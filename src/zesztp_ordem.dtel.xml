@@ -3,18 +3,18 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESAUART</ROLLNAME>
+    <ROLLNAME>ZESTP_ORDEM</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>CHAR5</DOMNAME>
-    <HEADLEN>10</HEADLEN>
+    <DOMNAME>CHAR12</DOMNAME>
+    <HEADLEN>12</HEADLEN>
     <SCRLEN1>10</SCRLEN1>
-    <SCRLEN2>10</SCRLEN2>
-    <SCRLEN3>10</SCRLEN3>
-    <DDTEXT>Tipo Ordem</DDTEXT>
-    <REPTEXT>Tipo Ordem</REPTEXT>
-    <SCRTEXT_S>Tipo Ordem</SCRTEXT_S>
-    <SCRTEXT_M>Tipo Ordem</SCRTEXT_M>
-    <SCRTEXT_L>Tipo Ordem</SCRTEXT_L>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Tp Ordem</DDTEXT>
+    <REPTEXT>Tp Ordem</REPTEXT>
+    <SCRTEXT_S>Tp Ordem</SCRTEXT_S>
+    <SCRTEXT_M>Tp Ordem</SCRTEXT_M>
+    <SCRTEXT_L>Tp Ordem</SCRTEXT_L>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>

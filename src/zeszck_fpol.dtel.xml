@@ -3,18 +3,18 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESKURSF</ROLLNAME>
+    <ROLLNAME>ZESCK_FPOL</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESKURSF</DOMNAME>
-    <HEADLEN>30</HEADLEN>
+    <DOMNAME>XFELD</DOMNAME>
+    <HEADLEN>55</HEADLEN>
     <SCRLEN1>10</SCRLEN1>
     <SCRLEN2>20</SCRLEN2>
     <SCRLEN3>40</SCRLEN3>
-    <DDTEXT>Taxa de câmbio</DDTEXT>
-    <REPTEXT>Taxa de câmbio</REPTEXT>
-    <SCRTEXT_S>Taxa</SCRTEXT_S>
-    <SCRTEXT_M>Taxa de câmbio</SCRTEXT_M>
-    <SCRTEXT_L>Taxa de câmbio</SCRTEXT_L>
+    <DDTEXT>Solicitar_pagamento_fora_da_política</DDTEXT>
+    <REPTEXT>Solicitar_pagamento_fora_da_política</REPTEXT>
+    <SCRTEXT_S>Politica</SCRTEXT_S>
+    <SCRTEXT_M>Solicitar_pagamento</SCRTEXT_M>
+    <SCRTEXT_L>Solicitar_pagamento_fora_da_política</SCRTEXT_L>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>

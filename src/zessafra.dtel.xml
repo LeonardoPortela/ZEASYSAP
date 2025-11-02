@@ -3,18 +3,18 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESAUART</ROLLNAME>
+    <ROLLNAME>ZESSAFRA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>CHAR5</DOMNAME>
-    <HEADLEN>10</HEADLEN>
+    <DOMNAME>GJAHR</DOMNAME>
+    <HEADLEN>12</HEADLEN>
     <SCRLEN1>10</SCRLEN1>
-    <SCRLEN2>10</SCRLEN2>
-    <SCRLEN3>10</SCRLEN3>
-    <DDTEXT>Tipo Ordem</DDTEXT>
-    <REPTEXT>Tipo Ordem</REPTEXT>
-    <SCRTEXT_S>Tipo Ordem</SCRTEXT_S>
-    <SCRTEXT_M>Tipo Ordem</SCRTEXT_M>
-    <SCRTEXT_L>Tipo Ordem</SCRTEXT_L>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Safra.</DDTEXT>
+    <REPTEXT>Ano da safra</REPTEXT>
+    <SCRTEXT_S>Ano safra</SCRTEXT_S>
+    <SCRTEXT_M>Ano da safra</SCRTEXT_M>
+    <SCRTEXT_L>Ano da safra</SCRTEXT_L>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>

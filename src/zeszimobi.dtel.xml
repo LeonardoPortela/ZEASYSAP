@@ -3,21 +3,21 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESCHAVE</ROLLNAME>
+    <ROLLNAME>ZESIMOBI</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <HEADLEN>40</HEADLEN>
+    <HEADLEN>16</HEADLEN>
     <SCRLEN1>10</SCRLEN1>
     <SCRLEN2>16</SCRLEN2>
-    <SCRLEN3>20</SCRLEN3>
-    <DDTEXT>Chave de Importação</DDTEXT>
-    <REPTEXT>Chave de Importação</REPTEXT>
-    <SCRTEXT_S>C.Import.</SCRTEXT_S>
-    <SCRTEXT_M>Chave Importação</SCRTEXT_M>
-    <SCRTEXT_L>Chave de Importação</SCRTEXT_L>
+    <SCRLEN3>16</SCRLEN3>
+    <DDTEXT>Imobilizado Agro</DDTEXT>
+    <REPTEXT>Imobilizado Agro</REPTEXT>
+    <SCRTEXT_S>Imob.Agro</SCRTEXT_S>
+    <SCRTEXT_M>Imobilizado Agro</SCRTEXT_M>
+    <SCRTEXT_L>Imobilizado Agro</SCRTEXT_L>
     <DTELMASTER>P</DTELMASTER>
     <DATATYPE>CHAR</DATATYPE>
-    <LENG>000040</LENG>
-    <OUTPUTLEN>000040</OUTPUTLEN>
+    <LENG>000030</LENG>
+    <OUTPUTLEN>000030</OUTPUTLEN>
    </DD04V>
   </asx:values>
  </asx:abap>

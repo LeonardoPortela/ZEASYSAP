@@ -3,20 +3,21 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESSAFRA</ROLLNAME>
+    <ROLLNAME>ZESPOTMOTOR</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>NUM4</DOMNAME>
     <HEADLEN>20</HEADLEN>
     <SCRLEN1>10</SCRLEN1>
-    <SCRLEN2>15</SCRLEN2>
-    <SCRLEN3>20</SCRLEN3>
-    <DDTEXT>Safra</DDTEXT>
-    <REPTEXT>Safra</REPTEXT>
-    <SCRTEXT_S>Safra</SCRTEXT_S>
-    <SCRTEXT_M>Safra</SCRTEXT_M>
-    <SCRTEXT_L>Safra</SCRTEXT_L>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Potência Motor</DDTEXT>
+    <REPTEXT>Potência Motor</REPTEXT>
+    <SCRTEXT_S>Potência M</SCRTEXT_S>
+    <SCRTEXT_M>Potência Motor</SCRTEXT_M>
+    <SCRTEXT_L>Potência Motor</SCRTEXT_L>
     <DTELMASTER>P</DTELMASTER>
-    <REFKIND>D</REFKIND>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000012</LENG>
+    <OUTPUTLEN>000012</OUTPUTLEN>
    </DD04V>
   </asx:values>
  </asx:abap>

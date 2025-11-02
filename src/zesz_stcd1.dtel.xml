@@ -3,18 +3,18 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESKURSF</ROLLNAME>
+    <ROLLNAME>ZES_STCD1</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESKURSF</DOMNAME>
-    <HEADLEN>30</HEADLEN>
+    <DOMNAME>CHAR18</DOMNAME>
+    <HEADLEN>55</HEADLEN>
     <SCRLEN1>10</SCRLEN1>
     <SCRLEN2>20</SCRLEN2>
     <SCRLEN3>40</SCRLEN3>
-    <DDTEXT>Taxa de câmbio</DDTEXT>
-    <REPTEXT>Taxa de câmbio</REPTEXT>
-    <SCRTEXT_S>Taxa</SCRTEXT_S>
-    <SCRTEXT_M>Taxa de câmbio</SCRTEXT_M>
-    <SCRTEXT_L>Taxa de câmbio</SCRTEXT_L>
+    <DDTEXT>ID Fiscal Fornecedor / Cliente</DDTEXT>
+    <REPTEXT>ID Fiscal Fornecedor / Cliente</REPTEXT>
+    <SCRTEXT_S>ID Fiscal</SCRTEXT_S>
+    <SCRTEXT_M>ID Fiscal Fornecedor</SCRTEXT_M>
+    <SCRTEXT_L>ID Fiscal Fornecedor / Cliente</SCRTEXT_L>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>
