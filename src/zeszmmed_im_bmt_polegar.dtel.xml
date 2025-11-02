@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESMMED_IM_BMT_POLEGAR</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <HEADLEN>55</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Imagem do Polegar</DDTEXT>
+    <REPTEXT>Imagem do Polegar</REPTEXT>
+    <SCRTEXT_S>ImgPolegar</SCRTEXT_S>
+    <SCRTEXT_M>Imagem do Polegar</SCRTEXT_M>
+    <SCRTEXT_L>Imagem do Polegar</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <DATATYPE>RSTR</DATATYPE>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

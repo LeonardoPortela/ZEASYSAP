@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZES_MOVI_USD</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESDM_VLR15_02</DOMNAME>
+    <HEADLEN>16</HEADLEN>
+    <SCRLEN1>08</SCRLEN1>
+    <SCRLEN2>16</SCRLEN2>
+    <SCRLEN3>16</SCRLEN3>
+    <DDTEXT>Movimentação USD</DDTEXT>
+    <REPTEXT>Movimentação USD</REPTEXT>
+    <SCRTEXT_S>Mov. USD</SCRTEXT_S>
+    <SCRTEXT_M>Movimentação USD</SCRTEXT_M>
+    <SCRTEXT_L>Movimentação USD</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

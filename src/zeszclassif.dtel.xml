@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESCLASSIF</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <HEADLEN>48</HEADLEN>
+    <SCRLEN1>09</SCRLEN1>
+    <SCRLEN2>13</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Código da classificação financeira.</DDTEXT>
+    <REPTEXT>Código da classificação financeira do movimento.</REPTEXT>
+    <SCRTEXT_S>Classific</SCRTEXT_S>
+    <SCRTEXT_M>Classificação</SCRTEXT_M>
+    <SCRTEXT_L>Código da classificação financeira do mo</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000014</LENG>
+    <OUTPUTLEN>000014</OUTPUTLEN>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

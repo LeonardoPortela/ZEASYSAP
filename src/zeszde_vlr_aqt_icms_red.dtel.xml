@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESDE_VLR_AQT_ICMS_RED</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>J_1BBASE</DOMNAME>
+    <HEADLEN>27</HEADLEN>
+    <SCRLEN1>07</SCRLEN1>
+    <SCRLEN2>12</SCRLEN2>
+    <SCRLEN3>27</SCRLEN3>
+    <DDTEXT>Percentual da Redução de BC</DDTEXT>
+    <REPTEXT>% Redução de BC</REPTEXT>
+    <SCRTEXT_S>Red.BC.</SCRTEXT_S>
+    <SCRTEXT_M>% Redução BC</SCRTEXT_M>
+    <SCRTEXT_L>% Redução de BC</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

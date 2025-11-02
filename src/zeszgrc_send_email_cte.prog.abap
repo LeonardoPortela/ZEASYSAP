@@ -1,0 +1,1072 @@
+﻿*&---------------------------------------------------------------------*
+*& Report  ZESZGRC_SEND_EMAIL_CTE
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZESZGRC_SEND_EMAIL_CTE MESSAGE-ID ZESZGRC.
+
+TABLES: J_1BNFDOC.
+
+SELECTION-SCREEN BEGIN OF BLOCK NFEDATA WITH FRAME TITLE TEXT-001.
+SELECT-OPTIONS: PDOCNUM FOR J_1BNFDOC-DOCNUM,
+                PNFNUM9 FOR J_1BNFDOC-NFNUM,
+                PBUKRS  FOR J_1BNFDOC-BUKRS NO INTERVALS NO-EXTENSION MEMORY ID BUK,
+                PSTDAT  FOR J_1BNFDOC-PSTDAT ,
+                PDIRECT FOR J_1BNFDOC-DIRECT OBLIGATORY DEFAULT '2'.
+SELECTION-SCREEN END OF BLOCK NFEDATA.
+
+SELECTION-SCREEN BEGIN OF BLOCK NFEENVIO WITH FRAME TITLE TEXT-002.
+PARAMETERS: PEMAIL TYPE AD_SMTPADR.
+SELECTION-SCREEN END OF BLOCK NFEENVIO.
+
+PARAMETERS: PBATCH TYPE SY-BATCH NO-DISPLAY.
+
+TYPES BEGIN OF TY_LINK.
+TYPES: DOCNUM TYPE J_1BDOCNUM.
+TYPES: REFTYP TYPE J_1BREFTYP.
+TYPES: LINK   TYPE CHAR10.
+TYPES: POSNR  TYPE POSNR_VF.
+TYPES END OF TY_LINK.
+
+TYPES BEGIN OF TY_PARCEIRO.
+TYPES: CODIGO TYPE LIFNR.
+TYPES END OF TY_PARCEIRO.
+
+DATA: IT_LINK_BI TYPE TABLE OF TY_LINK.
+DATA: IT_LINK_ZW TYPE TABLE OF TY_LINK.
+DATA: IT_LINK_CT TYPE TABLE OF TY_LINK.
+DATA: IT_PARCEIRO TYPE TABLE OF TY_PARCEIRO.
+DATA: WA_LINK TYPE TY_LINK.
+DATA: WA_PARCEIRO TYPE TY_PARCEIRO.
+
+INITIALIZATION.
+
+  IF SY-BATCH EQ ABAP_TRUE.
+
+    TRY .
+        ZCL_JOB=>GET_CK_PROGRAM_EXECUCAO( EXPORTING I_NOME_PROGRAM = SY-CPROG IMPORTING E_QTD  = DATA(E_QTD) ).
+      CATCH ZCX_JOB.
+    ENDTRY.
+
+    IF E_QTD GT 1.
+      LEAVE PROGRAM.
+    ENDIF.
+
+  ENDIF.
+
+  PBATCH = SY-BATCH.
+
+  SELECT SINGLE *
+    FROM SETLEAF
+    INTO @DATA(WA_SETLEAF)
+   WHERE SETNAME = 'MAGGI_GRC_SEND_MAIL'.
+
+  IF SY-SUBRC IS INITIAL.
+    DATA(CK_SEND_MAIL_GRC) = ABAP_TRUE.
+  ELSE.
+    CK_SEND_MAIL_GRC = ABAP_FALSE.
+  ENDIF.
+
+AT SELECTION-SCREEN.
+
+*  IF SY-BATCH EQ ABAP_FALSE AND PDOCNUM IS INITIAL AND PNFNUM9 IS INITIAL.
+*    SET CURSOR FIELD 'PDOCNUM-LOW'.
+*    MESSAGE E002.
+*  ENDIF.
+*
+*  IF SY-BATCH EQ ABAP_FALSE AND PNFNUM9 IS NOT INITIAL.
+*    SET CURSOR FIELD 'PNFNUM9-LOW'.
+*    MESSAGE E003.
+*  ENDIF.
+
+START-OF-SELECTION.
+
+  DATA: LC_OUT       TYPE CHAR01,
+        LC_DOC       TYPE J_1BNFDOC-DOCNUM,
+        LC_EMAIL     TYPE AD_SMTPADR,
+        LC_BATCH     TYPE SYST_BATCH,
+        LC_USER_MAIL TYPE UNAME.
+
+  LC_BATCH = PBATCH.
+  LC_USER_MAIL = ZCL_JOB=>GET_USER_JOB( ).
+
+  PERFORM ENVIA_EMAIL USING LC_DOC LC_EMAIL LC_BATCH CHANGING LC_OUT.
+
+  CLEAR: LC_DOC, LC_EMAIL, LC_OUT, LC_BATCH.
+
+*&---------------------------------------------------------------------*
+*&      Form  ENVIA_EMAIL
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*      -->P_POUTRODOC  text
+*      <--P_OUTENVIADO  text
+*----------------------------------------------------------------------*
+FORM ENVIA_EMAIL USING P_POUTRODOC TYPE J_1BDOCNUM LC_EMAIL TYPE AD_SMTPADR LC_BATCH TYPE SYST_BATCH CHANGING P_OUTENVIADO TYPE CHAR01.
+
+  IF LC_BATCH EQ ABAP_TRUE.
+    PBATCH = ABAP_TRUE.
+  ENDIF.
+
+  IF LC_EMAIL IS NOT INITIAL.
+    PEMAIL = LC_EMAIL.
+  ENDIF.
+
+  IF P_POUTRODOC IS NOT INITIAL.
+    PDOCNUM[] = VALUE #( OPTION = 'EQ' SIGN = 'I' ( LOW = P_POUTRODOC HIGH = P_POUTRODOC  ) ).
+  ENDIF.
+
+  P_OUTENVIADO = ABAP_FALSE.
+
+  IF SY-BATCH EQ ABAP_TRUE.
+
+    CLEAR: PSTDAT[].
+
+    DATA: E_DATA_LIMITE TYPE DATUM.
+
+    CALL FUNCTION 'RP_CALC_DATE_IN_INTERVAL'
+      EXPORTING
+        DATE      = SY-DATUM
+        DAYS      = 15
+        MONTHS    = 0
+        YEARS     = 0
+        SIGNUM    = '-'
+      IMPORTING
+        CALC_DATE = E_DATA_LIMITE.
+
+    IF E_DATA_LIMITE LT '20190924'.
+      E_DATA_LIMITE = '20190924'.
+    ENDIF.
+
+    PSTDAT[] = VALUE #( OPTION = 'GE' SIGN = 'I' ( LOW = E_DATA_LIMITE HIGH = E_DATA_LIMITE  ) ).
+
+    SELECT J~DOCNUM,
+           J~NFENUM,
+           J~PARVW,
+           J~PARID,
+           J~BUKRS,
+           J~BRANCH,
+           J~CRENAM,
+           J~CHANAM,
+           J~MODEL
+      INTO TABLE @DATA(IT_J_1BNFDOC)
+      FROM J_1BNFDOC AS J
+     WHERE J~DOCNUM IN @PDOCNUM
+       AND J~NFENUM IN @PNFNUM9
+       AND J~BUKRS  IN @PBUKRS
+       AND J~CREDAT IN @PSTDAT
+       AND J~FORM   NE @SPACE
+       AND J~MODEL  EQ '57'
+       AND J~CODE   EQ '100'
+       AND J~CANCEL NE @ABAP_TRUE
+       AND NOT EXISTS ( SELECT * FROM ZSDT0230 AS N WHERE N~DOCNUM EQ J~DOCNUM )
+       AND EXISTS ( SELECT * FROM ZESZIB_NFE AS I WHERE I~DOCNUM EQ J~DOCNUM )
+       AND EXISTS ( SELECT * FROM J_1BNFE_ACTIVE AS C WHERE C~DOCNUM EQ J~DOCNUM AND C~DOCSTA	= '1' AND C~ACTION_REQU	= 'C' AND C~CODE EQ '100' ).
+
+  ELSE.
+
+    SELECT J~DOCNUM,
+           J~NFENUM,
+           J~PARVW,
+           J~PARID,
+           J~BUKRS,
+           J~BRANCH,
+           J~CRENAM,
+           J~CHANAM,
+           J~MODEL
+      INTO TABLE @IT_J_1BNFDOC
+      FROM J_1BNFDOC AS J
+     WHERE DOCNUM IN @PDOCNUM
+       AND DIRECT IN @PDIRECT
+       AND NFENUM IN @PNFNUM9
+       AND BUKRS  IN @PBUKRS
+       AND PSTDAT IN @PSTDAT
+       AND FORM   NE @SPACE
+       AND MODEL  EQ '57'
+       AND CODE   EQ '100'
+       AND CANCEL NE @ABAP_TRUE
+       AND EXISTS ( SELECT * FROM ZESZIB_NFE AS I WHERE I~DOCNUM EQ J~DOCNUM ).
+
+  ENDIF.
+
+  CHECK IT_J_1BNFDOC[] IS NOT INITIAL.
+
+  SELECT * INTO TABLE @DATA(IT_J_1BAD_FILIAL)
+    FROM J_1BAD
+   WHERE PARTYP EQ 'B'.
+
+  SELECT * INTO TABLE @DATA(IT_J_1BAD_FORNECEDOR)
+    FROM J_1BAD
+   WHERE PARTYP EQ 'V'.
+
+  SELECT * INTO TABLE @DATA(IT_J_1BAD_CLIENTE)
+    FROM J_1BAD
+   WHERE PARTYP EQ 'C'.
+
+  SELECT * INTO TABLE @DATA(IT_ZIB_NFE)
+    FROM ZESZIB_NFE
+     FOR ALL ENTRIES IN @IT_J_1BNFDOC
+   WHERE DOCNUM EQ @IT_J_1BNFDOC-DOCNUM.
+
+  LOOP AT IT_ZIB_NFE INTO DATA(WA_ZIB_NFE) WHERE DS_URL_DANFE CS 'SIMETRYA'.
+    DELETE IT_J_1BNFDOC WHERE DOCNUM EQ WA_ZIB_NFE-DOCNUM.
+  ENDLOOP.
+
+  SELECT DOCNUM, REFTYP, REFKEY, REFITM
+    INTO TABLE @DATA(IT_J_1BNFLIN)
+    FROM J_1BNFLIN
+     FOR ALL ENTRIES IN @IT_J_1BNFDOC
+   WHERE DOCNUM EQ @IT_J_1BNFDOC-DOCNUM.
+
+  DATA(IT_J_1BNFLIN_AUX) = IT_J_1BNFLIN[].
+  DELETE IT_J_1BNFLIN_AUX WHERE REFTYP NE 'BI'.
+
+  CLEAR: IT_LINK_BI[], IT_LINK_ZW[], IT_PARCEIRO[].
+
+  IF IT_J_1BNFLIN_AUX[] IS NOT INITIAL.
+
+    LOOP AT IT_J_1BNFLIN_AUX INTO DATA(WA_J_1BNFLIN_AUX).
+      CLEAR: WA_LINK.
+      WA_LINK-DOCNUM = WA_J_1BNFLIN_AUX-DOCNUM.
+      WA_LINK-LINK   = WA_J_1BNFLIN_AUX-REFKEY(10).
+      WA_LINK-REFTYP = WA_J_1BNFLIN_AUX-REFTYP.
+      APPEND WA_LINK TO IT_LINK_BI.
+    ENDLOOP.
+
+    DATA: RGPARVW TYPE RANGE OF PARVW.
+    RGPARVW[] = VALUE #( SIGN = 'I' OPTION = 'EQ'
+                          ( LOW = 'WE' HIGH = 'WE' )
+                          ( LOW = 'LR' HIGH = 'LR' )
+                          ( LOW = 'Z1' HIGH = 'Z1' )
+                          ( LOW = 'T1' HIGH = 'T1' )
+                          ( LOW = 'T2' HIGH = 'T2' )
+                          ( LOW = 'T3' HIGH = 'T3' )
+                          ( LOW = 'T4' HIGH = 'T4' )
+                        ).
+
+    SELECT * INTO TABLE @DATA(IT_VBPA)
+      FROM VBPA
+       FOR ALL ENTRIES IN @IT_LINK_BI
+     WHERE VBELN EQ @IT_LINK_BI-LINK
+       AND PARVW IN @RGPARVW.
+
+  ENDIF.
+
+  IT_J_1BNFLIN_AUX = IT_J_1BNFLIN[].
+  DELETE IT_J_1BNFLIN_AUX WHERE REFTYP NE 'ZW'.
+
+  IF IT_J_1BNFLIN_AUX[] IS NOT INITIAL.
+
+    LOOP AT IT_J_1BNFLIN_AUX INTO WA_J_1BNFLIN_AUX.
+      CLEAR: WA_LINK.
+      WA_LINK-DOCNUM = WA_J_1BNFLIN_AUX-DOCNUM.
+      WA_LINK-LINK   = WA_J_1BNFLIN_AUX-REFKEY(10).
+      WA_LINK-REFTYP = WA_J_1BNFLIN_AUX-REFTYP.
+      APPEND WA_LINK TO IT_LINK_ZW.
+    ENDLOOP.
+
+    RGPARVW[] = VALUE #( SIGN = 'I' OPTION = 'EQ' ( LOW = 'WE' HIGH = 'WE' ) ( LOW = 'LR' HIGH = 'LR' ) ( LOW = 'Z1' HIGH = 'Z1' ) ).
+
+    SELECT * INTO TABLE @DATA(IT_ZFIWRT0015)
+      FROM ZFIWRT0015
+       FOR ALL ENTRIES IN @IT_LINK_ZW
+     WHERE SEQ_LCTO EQ @IT_LINK_ZW-LINK
+       AND PARVW    IN @RGPARVW.
+
+  ENDIF.
+
+  IT_J_1BNFLIN_AUX = IT_J_1BNFLIN[].
+  DELETE IT_J_1BNFLIN_AUX WHERE REFTYP NE SPACE.
+
+  IF IT_J_1BNFLIN_AUX[] IS NOT INITIAL.
+
+    RGPARVW[] = VALUE #( SIGN = 'I' OPTION = 'EQ' ( LOW = 'WE' HIGH = 'WE' ) ( LOW = 'LR' HIGH = 'LR' ) ( LOW = 'Z1' HIGH = 'Z1' ) ).
+
+    SELECT * INTO TABLE @DATA(IT_J_1BNFNAD)
+      FROM J_1BNFNAD
+       FOR ALL ENTRIES IN @IT_J_1BNFLIN_AUX
+     WHERE DOCNUM EQ @IT_J_1BNFLIN_AUX-DOCNUM
+       AND PARVW  IN @RGPARVW.
+
+  ENDIF.
+
+  SORT IT_J_1BNFLIN BY DOCNUM.
+  DELETE ADJACENT DUPLICATES FROM IT_J_1BNFLIN COMPARING DOCNUM.
+
+  "Procurar Parceiros da CT-e """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  "Procurar Parceiros da CT-e """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  "Procurar Parceiros da CT-e """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  DATA(IT_J_1BNFDOC_CTE) = IT_J_1BNFDOC[].
+  DELETE IT_J_1BNFDOC_CTE WHERE MODEL NE '57'.
+
+  IT_J_1BNFLIN_AUX = IT_J_1BNFLIN[].
+  DELETE IT_J_1BNFLIN_AUX WHERE REFTYP EQ SPACE.
+
+  IF IT_J_1BNFDOC_CTE[] IS NOT INITIAL.
+
+    LOOP AT IT_J_1BNFDOC_CTE INTO DATA(WA_J_1BNFDOC_CTE).
+      LOOP AT IT_J_1BNFLIN_AUX INTO WA_J_1BNFLIN_AUX WHERE DOCNUM EQ WA_J_1BNFDOC_CTE-DOCNUM.
+        CLEAR: WA_LINK.
+        WA_LINK-DOCNUM = WA_J_1BNFLIN_AUX-DOCNUM.
+        WA_LINK-LINK   = WA_J_1BNFLIN_AUX-REFKEY(10).
+        WA_LINK-REFTYP = WA_J_1BNFLIN_AUX-REFTYP.
+        WA_LINK-POSNR  = WA_J_1BNFLIN_AUX-REFITM.
+        APPEND WA_LINK TO IT_LINK_CT.
+      ENDLOOP.
+    ENDLOOP.
+
+    IF IT_LINK_CT[] IS NOT INITIAL.
+
+      "Fatura do Serviço
+      SELECT * INTO TABLE @DATA(IT_VBRP)
+        FROM VBRP
+         FOR ALL ENTRIES IN @IT_LINK_CT
+       WHERE VBELN EQ @IT_LINK_CT-LINK
+         AND POSNR EQ @IT_LINK_CT-POSNR.
+
+      IF IT_VBRP[] IS NOT INITIAL.
+
+        "Ordem de Venda
+        SELECT * INTO TABLE @DATA(IT_VBAK)
+          FROM VBAK
+           FOR ALL ENTRIES IN @IT_VBRP
+         WHERE VBELN EQ @IT_VBRP-AUBEL.
+
+        DELETE IT_VBAK WHERE TKNUM EQ SPACE.
+
+        IF IT_VBAK[] IS NOT INITIAL.
+          SELECT * INTO TABLE @DATA(IT_VTPA)
+            FROM VTPA
+             FOR ALL ENTRIES IN @IT_VBAK
+           WHERE VBELN EQ @IT_VBAK-TKNUM.
+        ENDIF.
+      ENDIF.
+    ENDIF.
+  ENDIF.
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+  IF PEMAIL IS INITIAL.
+
+    LOOP AT IT_J_1BNFDOC ASSIGNING FIELD-SYMBOL(<FS_DOC>) WHERE PARVW EQ 'BR'.
+      <FS_DOC>-PARID = <FS_DOC>-PARID+4(4).
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+        EXPORTING
+          INPUT  = <FS_DOC>-PARID
+        IMPORTING
+          OUTPUT = <FS_DOC>-PARID.
+    ENDLOOP.
+
+    "Fornecedor """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    DATA(IT_J_1BNFDOC_AUX) = IT_J_1BNFDOC[].
+
+    LOOP AT IT_J_1BAD_CLIENTE INTO DATA(WA_J_1BAD_CLIENTE).
+      DELETE IT_J_1BNFDOC_AUX WHERE PARVW EQ WA_J_1BAD_CLIENTE-PARVW.
+    ENDLOOP.
+
+    IF IT_J_1BNFDOC_AUX[] IS NOT INITIAL.
+      SELECT LIFNR, ADRNR, KTOKK
+        INTO TABLE @DATA(IT_LFA1)
+        FROM LFA1
+         FOR ALL ENTRIES IN @IT_J_1BNFDOC_AUX
+       WHERE LIFNR EQ @IT_J_1BNFDOC_AUX-PARID.
+    ENDIF.
+
+    "Cliente """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    IT_J_1BNFDOC_AUX = IT_J_1BNFDOC[].
+    "DELETE IT_J_1BNFDOC_AUX WHERE PARVW NE 'SP'.
+
+    LOOP AT IT_J_1BAD_FORNECEDOR INTO DATA(WA_J_1BAD_FORNECEDOR).
+      DELETE IT_J_1BNFDOC_AUX WHERE PARVW EQ WA_J_1BAD_FORNECEDOR-PARVW.
+    ENDLOOP.
+
+    LOOP AT IT_J_1BAD_FILIAL INTO DATA(WA_J_1BAD_FILIAL).
+      DELETE IT_J_1BNFDOC_AUX WHERE PARVW EQ WA_J_1BAD_FILIAL-PARVW.
+    ENDLOOP.
+
+    IF IT_J_1BNFDOC_AUX[] IS NOT INITIAL.
+      SELECT KUNNR, ADRNR, KTOKD
+        INTO TABLE @DATA(IT_KNA1)
+        FROM KNA1
+         FOR ALL ENTRIES IN @IT_J_1BNFDOC_AUX
+       WHERE KUNNR EQ @IT_J_1BNFDOC_AUX-PARID.
+    ENDIF.
+
+    "" Busca de Clientes
+    LOOP AT IT_ZFIWRT0015 INTO DATA(WA_ZFIWRT0015) WHERE PARVW EQ 'WE' OR PARVW EQ 'LR'.
+      CLEAR: WA_PARCEIRO.
+      WA_PARCEIRO-CODIGO = WA_ZFIWRT0015-PARID.
+      APPEND WA_PARCEIRO TO IT_PARCEIRO.
+    ENDLOOP.
+
+    LOOP AT IT_VBPA INTO DATA(WA_VBPA) WHERE PARVW EQ 'WE' OR PARVW EQ 'LR' OR PARVW EQ 'T3' OR PARVW EQ 'T4'.
+      CLEAR: WA_PARCEIRO.
+      WA_PARCEIRO-CODIGO = WA_VBPA-KUNNR.
+      APPEND WA_PARCEIRO TO IT_PARCEIRO.
+    ENDLOOP.
+
+    LOOP AT IT_VTPA INTO DATA(WA_VTPA) WHERE PARVW EQ 'LR' OR PARVW EQ 'SG'.
+      CLEAR: WA_PARCEIRO.
+      WA_PARCEIRO-CODIGO = WA_VTPA-KUNNR.
+      APPEND WA_PARCEIRO TO IT_PARCEIRO.
+    ENDLOOP.
+
+    SORT IT_PARCEIRO BY CODIGO.
+    DELETE ADJACENT DUPLICATES FROM IT_PARCEIRO COMPARING CODIGO.
+
+    IF IT_PARCEIRO[] IS NOT INITIAL.
+      SELECT KUNNR, ADRNR, KTOKD
+        APPENDING TABLE @IT_KNA1
+        FROM KNA1
+         FOR ALL ENTRIES IN @IT_PARCEIRO
+       WHERE KUNNR EQ @IT_PARCEIRO-CODIGO.
+    ENDIF.
+
+    CLEAR: IT_PARCEIRO[].
+
+    "" Busca de Fornecedor
+    LOOP AT IT_ZFIWRT0015 INTO WA_ZFIWRT0015 WHERE PARVW EQ 'Z1'.
+      CLEAR: WA_PARCEIRO.
+      WA_PARCEIRO-CODIGO = WA_ZFIWRT0015-PARID.
+      APPEND WA_PARCEIRO TO IT_PARCEIRO.
+    ENDLOOP.
+
+    LOOP AT IT_VBPA INTO WA_VBPA WHERE PARVW EQ 'Z1' OR PARVW EQ 'T1' OR PARVW EQ 'T2'.
+      CLEAR: WA_PARCEIRO.
+      WA_PARCEIRO-CODIGO = WA_VBPA-LIFNR.
+      APPEND WA_PARCEIRO TO IT_PARCEIRO.
+    ENDLOOP.
+
+    LOOP AT IT_VTPA INTO WA_VTPA WHERE PARVW EQ 'MT' OR PARVW EQ 'PC' OR PARVW EQ 'PV' OR PARVW EQ 'SP'.
+      CLEAR: WA_PARCEIRO.
+      WA_PARCEIRO-CODIGO = WA_VTPA-LIFNR.
+      APPEND WA_PARCEIRO TO IT_PARCEIRO.
+    ENDLOOP.
+
+    SORT IT_PARCEIRO BY CODIGO.
+    DELETE ADJACENT DUPLICATES FROM IT_PARCEIRO COMPARING CODIGO.
+
+    IF IT_PARCEIRO[] IS NOT INITIAL.
+      SELECT LIFNR, ADRNR, KTOKK
+        APPENDING TABLE @IT_LFA1
+        FROM LFA1
+         FOR ALL ENTRIES IN @IT_PARCEIRO
+       WHERE LIFNR EQ @IT_PARCEIRO-CODIGO.
+    ENDIF.
+
+    DATA(IT_J_1BNFNAD_C) = IT_J_1BNFNAD[].
+    DELETE IT_J_1BNFNAD_C WHERE PARTYP NE 'C'.
+    IF IT_J_1BNFNAD_C[] IS NOT INITIAL.
+      SELECT KUNNR, ADRNR
+        APPENDING TABLE @IT_KNA1
+        FROM KNA1
+         FOR ALL ENTRIES IN @IT_J_1BNFNAD_C
+       WHERE KUNNR EQ @IT_J_1BNFNAD_C-PARID.
+    ENDIF.
+
+    DATA(IT_J_1BNFNAD_V) = IT_J_1BNFNAD[].
+    DELETE IT_J_1BNFNAD_V WHERE PARTYP NE 'V'.
+    IF IT_J_1BNFNAD_V[] IS NOT INITIAL.
+      SELECT KUNNR, ADRNR
+        APPENDING TABLE @IT_LFA1
+        FROM LFA1
+         FOR ALL ENTRIES IN @IT_J_1BNFNAD_V
+       WHERE LIFNR EQ @IT_J_1BNFNAD_V-PARID.
+    ENDIF.
+
+    IF IT_LFA1[] IS NOT INITIAL.
+      SELECT ADDRNUMBER,
+             PERSNUMBER,
+             DATE_FROM,
+             SMTP_ADDR
+        INTO TABLE @DATA(IT_ADR6)
+        FROM ADR6
+         FOR ALL ENTRIES IN @IT_LFA1
+       WHERE ADDRNUMBER  EQ @IT_LFA1-ADRNR
+         AND DATE_FROM   LE @SY-DATUM.
+    ENDIF.
+
+    IF IT_KNA1[] IS NOT INITIAL.
+      SELECT ADDRNUMBER,
+             PERSNUMBER,
+             DATE_FROM,
+             SMTP_ADDR
+        APPENDING TABLE @IT_ADR6
+        FROM ADR6
+         FOR ALL ENTRIES IN @IT_KNA1
+       WHERE ADDRNUMBER  EQ @IT_KNA1-ADRNR
+         AND DATE_FROM   LE @SY-DATUM.
+    ENDIF.
+
+  ENDIF.
+
+  SORT IT_KNA1 BY KUNNR.
+  SORT IT_LFA1 BY LIFNR.
+
+  IF IT_J_1BNFDOC[] IS INITIAL.
+    MESSAGE S004 DISPLAY LIKE 'E'.
+    EXIT.
+  ENDIF.
+
+  TYPES BEGIN OF TY_EMAIL.
+  TYPES: EMAIL TYPE AD_SMTPADR.
+  TYPES END OF TY_EMAIL.
+
+  DATA: GT_EMAIL TYPE TABLE OF TY_EMAIL.
+
+  DATA: LT_CONTENTS   TYPE SOLI_TAB,
+        LS_CONTENTS   LIKE LINE OF LT_CONTENTS,
+        LV_SUBJECT    TYPE SO_OBJ_DES,
+        LV_BINPDF     TYPE XSTRING,
+        LV_BINXML     TYPE XSTRING,
+*        LO_DOCUMENT   TYPE REF TO CL_DOCUMENT_BCS,
+*        WO_DOCUMENT   TYPE REF TO CL_BCS,
+        LV_FILENAME_D TYPE SOOD-OBJDES,
+        LV_FILENAME_X TYPE SOOD-OBJDES,
+        LT_XML        TYPE DCXMLLINES,
+        LT_PDF        TYPE TABLE OF TLINE,
+        LT_ATTACH_BIN TYPE TABLE OF SOLIX,
+        GR_RECIPIENT  TYPE REF TO IF_RECIPIENT_BCS,
+        LT_SVAL       TYPE TABLE OF SVAL,
+        LS_SVAL       TYPE SVAL,
+        LV_RETCODE    TYPE C,
+        LV_LEN        TYPE I,
+        LV_IDX        TYPE I.
+
+  DATA: LT_ATTACH_TXT  TYPE SOLI_TAB,
+        LS_CONTENT_TXT TYPE SOLI.
+
+  CHECK NOT IT_J_1BNFDOC[] IS INITIAL.
+
+  SELECT * INTO TABLE @DATA(IT_J_1BBRANCH)
+    FROM J_1BBRANCH
+     FOR ALL ENTRIES IN @IT_J_1BNFDOC
+   WHERE BUKRS  EQ @IT_J_1BNFDOC-BUKRS
+     AND BRANCH EQ @IT_J_1BNFDOC-BRANCH.
+
+  SORT IT_J_1BBRANCH BY BUKRS BRANCH.
+
+  SELECT *
+    INTO TABLE @DATA(IT_ADRC_BRANCH)
+    FROM ADRC
+     FOR ALL ENTRIES IN @IT_J_1BBRANCH
+   WHERE ADDRNUMBER  EQ @IT_J_1BBRANCH-ADRNR
+     AND DATE_FROM   LE @SY-DATUM.
+
+  SORT IT_ADRC_BRANCH BY ADDRNUMBER.
+
+  DATA: LV_RFCDEST TYPE  RFCDEST.
+
+  LOOP AT IT_J_1BNFDOC INTO DATA(LS_BNFDOC).
+
+    CLEAR: LT_CONTENTS[], LS_CONTENTS.
+    IF LV_RFCDEST IS INITIAL.
+
+      CALL FUNCTION 'J_1B_NFE_CHECK_RFC_DESTINATION'
+        EXPORTING
+          I_BUKRS   = LS_BNFDOC-BUKRS
+          I_BRANCH  = LS_BNFDOC-BRANCH
+          I_MODEL   = LS_BNFDOC-MODEL
+        IMPORTING
+          E_RFCDEST = LV_RFCDEST
+        EXCEPTIONS
+          RFC_ERROR = 1
+          OTHERS    = 2.
+
+      IF SY-SUBRC IS NOT INITIAL.
+        CONTINUE.
+      ENDIF.
+
+    ENDIF.
+
+    CASE LS_BNFDOC-MODEL.
+      WHEN '55'.
+        LV_SUBJECT = 'DANFE E XML'. "Assunto
+      WHEN '57'.
+        LV_SUBJECT = 'DACTE E XML'. "Assunto
+    ENDCASE.
+
+    CASE SY-SYSID.
+      WHEN 'DEV'.
+        LS_CONTENTS-LINE = 'Ambiente de Desenvolvimento'. "Body do E-mail
+        APPEND LS_CONTENTS TO LT_CONTENTS.
+        LV_SUBJECT = ZCL_STRING=>CONCAT( EXPORTING S1 = CONV #( LV_SUBJECT ) S2 = CONV #( LS_CONTENTS-LINE ) SP = ' - ' ) .
+      WHEN 'QAS'.
+        LS_CONTENTS-LINE = 'Ambiente de Homologação'. "Body do E-mail
+        APPEND LS_CONTENTS TO LT_CONTENTS.
+        LV_SUBJECT = ZCL_STRING=>CONCAT( EXPORTING S1 = CONV #( LV_SUBJECT ) S2 = CONV #( LS_CONTENTS-LINE ) SP = ' - ' ).
+    ENDCASE.
+
+    SELECT SINGLE * FROM J_1BNFE_ACTIVE INTO @DATA(GS_ACTIVE) WHERE DOCNUM EQ @LS_BNFDOC-DOCNUM.
+
+    IF SY-SUBRC IS NOT INITIAL OR GS_ACTIVE-MSSTAT NE 'A'.
+      CONTINUE.
+    ENDIF.
+
+    DATA(GV_ACCESS_KEY) = GS_ACTIVE-REGIO &&
+                            GS_ACTIVE-NFYEAR &&
+                            GS_ACTIVE-NFMONTH &&
+                            GS_ACTIVE-STCD1 &&
+                            GS_ACTIVE-MODEL &&
+                            GS_ACTIVE-SERIE &&
+                            GS_ACTIVE-NFNUM9 &&
+                            GS_ACTIVE-DOCNUM9 &&
+                            GS_ACTIVE-CDV.
+
+*Anexo a este e-mail encontram-se a Nota Fiscal Eletrônica (NFe) e o Documento Auxiliar da Nota Fiscal Eletrônica (DANFe) de Chave de
+*Acesso nº  51190800315457000780550000001227921594323144 .
+*Atenciosamente,
+*AGROPECUARIA MAGGI LTDA
+*00.315.457/0007-80
+
+    CASE LS_BNFDOC-MODEL.
+      WHEN '55'.
+        LS_CONTENTS-LINE = 'Anexo a este e-mail encontram-se a Nota Fiscal Eletrônica (NFe) e o Documento Auxiliar da Nota Fiscal Eletrônica (DANFe) de Chave:' &&
+        CL_ABAP_CHAR_UTILITIES=>CR_LF.
+      WHEN '57'.
+        LS_CONTENTS-LINE = 'Anexo a este e-mail encontram-se O Conhecimento de Transporte Eletrônico (CTe) e o Documento Auxiliar do Conhecimento de Transporte Eetrônico (DACTe) de Chave:' &&
+        CL_ABAP_CHAR_UTILITIES=>CR_LF.
+    ENDCASE.
+
+    APPEND LS_CONTENTS TO LT_CONTENTS.
+    LS_CONTENTS-LINE = GV_ACCESS_KEY && CL_ABAP_CHAR_UTILITIES=>CR_LF.
+    APPEND LS_CONTENTS TO LT_CONTENTS.
+    CLEAR LS_CONTENTS-LINE.
+    APPEND LS_CONTENTS TO LT_CONTENTS.
+
+    LS_CONTENTS-LINE = 'Atenciosamente,' && CL_ABAP_CHAR_UTILITIES=>CR_LF.
+    APPEND LS_CONTENTS TO LT_CONTENTS.
+
+    READ TABLE IT_J_1BBRANCH INTO DATA(WA_J_1BBRANCH) WITH KEY BUKRS = LS_BNFDOC-BUKRS BRANCH = LS_BNFDOC-BRANCH BINARY SEARCH.
+    IF SY-SUBRC IS INITIAL.
+      READ TABLE IT_ADRC_BRANCH INTO DATA(WA_ADRC_BRANCH) WITH KEY ADDRNUMBER = WA_J_1BBRANCH-ADRNR BINARY SEARCH.
+      IF SY-SUBRC IS INITIAL.
+        LS_CONTENTS-LINE = WA_ADRC_BRANCH-NAME1 && CL_ABAP_CHAR_UTILITIES=>CR_LF.
+        APPEND LS_CONTENTS TO LT_CONTENTS.
+
+        DATA: LC_CNPJ TYPE C LENGTH 18.
+        CALL FUNCTION 'CONVERSION_EXIT_CGCBR_OUTPUT'
+          EXPORTING
+            INPUT  = WA_J_1BBRANCH-STCD1
+          IMPORTING
+            OUTPUT = LC_CNPJ.
+
+        LS_CONTENTS-LINE = LC_CNPJ && CL_ABAP_CHAR_UTILITIES=>CR_LF.
+        APPEND LS_CONTENTS TO LT_CONTENTS.
+      ENDIF.
+    ENDIF.
+
+    REFRESH: GT_EMAIL, GT_EMAIL[].
+
+*Se ls_bnfdoc-parid PARVW diferente ‘SP’. Faça.
+    IF PEMAIL IS INITIAL.
+      IF LS_BNFDOC-PARVW NE 'SP' AND LS_BNFDOC-PARVW NE 'BR'.
+        READ TABLE IT_KNA1 WITH KEY KUNNR = LS_BNFDOC-PARID INTO DATA(WA_KNA1) BINARY SEARCH.
+        IF SY-SUBRC IS INITIAL.
+          LOOP AT IT_ADR6 INTO DATA(WA_ADR6) WHERE ADDRNUMBER EQ WA_KNA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+            APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+          ENDLOOP.
+        ENDIF.
+      ELSE.
+        READ TABLE IT_LFA1 WITH KEY LIFNR = LS_BNFDOC-PARID INTO DATA(WA_LFA1) BINARY SEARCH.
+        IF SY-SUBRC IS INITIAL.
+          LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_LFA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+            APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+          ENDLOOP.
+        ENDIF.
+      ENDIF.
+
+      READ TABLE IT_J_1BNFLIN WITH KEY DOCNUM = LS_BNFDOC-DOCNUM INTO WA_J_1BNFLIN_AUX BINARY SEARCH.
+      IF SY-SUBRC IS INITIAL.
+        CASE WA_J_1BNFLIN_AUX-REFTYP.
+          WHEN 'BI'.
+            WA_LINK-LINK = WA_J_1BNFLIN_AUX-REFKEY(10).
+            LOOP AT IT_VBPA INTO WA_VBPA WHERE VBELN EQ WA_LINK-LINK.
+              CASE WA_VBPA-PARVW.
+
+                WHEN 'WE' OR 'LR' OR 'T3' OR 'T4'.
+                  READ TABLE IT_KNA1 WITH KEY KUNNR = WA_VBPA-KUNNR INTO WA_KNA1 BINARY SEARCH.
+                  IF SY-SUBRC IS INITIAL.
+                    LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_KNA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+                      APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+                    ENDLOOP.
+                  ENDIF.
+
+                WHEN 'Z1' OR 'T1' OR 'T2'.
+                  READ TABLE IT_LFA1 WITH KEY LIFNR = WA_VBPA-LIFNR INTO WA_LFA1 BINARY SEARCH.
+                  IF SY-SUBRC IS INITIAL.
+                    LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_LFA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+                      APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+                    ENDLOOP.
+                  ENDIF.
+
+              ENDCASE.
+            ENDLOOP.
+
+            IF LS_BNFDOC-MODEL EQ '57'.
+              WA_LINK-LINK   = WA_J_1BNFLIN_AUX-REFKEY(10).
+              WA_LINK-POSNR  = WA_J_1BNFLIN_AUX-REFITM.
+              "Fatura
+              LOOP AT IT_VBRP INTO DATA(WA_VBRP)
+                  WHERE VBELN EQ WA_LINK-LINK
+                    AND POSNR EQ WA_LINK-POSNR.
+                "Ordem de Venda
+                LOOP AT IT_VBAK INTO DATA(WA_VBAK) WHERE VBELN EQ WA_VBRP-AUBEL.
+                  LOOP AT IT_VTPA INTO WA_VTPA WHERE VBELN EQ WA_VBAK-TKNUM.
+                    CASE WA_VTPA-PARVW.
+                      WHEN 'LR' OR 'SG'.
+                        READ TABLE IT_KNA1 WITH KEY KUNNR = WA_VTPA-KUNNR INTO WA_KNA1 BINARY SEARCH.
+                        IF SY-SUBRC IS INITIAL.
+                          LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_KNA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+                            APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+                          ENDLOOP.
+                        ENDIF.
+
+                        IF WA_KNA1-KTOKD EQ 'ZCIC'.
+                          CASE SY-SYSID.
+                            WHEN 'QAS'.
+                              APPEND VALUE #( EMAIL = 'cte.homolog@amaggi.com.br' ) TO GT_EMAIL.
+                            WHEN 'PRD'.
+                              APPEND VALUE #( EMAIL = 'cte.fiscal@amaggi.com.br' ) TO GT_EMAIL.
+                          ENDCASE.
+                        ENDIF.
+
+                      WHEN 'MT' OR 'PC' OR 'PV' OR 'SP'.
+                        READ TABLE IT_LFA1 WITH KEY LIFNR = WA_VTPA-LIFNR INTO WA_LFA1 BINARY SEARCH.
+                        IF SY-SUBRC IS INITIAL.
+                          LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_LFA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+                            APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+                          ENDLOOP.
+                        ENDIF.
+
+                        IF WA_KNA1-KTOKD EQ 'ZFIC'.
+                          CASE SY-SYSID.
+                            WHEN 'QAS'.
+                              APPEND VALUE #( EMAIL = 'cte.homolog@amaggi.com.br' ) TO GT_EMAIL.
+                            WHEN 'PRD'.
+                              APPEND VALUE #( EMAIL = 'cte.fiscal@amaggi.com.br' ) TO GT_EMAIL.
+                          ENDCASE.
+                        ENDIF.
+
+                    ENDCASE.
+                  ENDLOOP.
+                ENDLOOP.
+              ENDLOOP.
+            ENDIF.
+
+          WHEN 'ZW'.
+            WA_LINK-LINK = WA_J_1BNFLIN_AUX-REFKEY(10).
+            LOOP AT IT_ZFIWRT0015 INTO WA_ZFIWRT0015 WHERE SEQ_LCTO EQ WA_LINK-LINK.
+              CASE WA_ZFIWRT0015-PARVW.
+                WHEN 'WE' OR 'LR'.
+                  READ TABLE IT_KNA1 WITH KEY KUNNR = WA_ZFIWRT0015-PARID INTO WA_KNA1 BINARY SEARCH.
+                  IF SY-SUBRC IS INITIAL.
+                    LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_KNA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+                      APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+                    ENDLOOP.
+                  ENDIF.
+                WHEN 'Z1'.
+                  READ TABLE IT_LFA1 WITH KEY LIFNR = WA_ZFIWRT0015-PARID INTO WA_LFA1 BINARY SEARCH.
+                  IF SY-SUBRC IS INITIAL.
+                    LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_LFA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+                      APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+                    ENDLOOP.
+                  ENDIF.
+              ENDCASE.
+            ENDLOOP.
+          WHEN SPACE.
+
+            LOOP AT IT_J_1BNFNAD INTO DATA(WA_NAD) WHERE DOCNUM EQ LS_BNFDOC-DOCNUM.
+              CASE WA_NAD-PARTYP.
+                WHEN 'C'.
+                  READ TABLE IT_KNA1 WITH KEY KUNNR = WA_NAD-PARID INTO WA_KNA1 BINARY SEARCH.
+                  IF SY-SUBRC IS INITIAL.
+                    LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_KNA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+                      APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+                    ENDLOOP.
+                  ENDIF.
+                WHEN 'V'.
+                  READ TABLE IT_LFA1 WITH KEY LIFNR = WA_NAD-PARID INTO WA_LFA1 BINARY SEARCH.
+                  IF SY-SUBRC IS INITIAL.
+                    LOOP AT IT_ADR6 INTO WA_ADR6 WHERE ADDRNUMBER EQ WA_LFA1-ADRNR AND SMTP_ADDR IS NOT INITIAL.
+                      APPEND VALUE #( EMAIL = WA_ADR6-SMTP_ADDR ) TO GT_EMAIL.
+                    ENDLOOP.
+                  ENDIF.
+              ENDCASE.
+            ENDLOOP.
+
+        ENDCASE.
+      ENDIF.
+
+    ELSE.
+      APPEND VALUE #( EMAIL = PEMAIL ) TO GT_EMAIL.
+    ENDIF.
+
+    IF GT_EMAIL[] IS NOT INITIAL.
+      SORT GT_EMAIL BY EMAIL ASCENDING.
+      DELETE ADJACENT DUPLICATES FROM GT_EMAIL COMPARING EMAIL.
+    ELSE.
+      MESSAGE S005 WITH LS_BNFDOC-PARID DISPLAY LIKE 'E'.
+      DATA: WA_ENVIADO2 TYPE ZSDT0230.
+      WA_ENVIADO2-DOCNUM = LS_BNFDOC-DOCNUM.
+      MODIFY ZSDT0230 FROM WA_ENVIADO2.
+      COMMIT WORK.
+      CONTINUE.
+    ENDIF.
+
+*    CREATE OBJECT LO_DOCUMENT.
+*    TRY .
+*        LO_DOCUMENT = CL_DOCUMENT_BCS=>CREATE_DOCUMENT(
+*            I_TYPE       = 'HTM'
+*            I_SUBJECT    = LV_SUBJECT
+*            I_LANGUAGE   = SY-LANGU
+*            I_IMPORTANCE = '1'
+*            I_TEXT       = LT_CONTENTS ).
+
+    CLEAR:   LV_BINPDF,
+             LV_BINXML.
+
+    REFRESH: LT_XML,
+             LT_PDF,
+             LT_ATTACH_BIN.
+
+    TRY .
+
+        CALL FUNCTION 'ZFSD_BUSCA_DANFE'
+          EXPORTING
+            I_DOCNUM   = LS_BNFDOC-DOCNUM
+          IMPORTING
+            T_XML      = LT_XML
+            OUT_BINPDF = LV_BINPDF
+            OUT_BINXML = LV_BINXML.
+
+      CATCH CX_ROOT.
+        CONTINUE.
+    ENDTRY.
+
+    DATA(LV_XML_STRING) = ZCL_STRING=>XSTRING_TO_STRING( I_XSTRING = LV_BINXML ).
+
+    FREE: LT_ATTACH_TXT.
+
+    CALL FUNCTION 'SCMS_STRING_TO_FTEXT'
+      EXPORTING
+        TEXT      = LV_XML_STRING
+      TABLES
+        FTEXT_TAB = LT_ATTACH_TXT.
+
+    CASE LS_BNFDOC-MODEL.
+      WHEN '55'.
+        LV_FILENAME_D = 'Danfe.pdf'.
+      WHEN '57'.
+        LV_FILENAME_D = 'Dacte.pdf'.
+    ENDCASE.
+
+***    PDF Attach
+    LT_ATTACH_BIN = CL_DOCUMENT_BCS=>XSTRING_TO_SOLIX( IP_XSTRING = LV_BINPDF ).
+*        CALL METHOD LO_DOCUMENT->ADD_ATTACHMENT
+*          EXPORTING
+*            I_ATTACHMENT_TYPE    = 'PDF'
+*            I_ATTACHMENT_SUBJECT = LV_FILENAME
+*            I_ATT_CONTENT_HEX    = LT_ATTACH_BIN.
+
+    CASE LS_BNFDOC-MODEL.
+      WHEN '55'.
+        LV_FILENAME_X = 'NFeXML.xml'.
+      WHEN '57'.
+        LV_FILENAME_X = 'CTeXML.xml'.
+    ENDCASE.
+
+*        CALL METHOD LO_DOCUMENT->ADD_ATTACHMENT
+*          EXPORTING
+*            I_ATTACHMENT_TYPE    = 'XML'
+*            I_ATTACHMENT_SUBJECT = LV_FILENAME
+*            I_ATT_CONTENT_TEXT   = LT_CONTENT_TXT.
+*
+*        IF PBATCH EQ ABAP_FALSE.
+*
+*          DATA(GT_EMAIL_AUX) = GT_EMAIL[].
+*
+*          LOOP AT GT_EMAIL_AUX INTO DATA(LS_EMAIL).
+*
+*            CLEAR: LT_SVAL[].
+*            LS_SVAL-TABNAME   = 'ADR6'.
+*            LS_SVAL-FIELDNAME = 'SMTP_ADDR'.
+*            LS_SVAL-VALUE     = LS_EMAIL-EMAIL.
+*            APPEND LS_SVAL TO LT_SVAL.
+*
+**            CALL FUNCTION 'POPUP_GET_VALUES'
+**              EXPORTING
+**                POPUP_TITLE     = TEXT-006
+**              IMPORTING
+**                RETURNCODE      = LV_RETCODE
+**              TABLES
+**                FIELDS          = LT_SVAL
+**              EXCEPTIONS
+**                ERROR_IN_FIELDS = 1
+**                OTHERS          = 2.
+**
+**            IF SY-SUBRC IS NOT INITIAL.
+**              MESSAGE ID SY-MSGID TYPE 'S' NUMBER SY-MSGNO WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4 DISPLAY LIKE 'E'.
+**              DELETE GT_EMAIL WHERE EMAIL EQ LS_EMAIL-EMAIL.
+**            ELSE.
+**              IF LV_RETCODE = 'A'. "Cancel
+**                DELETE GT_EMAIL WHERE EMAIL EQ LS_EMAIL-EMAIL.
+**              ENDIF.
+**            ENDIF.
+*
+*          ENDLOOP.
+*
+*        ENDIF.
+
+    IF GT_EMAIL[] IS INITIAL.
+      CONTINUE.
+    ENDIF.
+
+    READ TABLE GT_EMAIL INTO DATA(WA_EMAIL) INDEX 1.
+    DATA: LC_STRING_MAILS TYPE STRING.
+    CLEAR: LC_STRING_MAILS.
+*        TRY .
+*
+*            WO_DOCUMENT = CL_BCS=>CREATE_PERSISTENT( ).
+*            CALL METHOD WO_DOCUMENT->SET_DOCUMENT( LO_DOCUMENT ).
+*
+*            "Add sender to send request
+*            CALL METHOD WO_DOCUMENT->SET_SENDER
+*              EXPORTING
+*                I_SENDER = CL_SAPUSER_BCS=>CREATE( ZCL_JOB=>GET_USER_JOB( ) ).
+
+
+    DATA: IT_EMAIL_RFC TYPE TABLE OF ADR6,
+          WA_EMAIL_RFC TYPE ADR6.
+
+    CLEAR: IT_EMAIL_RFC[].
+
+    LOOP AT GT_EMAIL INTO DATA(LS_EMAIL).
+
+      IF ( PEMAIL IS INITIAL ) OR ( PEMAIL NE LS_EMAIL-EMAIL AND PEMAIL IS NOT INITIAL ).
+        CASE SY-SYSID.
+          WHEN 'DEV'.
+
+            IF LS_BNFDOC-CRENAM NE ZCL_JOB=>GET_USER_JOB( ).
+              LS_EMAIL-EMAIL = ZCL_USER=>ZIF_USER~GET_MAIL_USER( I_USER = LS_BNFDOC-CRENAM ).
+            ELSE.
+              CLEAR: LS_EMAIL-EMAIL.
+            ENDIF.
+
+            IF LS_EMAIL-EMAIL IS INITIAL.
+              LS_EMAIL-EMAIL = 'suporte.sap@amaggi.com.br'.
+            ENDIF.
+
+          WHEN 'QAS'.
+
+            IF LS_BNFDOC-CRENAM NE ZCL_JOB=>GET_USER_JOB( ).
+              LS_EMAIL-EMAIL = ZCL_USER=>ZIF_USER~GET_MAIL_USER( I_USER = LS_BNFDOC-CRENAM ).
+            ELSE.
+              CLEAR: LS_EMAIL-EMAIL.
+            ENDIF.
+
+            IF LS_EMAIL-EMAIL IS INITIAL.
+              LS_EMAIL-EMAIL = 'suporte.sap@amaggi.com.br'.
+            ENDIF.
+
+        ENDCASE.
+      ENDIF.
+
+      LC_STRING_MAILS = ZCL_STRING=>CONCAT( EXPORTING S1 = LC_STRING_MAILS S2 = CONV #( LS_EMAIL-EMAIL ) SP = ';' ).
+*              GR_RECIPIENT = CL_CAM_ADDRESS_BCS=>CREATE_INTERNET_ADDRESS( LS_EMAIL-EMAIL ).
+*              CALL METHOD WO_DOCUMENT->ADD_RECIPIENT
+*                EXPORTING
+*                  I_RECIPIENT  = GR_RECIPIENT
+*                  I_EXPRESS    = 'X'
+*                  I_BLIND_COPY = 'X'.
+      WA_EMAIL_RFC-SMTP_ADDR = LS_EMAIL-EMAIL.
+      APPEND WA_EMAIL_RFC TO IT_EMAIL_RFC.
+
+    ENDLOOP.
+
+    DATA: I_TYPE        TYPE  SO_OBJ_TP,
+          ANEXO_01_TYPE TYPE  SO_OBJ_TP,
+          ANEXO_02_TYPE TYPE  SO_OBJ_TP,
+          CK_ANEXO_01   TYPE  CHAR01,
+          CK_ANEXO_02   TYPE  CHAR01.
+
+    I_TYPE = 'HTM'.
+    ANEXO_01_TYPE = 'PDF'.
+    ANEXO_02_TYPE = 'XML'.
+    CK_ANEXO_01 = ABAP_TRUE.
+    CK_ANEXO_02 = ABAP_TRUE.
+
+    CASE CK_SEND_MAIL_GRC.
+      WHEN ABAP_TRUE.
+
+        CALL FUNCTION 'Z_SEND_MAIL' DESTINATION LV_RFCDEST
+          IMPORTING
+            P_OUTENVIADO          = P_OUTENVIADO
+          TABLES
+            LT_CONTENTS           = LT_CONTENTS
+            LT_SMTPADR            = IT_EMAIL_RFC
+            ANEXO_02_TXT          = LT_ATTACH_TXT
+            ANEXO_01_HEX          = LT_ATTACH_BIN
+          CHANGING
+            I_USER                = LC_USER_MAIL
+            I_TYPE                = I_TYPE
+            I_SUBJECT             = LV_SUBJECT
+            CK_ANEXO_01           = CK_ANEXO_01
+            ANEXO_01_TYPE         = ANEXO_01_TYPE
+            ANEXO_01_SUBJECT      = LV_FILENAME_D
+            CK_ANEXO_02           = CK_ANEXO_02
+            ANEXO_02_TYPE         = ANEXO_02_TYPE
+            ANEXO_02_SUBJECT      = LV_FILENAME_X
+          EXCEPTIONS
+            COMMUNICATION_FAILURE = 1
+            SYSTEM_FAILURE        = 2.
+
+      WHEN ABAP_FALSE.
+
+        CALL FUNCTION 'Z_SEND_MAIL'
+          IMPORTING
+            P_OUTENVIADO     = P_OUTENVIADO
+          TABLES
+            LT_CONTENTS      = LT_CONTENTS
+            LT_SMTPADR       = IT_EMAIL_RFC
+            ANEXO_02_TXT     = LT_ATTACH_TXT
+            ANEXO_01_HEX     = LT_ATTACH_BIN
+          CHANGING
+            I_USER           = LC_USER_MAIL
+            I_TYPE           = I_TYPE
+            I_SUBJECT        = LV_SUBJECT
+            CK_ANEXO_01      = CK_ANEXO_01
+            ANEXO_01_TYPE    = ANEXO_01_TYPE
+            ANEXO_01_SUBJECT = LV_FILENAME_D
+            CK_ANEXO_02      = CK_ANEXO_02
+            ANEXO_02_TYPE    = ANEXO_02_TYPE
+            ANEXO_02_SUBJECT = LV_FILENAME_X.
+
+    ENDCASE.
+
+    IF P_OUTENVIADO EQ ABAP_TRUE.
+
+      IF PEMAIL IS INITIAL.
+        DATA: WA_ENVIADO TYPE ZSDT0230.
+        WA_ENVIADO-DOCNUM      = LS_BNFDOC-DOCNUM.
+        WA_ENVIADO-EMAIL       = LC_STRING_MAILS.
+        WA_ENVIADO-DT_REGISTRO = SY-DATUM.
+        WA_ENVIADO-HR_REGISTRO = SY-UZEIT.
+        MODIFY ZSDT0230 FROM WA_ENVIADO.
+      ENDIF.
+      COMMIT WORK.
+
+    ELSE.
+      "IF SY-BATCH EQ ABAP_FALSE.
+      "  WRITE: / 'Docnum ', LS_BNFDOC-DOCNUM, ' - Erro no envio do email'.
+      "  WRITE: / 'Destinatários: ', WA_EMAIL-EMAIL.
+      "ENDIF.
+    ENDIF.
+
+  ENDLOOP.
+
+ENDFORM.

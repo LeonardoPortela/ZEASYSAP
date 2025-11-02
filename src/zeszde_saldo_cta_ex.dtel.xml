@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESDE_SALDO_CTA_EX</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>WERTV12</DOMNAME>
+    <HEADLEN>17</HEADLEN>
+    <SCRLEN1>07</SCRLEN1>
+    <SCRLEN2>17</SCRLEN2>
+    <SCRLEN3>17</SCRLEN3>
+    <DDTEXT>Saldo do Extrato</DDTEXT>
+    <REPTEXT>Saldo do Extrato</REPTEXT>
+    <SCRTEXT_S>Extrato</SCRTEXT_S>
+    <SCRTEXT_M>Saldo do Extrato</SCRTEXT_M>
+    <SCRTEXT_L>Saldo do Extrato</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>E</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Statement Balance</DDTEXT>
+     <REPTEXT>Statement Balance</REPTEXT>
+     <SCRTEXT_S>Balance</SCRTEXT_S>
+     <SCRTEXT_M>Statement Balance</SCRTEXT_M>
+     <SCRTEXT_L>Statement Balance</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

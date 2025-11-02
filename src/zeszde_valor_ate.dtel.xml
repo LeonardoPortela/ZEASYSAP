@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESDE_VALOR_ATE</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <HEADLEN>20</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Valor ATÉ</DDTEXT>
+    <REPTEXT>Valor ATÉ</REPTEXT>
+    <SCRTEXT_S>Valor ATÉ</SCRTEXT_S>
+    <SCRTEXT_M>Valor ATÉ</SCRTEXT_M>
+    <SCRTEXT_L>Valor ATÉ</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <DATATYPE>CURR</DATATYPE>
+    <LENG>000023</LENG>
+    <DECIMALS>000002</DECIMALS>
+    <OUTPUTLEN>000030</OUTPUTLEN>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

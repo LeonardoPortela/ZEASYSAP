@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESWRBTR_DRE</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>WERTV12</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>16</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Montante em moeda do documento.</DDTEXT>
+    <REPTEXT>[Mês]Realizado</REPTEXT>
+    <SCRTEXT_S>[Mês]Rea</SCRTEXT_S>
+    <SCRTEXT_M>[Mês]Rea</SCRTEXT_M>
+    <SCRTEXT_L>[Mês]Realizado</SCRTEXT_L>
+    <APPLCLASS>FB</APPLCLASS>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>D</LANGU>
+    <LANGU>E</LANGU>
+    <LANGU>S</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>Betrag in Belegwährung</DDTEXT>
+     <REPTEXT>[Mês]Realizado</REPTEXT>
+     <SCRTEXT_S>[Mês]Rea</SCRTEXT_S>
+     <SCRTEXT_M>[Mês]Rea</SCRTEXT_M>
+     <SCRTEXT_L>[Mês]Realizado</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Amount Month</DDTEXT>
+     <REPTEXT>Amount Month</REPTEXT>
+     <SCRTEXT_S>AmounMonth</SCRTEXT_S>
+     <SCRTEXT_M>Amount Month</SCRTEXT_M>
+     <SCRTEXT_L>Amount Month</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Importe en la moneda del documento</DDTEXT>
+     <REPTEXT>Importe</REPTEXT>
+     <SCRTEXT_S>Importe</SCRTEXT_S>
+     <SCRTEXT_M>Importe</SCRTEXT_M>
+     <SCRTEXT_L>Importe</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+   <LONGTEXTS>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESWRBTR_DRE</OBJECT>
+      <LANGU>D</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0001</VERSION>
+      <MASTERLANG>X</MASTERLANG>
+      <TXTLINES>00010</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESWRBTR_DRE</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>D</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00001</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEFINITION&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Betrag der &lt;GL:Belegposition&gt;Belegposition&lt;/&gt; in</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>&lt;GL:Belegwährung&gt;Belegwährung.&lt;/&gt;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;WHAT_TO_DO&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Bei der &lt;GL:Belegerfassung&gt;Belegerfassung&lt;/&gt; ist der Betrag manuell</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>einzugeben. In der letzten Belegposition kann &apos;*&apos; eingegeben werden.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Als Betrag wird dann vom System der &lt;GL:Saldo&gt;Saldo&lt;/&gt; der ZESuvor</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>erfaßten Positionen eingesetzt.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEPENDENCIES&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Die erfaßten Beträge können vom System automatisch geändert werden,</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>wenn folgende Buchungen vorzunehmen sind:</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>B1</TDFORMAT>
+       <TDLINE>Steuerkorrekturen</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>B1</TDFORMAT>
+       <TDLINE>Skontokorrekturen beim &lt;GL:Nettobuchen&gt;Nettobuchen&lt;/&gt;</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESWRBTR_DRE</OBJECT>
+      <LANGU>E</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0001</VERSION>
+      <TXTLINES>00010</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESWRBTR_DRE</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>E</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00001</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEFINITION&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>&lt;GL:line_item&gt;Line item&lt;/&gt; amount in &lt;GL:document_currency&gt;document</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>currency&lt;/&gt;.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;WHAT_TO_DO&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>During &lt;GL:document entry&gt;document entry&lt;/&gt;, enter the amount manually.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>In the last line item, you can enter a &quot;*&quot; - the amount of the final</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>line item is then the &lt;GL:balance&gt;balance&lt;/&gt; of all the line items</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>previously entered.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEPENDENCIES&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Amounts you enter may be changed automatically by the system if the</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>following postings are made:</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>B1</TDFORMAT>
+       <TDLINE>Tax adjustments</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>B1</TDFORMAT>
+       <TDLINE>Cash discount adjustments during &lt;GL:net postings&gt;net postings&lt;/&gt;.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESWRBTR_DRE</OBJECT>
+      <LANGU>P</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0001</VERSION>
+      <TXTLINES>00008</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESWRBTR_DRE</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>P</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00001</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEFINITION&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Montante do item de documento na moeda do documento.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;WHAT_TO_DO&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Na entrada do documento, o montante deve ser entrado manualmente. No</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>último item de documento pode ser entrado um &apos;*&apos;. Como montante será,</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>então, aplicado pelo sistema o saldo do item entrado anteriormente.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEPENDENCIES&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Os montantes entrados podem ser alterados automaticamente pelo sistema</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>se deverem ser efetuados os seguintes lançamentos:</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>B1</TDFORMAT>
+       <TDLINE>Ajustes de imposto</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>B1</TDFORMAT>
+       <TDLINE>Ajustes de desconto no lançamento de valores líquidos</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESWRBTR_DRE</OBJECT>
+      <LANGU>S</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0001</VERSION>
+      <TXTLINES>00008</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESWRBTR_DRE</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>S</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00001</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEFINITION&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Importe de la posición de documento en la moneda del documento.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;WHAT_TO_DO&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Al entrar el documento, este importe debe indicarse manualmente. En la</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>última posición puede indicarse un &apos;*&apos;, y el sistema fijará entonces</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>como importe el saldo de las posiciones entradas anteriormente.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEPENDENCIES&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Los documentos entrados pueden ser modificados automáticamente por el</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>sistema en el caso de las siguientes contabilizaciones:</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>B1</TDFORMAT>
+       <TDLINE>correcciones de impuestos</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>B1</TDFORMAT>
+       <TDLINE>correcciones de descuentos en contabilizaciones netas.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+   </LONGTEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

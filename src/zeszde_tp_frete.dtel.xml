@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESDE_TP_FRETE</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESDM_TP_FRETE</DOMNAME>
+    <HEADLEN>55</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Incoterms</DDTEXT>
+    <REPTEXT>Incoterms</REPTEXT>
+    <SCRTEXT_S>Incoterms</SCRTEXT_S>
+    <SCRTEXT_M>Incoterms</SCRTEXT_M>
+    <SCRTEXT_L>Incoterms</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <LONGTEXTS>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESDE_TP_FRETE</OBJECT>
+      <LANGU>P</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0002</VERSION>
+      <MASTERLANG>X</MASTERLANG>
+      <TXTLINES>00080</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESDE_TP_FRETE</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>P</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00002</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>Nomenclaturas das Incoterms</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>EXW – Ex Works - o produto e a fatura devem estar à disposição do</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>importador no estabelecimento do exportador. Todas as despesas e</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>quaisquer perdas e danos a partir da entrega da mercadoria, inclusive o</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>despacho da mercadoria para o exterior, são de responsabilidade do</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>importador. Quando solicitado, o exportador deverá prestar ao importador</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>assistência na obtenção de documentos para o despacho do produto. Esta</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>modalidade pode ser utilizada com relação a qualquer via de transporte.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>FCA – Free Carrier - o exportador entrega as mercadorias, desembaraçadas</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>para exportação, à custódia do transportador, no local indicado pelo</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>importador, cessando aí todas as responsabilidades do exportador. Essa</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>condição pode ser utilizada em qualquer tipo de transporte, inclusive o</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>multimodal.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>FAS – Free Along Ship - as obrigações do exportador encerram-se ao</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>colocar a mercadoria, já desembaraçada para exportação, no cais, livre,</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>junto ao costado do navio. A partir desse momento,  o importador assume</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>todos os riscos, devendo pagar inclusive as  despesas de colocação da</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>mercadoria dentro do navio. O termo é  utilizado para transporte</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>marítimo ou hidroviário interior.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>FOB – Free on Board - o exportador deve entregar a mercadoria,</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE> desembaraçada, a bordo do navio indicado pelo importador, no porto de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>embarque. Esta modalidade é válida para o transporte marítimo ou</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>hidroviário interior. Todas as despesas, até o momento em que o produto</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>é colocado a bordo do veículo transportador, são da responsabilidade do</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>exportador. Ao importador cabem as despesas e os riscos de perda ou dano</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>do produto, a partir do  momento que este transpuser a amurada do navio.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>CFR – Cost and Freight - o exportador deve entregar a mercadoria no</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>porto de destino escolhido pelo importador. As despesas de transporte</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>ficam, portanto, a cargo do exportador. O importador  deve arcar com as</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>despesas de seguro e de desembarque da mercadoria. A utilização desse</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>termo obriga o exportador a desembaraçar a mercadoria para exportação e</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>utilizar apenas o  transporte marítimo ou hidroviário interior.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>CIF – Cost, Insurance and Freight - modalidade equivalente ao CFR, com a</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>diferença de que as despesas de seguro ficam a cargo do exportador. O</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>exportador deve entregar a mercadoria a bordo do navio, no porto de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>embarque, com frete e seguro pagos. A responsabilidade do exportador</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>cessa no momento em que o produto cruza a amurada do navio no porto de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>destino. Esta modalidade só pode ser utilizada para transporte marítimo</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>ou hidroviário interior.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>CPT – Carriage Paid To... - como o CFR, esta condição estipula  que o</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>exportador deverá pagar as despesas de embarque da mercadoria e seu</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>frete internacional até o local de destino designado. Dessa forma, o</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>risco de perda ou de dano dos bens, assim como quaisquer aumentos de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>custos, é transferido do exportador para o importador, quando as</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>mercadorias forem entregues à custódia do transportador. Este Incoterm</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>pode ser utilizado com relação a qualquer meio de transporte.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>CIP – Carriage and Insurance Paid to... - adota princípio semelhante ao</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>CPT. O exportador, além de pagar as despesas de embarque da mercadoria e</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>do frete até o local de destino, também arca com as despesas do seguro</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>de transporte da mercadoria até o local de destino indicado. O CIP pode</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>ser utilizado com qualquer modalidade de transporte, inclusive</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>multimodal.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>DAF – Delivered At Frontier - o exportador deve entregar a  mercadoria</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>no ponto e local designados na fronteira, antes porém da linha limítrofe</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>com o país de destino. Este termo é utilizado principalmente nos casos</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>de transporte rodoviário ou ferroviário.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>DES – Delivered Ex Ship - modalidade utilizada somente para transporte</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>marítimo ou hidroviário interior. O exportador tem a obrigação de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>colocar a mercadoria no destino estipulado, a bordo do navio, ainda não</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>desembaraçada para a importação, assumindo integralmente todos os riscos</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>e despesas até aquele ponto no exterior.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>DEQ – Delivered Ex Quay - o exportador deve colocar a mercadoria, não</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>desembaraçada para importação, à disposição do importador no cais do</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>porto de destino designado. Este termo é utilizado para transporte</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>marítimo ou hidroviário interior ou multimodal.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>DDU – Delivered Duty Unpaid - o exportador deve colocar a mercadoria à</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>disposição do importador no local e ponto designados no exterior. Assume</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>todas as despesas e riscos para levar a mercadoria até o destino</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>indicado, exceto os gastos com pagamento de direitos aduaneiros,</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>impostos e demais encargos da importação. Este termo pode ser utilizado</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>com relação a qualquer modalidade de transporte.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>DDP – Delied Duty Paid - o exportador assume o compromisso de entregar a</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>mercadoria, desembaraçada para importação, no local designado pelo</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>importador, pagando todas as despesas, inclusive impostos e outros</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>encargos de importação. Não é de responsabilidade do exportador, porém,</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>o desembarque da mercadoria. O exportador é responsável também pelo</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>frete interno do local de desembarque até o local designado pelo</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>importador. Este termo pode ser utilizado  com qualquer modalidade de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>transporte. Trata-se do Incoterm que estabelece o maior grau de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>compromissos para o exportador.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+   </LONGTEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

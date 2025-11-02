@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESE_NOMEP</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>CHAR40</DOMNAME>
+    <HEADLEN>44</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Nome Processo ( Nome Transação ou Nome Job )</DDTEXT>
+    <REPTEXT>Nome Processo ( Nome Transação ou Nome Job )</REPTEXT>
+    <SCRTEXT_S>Nome Proce</SCRTEXT_S>
+    <SCRTEXT_M>Nome Processo ( Nome</SCRTEXT_M>
+    <SCRTEXT_L>Nome Processo ( Nome Transação ou Nome J</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

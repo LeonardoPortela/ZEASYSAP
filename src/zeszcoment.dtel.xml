@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESCOMENT</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <HEADLEN>55</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Comentário Contrato</DDTEXT>
+    <REPTEXT>Comentário Contrato</REPTEXT>
+    <SCRTEXT_S>Comentario</SCRTEXT_S>
+    <SCRTEXT_M>Comentário Contrato</SCRTEXT_M>
+    <SCRTEXT_L>Comentário Contrato</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000300</LENG>
+    <OUTPUTLEN>000300</OUTPUTLEN>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

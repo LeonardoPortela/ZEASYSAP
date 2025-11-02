@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESDE_NCM</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>STEUC</DOMNAME>
+    <HEADLEN>30</HEADLEN>
+    <SCRLEN1>03</SCRLEN1>
+    <SCRLEN2>03</SCRLEN2>
+    <SCRLEN3>03</SCRLEN3>
+    <DDTEXT>NCM</DDTEXT>
+    <REPTEXT>Nomenclatura Comum do Mercosul</REPTEXT>
+    <SCRTEXT_S>NCM</SCRTEXT_S>
+    <SCRTEXT_M>NCM</SCRTEXT_M>
+    <SCRTEXT_L>NCM</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

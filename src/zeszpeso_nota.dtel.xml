@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESPESO_NOTA</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>NUM13</DOMNAME>
+    <HEADLEN>19</HEADLEN>
+    <SCRLEN1>09</SCRLEN1>
+    <SCRLEN2>12</SCRLEN2>
+    <SCRLEN3>19</SCRLEN3>
+    <DDTEXT>Peso existente na nota fiscal</DDTEXT>
+    <REPTEXT>Peso da Nota Fiscal</REPTEXT>
+    <SCRTEXT_S>Peso Nota</SCRTEXT_S>
+    <SCRTEXT_M>Peso da Nota</SCRTEXT_M>
+    <SCRTEXT_L>Peso da Nota Fiscal</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

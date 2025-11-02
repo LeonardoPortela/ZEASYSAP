@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESCUSTO</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <HEADLEN>17</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>17</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Custos / Impostos</DDTEXT>
+    <REPTEXT>Custos / Impostos</REPTEXT>
+    <SCRTEXT_S>Cust / Imp</SCRTEXT_S>
+    <SCRTEXT_M>Custos / Impostos</SCRTEXT_M>
+    <SCRTEXT_L>Custos / Impostos</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <DATATYPE>CURR</DATATYPE>
+    <LENG>000008</LENG>
+    <DECIMALS>000004</DECIMALS>
+    <OUTPUTLEN>000010</OUTPUTLEN>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESXNFE_MDFE_MOD</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESXNFE_MDFE_MOD</DOMNAME>
+    <HEADLEN>19</HEADLEN>
+    <SCRLEN1>06</SCRLEN1>
+    <SCRLEN2>06</SCRLEN2>
+    <SCRLEN3>19</SCRLEN3>
+    <DDTEXT>MDF-e: modelo do documento fiscal</DDTEXT>
+    <REPTEXT>Modelo do documento</REPTEXT>
+    <SCRTEXT_S>Modelo</SCRTEXT_S>
+    <SCRTEXT_M>Modelo</SCRTEXT_M>
+    <SCRTEXT_L>Modelo do documento</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

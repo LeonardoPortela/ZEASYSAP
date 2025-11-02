@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESSDED005</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <HEADLEN>21</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>decimal com 17 casas, 6 decimais</DDTEXT>
+    <REPTEXT>Dec.</REPTEXT>
+    <SCRTEXT_S>Dec.</SCRTEXT_S>
+    <SCRTEXT_M>Dec.</SCRTEXT_M>
+    <SCRTEXT_L>Dec.</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <DATATYPE>DEC</DATATYPE>
+    <LENG>000017</LENG>
+    <DECIMALS>000006</DECIMALS>
+    <OUTPUTLEN>000021</OUTPUTLEN>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZESVIP_INVOICE_BILL_SOURCE</DOMNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000010</LENG>
+    <OUTPUTLEN>000010</OUTPUTLEN>
+    <VALEXI>X</VALEXI>
+    <DDTEXT>VIP Integration - Bill Source Code</DDTEXT>
+   </DD01V>
+   <DD07V_TAB>
+    <DD07V>
+     <VALPOS>0001</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>AGCA</DOMVALUE_L>
+     <DDTEXT>Port Disbursement Advance Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0002</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>AMVE</DOMVALUE_L>
+     <DDTEXT>MVE Adjustment Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0003</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>APCT</DOMVALUE_L>
+     <DDTEXT>VPC Adjustment Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0004</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>ARDB</DOMVALUE_L>
+     <DDTEXT>Time Charter In Bunker Adjustment Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0005</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>AREB</DOMVALUE_L>
+     <DDTEXT>Port Advance Rebill Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0006</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>ATCB</DOMVALUE_L>
+     <DDTEXT>Time Charter Out Bunker Adjustment Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0007</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>BBTP</DOMVALUE_L>
+     <DDTEXT>Bareboat Payment Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0008</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>BCMJ</DOMVALUE_L>
+     <DDTEXT>Bunker Swaps Allocation Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0009</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>BCST</DOMVALUE_L>
+     <DDTEXT>Bareboat Daily Cost Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0010</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>BINV</DOMVALUE_L>
+     <DDTEXT>Bunker Invoice Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0011</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>CEXP</DOMVALUE_L>
+     <DDTEXT>Claim Payment Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0012</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>CREB</DOMVALUE_L>
+     <DDTEXT>Claim Rebill Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0013</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>CREV</DOMVALUE_L>
+     <DDTEXT>Claim Invoice Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0014</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>CSHP</DOMVALUE_L>
+     <DDTEXT>Commission Share Payable Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0015</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>CSHR</DOMVALUE_L>
+     <DDTEXT>Commission Share Receivable Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0016</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>DCAB</DOMVALUE_L>
+     <DDTEXT>Demurrage Cost Allocation Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0017</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>DEMP</DOMVALUE_L>
+     <DDTEXT>Payable Demurrage Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0018</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>DEMR</DOMVALUE_L>
+     <DDTEXT>Receivable Demurrage Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0019</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>DESP</DOMVALUE_L>
+     <DDTEXT>Payable Despatch Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0020</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>DESR</DOMVALUE_L>
+     <DDTEXT>Receivable Despatch Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0021</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>DREB</DOMVALUE_L>
+     <DDTEXT>Port Disbursement Rebill Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0022</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>EQIP</DOMVALUE_L>
+     <DDTEXT>Equipment TC In Contract Payment Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0023</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>EQOB</DOMVALUE_L>
+     <DDTEXT>Equipment TC Out Bill Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0024</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>ESIP</DOMVALUE_L>
+     <DDTEXT>Equipment Spot In Contract Payment Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0025</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>ESOB</DOMVALUE_L>
+     <DDTEXT>Equipment Spot Out Contract Payment Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0026</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>FCOM</DOMVALUE_L>
+     <DDTEXT>Freight/Demurrage Commission, Paid Separately Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0027</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>FFAC</DOMVALUE_L>
+     <DDTEXT>Trade Commission Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0028</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>FFAJ</DOMVALUE_L>
+     <DDTEXT>Trade Settlement Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0029</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>FFAS</DOMVALUE_L>
+     <DDTEXT>Trade Settlement Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0030</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>FINV</DOMVALUE_L>
+     <DDTEXT>Freight Invoice Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0031</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>FRBT</DOMVALUE_L>
+     <DDTEXT>Freight Rebate Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0032</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>FREB</DOMVALUE_L>
+     <DDTEXT>Rebillable Freight Invoices and RELT voyages for SPOT/RELT</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0033</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>INTS</DOMVALUE_L>
+     <DDTEXT>Interservice Revenue Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0034</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>LCST</DOMVALUE_L>
+     <DDTEXT>Lease Cost Journal Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0035</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>LGHT</DOMVALUE_L>
+     <DDTEXT>Lightering Cost Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0036</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>MACR</DOMVALUE_L>
+     <DDTEXT>Monthly Closing Accruals Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0037</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>MLAJ</DOMVALUE_L>
+     <DDTEXT>Time Charter Period Journals Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0038</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>OREB</DOMVALUE_L>
+     <DDTEXT>Rebillable Expense Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0039</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>OWCM</DOMVALUE_L>
+     <DDTEXT>Owner&apos;s Commission Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0040</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>PAGY</DOMVALUE_L>
+     <DDTEXT>Port Disbursement Final Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0041</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>PESD</DOMVALUE_L>
+     <DDTEXT>Port Expense in Voyage Estimate Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0042</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>PEXP</DOMVALUE_L>
+     <DDTEXT>Port Expense Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0043</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>POOL</DOMVALUE_L>
+     <DDTEXT>Pooling Distribution Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0044</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>PLAR</DOMVALUE_L>
+     <DDTEXT>Pooling Distribution Receivable Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0045</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>PTSH</DOMVALUE_L>
+     <DDTEXT>Profit Share Distribution Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0046</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>RACM</DOMVALUE_L>
+     <DDTEXT>Relet Address Commission, Paid Separately Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0047</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>RCOM</DOMVALUE_L>
+     <DDTEXT>Relet Freight/Demurrage Commission Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0048</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>REXP</DOMVALUE_L>
+     <DDTEXT>Voyage Other Expense, Rate Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0049</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>RINV</DOMVALUE_L>
+     <DDTEXT>Relet Freight Invoice Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0050</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>RRBT</DOMVALUE_L>
+     <DDTEXT>Relet Rebate Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0051</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>RREV</DOMVALUE_L>
+     <DDTEXT>Voyage Other Revenue, Rate Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0052</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>SPUR</DOMVALUE_L>
+     <DDTEXT>Sling Purchase Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0053</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>SREB</DOMVALUE_L>
+     <DDTEXT>Owner Rebill Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0054</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>SRVB</DOMVALUE_L>
+     <DDTEXT>Service Bill Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0055</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>SRVP</DOMVALUE_L>
+     <DDTEXT>Service Payment Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0056</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>SURV</DOMVALUE_L>
+     <DDTEXT>Bunker Survey Cost Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0057</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>TCIP</DOMVALUE_L>
+     <DDTEXT>Time Charter In Payment Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0058</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>TCOB</DOMVALUE_L>
+     <DDTEXT>Time Charter Out Billing Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0059</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>TCOC</DOMVALUE_L>
+     <DDTEXT>Time Charter Out Commission, Paid Separately Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0060</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>TCOM</DOMVALUE_L>
+     <DDTEXT>Time Charter In Commission, Paid Separately Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0061</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>TCOP</DOMVALUE_L>
+     <DDTEXT>Time Charter Out Payment Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0062</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>TINV</DOMVALUE_L>
+     <DDTEXT>Spot Freight Invoice Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0063</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>TRNS</DOMVALUE_L>
+     <DDTEXT>Transshipment Cost Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0064</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>VBNK</DOMVALUE_L>
+     <DDTEXT>Voyage Bunker Cost Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0065</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>VCAB</DOMVALUE_L>
+     <DDTEXT>Voyage Cost Allocation Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0066</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>VCST</DOMVALUE_L>
+     <DDTEXT>Vessel Daily Cost Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0067</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>VEXP</DOMVALUE_L>
+     <DDTEXT>Voyage Other Expense, Lumpsum Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0068</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>VREB</DOMVALUE_L>
+     <DDTEXT>Voyage Rebillable Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0069</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>VREV</DOMVALUE_L>
+     <DDTEXT>Voyage Other Revenue, Lumpsum Receivable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0070</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>XEXP</DOMVALUE_L>
+     <DDTEXT>Non-Voyage Expense Payable</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0071</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>XJOU</DOMVALUE_L>
+     <DDTEXT>Non-Voyage Journal Journal Entry</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0072</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>XOTH</DOMVALUE_L>
+     <DDTEXT>Non-Accounting Rev/Exp Non-Accounting AR or AP</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0073</VALPOS>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DOMVALUE_L>XREV</DOMVALUE_L>
+     <DDTEXT>Non-Voyage Revenue Receivable</DDTEXT>
+    </DD07V>
+   </DD07V_TAB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

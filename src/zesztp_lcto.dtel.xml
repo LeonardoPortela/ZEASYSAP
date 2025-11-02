@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESTP_LCTO</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESDMTP_LCTO</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>28</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>28</SCRLEN3>
+    <DDTEXT>Codigo de Tipo de Lançamento</DDTEXT>
+    <REPTEXT>Codigo de Tipo de Lançamento</REPTEXT>
+    <SCRTEXT_S>Cod.Tp.Lct</SCRTEXT_S>
+    <SCRTEXT_M>Cod. Tipo Lançamento</SCRTEXT_M>
+    <SCRTEXT_L>Codigo de Tipo de Lançamento</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <SHLPNAME>ZES_PSQ_TP_LANC</SHLPNAME>
+    <SHLPFIELD>TP_LCTO</SHLPFIELD>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>E</LANGU>
+    <LANGU>S</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Input Model</DDTEXT>
+     <REPTEXT>Input Model</REPTEXT>
+     <SCRTEXT_S>Input Mode</SCRTEXT_S>
+     <SCRTEXT_M>Input Model</SCRTEXT_M>
+     <SCRTEXT_L>Input Model</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Código de lanzamiento</DDTEXT>
+     <REPTEXT>Código de lanzamiento</REPTEXT>
+     <SCRTEXT_S>Cod.Tp.Lzr</SCRTEXT_S>
+     <SCRTEXT_M>Cód de lanzamiento</SCRTEXT_M>
+     <SCRTEXT_L>Código de lanzamiento</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

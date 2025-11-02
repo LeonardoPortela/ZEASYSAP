@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESDE_VLR_KG_TRANS</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESDM_VLR_KG_TRANS</DOMNAME>
+    <HEADLEN>23</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>16</SCRLEN2>
+    <SCRLEN3>23</SCRLEN3>
+    <DDTEXT>Valor em Kg do Transporte</DDTEXT>
+    <REPTEXT>Valor do Kg Tranportado</REPTEXT>
+    <SCRTEXT_S>TranspKg.</SCRTEXT_S>
+    <SCRTEXT_M>Vlr. Transp. Kg.</SCRTEXT_M>
+    <SCRTEXT_L>Valor do Kg Tranportado</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

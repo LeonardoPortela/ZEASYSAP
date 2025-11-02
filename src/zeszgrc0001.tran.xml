@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TRAN" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TSTC>
+    <TCODE>ZESGRC0001</TCODE>
+    <CINFO>Ag==</CINFO>
+   </TSTC>
+   <TSTCC>
+    <TCODE>ZESGRC0001</TCODE>
+    <S_WEBGUI>1</S_WEBGUI>
+    <S_WIN32>X</S_WIN32>
+    <S_PLATIN>X</S_PLATIN>
+   </TSTCC>
+   <TSTCT>
+    <SPRSL>P</SPRSL>
+    <TCODE>ZESGRC0001</TCODE>
+    <TTEXT>GRC - Responsável Técnico por Estado</TTEXT>
+   </TSTCT>
+   <TSTCP>
+    <TCODE>ZESGRC0001</TCODE>
+    <PARAM>/*ZESREGISTER_DATA P_DB_TAB=ZESTNFE_ADD_RESP;P_TITLE=GRC - Responsável Técnico por Estado;P_SCMANT=0057;P_STCNAM=ZESTNFE_ADD_RESP;</PARAM>
+   </TSTCP>
+  </asx:values>
+ </asx:abap>
+</abapGit>

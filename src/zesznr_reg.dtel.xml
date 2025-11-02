@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESNR_REG</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>CHAR14</DOMNAME>
+    <HEADLEN>24</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>24</SCRLEN3>
+    <DDTEXT>Num. Registro Exportação</DDTEXT>
+    <REPTEXT>Num. Registro Exportação</REPTEXT>
+    <SCRTEXT_S>Num.Export</SCRTEXT_S>
+    <SCRTEXT_M>Num. Registro Export</SCRTEXT_M>
+    <SCRTEXT_L>Num. Registro Exportação</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

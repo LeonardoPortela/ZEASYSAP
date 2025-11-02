@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESFRETE_LOTACAO</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESFRETE_LOTACAO</DOMNAME>
+    <HEADLEN>13</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>13</SCRLEN2>
+    <SCRLEN3>13</SCRLEN3>
+    <DDTEXT>Frete Lotação</DDTEXT>
+    <REPTEXT>Frete Lotação</REPTEXT>
+    <SCRTEXT_S>Frete Lt.</SCRTEXT_S>
+    <SCRTEXT_M>Frete Lotação</SCRTEXT_M>
+    <SCRTEXT_L>Frete Lotação</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <LONGTEXTS>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESFRETE_LOTACAO</OBJECT>
+      <LANGU>P</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0005</VERSION>
+      <MASTERLANG>X</MASTERLANG>
+      <TXTLINES>00006</TXTLINES>
+      <DOKSTATE>R</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESFRETE_LOTACAO</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>P</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00005</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>Carga com valor fechado, sem alteração de acordo com quantidade de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>chegada da mercadoria.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Com isso sendo a operação de frete de carga lotação a quantidade de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>chegada da carga não será parâmetro para calculo de quebra de frete e</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>perda de mercadoria, sendo considerado sempre o peso de chegada o mesmo</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>que o peso de saída.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+   </LONGTEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

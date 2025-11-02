@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESDE_PS_BC_TON</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESDE_VLR07_03</DOMNAME>
+    <HEADLEN>42</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>23</SCRLEN3>
+    <DDTEXT>Peso Base de Cálculo de Frete em Toneladas</DDTEXT>
+    <REPTEXT>Peso Base de Cálculo de Frete em Toneladas</REPTEXT>
+    <SCRTEXT_S>Peso Base</SCRTEXT_S>
+    <SCRTEXT_M>Peso Base Cálc.</SCRTEXT_M>
+    <SCRTEXT_L>Peso Base Cálculo Frete</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

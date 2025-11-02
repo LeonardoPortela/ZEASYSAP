@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESDE_CONTA_VAR_CAMBIO</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>SAKNR</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>40</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>25</SCRLEN3>
+    <DDTEXT>Conta de Perdas e Ganho Câmbial</DDTEXT>
+    <REPTEXT>Conta de Perdas e Ganho Câmbial</REPTEXT>
+    <SCRTEXT_S>Perd/Ganho</SCRTEXT_S>
+    <SCRTEXT_M>Cta Perd/Ganho</SCRTEXT_M>
+    <SCRTEXT_L>Conta Perd/Ganho Câmbial</SCRTEXT_L>
+    <APPLCLASS>FB</APPLCLASS>
+    <DTELMASTER>D</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>D</LANGU>
+    <LANGU>E</LANGU>
+    <LANGU>S</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>Conta de Perdas e Ganho Variação Câmbial</DDTEXT>
+     <REPTEXT>Conta de Perdas e Ganho Câmbial</REPTEXT>
+     <SCRTEXT_S>Perd/Ganho</SCRTEXT_S>
+     <SCRTEXT_M>Cta Perd/Ganho</SCRTEXT_M>
+     <SCRTEXT_L>Conta Perd/Ganho Câmbial</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Account for Realized Exchange Rate Losses or Gains</DDTEXT>
+     <SCRTEXT_S>Loss/Gains</SCRTEXT_S>
+     <SCRTEXT_M>Losses or Gains</SCRTEXT_M>
+     <SCRTEXT_L>Acc. Losses or Gains</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Cuenta local para gastos realizados por diferencias de T/C</DDTEXT>
+     <SCRTEXT_S>Gastos</SCRTEXT_S>
+     <SCRTEXT_M>Gsto.T/C realiz</SCRTEXT_M>
+     <SCRTEXT_L>Gastos DT/C realiz.</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

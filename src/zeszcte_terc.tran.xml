@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TRAN" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TSTC>
+    <TCODE>ZESCTE_TERC</TCODE>
+    <PGMNA>ZES_1BNFE_MONITOR</PGMNA>
+    <DYPNO>1000</DYPNO>
+    <CINFO>hA==</CINFO>
+   </TSTC>
+   <TSTCC>
+    <TCODE>ZESCTE_TERC</TCODE>
+    <S_WEBGUI>1</S_WEBGUI>
+    <S_WIN32>X</S_WIN32>
+    <S_PLATIN>X</S_PLATIN>
+   </TSTCC>
+   <TSTCT>
+    <SPRSL>P</SPRSL>
+    <TCODE>ZESCTE_TERC</TCODE>
+    <TTEXT>Monitor p/nota fiscal eletrônica</TTEXT>
+   </TSTCT>
+   <AUTHORIZATIONS>
+    <TSTCA>
+     <TCODE>ZESCTE_TERC</TCODE>
+     <OBJCT>F_BKPF_BUK</OBJCT>
+     <FIELD>ACTVT</FIELD>
+     <VALUE>03</VALUE>
+    </TSTCA>
+    <TSTCA>
+     <TCODE>ZESCTE_TERC</TCODE>
+     <OBJCT>F_BKPF_BUK</OBJCT>
+     <FIELD>BUKRS</FIELD>
+    </TSTCA>
+   </AUTHORIZATIONS>
+   <I18N_TPOOL>
+    <TSTCT>
+     <SPRSL>D</SPRSL>
+     <TTEXT>Monitor f. elektronische Nota Fiscal</TTEXT>
+    </TSTCT>
+    <TSTCT>
+     <SPRSL>E</SPRSL>
+     <TTEXT>Monitor de CTe - Terceiro</TTEXT>
+    </TSTCT>
+    <TSTCT>
+     <SPRSL>S</SPRSL>
+     <TTEXT>Monitor de CTe - Terceiro</TTEXT>
+    </TSTCT>
+   </I18N_TPOOL>
+  </asx:values>
+ </asx:abap>
+</abapGit>

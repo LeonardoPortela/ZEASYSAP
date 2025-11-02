@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESVLR_BRL_NEW</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>WERTV12</DOMNAME>
+    <HEADLEN>14</HEADLEN>
+    <SCRLEN1>09</SCRLEN1>
+    <SCRLEN2>09</SCRLEN2>
+    <SCRLEN3>14</SCRLEN3>
+    <DDTEXT>Valor Novo BRL</DDTEXT>
+    <REPTEXT>Valor Novo BRL</REPTEXT>
+    <SCRTEXT_S>Vl Nv BRL</SCRTEXT_S>
+    <SCRTEXT_M>Vl Nv BRL</SCRTEXT_M>
+    <SCRTEXT_L>Valor Novo BRL</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

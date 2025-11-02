@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESSTCD1</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>STCD1</DOMNAME>
+    <MEMORYID>ZESSTCD1</MEMORYID>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>20</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Nº ID fiscal 1</DDTEXT>
+    <REPTEXT>Nº ID fiscal 1</REPTEXT>
+    <SCRTEXT_S>NºIdFisc-1</SCRTEXT_S>
+    <SCRTEXT_M>Nº ID fiscal 1</SCRTEXT_M>
+    <SCRTEXT_L>Nº ID fiscal 1</SCRTEXT_L>
+    <APPLCLASS>FB</APPLCLASS>
+    <DTELMASTER>D</DTELMASTER>
+    <SHLPNAME>ZESH_CLIENTE</SHLPNAME>
+    <SHLPFIELD>ZESSTCD1</SHLPFIELD>
+    <DEFFDNAME>TAX_NO_1</DEFFDNAME>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>D</LANGU>
+    <LANGU>E</LANGU>
+    <LANGU>S</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>Steuernummer 1</DDTEXT>
+     <REPTEXT>Steuernummer 1</REPTEXT>
+     <SCRTEXT_S>St.-Nr. 1</SCRTEXT_S>
+     <SCRTEXT_M>Steuernummer 1</SCRTEXT_M>
+     <SCRTEXT_L>Steuernummer 1</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Tax Number 1</DDTEXT>
+     <REPTEXT>Tax Number 1</REPTEXT>
+     <SCRTEXT_S>Tax No. 1</SCRTEXT_S>
+     <SCRTEXT_M>Tax Number 1</SCRTEXT_M>
+     <SCRTEXT_L>Tax Number 1</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Número de identificación fiscal 1</DDTEXT>
+     <REPTEXT>Nº ident.fis.1</REPTEXT>
+     <SCRTEXT_S>N.I.F.1</SCRTEXT_S>
+     <SCRTEXT_M>Nº ident.fis.1</SCRTEXT_M>
+     <SCRTEXT_L>Nº ident.fis.1</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESSDO_APLIC</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <HEADLEN>23</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>23</SCRLEN3>
+    <DDTEXT>Valor do Saldo Aplicado</DDTEXT>
+    <REPTEXT>Valor do Saldo Aplicado</REPTEXT>
+    <SCRTEXT_S>Vlr.Sl.Apl</SCRTEXT_S>
+    <SCRTEXT_M>Valor Saldo Aplicado</SCRTEXT_M>
+    <SCRTEXT_L>Valor do Saldo Aplicado</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <DATATYPE>CURR</DATATYPE>
+    <LENG>000015</LENG>
+    <DECIMALS>000002</DECIMALS>
+    <OUTPUTLEN>000020</OUTPUTLEN>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>S</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Valor Saldo Aplicado</DDTEXT>
+     <REPTEXT>Valor Saldo Aplicado</REPTEXT>
+     <SCRTEXT_S>Vlr.Sl.Apl</SCRTEXT_S>
+     <SCRTEXT_M>Valor Saldo Aplicado</SCRTEXT_M>
+     <SCRTEXT_L>Valor Saldo Aplicado</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

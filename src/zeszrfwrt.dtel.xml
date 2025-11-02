@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESRFWRT</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESWERTV8</DOMNAME>
+    <HEADLEN>21</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>IR BRL</DDTEXT>
+    <REPTEXT>IR BRL</REPTEXT>
+    <SCRTEXT_S>IR BRL</SCRTEXT_S>
+    <SCRTEXT_M>IR BRL</SCRTEXT_M>
+    <SCRTEXT_L>IR BRL</SCRTEXT_L>
+    <APPLCLASS>VF</APPLCLASS>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>D</LANGU>
+    <LANGU>E</LANGU>
+    <LANGU>S</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>Referierter Wert</DDTEXT>
+     <REPTEXT>Ref. Wert</REPTEXT>
+     <SCRTEXT_S>Ref. Wert</SCRTEXT_S>
+     <SCRTEXT_M>Ref. Wert</SCRTEXT_M>
+     <SCRTEXT_L>Ref. Wert</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Reference value</DDTEXT>
+     <REPTEXT>Reference value</REPTEXT>
+     <SCRTEXT_S>Ref. value</SCRTEXT_S>
+     <SCRTEXT_M>Reference value</SCRTEXT_M>
+     <SCRTEXT_L>Reference value</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Valor referenciado</DDTEXT>
+     <REPTEXT>Valor referenciado</REPTEXT>
+     <SCRTEXT_S>Val.refer.</SCRTEXT_S>
+     <SCRTEXT_M>Val.refer.</SCRTEXT_M>
+     <SCRTEXT_L>Valor referenciado</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+   <LONGTEXTS>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESRFWRT</OBJECT>
+      <LANGU>D</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0005</VERSION>
+      <MASTERLANG>X</MASTERLANG>
+      <TXTLINES>00010</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESRFWRT</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>D</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00005</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEFINITION&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Gibt an, wieviel vom Positionswert bereits in einem Folgebeleg</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>verarbeitet worden ist. Der referierte Wert ist in</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>&lt;GL:Hauswährung&gt;Hauswährung&lt;/&gt; ausgewiesen.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;USE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Bei Verkaufsbelegen errechnet sich der Wert aus dem</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>&lt;GL:Verkaufspreis&gt;Verkaufspreis&lt;/&gt; des Materials. Beim Warenausgang</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>basiert der Wert auf dem Verrechnungspreis des Materials.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Eine Angebotsposition hat einen Wert in Höhe von 100 DM. Sie erzeugen</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>ZESwei Kundenauftragspositionen für das Angebot:</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE> eine im Wert von 20 DM und eine im Wert von 80 DM. Im ersten Fall</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>beträgt der referierte Wert 20 DM, im ZESweiten Fall 80 DM.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESRFWRT</OBJECT>
+      <LANGU>E</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0005</VERSION>
+      <TXTLINES>00010</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESRFWRT</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>E</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00005</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT> 1</TDFORMAT>
+       <TDLINE>&amp;DEFINITION&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Specifies how much of an item value has already been processed in a</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>subsequent document. The referenced value is expressed in the</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>&lt;GL:local_currency&gt;local currency&lt;/&gt;.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;USE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>For sales documents, the value is based on the</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>&lt;GL:sales_price&gt;sales price&lt;/&gt; of the material. For goods issue, the</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>value is based on the stock price of the material.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>A quotation item is worth $100. You create two sales order items from</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>the quotation: the first is worth $20, the second $80. In the first</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>case, the referenced value is $20; in the second case, $80.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESRFWRT</OBJECT>
+      <LANGU>P</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0005</VERSION>
+      <TXTLINES>00009</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESRFWRT</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>P</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00005</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEFINITION&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Indica até que ponto o valor do item foi processado em um documento</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>subsequente. O valor de referência é apresentado em moeda interna.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;USE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Nos documentos de vendas, o valor do item é calculado através do preço</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>de venda do material, enquanto que na saída de mercadorias o valor do</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>item possui o preço interno como referência.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Um item de cotação possui um valor no montate de $100. O usuário cria</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>dois itens da ordem do cliente para a cotação: um item no valor de $20</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>e outro item no valor de $80. No primeiro caso, o valor de referência</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>será $20 e no segundo caso $80.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+    <item>
+     <DOKIL>
+      <ID>DE</ID>
+      <OBJECT>ZESRFWRT</OBJECT>
+      <LANGU>S</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0005</VERSION>
+      <TXTLINES>00011</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZESRFWRT</TDNAME>
+      <TDID>DE</TDID>
+      <TDSPRAS>S</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00005</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;DEFINITION&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Indica la cantidad de valor de posición que ya ha sido tratado en un</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>documento subsiguiente. El valor de referencia se expresa en moneda</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>local.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;USE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>En los documentos de ventas se calcula el valor a partir del precio de</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>ventas del material. En la salida de material, el valor se basa en el</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>precio de facturación del material.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Una posición de oferta tiene un valor de 10000 PTS. Se crean dos</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>posiciones de pedido de cliente para la oferta:</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>una con un valor de 2000 PTS y otra con un valor de 8000 PTS. En el</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>primer caso, el valor de referencia es de 2000 PTS y en</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>el segundo 8000 PTS.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+   </LONGTEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

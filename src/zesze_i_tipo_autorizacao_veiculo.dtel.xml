@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESE_I_TIPO_AUTORIZACAO_VEICULO</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESE_I_TIPO_AUTORIZACAO_VEICULO</DOMNAME>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Código da &quot;Autorização&quot; utilizada para a liberação abastecim</DDTEXT>
+    <SCRTEXT_S>Cd.Aut.Lib</SCRTEXT_S>
+    <SCRTEXT_M>Cód Aut.Liber.Abast</SCRTEXT_M>
+    <SCRTEXT_L>Cód.Autorização Liberação Abastecimento</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

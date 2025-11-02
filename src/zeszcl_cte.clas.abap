@@ -1,0 +1,1199 @@
+﻿CLASS ZESZCL_CTE DEFINITION
+  PUBLIC
+  INHERITING FROM ZESZCL_DOC_ELETRONICO
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+
+    CLASS-METHODS SET_ANULAR_CTE_SAIDA
+      IMPORTING
+        !I_DOCNUM TYPE J_1BDOCNUM
+        !I_ANULAR TYPE ZESZDE_ANULADO_CTE DEFAULT 'X' .
+
+    METHODS ZESZIF_DOC_ELETRONICO~GET_CK_ESTORNO_MDFE_POSSIVEL
+        REDEFINITION .
+    METHODS ZESZIF_DOC_ELETRONICO~GET_VAL_AUTORIZACAO_MODAL
+        REDEFINITION .
+    METHODS ZESZIF_DOC_ELETRONICO~GET_VAL_CANCELAMENTO_MODAL
+        REDEFINITION .
+    METHODS ZESZIF_DOC_ELETRONICO~GET_VAL_REINICIALIZAR_MODAL
+        REDEFINITION .
+    METHODS ZESZIF_DOC_ELETRONICO~SET_AUTORIZA_MDFE
+        REDEFINITION .
+    METHODS ZESZIF_DOC_ELETRONICO~SET_AUTORIZA_VIAGEM_TIP_FRETE
+        REDEFINITION .
+    METHODS ZESZIF_DOC_ELETRONICO~GET_URLS_DOCS
+        REDEFINITION .
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS ZESZCL_CTE IMPLEMENTATION.
+
+
+  METHOD SET_ANULAR_CTE_SAIDA.
+
+    "DATA: IT_ZLEST0061 TYPE TABLE OF ZESZLEST0061.
+    DATA: IT_ZLEST0060 TYPE TABLE OF ZESZLEST0060.
+    DATA: IT_ZLEST0060_OTHERS TYPE TABLE OF ZESZLEST0060.
+    "DATA: IT_ZLEST0056 TYPE TABLE OF ZESZLEST0056.
+    "DATA: IT_ZLEST0073 TYPE TABLE OF ZESZLEST0073.
+    DATA: IT_ZSDT0001  TYPE TABLE OF ZESZSDT0001.
+    "DATA: LC_SINAL TYPE I.
+
+
+    DELETE FROM ZESZLEST0061 WHERE DOCNUM EQ I_DOCNUM.
+
+    "SELECT * INTO TABLE IT_ZLEST0061
+    "  FROM ZESZLEST0061
+    " WHERE DOCNUM     EQ I_DOCNUM
+    "   AND CK_ANULADO NE I_ANULAR.
+
+    "Procurar Notas do CTE
+    SELECT * INTO TABLE IT_ZLEST0060
+      FROM ZESZLEST0060
+     WHERE DOCNUM EQ I_DOCNUM.
+
+    UPDATE ZESZLEST0060
+       SET DOCNUM = SPACE
+     WHERE DOCNUM EQ I_DOCNUM.
+
+*    CHECK SY-SUBRC IS INITIAL.
+
+*    LOOP AT IT_ZLEST0061 ASSIGNING FIELD-SYMBOL(<FS_ZLEST0061>).
+*      <FS_ZLEST0061>-CK_ANULADO = I_ANULAR.
+*    ENDLOOP.
+
+    IF IT_ZLEST0060 IS NOT INITIAL.
+      "Procurar Notas de Outros CT-E's
+      SELECT * INTO TABLE IT_ZLEST0060_OTHERS
+        FROM ZESZLEST0060
+         FOR ALL ENTRIES IN IT_ZLEST0060
+       WHERE DOCNUM NE I_DOCNUM
+         AND CHAVE_NFE EQ IT_ZLEST0060-CHAVE_NFE.
+
+      SORT IT_ZLEST0060_OTHERS BY CHAVE_NFE.
+    ENDIF.
+
+    "READ TABLE IT_ZLEST0061 INTO DATA(WA_ZLEST0061) INDEX 1.
+
+    "Procurar Destinos
+*    SELECT SINGLE * INTO @DATA(WA_ZLEST0056)
+*      FROM ZESZLEST0056
+*     WHERE BUKRS      EQ @WA_ZLEST0061-BUKRS
+*       AND WERKS      EQ @WA_ZLEST0061-WERKS
+*       AND NR_VIAGEM  EQ @WA_ZLEST0061-NR_VIAGEM
+*       AND ANO_VIAGEM EQ @WA_ZLEST0061-ANO_VIAGEM.
+
+*    IF SY-SUBRC IS INITIAL.
+*      "Busca Todas Notas
+*      SELECT * INTO TABLE IT_ZLEST0073
+*        FROM ZESZLEST0073
+*         FOR ALL ENTRIES IN IT_ZLEST0060
+*       WHERE CHAVE_NFE   EQ IT_ZLEST0060-CHAVE_NFE
+*         AND PO_EMBARQUE EQ WA_ZLEST0056-PO_EMBARQUE
+*         AND PO_DESTINO  EQ WA_ZLEST0056-PO_DESTINO.
+*
+*      SORT IT_ZLEST0073 BY CHAVE_NFE.
+*    ENDIF.
+
+*    CASE I_ANULAR.
+*      WHEN ABAP_TRUE.
+*        LC_SINAL = -1.
+*      WHEN ABAP_FALSE.
+*        LC_SINAL = 1.
+*    ENDCASE.
+
+    "Liberar Saldo
+    LOOP AT IT_ZLEST0060 INTO DATA(WA_60).
+
+      "Procura Filial de Entrada do Romaneio
+      SELECT SINGLE * FROM ZESZLEST0104 INTO @DATA(WL_ZLEST0104) WHERE EMISSOR EQ @WA_60-WERKS.
+
+      "Procura Romaneio de Entrada
+      SELECT SINGLE * INTO @DATA(WA_ZSDT0001)
+        FROM ZESZSDT0001
+       WHERE TP_MOVIMENTO EQ 'E'
+         AND BUKRS        EQ @WL_ZLEST0104-BUKRS
+         AND BRANCH       EQ @WL_ZLEST0104-BRANCH
+         AND NR_ROMANEIO  EQ @WA_60-NR_ROMANEIO
+         AND NR_SAFRA     EQ @WA_60-SAFRA
+         AND PARID        EQ @WA_60-RM_CODIGO.
+
+      IF SY-SUBRC IS INITIAL.
+        WA_ZSDT0001-CTE_EMIT_AQUAV = ABAP_FALSE.
+        APPEND WA_ZSDT0001 TO IT_ZSDT0001.
+      ENDIF.
+
+      "Busca Saldo
+*      READ TABLE IT_ZLEST0073 ASSIGNING FIELD-SYMBOL(<FS_73>) WITH KEY CHAVE_NFE = WA_60-CHAVE_NFE BINARY SEARCH.
+*      IF SY-SUBRC IS INITIAL.
+*        WA_60-PESO_FISCAL   = WA_60-PESO_FISCAL   * LC_SINAL.
+*        WA_60-NETWR         = WA_60-NETWR         * LC_SINAL.
+*        WA_60-PESO_SUBTOTAL = WA_60-PESO_SUBTOTAL * LC_SINAL.
+*        WA_60-PESO_LIQ_RET  = WA_60-PESO_LIQ_RET  * LC_SINAL.
+*        WA_60-PESO_RETIDO   = WA_60-PESO_RETIDO   * LC_SINAL.
+*
+*        ADD WA_60-PESO_FISCAL   TO <FS_73>-PESO_VINCULADO.
+*        ADD WA_60-NETWR         TO <FS_73>-VALOR_VINCULADO.
+*        ADD WA_60-PESO_SUBTOTAL TO <FS_73>-PESO_SUBTOT_VINC.
+*        ADD WA_60-PESO_LIQ_RET  TO <FS_73>-PESO_LIQRET_VINC.
+*        ADD WA_60-PESO_RETIDO   TO <FS_73>-PESO_RETIDO_VINC.
+*
+*        "Procura Romaneio de Entrada
+*        SELECT SINGLE * INTO @DATA(WA_ZSDT0001)
+*          FROM ZESZSDT0001
+*         WHERE TP_MOVIMENTO EQ 'E'
+*           AND BUKRS        EQ @WL_ZLEST0104-BUKRS
+*           AND BRANCH       EQ @WL_ZLEST0104-BRANCH
+*           AND NR_ROMANEIO  EQ @WA_60-NR_ROMANEIO
+*           AND NR_SAFRA     EQ @WA_60-SAFRA
+*           AND PARID        EQ @WA_60-RM_CODIGO.
+*
+*        IF SY-SUBRC IS INITIAL.
+*          ADD WA_60-PESO_RETIDO  TO WA_ZSDT0001-PESO_RETIDO_REAL.
+*          ADD WA_60-PESO_LIQ_RET TO WA_ZSDT0001-PESO_LIQRET_REAL.
+*          IF ( <FS_73>-PESO_ORIGEM - <FS_73>-PESO_VINCULADO ) LE 0.
+*            WA_ZSDT0001-VINC_TOT_AQUAV = ABAP_TRUE.
+*          ENDIF.
+*
+*          READ TABLE IT_ZLEST0060_OTHERS TRANSPORTING NO FIELDS WITH KEY CHAVE_NFE = WA_60-CHAVE_NFE BINARY SEARCH.
+*          IF SY-SUBRC IS NOT INITIAL AND I_ANULAR EQ ABAP_TRUE.
+*            WA_ZSDT0001-CT_AQUAV         = ABAP_FALSE.
+*            WA_ZSDT0001-VINC_TOT_AQUAV   = ABAP_FALSE.
+*            WA_ZSDT0001-CTE_EMIT_AQUAV   = ABAP_FALSE.
+*            WA_ZSDT0001-PESO_RETIDO_REAL = 0.
+*            WA_ZSDT0001-PESO_LIQRET_REAL = 0.
+*          ELSE.
+*            WA_ZSDT0001-CTE_EMIT_AQUAV   = ABAP_TRUE.
+*          ENDIF.
+*          APPEND WA_ZSDT0001 TO IT_ZSDT0001.
+*        ENDIF.
+*      ENDIF.
+    ENDLOOP.
+
+    "MODIFY ZESZLEST0061 FROM TABLE IT_ZLEST0061.
+    "MODIFY ZESZLEST0073 FROM TABLE IT_ZLEST0073.
+    MODIFY ZESZSDT0001  FROM TABLE IT_ZSDT0001.
+
+  ENDMETHOD.
+
+
+  METHOD ZESZIF_DOC_ELETRONICO~GET_CK_ESTORNO_MDFE_POSSIVEL.
+
+    R_INSTANCIA = SUPER->ZESZIF_DOC_ELETRONICO~GET_CK_ESTORNO_MDFE_POSSIVEL(
+                      )->GET_CK_VERIFICA_MODAL( I_MODAL = ME->ZESZIF_DOC_ELETRONICO~AT_ST_MODEL_CTE
+                      ).
+
+    SELECT *
+      INTO TABLE @DATA(IT_ZSDT0105)
+      FROM ZESZSDT0105
+     WHERE DOCNUM_REF NE 0
+       AND NMDFE      NE @ABAP_FALSE
+       AND DOCNUM     EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+    LOOP AT IT_ZSDT0105 INTO DATA(WA_ZSDT0105).
+
+      SELECT SINGLE *
+        INTO @DATA(WA_ZSDT0102)
+        FROM ZESZSDT0102
+       WHERE DOCNUM    EQ @WA_ZSDT0105-DOCNUM_REF
+         AND NMDFE     EQ @WA_ZSDT0105-NMDFE
+         AND ESTORNADO NE @ABAP_TRUE
+         AND CANCEL    NE @ABAP_TRUE
+         AND ENCERRADO NE @ABAP_TRUE.
+
+      IF SY-SUBRC IS INITIAL.
+        EXIT.
+      ENDIF.
+
+    ENDLOOP.
+
+    IF WA_ZSDT0102 IS NOT INITIAL.
+      "Verifica Prazo de 24 horas autorizado """""""""""""""""""
+      DATA: LC_DATE1    TYPE D,
+            LC_TIME1    TYPE T,
+            LC_DATE2    TYPE D,
+            LC_TIME2    TYPE T,
+            LC_DATEDIFF TYPE P,
+            LC_TIMEDIFF TYPE P,
+            LC_EARLIEST TYPE C,
+            E_TIME      TYPE ERZET.
+
+      LC_DATE1 = WA_ZSDT0102-DT_AUTHCOD.
+      IF WA_ZSDT0102-HR_AUTHCOD IS INITIAL.
+        WA_ZSDT0102-HR_AUTHCOD = '000001'.
+      ENDIF.
+      LC_TIME1 = WA_ZSDT0102-HR_AUTHCOD.
+
+      LC_DATE2 = SY-DATLO.
+      LC_TIME2 = SY-TIMLO.
+
+      CALL FUNCTION 'Z_FUSO_HORARIO_FILIAL'
+        EXPORTING
+          I_BUKRS  = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-BUKRS
+          I_BRANCH = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-BRANCH
+        IMPORTING
+          E_TIME   = E_TIME.
+
+      IF E_TIME IS NOT INITIAL.
+        LC_TIME2 = E_TIME.
+      ENDIF.
+
+      IF LC_TIME2 EQ '000000'.
+        LC_TIME2 = '000001'.
+      ENDIF.
+
+      CALL FUNCTION 'SD_DATETIME_DIFFERENCE'
+        EXPORTING
+          DATE1            = LC_DATE1
+          TIME1            = LC_TIME1
+          DATE2            = LC_DATE2
+          TIME2            = LC_TIME2
+        IMPORTING
+          DATEDIFF         = LC_DATEDIFF
+          TIMEDIFF         = LC_TIMEDIFF
+          EARLIEST         = LC_EARLIEST
+        EXCEPTIONS
+          INVALID_DATETIME = 1
+          OTHERS           = 2.
+
+      IF SY-SUBRC IS NOT INITIAL.
+        ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+      ENDIF.
+
+      IF LC_DATEDIFF IS NOT INITIAL OR LC_TIMEDIFF GE 24.
+        RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+          EXPORTING
+            TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_MDFE_AUTORIZADA_24HRS-MSGID
+                              MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_MDFE_AUTORIZADA_24HRS-MSGNO )
+            MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_MDFE_AUTORIZADA_24HRS-MSGID
+            MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_MDFE_AUTORIZADA_24HRS-MSGNO
+            MSGTY  = 'E'.
+      ENDIF.
+      """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD ZESZIF_DOC_ELETRONICO~GET_URLS_DOCS.
+
+    DATA: LC_TP_AMBIENTE TYPE ZESZDE_TP_AMBIENTE,
+          IT_URLLIST     TYPE TIHTTPURLS2.
+
+    R_INSTANCIA = SUPER->ZESZIF_DOC_ELETRONICO~GET_URLS_DOCS(
+                      IMPORTING
+                        E_LINK_PDF  = E_LINK_PDF
+                        E_LINK_XML  = E_LINK_XML ).
+
+    CLEAR: E_LINK_PDF, E_LINK_XML.
+
+    TRY .
+        ME->ZESZIF_DOC_ELETRONICO~GET_CK_AUTORIZADO_USO( ).
+
+        CALL FUNCTION 'HTTP_GET_URL2'
+          EXPORTING
+            HANDLERCLASS     = 'ZCL_FMCALL_DOC_FISCAL'
+          IMPORTING
+            URLLIST          = IT_URLLIST
+          EXCEPTIONS
+            HTTP_NOT_ENABLED = 1
+            OTHERS           = 2.
+
+        CHECK SY-SUBRC IS INITIAL.
+
+        READ TABLE IT_URLLIST WITH KEY protocol = 'http' INTO DATA(WA_URLLIST).
+
+        zcl_drc_utils=>get_host_port_url_documento( CHANGING  c_http_url = wa_urllist ).
+
+        "http://sapqas.maggi.corp:8001/custom/docfiscal?sap-client=300
+        DATA(WA_DOMINIO) = WA_URLLIST-PROTOCOL && '://' && WA_URLLIST-HOST && ':' && WA_URLLIST-PORT && WA_URLLIST-URL.
+
+        IF I_ID_CCE IS NOT INITIAL.
+          E_LINK_PDF = WA_DOMINIO && '/getccectepdf?' && 'sap-client=' && SY-MANDT && '&i_docnum=' && ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM && '&i_id_cce=' && I_ID_CCE.
+        ELSE.
+          E_LINK_PDF = WA_DOMINIO && '/getctepdf?' && 'sap-client=' && SY-MANDT && '&i_docnum=' && ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+          E_LINK_XML = WA_DOMINIO && '/getctexml?' && 'sap-client=' && SY-MANDT && '&i_docnum=' && ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+        ENDIF.
+
+*        ENDIF.
+
+      CATCH ZESZCX_DOC_ELETRONICO.    "
+    ENDTRY.
+
+  ENDMETHOD.
+
+
+  METHOD ZESZIF_DOC_ELETRONICO~GET_VAL_AUTORIZACAO_MODAL.
+
+    DATA: LC_TEXTO TYPE C LENGTH 200.
+
+    DATA: LC_TP_FORNE   TYPE ZESZTP_FORNECIMENTO,
+          LC_BUKRS      TYPE BUKRS,
+          LC_PARID      TYPE J_1BPARID,
+          LC_PARTYP     TYPE J_1BPARTYP,
+          LC_TKNUM      TYPE TKNUM,
+          IT_NFE_ACTIVE TYPE TABLE OF J_1BNFE_ACTIVE,
+          LC_EMITE_CIOT TYPE CHAR01,
+          WA_CTE_VTTK   TYPE VTTK,
+          IT_CTE_CIOT   TYPE TABLE OF ZESZCTE_CIOT.
+
+    R_INSTANCIA = SUPER->ZESZIF_DOC_ELETRONICO~GET_VAL_AUTORIZACAO_MODAL(
+                      )->GET_CK_VERIFICA_MODAL( I_MODAL = ME->ZESZIF_DOC_ELETRONICO~AT_ST_MODEL_CTE
+                      ).
+
+    ZCL_REPOM_VIAGEM_VPR=>VERIFICA_CUSTO_VI(
+      EXPORTING
+        I_DOCNUM_CTE      = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+      EXCEPTIONS
+        CUSTO_VI          = 1
+        OTHERS            = 2
+    ).
+
+    IF SY-SUBRC IS NOT INITIAL.
+      ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+    ENDIF.
+
+    CALL FUNCTION 'Z_REMETENTE_MERCADORIA_CTE'
+      EXPORTING
+        P_DOCNUM   = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+      CHANGING
+        P_TP_FORNE = LC_TP_FORNE
+        P_BUKRS    = LC_BUKRS
+        P_PARID    = LC_PARID
+        P_PARTYP   = LC_PARTYP
+        P_TKNUM    = LC_TKNUM.
+
+    CALL FUNCTION 'Z_SD_NFES_DA_CTE'
+      EXPORTING
+        MP_DOCNUM     = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+      TABLES
+        MT_NFE_ACTIVE = IT_NFE_ACTIVE
+      CHANGING
+        MR_VTTK       = WA_CTE_VTTK.
+
+    IF LC_TP_FORNE NE 'A'.
+
+      LOOP AT IT_NFE_ACTIVE INTO DATA(WA_NFE_ACTIVE).
+
+        "Verifica se a nota fiscal está autoriza e não cancelado
+        ZESZCL_NFE=>ZESZIF_DOC_ELETRONICO~GET_INSTANCE( I_DOCNUM = WA_NFE_ACTIVE-DOCNUM
+          )->SET_REGISTRO( I_DOCNUM = WA_NFE_ACTIVE-DOCNUM
+          )->GET_CK_DOC_NAO_CANCEL(
+          )->GET_CK_AUTORIZADO_USO(
+          )->GET_REGISTRO( IMPORTING E_DOCUMENTO = DATA(E_DOCUMENTO)
+          ).
+
+      ENDLOOP.
+
+    ENDIF.
+
+    IF NOT WA_CTE_VTTK IS INITIAL.
+      IF WA_CTE_VTTK-STDIS IS INITIAL.
+
+        RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+          EXPORTING
+            TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_ORGANIZACAO-MSGID MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_ORGANIZACAO-MSGNO ATTR1 = CONV #( WA_CTE_VTTK-TKNUM ) )
+            MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_ORGANIZACAO-MSGID
+            MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_ORGANIZACAO-MSGNO
+            MSGV1  = CONV #( WA_CTE_VTTK-TKNUM )
+            MSGTY  = 'E'.
+
+      ELSEIF WA_CTE_VTTK-STREG IS INITIAL.
+
+        RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+          EXPORTING
+            TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_REGISTRO-MSGID MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_REGISTRO-MSGNO ATTR1 = CONV #( WA_CTE_VTTK-TKNUM ) )
+            MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_REGISTRO-MSGID
+            MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_REGISTRO-MSGNO
+            MSGV1  = CONV #( WA_CTE_VTTK-TKNUM )
+            MSGTY  = 'E'.
+
+      ELSEIF WA_CTE_VTTK-STLBG IS INITIAL.
+
+        RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+          EXPORTING
+            TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_INICIO_CARREG-MSGID MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_INICIO_CARREG-MSGNO ATTR1 = CONV #( WA_CTE_VTTK-TKNUM ) )
+            MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_INICIO_CARREG-MSGID
+            MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_INICIO_CARREG-MSGNO
+            MSGV1  = CONV #( WA_CTE_VTTK-TKNUM )
+            MSGTY  = 'E'.
+
+      ELSEIF WA_CTE_VTTK-STLAD IS INITIAL.
+
+        RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+          EXPORTING
+            TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_FIM_CARREG-MSGID MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_FIM_CARREG-MSGNO ATTR1 = CONV #( WA_CTE_VTTK-TKNUM ) )
+            MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_FIM_CARREG-MSGID
+            MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_FIM_CARREG-MSGNO
+            MSGV1  = CONV #( WA_CTE_VTTK-TKNUM )
+            MSGTY  = 'E'.
+
+      ELSEIF WA_CTE_VTTK-STABF IS INITIAL.
+
+        RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+          EXPORTING
+            TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_PROCMTO-MSGID MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_PROCMTO-MSGNO ATTR1 = CONV #( WA_CTE_VTTK-TKNUM ) )
+            MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_PROCMTO-MSGID
+            MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_PROCMTO-MSGNO
+            MSGV1  = CONV #( WA_CTE_VTTK-TKNUM )
+            MSGTY  = 'E'.
+
+      ELSEIF WA_CTE_VTTK-STTBG IS INITIAL.
+
+        RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+          EXPORTING
+            TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_INICIO_TRANSPORTE-MSGID MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_INICIO_TRANSPORTE-MSGNO ATTR1 = CONV #( WA_CTE_VTTK-TKNUM ) )
+            MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_INICIO_TRANSPORTE-MSGID
+            MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_VT_SEM_INICIO_TRANSPORTE-MSGNO
+            MSGV1  = CONV #( WA_CTE_VTTK-TKNUM )
+            MSGTY  = 'E'.
+
+      ENDIF.
+    ENDIF.
+
+    CASE ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCTYP.
+      WHEN '1'.
+        "Conhecimento Aguaviário
+        SELECT SINGLE * INTO @DATA(WA_ZLEST0061)
+          FROM ZESZLEST0061
+         WHERE DOCNUM EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+      WHEN '2'.
+        "Conhecimento Aguaviário - Complemento
+        SELECT SINGLE * INTO WA_ZLEST0061
+          FROM ZESZLEST0061
+         WHERE DOCNUM EQ ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCREF.
+    ENDCASE.
+
+    IF NOT ( ( WA_ZLEST0061 IS NOT INITIAL ) OR
+             ( WA_ZLEST0061 IS INITIAL  AND
+               ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCREF IS NOT INITIAL AND
+               ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCTYP = '2'    ) ).
+
+      CALL FUNCTION 'Z_CIOT_EMPRESA_PARCEIRO'
+        EXPORTING
+          P_EMPRESA    = E_DOCUMENTO-BUKRS
+          P_PARTYP     = E_DOCUMENTO-PARTYP
+          P_PARID      = E_DOCUMENTO-PARID
+          P_DT_POSICAO = E_DOCUMENTO-DOCDAT
+          P_TKNUM      = LC_TKNUM
+        IMPORTING
+          P_EMITE      = LC_EMITE_CIOT.
+
+      IF LC_EMITE_CIOT EQ ABAP_TRUE.
+
+        "Verificar Viagem CIOT
+        CALL FUNCTION 'Z_SD_INFO_CTE_CIOT'
+          EXPORTING
+            P_CTE_AVULSO = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+          TABLES
+            IT_CTE_CIOT  = IT_CTE_CIOT
+          EXCEPTIONS
+            NAO_CIOT     = 1
+            OTHERS       = 2.
+
+        IF SY-SUBRC IS NOT INITIAL.
+          MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO INTO DATA(MTEXT) WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4.
+          ME->ZESZIF_DOC_ELETRONICO~SET_ALTERA_STATUS( I_TP_AUTHCOD = '1'
+           )->GET_ERRO_GERAL( ).
+        ENDIF.
+
+        LOOP AT IT_CTE_CIOT INTO DATA(WA_CTE_CIOT).
+          CASE WA_CTE_CIOT-ST_CIOT.
+            WHEN ZCL_CIOT=>C_0.
+              MESSAGE ID 'ZSIMETRYA' TYPE 'S' NUMBER 023 WITH 'Viagem Cd. CIOT' WA_CTE_CIOT-CD_CIOT 'com estatus de "pendente"'.
+              ME->ZESZIF_DOC_ELETRONICO~SET_ALTERA_STATUS( I_TP_AUTHCOD = '1'
+               )->GET_ERRO_GERAL( ).
+            WHEN ZCL_CIOT=>C_1.
+              MESSAGE ID 'ZSIMETRYA' TYPE 'S' NUMBER 023 WITH 'Viagem Cd. CIOT' WA_CTE_CIOT-CD_CIOT 'com estatus de "enviado"'.
+              ME->ZESZIF_DOC_ELETRONICO~SET_ALTERA_STATUS( I_TP_AUTHCOD = '1'
+               )->GET_ERRO_GERAL( ).
+            WHEN ZCL_CIOT=>C_3.
+              MESSAGE ID 'ZSIMETRYA' TYPE 'S' NUMBER 023 WITH 'Viagem Cd. CIOT' WA_CTE_CIOT-CD_CIOT 'com estatus de "Rejeitado"'.
+              ME->ZESZIF_DOC_ELETRONICO~SET_ALTERA_STATUS( I_TP_AUTHCOD = '1'
+               )->GET_ERRO_GERAL( ).
+            WHEN ZCL_CIOT=>C_4.
+              MESSAGE ID 'ZSIMETRYA' TYPE 'S' NUMBER 023 WITH 'Viagem Nr. CIOT' WA_CTE_CIOT-NR_CIOT 'com estatus de "creditado"'.
+              ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+            WHEN ZCL_CIOT=>C_5.
+              MESSAGE ID 'ZSIMETRYA' TYPE 'S' NUMBER 023 WITH 'Viagem Cd. CIOT' WA_CTE_CIOT-CD_CIOT 'com estatus de "fechado (pago cockpit)"'.
+              ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+            WHEN ZCL_CIOT=>C_7.
+              MESSAGE ID 'ZSIMETRYA' TYPE 'S' NUMBER 023 WITH 'Viagem Cd. CIOT' WA_CTE_CIOT-CD_CIOT 'com estatus de "Enviado Cancelamento"'.
+              ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+            WHEN ZCL_CIOT=>C_8.
+              MESSAGE ID 'ZSIMETRYA' TYPE 'S' NUMBER 023 WITH 'Viagem Cd. CIOT' WA_CTE_CIOT-CD_CIOT 'com estatus de "Cancelado"'.
+              ME->ZESZIF_DOC_ELETRONICO~SET_ALTERA_STATUS( I_TP_AUTHCOD = '1'
+               )->GET_ERRO_GERAL( ).
+            WHEN ZCL_CIOT=>C_9.
+              "Não tem Registro TipFrete
+          ENDCASE.
+        ENDLOOP.
+
+      ENDIF.
+
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD ZESZIF_DOC_ELETRONICO~GET_VAL_CANCELAMENTO_MODAL.
+
+    R_INSTANCIA = SUPER->ZESZIF_DOC_ELETRONICO~GET_VAL_CANCELAMENTO_MODAL(
+                      )->GET_CK_VERIFICA_MODAL( I_MODAL = ME->ZESZIF_DOC_ELETRONICO~AT_ST_MODEL_CTE
+                      ).
+
+    DATA: LC_DATE1    TYPE D,
+          LC_TIME1    TYPE T,
+          LC_DATE2    TYPE D,
+          LC_TIME2    TYPE T,
+          LC_DATEDIFF TYPE P,
+          LC_TIMEDIFF TYPE P,
+          LC_EARLIEST TYPE C,
+          E_TIME      TYPE ERZET.
+
+    LC_DATE1 = ME->ZESZIF_DOC_ELETRONICO~AT_INFO_DOC_ELETRONICO-ACTION_DATE.
+    LC_TIME1 = ME->ZESZIF_DOC_ELETRONICO~AT_INFO_DOC_ELETRONICO-ACTION_TIME.
+
+    IF LC_TIME1 IS INITIAL.
+      LC_TIME1 = '000001'.
+    ENDIF.
+
+    LC_DATE2 = SY-DATUM.
+    LC_TIME2 = SY-UZEIT.
+
+    IF LC_TIME2 IS INITIAL.
+      LC_TIME2 = '000001'.
+    ENDIF.
+
+    CALL FUNCTION 'SD_DATETIME_DIFFERENCE'
+      EXPORTING
+        DATE1            = LC_DATE1
+        TIME1            = LC_TIME1
+        DATE2            = LC_DATE2
+        TIME2            = LC_TIME2
+      IMPORTING
+        DATEDIFF         = LC_DATEDIFF
+        TIMEDIFF         = LC_TIMEDIFF
+        EARLIEST         = LC_EARLIEST
+      EXCEPTIONS
+        INVALID_DATETIME = 1
+        OTHERS           = 2.
+
+    IF SY-SUBRC IS NOT INITIAL.
+      ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+    ENDIF.
+
+    IF LC_DATEDIFF GE 1 OR LC_TIMEDIFF GE 1.
+      RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+        EXPORTING
+          TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_CTE_CANCEL_EXPIROU-MSGID
+                            MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_CTE_CANCEL_EXPIROU-MSGNO )
+          MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_CTE_CANCEL_EXPIROU-MSGID
+          MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_CTE_CANCEL_EXPIROU-MSGNO
+          MSGTY  = 'E'.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD ZESZIF_DOC_ELETRONICO~GET_VAL_REINICIALIZAR_MODAL.
+
+    R_INSTANCIA = SUPER->ZESZIF_DOC_ELETRONICO~GET_VAL_REINICIALIZAR_MODAL( ).
+
+    SELECT SINGLE * INTO @DATA(WA_ZCTE_CIOT)
+      FROM ZESZCTE_CIOT
+     WHERE DOCNUM EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+    IF WA_ZCTE_CIOT-ST_CIOT EQ '3'.
+
+      CALL FUNCTION 'Z_SD_INFO_CTE_AVULSO'
+        EXPORTING
+          P_CTE_AVULSO   = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+          P_CHAMAR_TELA  = 'X'
+          P_GRAVAR_DADOS = 'X'
+          P_APAGAR_DADOS = 'X'
+        EXCEPTIONS
+          OTHERS         = 1.
+
+      IF NOT SY-SUBRC IS INITIAL.
+        ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+      ENDIF.
+
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD ZESZIF_DOC_ELETRONICO~SET_AUTORIZA_MDFE.
+
+
+    DATA: LC_CICLOS	TYPE ZESZDE_QTD_CICLOS.
+    DATA: ZCL_MDFE TYPE REF TO ZCL_MDFE,
+          E_TIME   TYPE ERZET.
+
+    R_INSTANCIA = SUPER->ZESZIF_DOC_ELETRONICO~SET_AUTORIZA_MDFE( I_ACAO = I_ACAO ).
+
+    CASE I_ACAO.
+      WHEN ZESZIF_DOC_ELETRONICO=>AT_ACAO_MDFE_AUTORIZA.
+
+        TRY .
+
+            SELECT *
+              INTO TABLE @DATA(IT_ZSDT0105)
+              FROM ZESZSDT0105
+             WHERE DOCNUM_REF NE 0
+               AND NMDFE      NE @ABAP_FALSE
+               AND DOCNUM     EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+            LOOP AT IT_ZSDT0105 INTO DATA(WA_ZSDT0105).
+
+              SELECT SINGLE *
+                INTO @DATA(WA_ZSDT0102)
+                FROM ZESZSDT0102
+               WHERE DOCNUM    EQ @WA_ZSDT0105-DOCNUM_REF
+                 AND NMDFE     EQ @WA_ZSDT0105-NMDFE
+                 AND ESTORNADO NE @ABAP_TRUE
+                 AND CANCEL    NE @ABAP_TRUE
+                 AND ENCERRADO NE @ABAP_TRUE.
+
+              IF SY-SUBRC IS INITIAL.
+                DATA(VL_DOCNUM_MDFE) = WA_ZSDT0102-DOCNUM.
+                EXIT.
+              ENDIF.
+
+            ENDLOOP.
+
+            IF WA_ZSDT0102 IS NOT INITIAL.
+              CREATE OBJECT ZCL_MDFE
+                EXPORTING
+                  I_NMDFE  = WA_ZSDT0102-NMDFE
+                  I_DOCNUM = WA_ZSDT0102-DOCNUM.
+            ELSE.
+
+              "Gerar e Autorizar MDF-e
+              CREATE OBJECT ZCL_MDFE.
+              ZCL_MDFE->SET_TP_DOC_REF( I_TP_DOC_REF = '1' ).
+              ZCL_MDFE->SET_DATA_EMI( SY-DATLO ).
+              ZCL_MDFE->SET_HORA_EMI( SY-TIMLO ).
+
+              CALL FUNCTION 'Z_FUSO_HORARIO_FILIAL'
+                EXPORTING
+                  I_BUKRS  = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-BUKRS
+                  I_BRANCH = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-BRANCH
+                IMPORTING
+                  E_TIME   = E_TIME.
+
+              IF E_TIME IS NOT INITIAL.
+                ZCL_MDFE->SET_HORA_EMI( E_TIME ).
+              ENDIF.
+              ZCL_MDFE->ADD_DOCUMENTO( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ).
+
+              " -- Incluir Estados -------------------------------------------------------------
+              " -- Incluir Estados -------------------------------------------------------------
+
+              "Lista de Estados
+              "Tabela: T005S
+
+              " -- Incluir Estados -------------------------------------------------------------
+              " -- Incluir Estados -------------------------------------------------------------
+
+              VL_DOCNUM_MDFE = ZCL_MDFE->GRAVAR_MDFE( ).
+
+              IF VL_DOCNUM_MDFE IS INITIAL.
+                "Não gerou MDF-e """""""""""""""""""""""""""""""""""""""""""
+                ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+              ELSE.
+                MESSAGE S047(ZMDFE) WITH VL_DOCNUM_MDFE.
+*                TRY.
+*                    DATA(MDFE) = ZESZCL_MDFE_=>ZESZIF_DOC_ELETRONICO~GET_INSTANCE( I_DOCNUM = VL_DOCNUM_MDFE
+*                      )->SET_BLOQUEAR( I_BLOQUEAR = ABAP_FALSE
+*                      )->SET_REGISTRO( EXPORTING I_DOCNUM = VL_DOCNUM_MDFE
+*                      )->SET_AUTORIZAR( EXPORTING I_AGUARDAR = ABAP_TRUE I_CICLOS = 120 I_SEGUNDOS = 2
+*                      )->GET_CK_AUTORIZADO_USO(
+*                      )->SET_CLEAR(
+*                      ).
+*                  CATCH ZESZCX_DOC_ELETRONICO.    " .
+*                    IF MDFE IS NOT INITIAL.
+*                      MDFE->SET_CLEAR( ).
+*                      CLEAR: MDFE.
+*                    ENDIF.
+*                ENDTRY.
+
+              ENDIF.
+
+            ENDIF.
+
+            IF ZCL_MDFE->GET_CK_AUTORIZADO( ) EQ ABAP_FALSE.
+
+              "Encerramento """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+              "Encerramento """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+              "A exceção ZCX_AVERBACAO_SEGURO não será interceptada nem é declarada na cáusula RAISING de "SET_AUTORIZA_MDFE".
+              TRY .
+                MESSAGE S048(ZMDFE) WITH VL_DOCNUM_MDFE.
+                  DATA(VL_DOCNUM_SOL_ENC) = ZCL_MDFE->ENVIAR_MDFE( I_SEM_CONFIRMACAO = ABAP_TRUE
+                        I_AGUARDAR = I_AGUARDAR
+                        I_CICLOS = I_CICLOS
+                        I_SEGUNDOS = I_SEGUNDOS
+                        I_RAISE = ABAP_TRUE
+                   ).
+                CATCH ZCX_AVERBACAO_SEGURO.
+
+              ENDTRY.
+
+              IF VL_DOCNUM_SOL_ENC IS NOT INITIAL.
+                MESSAGE S049(ZMDFE) WITH VL_DOCNUM_SOL_ENC.
+                "Aguardar Encerramento
+                CLEAR: WA_ZSDT0102.
+                WAIT UP TO 5 SECONDS.
+                LC_CICLOS = I_CICLOS.
+                WHILE LC_CICLOS IS NOT INITIAL AND WA_ZSDT0102-ENCERRADO EQ ABAP_FALSE AND WA_ZSDT0102-STATUS NE '3'.
+                  "Tempo de Cadas Ciclo
+                  WAIT UP TO I_SEGUNDOS SECONDS.
+                  "Busca Vinculo do CT-e com a
+                  SELECT SINGLE * INTO WA_ZSDT0102
+                    FROM ZESZSDT0102
+                   WHERE DOCNUM EQ VL_DOCNUM_SOL_ENC.
+                  SUBTRACT 1 FROM LC_CICLOS.
+                ENDWHILE.
+
+                VL_DOCNUM_SOL_ENC = ZCL_MDFE->ENVIAR_MDFE( I_SEM_CONFIRMACAO = ABAP_TRUE ).
+                "Existe MDF-e a Ser Encerrada """""""""""""""""""""""""""""""
+                IF VL_DOCNUM_SOL_ENC IS NOT INITIAL.
+                  ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+                ENDIF.
+              ENDIF.
+              """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+              """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+              CLEAR: ZCL_MDFE.
+
+              "Busca Vinculo do CT-e com a
+              SELECT SINGLE * INTO WA_ZSDT0102
+                FROM ZESZSDT0102
+               WHERE DOCNUM EQ VL_DOCNUM_MDFE.
+
+              WAIT UP TO 5 SECONDS.
+
+              LC_CICLOS = I_CICLOS.
+
+              WHILE LC_CICLOS IS NOT INITIAL AND WA_ZSDT0102-AUTORIZADO EQ ABAP_FALSE AND WA_ZSDT0102-STATUS NE '3'.
+                "Tempo de Cadas Ciclo
+                WAIT UP TO I_SEGUNDOS SECONDS.
+                "Busca Vinculo do CT-e com a
+                SELECT SINGLE *
+                  INTO WA_ZSDT0102
+                  FROM ZESZSDT0102
+                 WHERE DOCNUM EQ VL_DOCNUM_MDFE.
+                SUBTRACT 1 FROM LC_CICLOS.
+              ENDWHILE.
+            ELSE.
+              SELECT SINGLE * INTO WA_ZSDT0102
+                FROM ZESZSDT0102
+               WHERE NMDFE  EQ WA_ZSDT0102-NMDFE
+                 AND DOCNUM EQ WA_ZSDT0102-DOCNUM.
+            ENDIF.
+
+            IF WA_ZSDT0102-AUTORIZADO EQ ABAP_TRUE.
+              "Autorizado
+            ELSE.
+              IF WA_ZSDT0102-STATUS EQ '3'.
+                "pegar texto para exceção
+                ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL_STRING( I_TEXTO = CONV #( WA_ZSDT0102-MSG ) ).
+              ELSE.
+                "Ainda não foi autorizado
+
+              ENDIF.
+            ENDIF.
+
+          CATCH ZCX_MDFE INTO DATA(EX_MDFE).
+            ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL_STRING( I_TEXTO = EX_MDFE->GET_LONGTEXT( ) ).
+        ENDTRY.
+
+      WHEN ZESZIF_DOC_ELETRONICO=>AT_ACAO_MDFE_CANCELAR.
+
+        SELECT *
+          INTO TABLE @IT_ZSDT0105
+          FROM ZESZSDT0105
+         WHERE DOCNUM_REF NE 0
+           AND NMDFE      NE @ABAP_FALSE
+           AND DOCNUM     EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+        LOOP AT IT_ZSDT0105 INTO WA_ZSDT0105.
+
+          SELECT SINGLE *
+            INTO @WA_ZSDT0102
+            FROM ZESZSDT0102
+           WHERE DOCNUM    EQ @WA_ZSDT0105-DOCNUM_REF
+             AND NMDFE     EQ @WA_ZSDT0105-NMDFE
+             AND ESTORNADO NE @ABAP_TRUE
+             AND CANCEL    NE @ABAP_TRUE
+             AND ENCERRADO NE @ABAP_TRUE.
+
+          IF SY-SUBRC IS INITIAL.
+            EXIT.
+          ENDIF.
+        ENDLOOP.
+
+        CHECK WA_ZSDT0102 IS NOT INITIAL.
+
+        CREATE OBJECT ZCL_MDFE
+          EXPORTING
+            I_NMDFE  = WA_ZSDT0102-NMDFE
+            I_DOCNUM = WA_ZSDT0102-DOCNUM.
+
+        ZCL_MDFE->CANCELAR_MDFE( I_SEM_CONFIRMACAO = ABAP_TRUE I_JUSTIFICATIVA_CANCEL = I_JUSTIFICATIVA_CANCEL ).
+
+        SELECT SINGLE * INTO WA_ZSDT0102
+          FROM ZESZSDT0102
+         WHERE NMDFE  EQ WA_ZSDT0102-NMDFE
+           AND DOCNUM EQ WA_ZSDT0102-DOCNUM.
+
+        "Aguardar Cancelamento
+        WAIT UP TO 5 SECONDS.
+        LC_CICLOS = ME->ZESZIF_DOC_ELETRONICO~AT_QTD_CICLOS.
+        IF WA_ZSDT0102-AUTORIZADO EQ ABAP_FALSE.
+          DATA(LC_CANCEL) = ABAP_TRUE.
+        ELSE.
+          LC_CANCEL = ABAP_FALSE.
+        ENDIF.
+        WHILE LC_CICLOS IS NOT INITIAL AND LC_CANCEL EQ ABAP_FALSE AND WA_ZSDT0102-STATUS NE '3'.
+
+          "Tempo de Cadas Ciclo
+          WAIT UP TO ME->ZESZIF_DOC_ELETRONICO~AT_QTD_SEGUNDOS SECONDS.
+
+          "Busca Vinculo do CT-e com a
+          SELECT SINGLE * INTO WA_ZSDT0102
+            FROM ZESZSDT0102
+           WHERE NMDFE  EQ WA_ZSDT0102-NMDFE
+             AND DOCNUM EQ WA_ZSDT0102-DOCNUM.
+
+          SUBTRACT 1 FROM LC_CICLOS.
+
+          LC_CANCEL = WA_ZSDT0102-CANCEL.
+
+          IF WA_ZSDT0102-TRANSMISSAO NE '2'.
+            WA_ZSDT0102-STATUS = '3'.
+          ENDIF.
+
+        ENDWHILE.
+
+        IF NOT (
+           ( WA_ZSDT0102-AUTORIZADO EQ ABAP_FALSE ) OR
+           ( WA_ZSDT0102-AUTORIZADO EQ ABAP_TRUE AND WA_ZSDT0102-CANCEL EQ ABAP_TRUE ) ).
+          IF WA_ZSDT0102-STATUS EQ '3' .
+            ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL_STRING( I_TEXTO = CONV #( WA_ZSDT0102-MSG ) ).
+          ELSE.
+            RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+              EXPORTING
+                TEXTID = VALUE #( MSGID = ZESZCX_DOC_ELETRONICO=>ZCX_MDFE_NAO_CANCELADA-MSGID
+                                  MSGNO = ZESZCX_DOC_ELETRONICO=>ZCX_MDFE_NAO_CANCELADA-MSGNO
+                                  ATTR1 = CONV #( WA_ZSDT0102-NMDFE ) )
+                MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_MDFE_NAO_CANCELADA-MSGID
+                MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_MDFE_NAO_CANCELADA-MSGNO
+                MSGV1  = CONV #( WA_ZSDT0102-NMDFE )
+                MSGTY  = 'E'.
+          ENDIF.
+        ENDIF.
+    ENDCASE.
+
+  ENDMETHOD.
+
+
+  METHOD ZESZIF_DOC_ELETRONICO~SET_AUTORIZA_VIAGEM_TIP_FRETE.
+
+    DATA: P_PROTOCOLO TYPE ZESZPROTOCOLO.
+
+    R_INSTANCIA = SUPER->ZESZIF_DOC_ELETRONICO~SET_AUTORIZA_VIAGEM_TIP_FRETE( ).
+
+*AT_ACAO_VIAGEM_FRETE_CRIAR Constant  Type  CHAR01  Criar Viagem TipFrete '1'
+*AT_ACAO_VIAGEM_FRETE_AUTORIZAR Constant  Type  CHAR01  Aut. Viagem TipFrete  '2'
+*AT_ACAO_VIAGEM_FRETE_CANCELAR  Constant  Type  CHAR01  Can. Viagem TipFrete  '3'
+
+    CASE I_ACAO.
+      WHEN ZESZIF_DOC_ELETRONICO=>AT_ACAO_VIAGEM_FRETE_CRIAR.
+
+        SELECT SINGLE * INTO @DATA(WA_ZCTE_CIOT)
+          FROM ZESZCTE_CIOT
+         WHERE DOCNUM EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+        IF SY-SUBRC IS NOT INITIAL.
+
+          CALL FUNCTION 'Z_SD_INFO_CTE_AVULSO'
+            EXPORTING
+              P_CTE_AVULSO       = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+              P_CHAMAR_TELA      = ABAP_FALSE
+              P_GRAVAR_DADOS     = ABAP_TRUE
+            EXCEPTIONS
+              N_INFO_CTE         = 1
+              N_LOC_CTE          = 2
+              N_ELETRONICO       = 3
+              N_MODELO_57        = 4
+              N_STATUS           = 5
+              INF_DOCNUM         = 6
+              INF_PROPVEICULO    = 7
+              NAO_DOCNUM         = 8
+              NAO_RTRC           = 9
+              NAO_CONTA_CORRENTE = 10
+              MOTO_NAO_PF        = 11
+              N_PLACA_CAD        = 12
+              SEM_NOTAS          = 13
+              OTHERS             = 14.
+
+          IF SY-SUBRC IS NOT INITIAL.
+            ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+          ENDIF.
+
+        ENDIF.
+
+        SELECT SINGLE * INTO @WA_ZCTE_CIOT
+          FROM ZESZCTE_CIOT
+         WHERE DOCNUM EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+        IF WA_ZCTE_CIOT-ST_CIOT EQ ZCL_CIOT=>C_9.
+
+          "Não tem que emitir nada para a TipFrete
+
+        ELSEIF WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_2.
+
+          CALL FUNCTION 'Z_SD_EMITE_CIOT'
+            EXPORTING
+              P_CTE_AVULSO      = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+              P_TELA_VISUALIZA  = ABAP_FALSE
+              EMITIR_VIAGEM_ADM = ABAP_TRUE
+            EXCEPTIONS
+              SEM_DADOS_CIOT    = 1
+              NAO_CIOT          = 2
+              ERRO_STATUS       = 3
+              ERRO_WEB_SERVICE  = 4
+              ERRO_STATUS_CRED  = 5
+              ERRO_STATUS_CANC  = 6
+              ERRO_SOLICITACAO  = 7
+              OTHERS            = 8.
+
+          IF SY-SUBRC IS NOT INITIAL.
+            ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+          ENDIF.
+
+          WAIT UP TO 3 SECONDS.
+
+          CALL FUNCTION 'Z_SD_EMITE_CIOT'
+            EXPORTING
+              P_CTE_AVULSO            = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+              P_TELA_VISUALIZA        = ABAP_FALSE
+              CONSULTAR_STATUS_VIAGEM = ABAP_TRUE
+            CHANGING
+              P_PROTOCOLO             = P_PROTOCOLO
+            EXCEPTIONS
+              SEM_DADOS_CIOT          = 1
+              NAO_CIOT                = 2
+              ERRO_STATUS             = 3
+              ERRO_WEB_SERVICE        = 4
+              ERRO_STATUS_CRED        = 5
+              ERRO_STATUS_CANC        = 6
+              ERRO_SOLICITACAO        = 7
+              OTHERS                  = 8.
+
+          IF SY-SUBRC IS NOT INITIAL.
+            ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+          ENDIF.
+
+          DATA(NR_TENTATIVAS) = 5.
+
+          SELECT SINGLE * INTO @WA_ZCTE_CIOT
+            FROM ZESZCTE_CIOT
+           WHERE DOCNUM EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+          WHILE ( WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_2 AND WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_9 ) AND NR_TENTATIVAS IS NOT INITIAL.
+
+            WAIT UP TO 3 SECONDS.
+
+            CALL FUNCTION 'Z_SD_EMITE_CIOT'
+              EXPORTING
+                P_CTE_AVULSO            = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+                P_TELA_VISUALIZA        = ABAP_FALSE
+                CONSULTAR_STATUS_VIAGEM = ABAP_TRUE
+              CHANGING
+                P_PROTOCOLO             = P_PROTOCOLO
+              EXCEPTIONS
+                SEM_DADOS_CIOT          = 1
+                NAO_CIOT                = 2
+                ERRO_STATUS             = 3
+                ERRO_WEB_SERVICE        = 4
+                ERRO_STATUS_CRED        = 5
+                ERRO_STATUS_CANC        = 6
+                ERRO_SOLICITACAO        = 7
+                OTHERS                  = 8.
+
+            IF SY-SUBRC IS NOT INITIAL.
+              ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+            ENDIF.
+
+            SELECT SINGLE * INTO @WA_ZCTE_CIOT
+              FROM ZESZCTE_CIOT
+             WHERE DOCNUM EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+            NR_TENTATIVAS = NR_TENTATIVAS - 1.
+
+          ENDWHILE.
+
+        ENDIF.
+
+        IF WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_2 AND WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_9.
+          RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+            EXPORTING
+              TEXTID = VALUE #( MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_VIAGEM-MSGID
+                                MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_VIAGEM-MSGNO
+                                ATTR1  = CONV #( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ) )
+              MSGTY  = 'E'
+              MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_VIAGEM-MSGID
+              MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_VIAGEM-MSGNO
+              MSGV1  = CONV #( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ).
+        ENDIF.
+
+      WHEN ZESZIF_DOC_ELETRONICO=>AT_ACAO_VIAGEM_FRETE_AUTORIZAR.
+
+        SELECT SINGLE * INTO WA_ZCTE_CIOT
+          FROM ZESZCTE_CIOT
+         WHERE DOCNUM EQ ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+        IF WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_5 AND WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_9.
+
+          CALL FUNCTION 'Z_SD_CREDITA_CIOT'
+            EXPORTING
+              P_CTE_AVULSO       = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+            EXCEPTIONS
+              CTE_NAO_AUTORIZADO = 1
+              SEM_DADOS_CIOT     = 2
+              ERRO_STATUS_CRED   = 3
+              ERRO_WEB_SERVICE   = 4
+              OTHERS             = 5.
+
+          IF SY-SUBRC IS NOT INITIAL.
+            ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+          ENDIF.
+
+          SELECT SINGLE * INTO WA_ZCTE_CIOT
+            FROM ZESZCTE_CIOT
+           WHERE DOCNUM EQ ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+          "5  Creditado
+          IF WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_5.
+            RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+              EXPORTING
+                TEXTID = VALUE #( MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_CREDIDATO-MSGID
+                                  MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_CREDIDATO-MSGNO
+                                  ATTR1  = CONV #( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ) )
+                MSGTY  = 'E'
+                MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_CREDIDATO-MSGID
+                MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_CREDIDATO-MSGNO
+                MSGV1  = CONV #( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ).
+          ENDIF.
+
+        ENDIF.
+
+      WHEN ZESZIF_DOC_ELETRONICO=>AT_ACAO_VIAGEM_FRETE_CANCELAR.
+
+        SELECT SINGLE * INTO @DATA(WA_J_1BNFE_CANCELRT)
+          FROM J_1BNFE_CANCELRT
+         WHERE SPRAS  EQ @SY-LANGU
+           AND REASON EQ @I_MOTIVO_CANCEL.
+
+        IF SY-SUBRC IS NOT INITIAL.
+          RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+            EXPORTING
+              TEXTID = VALUE #( MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_MOTIVO_CANCEL-MSGID
+                                MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_MOTIVO_CANCEL-MSGNO
+                                ATTR1  = CONV #( I_MOTIVO_CANCEL ) )
+              MSGTY  = 'E'
+              MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_MOTIVO_CANCEL-MSGID
+              MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_MOTIVO_CANCEL-MSGNO
+              MSGV1  = CONV #( I_MOTIVO_CANCEL ).
+        ENDIF.
+
+        SELECT SINGLE * INTO WA_ZCTE_CIOT
+          FROM ZESZCTE_CIOT
+         WHERE DOCNUM EQ ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+        IF WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_8 AND
+           WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_0 AND
+           WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_3 AND
+           WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_9.
+
+          SELECT SINGLE * INTO @DATA(WA_ZCTE_IDENTIFICA)
+            FROM ZESZCTE_IDENTIFICA
+           WHERE DOCNUM EQ @ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+          IF SY-SUBRC IS NOT INITIAL.
+            RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+              EXPORTING
+                TEXTID = VALUE #( MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_CTE_SEM_ZCTE_IDENTIFICA-MSGID
+                                  MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_CTE_SEM_ZCTE_IDENTIFICA-MSGNO
+                                  ATTR1  = CONV #( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ) )
+                MSGTY  = 'E'
+                MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_CTE_SEM_ZCTE_IDENTIFICA-MSGID
+                MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_CTE_SEM_ZCTE_IDENTIFICA-MSGNO
+                MSGV1  = CONV #( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ).
+          ENDIF.
+
+          WA_ZCTE_IDENTIFICA-REASON  = WA_J_1BNFE_CANCELRT-REASON.
+          WA_ZCTE_IDENTIFICA-REASON1 = WA_J_1BNFE_CANCELRT-REASON1.
+          WA_ZCTE_IDENTIFICA-REASON2 = WA_J_1BNFE_CANCELRT-REASON2.
+          WA_ZCTE_IDENTIFICA-REASON3 = WA_J_1BNFE_CANCELRT-REASON3.
+          WA_ZCTE_IDENTIFICA-REASON4 = WA_J_1BNFE_CANCELRT-REASON4.
+          MODIFY ZESZCTE_IDENTIFICA FROM WA_ZCTE_IDENTIFICA.
+          COMMIT WORK.
+
+          CALL FUNCTION 'Z_SD_RESCISAO_CIOT'
+            EXPORTING
+              P_CTE_AVULSO       = ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM
+              I_REASON           = WA_J_1BNFE_CANCELRT-REASON
+              I_REASON1          = WA_J_1BNFE_CANCELRT-REASON1
+              I_REASON2          = WA_J_1BNFE_CANCELRT-REASON2
+              I_REASON3          = WA_J_1BNFE_CANCELRT-REASON3
+              I_REASON4          = WA_J_1BNFE_CANCELRT-REASON4
+            EXCEPTIONS
+              CTE_NAO_AUTORIZADO = 1
+              SEM_DADOS_CIOT     = 2
+              ERRO_STATUS_CRED   = 3
+              ERRO_WEB_SERVICE   = 4
+              OTHERS             = 5.
+
+          IF SY-SUBRC IS NOT INITIAL.
+            ME->ZESZIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
+          ENDIF.
+
+          SELECT SINGLE * INTO WA_ZCTE_CIOT
+            FROM ZESZCTE_CIOT
+           WHERE DOCNUM EQ ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM.
+
+        ENDIF.
+
+        "8  Cancelado
+        IF WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_8 AND
+           WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_0 AND
+           WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_3 AND
+           WA_ZCTE_CIOT-ST_CIOT NE ZCL_CIOT=>C_9.
+
+          RAISE EXCEPTION TYPE ZESZCX_DOC_ELETRONICO
+            EXPORTING
+              TEXTID = VALUE #( MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_CANCELADO-MSGID
+                                MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_CANCELADO-MSGNO
+                                ATTR1  = CONV #( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ) )
+              MSGTY  = 'E'
+              MSGID  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_CANCELADO-MSGID
+              MSGNO  = ZESZCX_DOC_ELETRONICO=>ZCX_SEM_CONTRATO_CANCELADO-MSGNO
+              MSGV1  = CONV #( ME->ZESZIF_DOC_ELETRONICO~AT_DOCUMENTO-DOCNUM ).
+        ENDIF.
+
+        CONCATENATE WA_J_1BNFE_CANCELRT-REASON1 WA_J_1BNFE_CANCELRT-REASON2 WA_J_1BNFE_CANCELRT-REASON3 WA_J_1BNFE_CANCELRT-REASON4
+               INTO E_JUSTIFICATIVA_CANCEL SEPARATED BY SPACE.
+
+    ENDCASE.
+
+  ENDMETHOD.
+ENDCLASS.

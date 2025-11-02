@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZESGRC</ARBGB>
+    <MASTERLANG>P</MASTERLANG>
+    <STEXT>Documento está cancelado!</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp;1 &amp;2 &amp;3 &amp;4</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Documento está cancelado!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Informar o documento para execução online!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Empresa e data de lançamento devem ser informados!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Nenhum dado encontrado!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Nenhum e-mail informado para Parceiro &amp;1!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Grupo &amp;1 campo &amp;2 não parametrizado! (J_1BNFE_C_CCECFG)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Deve ser Informado um Local de Descarregamento!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>Placa de Veículo não cadastrada na ZESLES0003!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erro de comunicação com GRC!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>Houve uma falha no sistema!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Erro ao ler o documento NF-e!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>Houve um erro técnico!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>Houve um erro ao criar o evento!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>Processo não permitido!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>Erro desconhecido!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZESGRC</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>Já existe um veículo de categoria(Trator)!</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

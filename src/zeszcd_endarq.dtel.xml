@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESCD_ENDARQ</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>TEXT255</DOMNAME>
+    <HEADLEN>16</HEADLEN>
+    <SCRLEN1>07</SCRLEN1>
+    <SCRLEN2>16</SCRLEN2>
+    <SCRLEN3>16</SCRLEN3>
+    <DDTEXT>Endereço Arquivo</DDTEXT>
+    <REPTEXT>Endereço Arquivo</REPTEXT>
+    <SCRTEXT_S>End.Arq</SCRTEXT_S>
+    <SCRTEXT_M>Endereço Arquivo</SCRTEXT_M>
+    <SCRTEXT_L>Endereço Arquivo</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESOPR_MDEST</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESOPR_MDEST</DOMNAME>
+    <HEADLEN>32</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>32</SCRLEN3>
+    <DDTEXT>Operação Manifestação Destinatário</DDTEXT>
+    <REPTEXT>Operação Manifesto Destinatário</REPTEXT>
+    <SCRTEXT_S>Opr.Dest.</SCRTEXT_S>
+    <SCRTEXT_M>Opr.Manifesto.Dest.</SCRTEXT_M>
+    <SCRTEXT_L>Operação Manifesto Destinatário</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

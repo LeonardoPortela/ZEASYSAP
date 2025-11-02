@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZESREF_LCTO</ROLLNAME>
+    <DDLANGUAGE>P</DDLANGUAGE>
+    <DOMNAME>ZESREF_LCTO</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>15</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Referência do Lançamento</DDTEXT>
+    <REPTEXT>Ref. Lançamento</REPTEXT>
+    <SCRTEXT_S>Ref. Lcto.</SCRTEXT_S>
+    <SCRTEXT_M>Ref. Lançamento</SCRTEXT_M>
+    <SCRTEXT_L>Ref. Lançamento</SCRTEXT_L>
+    <DTELMASTER>P</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>
