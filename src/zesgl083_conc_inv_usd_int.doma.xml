@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESGL083_CONC_INSVEST_USD_INTER</DOMNAME>
+    <DOMNAME>ZESGL083_CONC_INV_USD_INT</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>INT1</DATATYPE>
     <LENG>000003</LENG>
@@ -46,3 +46,4 @@
   </asx:values>
  </asx:abap>
 </abapGit>
+

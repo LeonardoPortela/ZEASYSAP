@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD40V>
-    <TYPENAME>ZESDE_INF_MDFE_MD_RODO_VEIC_REBT</TYPENAME>
+    <TYPENAME>ZESDE_INF_MDFE_RODO_V_REBT</TYPENAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <ROWTYPE>ZESDE_INF_MDFE_MD_RODO_VEIC_REBO</ROWTYPE>
     <ROWKIND>S</ROWKIND>
@@ -16,3 +16,4 @@
   </asx:values>
  </asx:abap>
 </abapGit>
+
