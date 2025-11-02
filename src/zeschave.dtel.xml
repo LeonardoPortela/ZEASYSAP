@@ -5,16 +5,19 @@
    <DD04V>
     <ROLLNAME>ZESCHAVE</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESCHAVE</DOMNAME>
-    <SCRLEN1>05</SCRLEN1>
-    <SCRLEN2>12</SCRLEN2>
-    <SCRLEN3>26</SCRLEN3>
-    <DDTEXT>Chave de processamento DRE</DDTEXT>
-    <SCRTEXT_S>Chave</SCRTEXT_S>
-    <SCRTEXT_M>Chave de DRE</SCRTEXT_M>
-    <SCRTEXT_L>Chave de processamento DRE</SCRTEXT_L>
+    <HEADLEN>40</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>16</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Chave de Importação</DDTEXT>
+    <REPTEXT>Chave de Importação</REPTEXT>
+    <SCRTEXT_S>C.Import.</SCRTEXT_S>
+    <SCRTEXT_M>Chave Importação</SCRTEXT_M>
+    <SCRTEXT_L>Chave de Importação</SCRTEXT_L>
     <DTELMASTER>P</DTELMASTER>
-    <REFKIND>D</REFKIND>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000040</LENG>
+    <OUTPUTLEN>000040</OUTPUTLEN>
    </DD04V>
   </asx:values>
  </asx:abap>
