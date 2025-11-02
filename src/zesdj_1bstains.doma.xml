@@ -8,9 +8,10 @@
     <DATATYPE>CHAR</DATATYPE>
     <LENG>000018</LENG>
     <OUTPUTLEN>000018</OUTPUTLEN>
-    <ENTITYTAB>ZESIB_NFE_DIST_TER</ENTITYTAB>
+    <ENTITYTAB>ZESIB_NFE_TER</ENTITYTAB>
     <DDTEXT>Inscrição Estadual</DDTEXT>
    </DD01V>
   </asx:values>
  </asx:abap>
 </abapGit>
+

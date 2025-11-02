@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESIB_CTE_DIST_NT_ALV</TABNAME>
+    <TABNAME>ZESIB_CTE_NT_ALV</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>CT-e Distribuida - NF55/NF01 - ALV</DDTEXT>
@@ -46,7 +46,7 @@
      <FIELDNAME>ZESVLR_VI</FIELDNAME>
      <ROLLNAME>ZESDE_VLR_VI</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
-     <REFTABLE>ZESIB_CTE_DIST_N55</REFTABLE>
+     <REFTABLE>ZESIB_CTE_N55</REFTABLE>
      <REFFIELD>WAERK_VI</REFFIELD>
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
@@ -146,3 +146,4 @@
   </asx:values>
  </asx:abap>
 </abapGit>
+

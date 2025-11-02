@@ -55,7 +55,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>INCLUDE</FIELDNAME>
-     <ROLLNAME>ZESIB_CTE_DIST_TER</ROLLNAME>
+     <ROLLNAME>ZESIB_CTE_TER</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>STRU</DATATYPE>
      <MASK>  STRUS</MASK>
@@ -71,3 +71,4 @@
   </asx:values>
  </asx:abap>
 </abapGit>
+

@@ -14,7 +14,7 @@
     <DD03P>
      <FIELDNAME>.INCLUDE</FIELDNAME>
      <ADMINFIELD>0</ADMINFIELD>
-     <PRECFIELD>ZESIB_CTE_DIST_NIT</PRECFIELD>
+     <PRECFIELD>ZESIB_CTE_NIT</PRECFIELD>
      <MASK>      S</MASK>
      <DDTEXT>Tabela de InBound de Itens de Documento Fiscal</DDTEXT>
      <COMPTYPE>S</COMPTYPE>
@@ -41,3 +41,4 @@
   </asx:values>
  </asx:abap>
 </abapGit>
+

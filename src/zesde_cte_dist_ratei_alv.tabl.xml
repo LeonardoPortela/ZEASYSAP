@@ -14,7 +14,7 @@
     <DD03P>
      <FIELDNAME>.INCLUDE</FIELDNAME>
      <ADMINFIELD>0</ADMINFIELD>
-     <PRECFIELD>ZESIB_CTE_DIST_LBP</PRECFIELD>
+     <PRECFIELD>ZESIB_CTE_LBP</PRECFIELD>
      <MASK>      S</MASK>
      <DDTEXT>Liberação de Diferença de Peso de CT-e</DDTEXT>
      <COMPTYPE>S</COMPTYPE>
@@ -71,3 +71,4 @@
   </asx:values>
  </asx:abap>
 </abapGit>
+
