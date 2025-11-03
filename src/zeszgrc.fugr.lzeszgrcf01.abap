@@ -1452,32 +1452,32 @@ endform.
 *----------------------------------------------------------------------*
 form zf_atribuir_cte_dist_vei .
 
-  data: lt_zde_inf_modal_rodo type zde_inf_modal_rodo_t,
-        ls_zde_inf_modal_rodo type zde_inf_modal_rodo_m.
+  data: lt_zesde_inf_modal_rodo type zesde_inf_modal_rodo_t,
+        ls_zesde_inf_modal_rodo type zesde_inf_modal_rodo_m.
 
-  lt_zde_inf_modal_rodo[] = gs_xml_sefaz_cte-cteproc-cte-infcte-infctenorm-infmodal-rodo-veic[].
+  lt_zesde_inf_modal_rodo[] = gs_xml_sefaz_cte-cteproc-cte-infcte-infctenorm-infmodal-rodo-veic[].
 
 *  Atualiza Tabela ZESZIB_CTE_DIST_VEI
-  loop at lt_zde_inf_modal_rodo into ls_zde_inf_modal_rodo.
+  loop at lt_zesde_inf_modal_rodo into ls_zesde_inf_modal_rodo.
     gs_zib_cte_dist_vei-cd_chave_cte            = gs_xml_sefaz_cte-cteproc-protcte-infprot-chcte.
-    gs_zib_cte_dist_vei-veic_placa              = ls_zde_inf_modal_rodo-placa.
-    gs_zib_cte_dist_vei-veic_tara_kg            = ls_zde_inf_modal_rodo-tara.
-    gs_zib_cte_dist_vei-veic_capacidade_kg      = ls_zde_inf_modal_rodo-capkg.
-    gs_zib_cte_dist_vei-veic_capacidade_m3      = ls_zde_inf_modal_rodo-capm3.
-    gs_zib_cte_dist_vei-veic_tipo_propriedade   = ls_zde_inf_modal_rodo-tpprop.
-    gs_zib_cte_dist_vei-veic_tipo_veiculo       = ls_zde_inf_modal_rodo-tpveic.
-    gs_zib_cte_dist_vei-veic_tipo_rodado        = ls_zde_inf_modal_rodo-tprod.
-    gs_zib_cte_dist_vei-veic_tipo_carroceria    = ls_zde_inf_modal_rodo-tpcar.
-    gs_zib_cte_dist_vei-veic_uf_licenciamento   = ls_zde_inf_modal_rodo-uf.
-    gs_zib_cte_dist_vei-veic_renavam            = ls_zde_inf_modal_rodo-renavam.
-    gs_zib_cte_dist_vei-veic_rntrc              = ls_zde_inf_modal_rodo-prop-rntrc.
+    gs_zib_cte_dist_vei-veic_placa              = ls_zesde_inf_modal_rodo-placa.
+    gs_zib_cte_dist_vei-veic_tara_kg            = ls_zesde_inf_modal_rodo-tara.
+    gs_zib_cte_dist_vei-veic_capacidade_kg      = ls_zesde_inf_modal_rodo-capkg.
+    gs_zib_cte_dist_vei-veic_capacidade_m3      = ls_zesde_inf_modal_rodo-capm3.
+    gs_zib_cte_dist_vei-veic_tipo_propriedade   = ls_zesde_inf_modal_rodo-tpprop.
+    gs_zib_cte_dist_vei-veic_tipo_veiculo       = ls_zesde_inf_modal_rodo-tpveic.
+    gs_zib_cte_dist_vei-veic_tipo_rodado        = ls_zesde_inf_modal_rodo-tprod.
+    gs_zib_cte_dist_vei-veic_tipo_carroceria    = ls_zesde_inf_modal_rodo-tpcar.
+    gs_zib_cte_dist_vei-veic_uf_licenciamento   = ls_zesde_inf_modal_rodo-uf.
+    gs_zib_cte_dist_vei-veic_renavam            = ls_zesde_inf_modal_rodo-renavam.
+    gs_zib_cte_dist_vei-veic_rntrc              = ls_zesde_inf_modal_rodo-prop-rntrc.
     gs_zib_cte_dist_vei-prop_tp_doc             = 1.
-    gs_zib_cte_dist_vei-prop_cnpj               = ls_zde_inf_modal_rodo-prop-cnpj.
-*    GS_ZIB_CTE_DIST_VEI-PROP_CPF                = ls_ZDE_INF_MODAL_RODO-PLACA.
-*    GS_ZIB_CTE_DIST_VEI-PROP_IE                 = ls_ZDE_INF_MODAL_RODO-PLACA.
-*    GS_ZIB_CTE_DIST_VEI-PROP_UF_IE              = ls_ZDE_INF_MODAL_RODO-PLACA.
-*    GS_ZIB_CTE_DIST_VEI-PROP_RSOCIAL            = ls_ZDE_INF_MODAL_RODO-PLACA.
-*    GS_ZIB_CTE_DIST_VEI-PROP_TIPO_PROP          = ls_ZDE_INF_MODAL_RODO-PLACA.
+    gs_zib_cte_dist_vei-prop_cnpj               = ls_zesde_inf_modal_rodo-prop-cnpj.
+*    GS_ZIB_CTE_DIST_VEI-PROP_CPF                = ls_ZESDE_INF_MODAL_RODO-PLACA.
+*    GS_ZIB_CTE_DIST_VEI-PROP_IE                 = ls_ZESDE_INF_MODAL_RODO-PLACA.
+*    GS_ZIB_CTE_DIST_VEI-PROP_UF_IE              = ls_ZESDE_INF_MODAL_RODO-PLACA.
+*    GS_ZIB_CTE_DIST_VEI-PROP_RSOCIAL            = ls_ZESDE_INF_MODAL_RODO-PLACA.
+*    GS_ZIB_CTE_DIST_VEI-PROP_TIPO_PROP          = ls_ZESDE_INF_MODAL_RODO-PLACA.
     modify ZESZIB_CTE_DIST_VEI from gs_zib_cte_dist_vei.
   endloop.
 
