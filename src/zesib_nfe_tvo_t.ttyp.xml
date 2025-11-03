@@ -3,15 +3,15 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD40V>
-    <TYPENAME>ZESDE_INF_MDFE_MD_RODO_VEIC_REBT</TYPENAME>
+    <TYPENAME>ZESIB_NFE_DIST_TVO_T</TYPENAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <ROWTYPE>ZESDE_INF_MDFE_MD_RODO_VEIC_REBO</ROWTYPE>
+    <ROWTYPE>ZESIB_NFE_TVO</ROWTYPE>
     <ROWKIND>S</ROWKIND>
     <DATATYPE>STRU</DATATYPE>
     <ACCESSMODE>T</ACCESSMODE>
     <KEYDEF>D</KEYDEF>
     <KEYKIND>N</KEYKIND>
-    <DDTEXT>Veiculo Reboque</DDTEXT>
+    <DDTEXT>Transportador Volume</DDTEXT>
    </DD40V>
   </asx:values>
  </asx:abap>

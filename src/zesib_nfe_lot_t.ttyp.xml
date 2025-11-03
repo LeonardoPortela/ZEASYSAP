@@ -3,15 +3,15 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD40V>
-    <TYPENAME>ZESIB_NFE_DIST_TVO_T</TYPENAME>
+    <TYPENAME>ZESIB_NFE_DIST_LOT_T</TYPENAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <ROWTYPE>ZESIB_NFE_DIST_TVO</ROWTYPE>
+    <ROWTYPE>ZESIB_NFE_LOT</ROWTYPE>
     <ROWKIND>S</ROWKIND>
     <DATATYPE>STRU</DATATYPE>
     <ACCESSMODE>T</ACCESSMODE>
     <KEYDEF>D</KEYDEF>
     <KEYKIND>N</KEYKIND>
-    <DDTEXT>Transportador Volume</DDTEXT>
+    <DDTEXT>Itens/Lotes da Nota Fiscal Eletrônica</DDTEXT>
    </DD40V>
   </asx:values>
  </asx:abap>
