@@ -1,8 +1,8 @@
 *******************************************************************
 *   System-defined Include-files.                                 *
 *******************************************************************
-  INCLUDE lzesgrctop.                        " Global Data
-  INCLUDE lzesgrcuxx.                        " Function Modules
+INCLUDE lzesgrctop.                        " Global Data
+INCLUDE lzesgrcuxx.                        " Function Modules
 
 *******************************************************************
 *   User-defined Include-files (if necessary).                    *
@@ -20,18 +20,18 @@
 
 *INCLUDE LZESGRCF04.
 
-  INCLUDE LZESGRCF01.
+INCLUDE lzesgrcf01.
 
-  INCLUDE LZESGRCF02.
+INCLUDE lzesgrcf02.
 
-  INCLUDE LZESGRCF03.
+INCLUDE lzesgrcf03.
 
-  INCLUDE LZESGRCF04.
+INCLUDE lzesgrcf04.
 
-  INCLUDE LZESGRCF05.
+INCLUDE lzesgrcf05.
 
-  INCLUDE LZESGRCO01.
+INCLUDE lzesgrco01.
 
-  INCLUDE LZESGRCF06.
+INCLUDE lzesgrcf06.
 
-INCLUDE LZESGRCF07.
+INCLUDE lzesgrcf07.

@@ -1,5 +1,5 @@
-﻿FUNCTION-POOL ZESZGRC0001                   MESSAGE-ID SV.
+FUNCTION-POOL ZESZGRC0001                   MESSAGE-ID SV.
 
-* INCLUDE LZGRC0001D...                      " Local class definition
+* INCLUDE LZESGRC0001D...                      " Local class definition
   INCLUDE LSVIMDAT                                . "general data decl.
-  INCLUDE LZGRC0001T00                            . "view rel. data dcl.
+  INCLUDE LZESGRC0001T00                            . "view rel. data dcl.
