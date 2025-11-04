@@ -1,0 +1,38 @@
+FUNCTION Z_GRC_REGISTRA_LOG_DOC.
+*"----------------------------------------------------------------------
+*"*"Interface local:
+*"  IMPORTING
+*"     REFERENCE(I_DOCNUM) TYPE  J_1BDOCNUM
+*"     REFERENCE(I_EVENT_FLAG) TYPE  CHAR01 OPTIONAL
+*"----------------------------------------------------------------------
+
+  DATA: WL_ZIB_NFE         TYPE ZIB_NFE.
+
+  CLEAR: WL_ZIB_NFE.
+
+  CHECK I_DOCNUM IS NOT INITIAL.
+
+  SELECT SINGLE *
+    FROM J_1BNFDOC INTO @DATA(WL_DOC)
+   WHERE DOCNUM EQ @I_DOCNUM.
+
+  CHECK ( SY-SUBRC EQ 0 ).
+
+  IF I_EVENT_FLAG IS NOT INITIAL.
+    SELECT SINGLE *
+      FROM ZIB_NFE INTO WL_ZIB_NFE
+     WHERE DOCNUM EQ I_DOCNUM.
+
+    IF SY-SUBRC EQ 0.
+      CLEAR: WL_ZIB_NFE-DATE_AUT_2,
+             WL_ZIB_NFE-TIME_AUT_2,
+             WL_ZIB_NFE-USER_AUT_2.
+
+      MODIFY ZIB_NFE FROM WL_ZIB_NFE.
+    ENDIF.
+
+  ELSE.
+    DELETE FROM ZIB_NFE WHERE DOCNUM EQ I_DOCNUM.
+  ENDIF.
+
+ENDFUNCTION.
