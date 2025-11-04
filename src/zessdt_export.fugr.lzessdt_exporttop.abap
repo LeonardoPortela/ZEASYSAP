@@ -4,4 +4,4 @@
 FUNCTION-POOL ZESSDT_EXPORT                MESSAGE-ID SV.
 
   INCLUDE LSVIMDAT                                . "general data decl.
-  INCLUDE LZSDT_EXPORTT00                         . "view rel. data dcl.
+  INCLUDE LZESSDT_EXPORTT00                         . "view rel. data dcl.

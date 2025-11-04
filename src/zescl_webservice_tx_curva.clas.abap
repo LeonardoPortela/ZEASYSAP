@@ -1,76 +1,76 @@
-class ZESCL_WEBSERVICE_TX_CURVA definition
-  public
-  inheriting from ZESCL_WEBSERVICE
-  create public .
+CLASS zescl_webservice_tx_curva DEFINITION
+  PUBLIC
+  INHERITING FROM zescl_webservice
+  CREATE PUBLIC .
 
 *"* public components of class ZESCL_WEBSERVICE_TX_CURVA
 *"* do not include other source files here!!!
-public section.
+  PUBLIC SECTION.
 
-  methods BUSCAR_TAXA
-    importing
-      !I_DATA type DATUM
-      !I_DATA_LIB type DATUM optional
-      !I_TIPO type CHAR01 default 'C'
-    returning
-      value(E_COTACAO) type KURRF
-    raising
-      ZESCX_WEBSERVICE .
-  methods EXECUTAR
-    importing
-      !I_NUMERO type ZSDED013
-      !I_TIPO type CHAR03 optional
-      !I_FIXACAO type POSNR optional
-      !I_UCOMM type SYUCOMM optional
-      !I_STATUS type C optional
-      !I_TCODE type SYTCODE optional
-      !I_VBELN type VBELN optional
-      !I_AUART type AUART optional
-      !I_VBAP type VBAP_T optional .
-  class-methods HEDGE_INSUMOS
-    importing
-      !I_NUMERO type ZSDED003 optional
-      !I_ACAO type SY-UCOMM optional
-      !I_TIPO type CHAR3 optional
-      !I_ITENS type STANDARD TABLE optional
-      !I_0090 type ZSDT0090 optional
-      !I_VBELN type VBELN optional
-      !I_DIR type BEZEI30 optional
-      !I_SEQ type NUMC4 optional
-      !I_TAXA_BOLETA type UKURSP optional
-      !I_0090_MANUAL type FLAG optional .
-  class-methods HEDGE_AQUAVIARIO
-    importing
-      !_VBRK type VBRK
-      !_VBRP type VBRPVB optional
-      !_CODE type SYTCODE
-      !_AUART type AUART optional .
+    METHODS buscar_taxa
+    IMPORTING
+      !i_data TYPE datum
+      !i_data_lib TYPE datum OPTIONAL
+      !i_tipo TYPE char01 DEFAULT 'C'
+    RETURNING
+      VALUE(e_cotacao) TYPE kurrf
+    RAISING
+      zescx_webservice .
+    METHODS executar
+    IMPORTING
+      !i_numero TYPE zsded013
+      !i_tipo TYPE char03 OPTIONAL
+      !i_fixacao TYPE posnr OPTIONAL
+      !i_ucomm TYPE syucomm OPTIONAL
+      !i_status TYPE c OPTIONAL
+      !i_tcode TYPE sytcode OPTIONAL
+      !i_vbeln TYPE vbeln OPTIONAL
+      !i_auart TYPE auart OPTIONAL
+      !i_vbap TYPE vbap_t OPTIONAL .
+    CLASS-METHODS hedge_insumos
+    IMPORTING
+      !i_numero TYPE zsded003 OPTIONAL
+      !i_acao TYPE sy-ucomm OPTIONAL
+      !i_tipo TYPE char3 OPTIONAL
+      !i_itens TYPE STANDARD TABLE OPTIONAL
+      !i_0090 TYPE zsdt0090 OPTIONAL
+      !i_vbeln TYPE vbeln OPTIONAL
+      !i_dir TYPE bezei30 OPTIONAL
+      !i_seq TYPE numc4 OPTIONAL
+      !i_taxa_boleta TYPE ukursp OPTIONAL
+      !i_0090_manual TYPE flag OPTIONAL .
+    CLASS-METHODS hedge_aquaviario
+    IMPORTING
+      !_vbrk TYPE vbrk
+      !_vbrp TYPE vbrpvb OPTIONAL
+      !_code TYPE sytcode
+      !_auart TYPE auart OPTIONAL .
   PROTECTED SECTION.
 *"* protected components of class ZCL_WEBSERVICE_TX_CURVA
 *"* do not include other source files here!!!
-private section.
+  PRIVATE SECTION.
 
 *"* private components of class ZCL_WEBSERVICE_TX_CURVA
 *"* do not include other source files here!!!
-  methods MONTA_XML_TAXA
-    importing
-      !I_DATA type SYDATUM
-      !I_DATA_LIB type DATUM optional
-      !I_TIPO type CHAR01
-    returning
-      value(E_XML) type STRING .
-  methods LER_XML_TAXA
-    importing
-      !I_XML type STRING
-    returning
-      value(E_COTACAO) type KURRF
-    raising
-      ZESCX_WEBSERVICE .
+    METHODS monta_xml_taxa
+    IMPORTING
+      !i_data TYPE sydatum
+      !i_data_lib TYPE datum OPTIONAL
+      !i_tipo TYPE char01
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS ler_xml_taxa
+    IMPORTING
+      !i_xml TYPE string
+    RETURNING
+      VALUE(e_cotacao) TYPE kurrf
+    RAISING
+      zescx_webservice .
 ENDCLASS.
 
 
 
-CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
+CLASS zcl_webservice_tx_curva IMPLEMENTATION.
 
 
   METHOD buscar_taxa.
@@ -150,37 +150,37 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
   ENDMETHOD.
 
 
-  method executar.
+  METHOD executar.
 
-    data: gobj_taxa_curva_db type ref to zescl_taxa_curva_db.
-    data: lw_zsdt0094 type zsdt0094.
-    data: lw_setleaf  type setleaf.
+    DATA: gobj_taxa_curva_db TYPE REF TO zescl_taxa_curva_db.
+    DATA: lw_zsdt0094 TYPE zsdt0094.
+    DATA: lw_setleaf  TYPE setleaf.
 
-    create object gobj_taxa_curva_db.
+    CREATE OBJECT gobj_taxa_curva_db.
 
     "Caso encontre qualquer registro referente ao número de solicitação de venda que tenha o status inicializado como 'X'
     "não deverá ser feito nenhum tipo de registro na ZSDT0094.
-    select single * from zsdt0094 into lw_zsdt0094 where nro_sol_ov eq i_numero
-                                                     and edicao     eq 'X'.
-    if ( sy-subrc ne 0 ).
+    SELECT SINGLE * FROM zsdt0094 INTO lw_zsdt0094 WHERE nro_sol_ov EQ i_numero
+                                                     AND edicao     EQ 'X'.
+    IF ( sy-subrc NE 0 ).
 
       "Caso a solicitação seja encontrada, não pode fazer o lançamento  novamente, porque se trata de uma SOV antiga.
-      select single * from setleaf into lw_setleaf where setname = 'MAGGI_SOV_ANTIGA'
-                                                     and valfrom = i_numero.
-      if ( sy-subrc ne 0 ).
-        case i_tipo.
-          when: 'LIB'. "Liberação de OV.
+      SELECT SINGLE * FROM setleaf INTO lw_setleaf WHERE setname = 'MAGGI_SOV_ANTIGA'
+                                                     AND valfrom = i_numero.
+      IF ( sy-subrc NE 0 ).
+        CASE i_tipo.
+          WHEN: 'LIB'. "Liberação de OV.
             gobj_taxa_curva_db->liberar_ov( i_numero  = i_numero
                                             i_tcode   = i_tcode
                                             i_fixacao = i_fixacao ).
-          when: 'FRA'."Frame
+          WHEN: 'FRA'."Frame
             gobj_taxa_curva_db->frame( i_numero = i_numero
                                        i_ucomm  = i_ucomm
                                        i_tcode  = i_tcode
                                        i_vbeln  = i_vbeln
                                        i_auart  = i_auart
                                        ).
-          when: 'FRE'. "Frete.
+          WHEN: 'FRE'. "Frete.
             gobj_taxa_curva_db->frete( i_numero  = i_numero
                                        i_fixacao = i_fixacao
                                        i_status  = i_status
@@ -189,7 +189,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
                                        i_auart   = i_auart
                                        ).
 
-          when: 'EDI' or 'DEL' . "Edição / Delete.
+          WHEN: 'EDI' OR 'DEL' . "Edição / Delete.
             gobj_taxa_curva_db->edicao( i_numero  = i_numero
                                         i_fixacao = i_fixacao
                                         i_ucomm   = i_ucomm
@@ -197,7 +197,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
                                         i_tcode   = i_tcode
                                         ).
 
-          when: 'EDF'."Edição de Frame
+          WHEN: 'EDF'."Edição de Frame
             gobj_taxa_curva_db->frame_edicao( i_numero  = i_numero
                                               i_fixacao = i_fixacao
                                               i_vbeln   = i_vbeln
@@ -206,7 +206,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
                                               i_tipo    = i_tipo
                                               i_status  = i_status ).
 
-          when: 'ENC'.  "Encerramento de Venda Simples
+          WHEN: 'ENC'.  "Encerramento de Venda Simples
 
             "Repetir essa merda porque o usuário não sabe o que quer da vida.
             gobj_taxa_curva_db->encerramento( i_numero  = i_numero
@@ -218,7 +218,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
                                               i_vbap    = i_vbap ). "ajuste Bug Solto 149379 / aoenning& / 22-08-2024 -----&*.
 
 
-          when: 'LOG'.  "Atualiza a Aba logista, das vendas que não dispara o Hedge
+          WHEN: 'LOG'.  "Atualiza a Aba logista, das vendas que não dispara o Hedge
 
             gobj_taxa_curva_db->calcula_frete( i_numero  = i_numero
                                                i_fixacao = i_fixacao
@@ -227,11 +227,11 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
                                                i_tcode   = i_tcode ).
 
 
-        endcase.
-      endif.
-    endif.
+        ENDCASE.
+      ENDIF.
+    ENDIF.
 
-  endmethod.
+  ENDMETHOD.
 
 
   METHOD hedge_aquaviario.
@@ -360,7 +360,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
                               i_vbeln  = i_vbeln
                               i_dir    = i_dir
                               i_seq    = i_seq
-                              I_0090_MANUAL = I_0090_MANUAL ).
+                              i_0090_manual = i_0090_manual ).
 
       WHEN 'INV'.
 **************************************************************************************************
@@ -381,133 +381,132 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD LER_XML_TAXA.
+  METHOD ler_xml_taxa.
 
-    TYPES: BEGIN OF TY_TAXA,
-             COTACAO TYPE C LENGTH 10,
-             STATUS  TYPE C LENGTH 1,
-             MESSAGE TYPE C LENGTH 50,
-           END OF TY_TAXA.
+    TYPES: BEGIN OF ty_taxa,
+             cotacao TYPE c LENGTH 10,
+             status  TYPE c LENGTH 1,
+             message TYPE c LENGTH 50,
+           END OF ty_taxa.
 
-    DATA: IF_XML           TYPE REF TO IF_IXML,
-          IF_STREAMFACTORY TYPE REF TO IF_IXML_STREAM_FACTORY,
-          IF_STREAM        TYPE REF TO IF_IXML_ISTREAM,
-          IF_XML_PARSER    TYPE REF TO IF_IXML_PARSER,
-          IF_DOCUMENT      TYPE REF TO IF_IXML_DOCUMENT,
+    DATA: if_xml           TYPE REF TO if_ixml,
+          if_streamfactory TYPE REF TO if_ixml_stream_factory,
+          if_stream        TYPE REF TO if_ixml_istream,
+          if_xml_parser    TYPE REF TO if_ixml_parser,
+          if_document      TYPE REF TO if_ixml_document,
 
-          IF_NODE          TYPE REF TO IF_IXML_NODE,
-          IF_MAP           TYPE REF TO IF_IXML_NAMED_NODE_MAP,
-          IF_ATTR          TYPE REF TO IF_IXML_NODE,
+          if_node          TYPE REF TO if_ixml_node,
+          if_map           TYPE REF TO if_ixml_named_node_map,
+          if_attr          TYPE REF TO if_ixml_node,
 
-          ITERATOR         TYPE REF TO IF_IXML_NODE_ITERATOR,
-          TAG_NAME         TYPE STRING,
-          NAME_DOM         TYPE STRING,
-          COUNT_DOM        TYPE I,
-          INDEX_DOM        TYPE I,
-          PREFIX_DOM       TYPE STRING,
-          VALOR_DOM        TYPE STRING,
+          iterator         TYPE REF TO if_ixml_node_iterator,
+          tag_name         TYPE string,
+          name_dom         TYPE string,
+          count_dom        TYPE i,
+          index_dom        TYPE i,
+          prefix_dom       TYPE string,
+          valor_dom        TYPE string,
 
-          NODE_FILHO       TYPE REF TO IF_IXML_NODE,
-          VALOR_FILHO      TYPE STRING.
+          node_filho       TYPE REF TO if_ixml_node,
+          valor_filho      TYPE string.
 
-    DATA: GT_TAXA TYPE TABLE OF TY_TAXA,
-          GW_TAXA TYPE TY_TAXA.
+    DATA: gt_taxa TYPE TABLE OF ty_taxa,
+          gw_taxa TYPE ty_taxa.
 
-    FIELD-SYMBOLS: <FS_TAXA> TYPE TY_TAXA.
-
-
-    IF_XML           = CL_IXML=>CREATE( ).
-    IF_DOCUMENT      = IF_XML->CREATE_DOCUMENT( ).
-    IF_STREAMFACTORY = IF_XML->CREATE_STREAM_FACTORY( ).
-    IF_STREAM        = IF_STREAMFACTORY->CREATE_ISTREAM_STRING( I_XML ).
-
-    IF_XML_PARSER    = IF_XML->CREATE_PARSER(  STREAM_FACTORY = IF_STREAMFACTORY
-                                               ISTREAM        = IF_STREAM
-                                               DOCUMENT       = IF_DOCUMENT ).
-
-    IF_XML_PARSER->PARSE( ).
-
-    IF_NODE ?= IF_DOCUMENT->GET_ROOT_ELEMENT( ).
+    FIELD-SYMBOLS: <fs_taxa> TYPE ty_taxa.
 
 
-    IF NOT ( IF_NODE IS INITIAL ).
+    if_xml           = cl_ixml=>create( ).
+    if_document      = if_xml->create_document( ).
+    if_streamfactory = if_xml->create_stream_factory( ).
+    if_stream        = if_streamfactory->create_istream_string( i_xml ).
 
-      ITERATOR = IF_NODE->CREATE_ITERATOR( ).
-      IF_NODE = ITERATOR->GET_NEXT( ).
+    if_xml_parser    = if_xml->create_parser(  stream_factory = if_streamfactory
+                                               istream        = if_stream
+                                               document       = if_document ).
 
-      WHILE NOT IF_NODE IS INITIAL.
+    if_xml_parser->parse( ).
+
+    if_node ?= if_document->get_root_element( ).
 
 
-        CASE IF_NODE->GET_TYPE( ).
+    IF NOT ( if_node IS INITIAL ).
 
-          WHEN: IF_IXML_NODE=>CO_NODE_ELEMENT.
+      iterator = if_node->create_iterator( ).
+      if_node = iterator->get_next( ).
 
-            TAG_NAME = IF_NODE->GET_NAME( ).
-            IF_MAP   = IF_NODE->GET_ATTRIBUTES( ).
+      WHILE NOT if_node IS INITIAL.
 
-            IF NOT ( IF_MAP IS INITIAL ).
 
-              COUNT_DOM = IF_MAP->GET_LENGTH( ).
+        CASE if_node->get_type( ).
 
-              DO COUNT_DOM TIMES.
+          WHEN: if_ixml_node=>co_node_element.
 
-                INDEX_DOM  = SY-INDEX - 1.
-                IF_ATTR    = IF_MAP->GET_ITEM( INDEX_DOM ).
-                NAME_DOM   = IF_ATTR->GET_NAME( ).
-                PREFIX_DOM = IF_ATTR->GET_NAMESPACE_PREFIX( ).
-                VALOR_DOM  = IF_ATTR->GET_VALUE( ).
+            tag_name = if_node->get_name( ).
+            if_map   = if_node->get_attributes( ).
+
+            IF NOT ( if_map IS INITIAL ).
+
+              count_dom = if_map->get_length( ).
+
+              DO count_dom TIMES.
+
+                index_dom  = sy-index - 1.
+                if_attr    = if_map->get_item( index_dom ).
+                name_dom   = if_attr->get_name( ).
+                prefix_dom = if_attr->get_namespace_prefix( ).
+                valor_dom  = if_attr->get_value( ).
 
               ENDDO.
 
-              CASE TAG_NAME.
+              CASE tag_name.
                 WHEN: 'cotacao'.
-                  GW_TAXA-COTACAO = IF_NODE->GET_VALUE( ).
-                  E_COTACAO = GW_TAXA-COTACAO.
+                  gw_taxa-cotacao = if_node->get_value( ).
+                  e_cotacao = gw_taxa-cotacao.
                 WHEN: 'status'.
-                  GW_TAXA-STATUS = IF_NODE->GET_VALUE( ).
+                  gw_taxa-status = if_node->get_value( ).
                 WHEN: 'message'.
-                  GW_TAXA-MESSAGE = IF_NODE->GET_VALUE( ).
+                  gw_taxa-message = if_node->get_value( ).
 
               ENDCASE.
             ENDIF.
         ENDCASE.
-        IF_NODE = ITERATOR->GET_NEXT( ).
+        if_node = iterator->get_next( ).
       ENDWHILE.
     ENDIF.
-
 
 
 
   ENDMETHOD.
 
 
-  METHOD MONTA_XML_TAXA.
-    CLEAR: E_XML. "Limpar a variavel de retorno.
+  METHOD monta_xml_taxa.
+    CLEAR: e_xml. "Limpar a variavel de retorno.
 
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
-    DATA: OBJ_ZCL_UTIL TYPE REF TO ZCL_UTIL.
-    DATA: VAR_DATA     TYPE C LENGTH 10.
-    DATA: VAR_DATA_LIB TYPE C LENGTH 10.
+    DATA: obj_zcl_util TYPE REF TO zcl_util.
+    DATA: var_data     TYPE c LENGTH 10.
+    DATA: var_data_lib TYPE c LENGTH 10.
 
-    FREE: OBJ_ZCL_UTIL.
+    FREE: obj_zcl_util.
 
-    CREATE OBJECT OBJ_ZCL_UTIL.
-    OBJ_ZCL_UTIL->CONV_DATA_US_BR( EXPORTING I_DATA = I_DATA
-                                             I_OPCAO = '.'
-                                   RECEIVING E_DATA = VAR_DATA ).
+    CREATE OBJECT obj_zcl_util.
+    obj_zcl_util->conv_data_us_br( EXPORTING i_data = i_data
+                                             i_opcao = '.'
+                                   RECEIVING e_data = var_data ).
 
-    OBJ_ZCL_UTIL->CONV_DATA_US_BR( EXPORTING I_DATA = I_DATA_LIB
-                                             I_OPCAO = '.'
-                                   RECEIVING E_DATA = VAR_DATA_LIB ).
+    obj_zcl_util->conv_data_us_br( EXPORTING i_data = i_data_lib
+                                             i_opcao = '.'
+                                   RECEIVING e_data = var_data_lib ).
 
     CONC_XML '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">'.
     CONC_XML  '<soap:Header/>'.
     CONC_XML '<soap:Body>'.
 
-    IF ( SY-CPROG EQ 'ZCARGA').
+    IF ( sy-cprog EQ 'ZCARGA').
       CONC_XML       '<tem:GetHedge>'.
       CONC_XML          '<tem:dataRef>'.
       CONC_XML           VAR_DATA_LIB.
@@ -526,7 +525,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
     CONC_XML           I_TIPO.
     CONC_XML       '</tem:tipo>'.
 
-    IF ( SY-CPROG EQ 'ZCARGA').
+    IF ( sy-cprog EQ 'ZCARGA').
       CONC_XML       '</tem:GetHedge>'.
     ELSE.
       CONC_XML       '</tem:Get>'.

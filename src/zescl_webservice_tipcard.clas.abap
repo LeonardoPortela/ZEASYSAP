@@ -1,277 +1,277 @@
-class ZESCL_WEBSERVICE_TIPCARD definition
-  public
-  inheriting from ZESCL_WEBSERVICE
-  create public .
+CLASS zescl_webservice_tipcard DEFINITION
+  PUBLIC
+  INHERITING FROM zescl_webservice
+  CREATE PUBLIC .
 
 *"* public components of class ZESCL_WEBSERVICE_TIPCARD
 *"* do not include other source files here!!!
-public section.
+  PUBLIC SECTION.
 
-  data CK_SALVAR_XML_LOCAL type CHAR01 .
+    DATA ck_salvar_xml_local TYPE char01 .
 
-  methods AUTENTICACAO
-    importing
-      !I_HTTP type ref to IF_HTTP_CLIENT optional
-      !I_OPERADORA type CHAR3
-      !I_GRUPO type ZDE_DS_GRUPO_EMPRESA
-    returning
-      value(E_CHAVE) type CHAR32
-    raising
-      ZESCX_WEBSERVICE .
-  methods BUSCAR_ROTAS
-    importing
-      !I_GRUPO type ZDE_DS_GRUPO_EMPRESA
-    raising
-      ZESCX_WEBSERVICE .
-  methods LER_XML_ROTAS
-    importing
-      !I_GRUPO type ZDE_DS_GRUPO_EMPRESA
-      !I_XML type STRING
-    raising
-      ZESCX_WEBSERVICE .
-  methods CHAVE_SEGURANCA
-    importing
-      !I_GRUPO type ZDE_DS_GRUPO_EMPRESA
-    returning
-      value(E_CHAVE) type CHAR32
-    raising
-      ZESCX_WEBSERVICE .
-  methods ATUALIZAR_VALORES
-    importing
-      !I_GRUPO type ZDE_DS_GRUPO_EMPRESA .
-  methods XML_AUTENTICA
-    importing
-      !I_USUARIO type ZUSE_WEB
-      !I_SENHA type ZPASS_WEB
-    returning
-      value(E_XML) type STRING .
-  methods XML_CONSULTA_ROTA .
-  methods XML_ATUALIZA_ROTA
-    importing
-      !I_CHAVE type CHAR32
-      !I_CNPJCONTRATANTE type SETVALMIN
-    returning
-      value(E_XML) type STRING .
-  methods CONSULTAR_ARQUIVO_COBRANCA
-    importing
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-      !I_FATURA type ZPFE_NR_LOTE_ADM optional
-    exporting
-      !E_MSG type CHAR255
-      value(R_LINKARQUIVO) type STRING
-      value(R_LINKARQUIVO_PEDAGIO) type STRING
-      value(R_CONTENT_ARQUIVO) type STRING
-      value(R_CONTENT_ARQUIVO_PEDAGIO) type STRING
-    exceptions
-      ZWEBSERVICE .
-  methods CONSULTAR_ARQUIVO_CONFERENCIA
-    importing
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-      !I_DT_INICIAL type DATUM
-      !I_DT_FINAL type DATUM
-    exporting
-      !E_MSG type CHAR255
-    returning
-      value(R_LINKARQUIVO) type STRING
-    exceptions
-      ZWEBSERVICE .
-  methods CONSULTAR_ROTA
-    importing
-      !I_ROTA type ZDE_ID_ROTA
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-    exporting
-      !E_MSG type CHAR255
-    exceptions
-      ZWEBSERVICE .
-  methods SOLICITA_ROTA
-    importing
-      !I_ROTA type ZDE_ID_ROTA
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-    exporting
-      !E_MSG type CHAR255
-      !E_ID_ROTA_ADM type ZDE_ID_ROTA_ADM
-    exceptions
-      ZWEBSERVICE .
-  methods ATUALIZAR_ROTA
-    importing
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-    exporting
-      !E_MSG type CHAR255
-    exceptions
-      ZWEBSERVICE .
-  class-methods CONS_SITUACAO_TRANSPORTADOR
-    importing
-      !I_BUKRS type BUKRS default '0001'
-      !I_BRANCH type J_1BBRANC_ default '0116'
-      !I_PARTINER type J_1BPARID optional
-      !I_PLACA type ZPC_VEICULO optional
-      !I_PESQUISA_LIVRE type CHAR01 default ' '
-      !I_CNPJ type STCD1 optional
-      !I_RNTRC type STCD3 optional
-      !I_CK_CONSULTA type ZDE_CK_RNTRC_CS optional
-    returning
-      value(E_CONSULTAS) type ZLEST0135_T
-    exceptions
-      ERRO
-      WEBSERVICE .
-  methods SALVA_XML
-    importing
-      !I_NAME_FILE type STRING
-      !I_XML type STRING .
-  methods XML_CONSULTAR_ARQ_COBRANCA
-    importing
-      !I_CHAVE type CHAR32
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-      !I_FATURA type ZPFE_NR_LOTE_ADM optional
-    returning
-      value(E_XML) type STRING .
-  methods XML_CONSULTAR_ARQ_CONFERENCIA
-    importing
-      !I_CHAVE type CHAR32
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-      !I_DT_INICIAL type DATUM
-      !I_DT_FINAL type DATUM
-    returning
-      value(E_XML) type STRING .
-  class-methods PROCESSAR_ARQUIVO_COBRANCA
-    importing
-      !I_FILENAME type STRING
-      !I_FILENAME_PEDAGIO type STRING
-      !I_CONTENT_FILENAME type STRING optional
-      !I_CONTENT_FILENAME_PEDAGIO type STRING optional
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-    exporting
-      !E_LOTES type ZPFE_NUMERO_LOTE_T
-    raising
-      ZCX_CADASTRO
-      ZCX_ERRO_ARQUIVO .
-  class-methods PROCESSAR_ARQUIVO_CONFERENCIA
-    importing
-      !I_FILENAME type STRING
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-      !I_DT_INICIAL type DATUM
-      !I_DT_FINAL type DATUM
-    raising
-      ZCX_CADASTRO
-      ZCX_ERRO_ARQUIVO .
-  methods CHECK_DATA_ENVIO_EMAIL
-    importing
-      !E_CONSULTAS type ZLEST0135 .
-  methods CONS_STATUS_PARCEIRO
-    importing
-      !I_BUKRS type BUKRS default '0001'
-      !I_BRANCH type J_1BBRANC_ default '0116'
-      !I_PARTINER type J_1BPARID optional
-      !I_PLACA type ZPC_VEICULO optional
-    returning
-      value(E_CONSULTAS) type ZLEST0135_T
-    exceptions
-      ERRO
-      WEBSERVICE .
-  methods XML_CONSULTA_STATUS_PARCEIRO
-    importing
-      !I_CHAVE type CHAR32
-      !I_CONSULTA type ZDE_CONSULTA_PARCEIRO
-    returning
-      value(E_XML) type STRING .
-  methods ENVIAR_EMAIL_TIP
-    importing
-      !E_CONSULTAS type ZLEST0135 .
-protected section.
+    METHODS autenticacao
+    IMPORTING
+      !i_http TYPE REF TO if_http_client OPTIONAL
+      !i_operadora TYPE char3
+      !i_grupo TYPE zde_ds_grupo_empresa
+    RETURNING
+      VALUE(e_chave) TYPE char32
+    RAISING
+      zescx_webservice .
+    METHODS buscar_rotas
+    IMPORTING
+      !i_grupo TYPE zde_ds_grupo_empresa
+    RAISING
+      zescx_webservice .
+    METHODS ler_xml_rotas
+    IMPORTING
+      !i_grupo TYPE zde_ds_grupo_empresa
+      !i_xml TYPE string
+    RAISING
+      zescx_webservice .
+    METHODS chave_seguranca
+    IMPORTING
+      !i_grupo TYPE zde_ds_grupo_empresa
+    RETURNING
+      VALUE(e_chave) TYPE char32
+    RAISING
+      zescx_webservice .
+    METHODS atualizar_valores
+    IMPORTING
+      !i_grupo TYPE zde_ds_grupo_empresa .
+    METHODS xml_autentica
+    IMPORTING
+      !i_usuario TYPE zuse_web
+      !i_senha TYPE zpass_web
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS xml_consulta_rota .
+    METHODS xml_atualiza_rota
+    IMPORTING
+      !i_chave TYPE char32
+      !i_cnpjcontratante TYPE setvalmin
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS consultar_arquivo_cobranca
+    IMPORTING
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+      !i_fatura TYPE zpfe_nr_lote_adm OPTIONAL
+    EXPORTING
+      !e_msg TYPE char255
+      VALUE(r_linkarquivo) TYPE string
+      VALUE(r_linkarquivo_pedagio) TYPE string
+      VALUE(r_content_arquivo) TYPE string
+      VALUE(r_content_arquivo_pedagio) TYPE string
+    EXCEPTIONS
+      zwebservice .
+    METHODS consultar_arquivo_conferencia
+    IMPORTING
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+      !i_dt_inicial TYPE datum
+      !i_dt_final TYPE datum
+    EXPORTING
+      !e_msg TYPE char255
+    RETURNING
+      VALUE(r_linkarquivo) TYPE string
+    EXCEPTIONS
+      zwebservice .
+    METHODS consultar_rota
+    IMPORTING
+      !i_rota TYPE zde_id_rota
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+    EXPORTING
+      !e_msg TYPE char255
+    EXCEPTIONS
+      zwebservice .
+    METHODS solicita_rota
+    IMPORTING
+      !i_rota TYPE zde_id_rota
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+    EXPORTING
+      !e_msg TYPE char255
+      !e_id_rota_adm TYPE zde_id_rota_adm
+    EXCEPTIONS
+      zwebservice .
+    METHODS atualizar_rota
+    IMPORTING
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+    EXPORTING
+      !e_msg TYPE char255
+    EXCEPTIONS
+      zwebservice .
+    CLASS-METHODS cons_situacao_transportador
+    IMPORTING
+      !i_bukrs TYPE bukrs DEFAULT '0001'
+      !i_branch TYPE j_1bbranc_ DEFAULT '0116'
+      !i_partiner TYPE j_1bparid OPTIONAL
+      !i_placa TYPE zpc_veiculo OPTIONAL
+      !i_pesquisa_livre TYPE char01 DEFAULT ' '
+      !i_cnpj TYPE stcd1 OPTIONAL
+      !i_rntrc TYPE stcd3 OPTIONAL
+      !i_ck_consulta TYPE zde_ck_rntrc_cs OPTIONAL
+    RETURNING
+      VALUE(e_consultas) TYPE zlest0135_t
+    EXCEPTIONS
+      erro
+      webservice .
+    METHODS salva_xml
+    IMPORTING
+      !i_name_file TYPE string
+      !i_xml TYPE string .
+    METHODS xml_consultar_arq_cobranca
+    IMPORTING
+      !i_chave TYPE char32
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+      !i_fatura TYPE zpfe_nr_lote_adm OPTIONAL
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS xml_consultar_arq_conferencia
+    IMPORTING
+      !i_chave TYPE char32
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+      !i_dt_inicial TYPE datum
+      !i_dt_final TYPE datum
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    CLASS-METHODS processar_arquivo_cobranca
+    IMPORTING
+      !i_filename TYPE string
+      !i_filename_pedagio TYPE string
+      !i_content_filename TYPE string OPTIONAL
+      !i_content_filename_pedagio TYPE string OPTIONAL
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+    EXPORTING
+      !e_lotes TYPE zpfe_numero_lote_t
+    RAISING
+      zcx_cadastro
+      zcx_erro_arquivo .
+    CLASS-METHODS processar_arquivo_conferencia
+    IMPORTING
+      !i_filename TYPE string
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+      !i_dt_inicial TYPE datum
+      !i_dt_final TYPE datum
+    RAISING
+      zcx_cadastro
+      zcx_erro_arquivo .
+    METHODS check_data_envio_email
+    IMPORTING
+      !e_consultas TYPE zlest0135 .
+    METHODS cons_status_parceiro
+    IMPORTING
+      !i_bukrs TYPE bukrs DEFAULT '0001'
+      !i_branch TYPE j_1bbranc_ DEFAULT '0116'
+      !i_partiner TYPE j_1bparid OPTIONAL
+      !i_placa TYPE zpc_veiculo OPTIONAL
+    RETURNING
+      VALUE(e_consultas) TYPE zlest0135_t
+    EXCEPTIONS
+      erro
+      webservice .
+    METHODS xml_consulta_status_parceiro
+    IMPORTING
+      !i_chave TYPE char32
+      !i_consulta TYPE zde_consulta_parceiro
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS enviar_email_tip
+    IMPORTING
+      !e_consultas TYPE zlest0135 .
+  PROTECTED SECTION.
 
 *"* protected components of class ZCL_WEBSERVICE_TIPCARD
 *"* do not include other source files here!!!
-  methods XML_ATUALIZAR_ROTA
-    importing
-      !I_CHAVE type CHAR32
-      !I_BUKRS type BUKRS
-      !I_BRANCH type J_1BBRANC_
-    returning
-      value(E_XML) type STRING .
-  methods XML_CONSULTAR_ROTA
-    importing
-      !I_CHAVE type CHAR32
-      !I_ZLEST0101 type ZLEST0101
-    returning
-      value(E_XML) type STRING .
-  methods XML_CRIAR_ROTA
-    importing
-      !I_CHAVE type CHAR32
-      !I_ZLEST0101 type ZLEST0101
-      !I_ZLEST0107 type ZLEST0107_T
-    returning
-      value(E_XML) type STRING .
-  methods LER_XML_ATUALIZAR_ROTA
-    importing
-      !I_XML type STRING
-    exporting
-      !E_MSG type CHAR255
-      !E_ROTAS type ZLEST0101_T
-      !E_PRACAS type ZLEST0102_T .
-  methods LER_XML_CONSULTAR_ROTA
-    importing
-      !I_XML type STRING
-    exporting
-      !E_ROTAS type ZLEST0101_T
-      !E_PRACAS type ZLEST0102_T
-      !E_MSG type CHAR255 .
-  methods LER_XML_CRIAR_ROTA
-    importing
-      !I_XML type STRING
-    exporting
-      !E_MSG type CHAR255
-      !E_ID_ROTA_ADM type ZDE_ID_ROTA_ADM .
-  methods XML_CONSULTA_TRANSPORTADOR
-    importing
-      !I_CHAVE type CHAR32
-      !I_CONSULTA_RNTRC type ZDE_CONSULTA_RNTRC
-    returning
-      value(E_XML) type STRING .
-  methods LER_XML_CONSULTAR_ARQ_COBRANCA
-    importing
-      !I_XML type STRING
-    exporting
-      !E_MSG type CHAR255
-      value(R_LINKARQUIVO) type STRING
-      value(R_LINKARQUIVO_PEDAGIO) type STRING
-      value(R_CONTENT_ARQUIVO) type STRING
-      value(R_CONTENT_ARQUIVO_PEDAGIO) type STRING .
-  methods LER_XML_CONSULTAR_ARQ_CONFERE
-    importing
-      !I_XML type STRING
-    exporting
-      !E_MSG type CHAR255
-      !E_CODIGO type STRING
-    returning
-      value(R_LINKARQUIVO) type STRING .
-  methods LER_XML_SITUACAO_TRANSPORTADOR
-    importing
-      !I_XML type STRING
-    returning
-      value(E_ZLEST0135) type ZLEST0135 .
-private section.
+    METHODS xml_atualizar_rota
+    IMPORTING
+      !i_chave TYPE char32
+      !i_bukrs TYPE bukrs
+      !i_branch TYPE j_1bbranc_
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS xml_consultar_rota
+    IMPORTING
+      !i_chave TYPE char32
+      !i_zlest0101 TYPE zlest0101
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS xml_criar_rota
+    IMPORTING
+      !i_chave TYPE char32
+      !i_zlest0101 TYPE zlest0101
+      !i_zlest0107 TYPE zlest0107_t
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS ler_xml_atualizar_rota
+    IMPORTING
+      !i_xml TYPE string
+    EXPORTING
+      !e_msg TYPE char255
+      !e_rotas TYPE zlest0101_t
+      !e_pracas TYPE zlest0102_t .
+    METHODS ler_xml_consultar_rota
+    IMPORTING
+      !i_xml TYPE string
+    EXPORTING
+      !e_rotas TYPE zlest0101_t
+      !e_pracas TYPE zlest0102_t
+      !e_msg TYPE char255 .
+    METHODS ler_xml_criar_rota
+    IMPORTING
+      !i_xml TYPE string
+    EXPORTING
+      !e_msg TYPE char255
+      !e_id_rota_adm TYPE zde_id_rota_adm .
+    METHODS xml_consulta_transportador
+    IMPORTING
+      !i_chave TYPE char32
+      !i_consulta_rntrc TYPE zde_consulta_rntrc
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS ler_xml_consultar_arq_cobranca
+    IMPORTING
+      !i_xml TYPE string
+    EXPORTING
+      !e_msg TYPE char255
+      VALUE(r_linkarquivo) TYPE string
+      VALUE(r_linkarquivo_pedagio) TYPE string
+      VALUE(r_content_arquivo) TYPE string
+      VALUE(r_content_arquivo_pedagio) TYPE string .
+    METHODS ler_xml_consultar_arq_confere
+    IMPORTING
+      !i_xml TYPE string
+    EXPORTING
+      !e_msg TYPE char255
+      !e_codigo TYPE string
+    RETURNING
+      VALUE(r_linkarquivo) TYPE string .
+    METHODS ler_xml_situacao_transportador
+    IMPORTING
+      !i_xml TYPE string
+    RETURNING
+      VALUE(e_zlest0135) TYPE zlest0135 .
+  PRIVATE SECTION.
 
-  methods LER_XML_STATUS_PARCEIRO
-    importing
-      !I_XML type STRING
-    returning
-      value(E_ZLEST0135) type ZLEST0135 .
+    METHODS ler_xml_status_parceiro
+    IMPORTING
+      !i_xml TYPE string
+    RETURNING
+      VALUE(e_zlest0135) TYPE zlest0135 .
 *"* private components of class ZCL_WEBSERVICE_TIPCARD
 *"* do not include other source files here!!!
 ENDCLASS.
 
 
 
-CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
+CLASS zcl_webservice_tipcard IMPLEMENTATION.
 
 
   METHOD atualizar_rota.
@@ -746,18 +746,18 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD ATUALIZAR_VALORES.
+  METHOD atualizar_valores.
 *****************
 *  Descrição: Método responsavel por atualizar os novos valores para o pedágio e sua data de vigencia.
 *  Data: 05.05.2014 14:43:10
 *****************
 
-    DATA: OBJ_ZCL_ROTA_DB TYPE REF TO ZCL_ROTA_DB.
+    DATA: obj_zcl_rota_db TYPE REF TO zcl_rota_db.
 
-    FREE OBJ_ZCL_ROTA_DB.
+    FREE obj_zcl_rota_db.
 
-    CREATE OBJECT OBJ_ZCL_ROTA_DB.
-    OBJ_ZCL_ROTA_DB->SELECIONA_NOVOS( I_GRUPO = I_GRUPO ).
+    CREATE OBJECT obj_zcl_rota_db.
+    obj_zcl_rota_db->seleciona_novos( i_grupo = i_grupo ).
 
   ENDMETHOD.
 
@@ -892,132 +892,132 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD BUSCAR_ROTAS.
+  METHOD buscar_rotas.
 
-    CONSTANTS: VAR_SET_CONTRATANTE TYPE SETNAMENEW VALUE 'MAGGI_PEDAGIO_AG_PROP'. "Constante para o SET Agentes Proprio.
+    CONSTANTS: var_set_contratante TYPE setnamenew VALUE 'MAGGI_PEDAGIO_AG_PROP'. "Constante para o SET Agentes Proprio.
 
-    DATA: GT_SETLEAF TYPE TABLE OF SETLEAF, "Internal Table para o SET
-          GW_SETLEAF TYPE SETLEAF. "Work Area para o SET
+    DATA: gt_setleaf TYPE TABLE OF setleaf, "Internal Table para o SET
+          gw_setleaf TYPE setleaf. "Work Area para o SET
 
-    DATA: GW_XML      TYPE STRING, "String para guardar informações do XML
-          GW_XML_ROTA TYPE STRING. "String para guardar informações do XML da Rota.
+    DATA: gw_xml      TYPE string, "String para guardar informações do XML
+          gw_xml_rota TYPE string. "String para guardar informações do XML da Rota.
 
-    DATA: VAR_CHAVE TYPE C LENGTH 32, "Variavel para guardar a CHAVE
-          VAR_MSG   TYPE STRING, "Variavel para mostrar a Mensagem texto da exception.
-          VAR_HTTP  TYPE REF TO IF_HTTP_CLIENT. "Interface HTTP Client
+    DATA: var_chave TYPE c LENGTH 32, "Variavel para guardar a CHAVE
+          var_msg   TYPE string, "Variavel para mostrar a Mensagem texto da exception.
+          var_http  TYPE REF TO if_http_client. "Interface HTTP Client
 
-    DATA: CX_EXCEPTION TYPE REF TO ZESCX_WEBSERVICE. "Referencia para a Classe de Exception.
+    DATA: cx_exception TYPE REF TO zescx_webservice. "Referencia para a Classe de Exception.
 
     "Limpar tabela internal e work area.
-    REFRESH: GT_SETLEAF.
-    CLEAR: GW_SETLEAF.
+    REFRESH: gt_setleaf.
+    CLEAR: gw_setleaf.
 
     "Selecionar o SET para o Agente Proprio.
-    SELECT * FROM SETLEAF
-      INTO TABLE GT_SETLEAF
-    WHERE SETNAME EQ VAR_SET_CONTRATANTE.
+    SELECT * FROM setleaf
+      INTO TABLE gt_setleaf
+    WHERE setname EQ var_set_contratante.
 
-    IF ( SY-SUBRC EQ 0 ).
+    IF ( sy-subrc EQ 0 ).
 
-      LOOP AT GT_SETLEAF INTO GW_SETLEAF.
+      LOOP AT gt_setleaf INTO gw_setleaf.
 
         TRY .
 
-            VAR_CHAVE = ME->CHAVE_SEGURANCA( I_GRUPO = I_GRUPO ). "Recuperar a Chave de Segurança.
+            var_chave = me->chave_seguranca( i_grupo = i_grupo ). "Recuperar a Chave de Segurança.
 
-          CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-            VAR_MSG  = CX_EXCEPTION->GET_TEXT( ).
-            MESSAGE E007(ZWEBSERVICE) WITH VAR_MSG.
+          CATCH zescx_webservice INTO cx_exception .
+            var_msg  = cx_exception->get_text( ).
+            MESSAGE e007(zwebservice) WITH var_msg.
         ENDTRY.
 
         "Caso a chave não seja encontrada o loop deve continuar.
-        IF ( VAR_CHAVE IS INITIAL ).
-          CLEAR: GW_SETLEAF.
+        IF ( var_chave IS INITIAL ).
+          CLEAR: gw_setleaf.
           CONTINUE.
         ELSE.
 
           "Chama o Método XML_ATUALIZ_ROTA onde é feito a montagem do arquivo
           "XML e para que possamos enviar para a TIPCARD e consultar toda as
           "rotas que precisam ser atualizadas referente ao CNPJ do Contratante.
-          GW_XML = XML_ATUALIZA_ROTA( I_CHAVE = VAR_CHAVE
-                                      I_CNPJCONTRATANTE = GW_SETLEAF-VALFROM
+          gw_xml = xml_atualiza_rota( i_chave = var_chave
+                                      i_cnpjcontratante = gw_setleaf-valfrom
                                     ).
 
           TRY .
 
               "Atribui o serviço que precisa ser consultado.
               "PE = Pedagio.
-              ME->SET_SERVICO( EXPORTING I_SERVICO = 'PE' ).
+              me->set_servico( EXPORTING i_servico = 'PE' ).
 
-            CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-              VAR_MSG  = CX_EXCEPTION->GET_TEXT( ).
-              MESSAGE E007(ZWEBSERVICE) WITH VAR_MSG.
+            CATCH zescx_webservice INTO cx_exception .
+              var_msg  = cx_exception->get_text( ).
+              MESSAGE e007(zwebservice) WITH var_msg.
           ENDTRY.
 
           "Atribui o Tipo de Serviço
           "A = atualização.
-          ME->SET_TIPO( EXPORTING I_TIPO = 'A').
+          me->set_tipo( EXPORTING i_tipo = 'A').
 
           TRY .
 
               "Atribui as Informações do HTTP Client para consultar o WebService.
-              VAR_HTTP = ME->URL( ).
+              var_http = me->url( ).
 
 
-            CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-              VAR_MSG  = CX_EXCEPTION->GET_TEXT( ).
-              MESSAGE E007(ZWEBSERVICE) WITH VAR_MSG.
+            CATCH zescx_webservice INTO cx_exception .
+              var_msg  = cx_exception->get_text( ).
+              MESSAGE e007(zwebservice) WITH var_msg.
           ENDTRY.
 
-          ME->ZESIF_WEBSERVICE~ABRIR_CONEXAO( VAR_HTTP ).
+          me->zesif_webservice~abrir_conexao( var_http ).
 
         ENDIF.
 
         "Envia para Consultar a rota com as informações preenchidas acima.
         "O retorno é de um arquivo XML com todas as rotas que precisam ser atualizadas.
-        GW_XML_ROTA = ME->ZESIF_WEBSERVICE~CONSULTAR( I_HTTP = VAR_HTTP
-                                                    I_XML  = GW_XML
+        gw_xml_rota = me->zesif_webservice~consultar( i_http = var_http
+                                                    i_xml  = gw_xml
                                                    ).
 
-        ME->LER_XML_ROTAS( I_GRUPO = I_GRUPO I_XML = GW_XML_ROTA ).
+        me->ler_xml_rotas( i_grupo = i_grupo i_xml = gw_xml_rota ).
 
-        CLEAR: GW_SETLEAF, GW_XML, GW_XML_ROTA.
-        CLEAR: VAR_CHAVE, VAR_HTTP, VAR_MSG.
+        CLEAR: gw_setleaf, gw_xml, gw_xml_rota.
+        CLEAR: var_chave, var_http, var_msg.
       ENDLOOP.
 
     ELSE.
       "Quando não existir parametrização no SET para o contratante a mensagem abaixo devera
       "ser exibida.
-      MESSAGE E007(ZWEBSERVICE) WITH 'Nenhum contratante foi cadastrado no SET' 'MAGGI_PEDAGIO_AG_PROP'.
+      MESSAGE e007(zwebservice) WITH 'Nenhum contratante foi cadastrado no SET' 'MAGGI_PEDAGIO_AG_PROP'.
     ENDIF.
   ENDMETHOD.
 
 
-  METHOD CHAVE_SEGURANCA.
+  METHOD chave_seguranca.
 *****************
 *  Descrição: Método para retornar a chave de Segurança da Tipcard.
 *  Data: 07.04.2014 14:09:41
 *  Developer: Victor Hugo Souza Nunes
 *****************
 
-    DATA: GW_ZLEST0086 TYPE ZLEST0086, "Controle da Chave de Autenticação TIPCARD
-          CALC_HORA    TYPE I,         "Variavel para calcular a hora.
-          VAR_HTTP     TYPE REF TO IF_HTTP_CLIENT,
-          CX_EXCEPTION TYPE REF TO ZESCX_WEBSERVICE, "Classe da Exception
-          MSG          TYPE STRING. "String de Mensagem.
+    DATA: gw_zlest0086 TYPE zlest0086, "Controle da Chave de Autenticação TIPCARD
+          calc_hora    TYPE i,         "Variavel para calcular a hora.
+          var_http     TYPE REF TO if_http_client,
+          cx_exception TYPE REF TO zescx_webservice, "Classe da Exception
+          msg          TYPE string. "String de Mensagem.
 
-    CLEAR: GW_ZLEST0086, CALC_HORA.
+    CLEAR: gw_zlest0086, calc_hora.
 
     "Selecionar na tabela de Controle de Chave a chave atual.
-    SELECT SINGLE * INTO GW_ZLEST0086
-      FROM ZLEST0086
-     WHERE DS_GRUPO EQ I_GRUPO.
+    SELECT SINGLE * INTO gw_zlest0086
+      FROM zlest0086
+     WHERE ds_grupo EQ i_grupo.
 
-    IF ( SY-SUBRC EQ 0 ).
+    IF ( sy-subrc EQ 0 ).
 
-      CALC_HORA = ( ( SY-UZEIT - GW_ZLEST0086-HORA ) / 60 ). "Transformar a hora cadastrada em minutos.
-      IF ( CALC_HORA < 0 ).
-        CALC_HORA = CALC_HORA * -1.
+      calc_hora = ( ( sy-uzeit - gw_zlest0086-hora ) / 60 ). "Transformar a hora cadastrada em minutos.
+      IF ( calc_hora < 0 ).
+        calc_hora = calc_hora * -1.
       ENDIF.
 
 
@@ -1032,7 +1032,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
         "Atribui o serviço que precisa ser consultado.
         "PE = Pedagio.
         "TRY .
-        ME->SET_SERVICO( I_SERVICO = 'VI' ).
+        me->set_servico( i_servico = 'VI' ).
         "  CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION.
         "    MSG = CX_EXCEPTION->GET_TEXT( ).
         "    MESSAGE E007(ZWEBSERVICE) DISPLAY LIKE 'W' WITH MSG.
@@ -1040,17 +1040,17 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
         "Atribui o Tipo de Serviço
         "A = atualização.
-        ME->SET_TIPO( I_TIPO = 'C').
+        me->set_tipo( i_tipo = 'C').
 
-        VAR_HTTP = ME->URL( ). "Recupear qual é a URL que é preciso atribuir ao HEADER do WebService.
+        var_http = me->url( ). "Recupear qual é a URL que é preciso atribuir ao HEADER do WebService.
 
         "Recuperar a Chave de Acesso cas não tenha registro na tabela de controle
         "ou o seu tempo de autorização esteja ultrapassado.
 
-        E_CHAVE = ME->AUTENTICACAO(
-                                   I_HTTP      = VAR_HTTP
-                                   I_OPERADORA = 'TIP'
-                                   I_GRUPO     = I_GRUPO
+        e_chave = me->autenticacao(
+                                   i_http      = var_http
+                                   i_operadora = 'TIP'
+                                   i_grupo     = i_grupo
                                    ).
 
 
@@ -1060,7 +1060,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
         " ENDTRY.
       ELSE.
         "Retornar a chave que esta cadastrada caso a mesma ainda seja menor que 50 minutos.
-        E_CHAVE = GW_ZLEST0086-CHAVE.
+        e_chave = gw_zlest0086-chave.
       ENDIF.
     ELSE.
       "RAISE EXCEPTION TYPE ZESCX_WEBSERVICE EXPORTING TEXTID = ZESCX_WEBSERVICE=>AUTENTICACAO_NAO_ENCONTRADO.
@@ -1068,7 +1068,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
       "Atribui o serviço que precisa ser consultado.
       "PE = Pedagio.
       "TRY .
-      ME->SET_SERVICO( I_SERVICO = 'VI' ).
+      me->set_servico( i_servico = 'VI' ).
       "  CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION.
       "    MSG = CX_EXCEPTION->GET_TEXT( ).
       "    MESSAGE E007(ZWEBSERVICE) DISPLAY LIKE 'W' WITH MSG.
@@ -1076,14 +1076,14 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
       "Atribui o Tipo de Serviço
       "A = atualização.
-      ME->SET_TIPO( I_TIPO = 'C').
+      me->set_tipo( i_tipo = 'C').
 
-      VAR_HTTP = ME->URL( ). "Recupear qual é a URL que é preciso atribuir ao HEADER do WebService.
+      var_http = me->url( ). "Recupear qual é a URL que é preciso atribuir ao HEADER do WebService.
 
       "Recuperar a Chave de Acesso cas não tenha registro na tabela de controle
       "ou o seu tempo de autorização esteja ultrapassado.
 
-      E_CHAVE = ME->AUTENTICACAO( I_HTTP = VAR_HTTP I_OPERADORA = 'TIP' I_GRUPO = I_GRUPO ).
+      e_chave = me->autenticacao( i_http = var_http i_operadora = 'TIP' i_grupo = i_grupo ).
 
       "   CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION.
       "     MSG = CX_EXCEPTION->GET_TEXT( ).
@@ -1172,73 +1172,73 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD CONSULTAR_ARQUIVO_CONFERENCIA.
+  METHOD consultar_arquivo_conferencia.
 
-    DATA: CX_EXCEPTION TYPE REF TO ZESCX_WEBSERVICE.
+    DATA: cx_exception TYPE REF TO zescx_webservice.
 
-    CLEAR: R_LINKARQUIVO, E_MSG.
+    CLEAR: r_linkarquivo, e_msg.
 
-    SELECT SINGLE * INTO @DATA(WA_ZLEST0160)
-      FROM ZLEST0160
-     WHERE BUKRS   EQ @I_BUKRS
-       AND BRANCH  EQ @I_BRANCH.
+    SELECT SINGLE * INTO @DATA(wa_zlest0160)
+      FROM zlest0160
+     WHERE bukrs   EQ @i_bukrs
+       AND branch  EQ @i_branch.
 
     TRY .
-        DATA(E_CHAVE) = ME->CHAVE_SEGURANCA( I_GRUPO = WA_ZLEST0160-DS_GRUPO ).
-      CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-        DATA(LC_MSG)  = CX_EXCEPTION->GET_TEXT( ).
-        MESSAGE E007(ZWEBSERVICE) WITH LC_MSG.
+        DATA(e_chave) = me->chave_seguranca( i_grupo = wa_zlest0160-ds_grupo ).
+      CATCH zescx_webservice INTO cx_exception .
+        DATA(lc_msg)  = cx_exception->get_text( ).
+        MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    DATA(LC_XML) = ME->XML_CONSULTAR_ARQ_CONFERENCIA( I_CHAVE = E_CHAVE I_BUKRS = I_BUKRS I_BRANCH = I_BRANCH I_DT_INICIAL = I_DT_INICIAL I_DT_FINAL = I_DT_FINAL ).
+    DATA(lc_xml) = me->xml_consultar_arq_conferencia( i_chave = e_chave i_bukrs = i_bukrs i_branch = i_branch i_dt_inicial = i_dt_inicial i_dt_final = i_dt_final ).
 
     TRY .
         "Atribui o serviço que precisa ser consultado.
         "RC - Consultar Rota.
-        ME->SET_SERVICO( EXPORTING I_SERVICO = 'CA' ).
+        me->set_servico( EXPORTING i_servico = 'CA' ).
 
-      CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-        LC_MSG  = CX_EXCEPTION->GET_TEXT( ).
-        MESSAGE E007(ZWEBSERVICE) WITH LC_MSG.
+      CATCH zescx_webservice INTO cx_exception .
+        lc_msg  = cx_exception->get_text( ).
+        MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    ME->SET_TIPO( EXPORTING I_TIPO = 'Q').
+    me->set_tipo( EXPORTING i_tipo = 'Q').
 
     TRY .
         "Atribui as Informações do HTTP Client para consultar o WebService.
-        DATA(LC_HTTP) = ME->URL( ).
-      CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-        LC_MSG  = CX_EXCEPTION->GET_TEXT( ).
-        MESSAGE E007(ZWEBSERVICE) WITH LC_MSG.
+        DATA(lc_http) = me->url( ).
+      CATCH zescx_webservice INTO cx_exception .
+        lc_msg  = cx_exception->get_text( ).
+        MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    ME->ZESIF_WEBSERVICE~ABRIR_CONEXAO( LC_HTTP ).
+    me->zesif_webservice~abrir_conexao( lc_http ).
 
     "Envia para Criar Rota.
     "O retorno é de um arquivo XML com o Código da Rota Administradora.
-    CALL METHOD ME->ZESIF_WEBSERVICE~CONSULTAR
+    CALL METHOD me->zesif_webservice~consultar
       EXPORTING
-        I_HTTP                     = LC_HTTP
-        I_XML                      = LC_XML
+        i_http                     = lc_http
+        i_xml                      = lc_xml
       RECEIVING
-        E_RESULTADO                = DATA(LC_MSG_ADM)
+        e_resultado                = DATA(lc_msg_adm)
       EXCEPTIONS
-        HTTP_COMMUNICATION_FAILURE = 1
-        HTTP_INVALID_STATE         = 2
-        HTTP_PROCESSING_FAILED     = 3
-        HTTP_INVALID_TIMEOUT       = 4
+        http_communication_failure = 1
+        http_invalid_state         = 2
+        http_processing_failed     = 3
+        http_invalid_timeout       = 4
         OTHERS                     = 5.
 
-    IF SY-SUBRC IS NOT INITIAL.
-      MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4 RAISING ZWEBSERVICE.
+    IF sy-subrc IS NOT INITIAL.
+      MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4 RAISING zwebservice.
     ENDIF.
 
-    CLEAR: E_MSG.
+    CLEAR: e_msg.
 
-    R_LINKARQUIVO = ME->LER_XML_CONSULTAR_ARQ_CONFERE( EXPORTING I_XML = LC_MSG_ADM IMPORTING E_MSG = E_MSG ).
+    r_linkarquivo = me->ler_xml_consultar_arq_confere( EXPORTING i_xml = lc_msg_adm IMPORTING e_msg = e_msg ).
 
-    IF E_MSG NE 'SUCESSO'.
-      MESSAGE E_MSG TYPE 'E' RAISING ZWEBSERVICE.
+    IF e_msg NE 'SUCESSO'.
+      MESSAGE e_msg TYPE 'E' RAISING zwebservice.
     ENDIF.
 
   ENDMETHOD.
@@ -2500,67 +2500,67 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD LER_XML_CONSULTAR_ARQ_CONFERE.
+  METHOD ler_xml_consultar_arq_confere.
 
-    DATA: IF_XML           TYPE REF TO IF_IXML,
-          IF_DOCUMENT      TYPE REF TO IF_IXML_DOCUMENT,
-          IF_STREAMFACTORY TYPE REF TO IF_IXML_STREAM_FACTORY,
-          IF_STREAM        TYPE REF TO IF_IXML_ISTREAM,
-          IF_XML_PARSER    TYPE REF TO IF_IXML_PARSER,
-          IF_NODE          TYPE REF TO IF_IXML_NODE,
-          ITERATOR         TYPE REF TO IF_IXML_NODE_ITERATOR.
+    DATA: if_xml           TYPE REF TO if_ixml,
+          if_document      TYPE REF TO if_ixml_document,
+          if_streamfactory TYPE REF TO if_ixml_stream_factory,
+          if_stream        TYPE REF TO if_ixml_istream,
+          if_xml_parser    TYPE REF TO if_ixml_parser,
+          if_node          TYPE REF TO if_ixml_node,
+          iterator         TYPE REF TO if_ixml_node_iterator.
 
-    DATA: TAG_NAME      TYPE STRING,
-          VALOR_DOM     TYPE STRING,
-          FILHO         TYPE REF TO IF_IXML_NODE_LIST,
-          ITERATOR2     TYPE REF TO IF_IXML_NODE_ITERATOR,
-          IF_NODE_FILHO TYPE REF TO IF_IXML_NODE.
+    DATA: tag_name      TYPE string,
+          valor_dom     TYPE string,
+          filho         TYPE REF TO if_ixml_node_list,
+          iterator2     TYPE REF TO if_ixml_node_iterator,
+          if_node_filho TYPE REF TO if_ixml_node.
 
-    CLEAR: R_LINKARQUIVO.
+    CLEAR: r_linkarquivo.
 
-    IF_XML           = CL_IXML=>CREATE( ).
-    IF_DOCUMENT      = IF_XML->CREATE_DOCUMENT( ).
-    IF_STREAMFACTORY = IF_XML->CREATE_STREAM_FACTORY( ).
-    IF_STREAM        = IF_STREAMFACTORY->CREATE_ISTREAM_STRING( I_XML ).
-    IF_XML_PARSER    = IF_XML->CREATE_PARSER(  STREAM_FACTORY = IF_STREAMFACTORY ISTREAM = IF_STREAM DOCUMENT = IF_DOCUMENT ).
-    IF_XML_PARSER->PARSE( ).
+    if_xml           = cl_ixml=>create( ).
+    if_document      = if_xml->create_document( ).
+    if_streamfactory = if_xml->create_stream_factory( ).
+    if_stream        = if_streamfactory->create_istream_string( i_xml ).
+    if_xml_parser    = if_xml->create_parser(  stream_factory = if_streamfactory istream = if_stream document = if_document ).
+    if_xml_parser->parse( ).
 
-    IF_NODE ?= IF_DOCUMENT->GET_ROOT_ELEMENT( ).
+    if_node ?= if_document->get_root_element( ).
 
-    IF NOT ( IF_NODE IS INITIAL ).
+    IF NOT ( if_node IS INITIAL ).
 
-      ITERATOR = IF_NODE->CREATE_ITERATOR( ).
-      IF_NODE  = ITERATOR->GET_NEXT( ).
+      iterator = if_node->create_iterator( ).
+      if_node  = iterator->get_next( ).
 
-      WHILE NOT IF_NODE IS INITIAL.
-        CASE IF_NODE->GET_TYPE( ).
-          WHEN: IF_IXML_NODE=>CO_NODE_ELEMENT.
-            TAG_NAME = IF_NODE->GET_NAME( ).
+      WHILE NOT if_node IS INITIAL.
+        CASE if_node->get_type( ).
+          WHEN: if_ixml_node=>co_node_element.
+            tag_name = if_node->get_name( ).
 
-            CASE TAG_NAME.
+            CASE tag_name.
               WHEN 'respostaArquivoConferencia'.
-                FILHO         = IF_NODE->GET_CHILDREN( ).
-                ITERATOR2     = FILHO->CREATE_ITERATOR( ).
-                IF_NODE_FILHO = ITERATOR2->GET_NEXT( ).
+                filho         = if_node->get_children( ).
+                iterator2     = filho->create_iterator( ).
+                if_node_filho = iterator2->get_next( ).
 
-                WHILE NOT IF_NODE_FILHO IS INITIAL.
-                  TAG_NAME  = IF_NODE_FILHO->GET_NAME( ).
-                  VALOR_DOM = IF_NODE_FILHO->GET_VALUE( ).
-                  CASE TAG_NAME.
+                WHILE NOT if_node_filho IS INITIAL.
+                  tag_name  = if_node_filho->get_name( ).
+                  valor_dom = if_node_filho->get_value( ).
+                  CASE tag_name.
                     WHEN 'codigoMensagem'.
-                      E_CODIGO = VALOR_DOM.
+                      e_codigo = valor_dom.
                     WHEN 'mensagem'.
-                      TRANSLATE VALOR_DOM TO UPPER CASE.
-                      E_MSG = VALOR_DOM.
+                      TRANSLATE valor_dom TO UPPER CASE.
+                      e_msg = valor_dom.
                     WHEN 'linkArquivo'.
-                      R_LINKARQUIVO = VALOR_DOM.
+                      r_linkarquivo = valor_dom.
                   ENDCASE.
-                  IF_NODE_FILHO = ITERATOR2->GET_NEXT( ).
+                  if_node_filho = iterator2->get_next( ).
                 ENDWHILE.
             ENDCASE.
         ENDCASE.
 
-        IF_NODE = ITERATOR->GET_NEXT( ).
+        if_node = iterator->get_next( ).
       ENDWHILE.
 
     ENDIF.
@@ -2915,269 +2915,269 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD LER_XML_CRIAR_ROTA.
+  METHOD ler_xml_criar_rota.
 
-    DATA: XML_RET    TYPE REF TO CL_XML_DOCUMENT,
-          XML_NODE   TYPE REF TO IF_IXML_NODE,
-          V_TAMANHOI TYPE I,
-          V_VALOR    TYPE STRING.
+    DATA: xml_ret    TYPE REF TO cl_xml_document,
+          xml_node   TYPE REF TO if_ixml_node,
+          v_tamanhoi TYPE i,
+          v_valor    TYPE string.
 
-    CREATE OBJECT XML_RET.
+    CREATE OBJECT xml_ret.
 
-    V_TAMANHOI = XML_RET->PARSE_STRING( I_XML ).
+    v_tamanhoi = xml_ret->parse_string( i_xml ).
 
-    CALL METHOD XML_RET->FIND_NODE
+    CALL METHOD xml_ret->find_node
       EXPORTING
-        NAME = 'msg'
+        name = 'msg'
       RECEIVING
-        NODE = XML_NODE.
+        node = xml_node.
 
-    IF ( SY-SUBRC IS INITIAL ) AND ( NOT XML_NODE IS INITIAL ).
-      CALL METHOD XML_NODE->GET_VALUE
+    IF ( sy-subrc IS INITIAL ) AND ( NOT xml_node IS INITIAL ).
+      CALL METHOD xml_node->get_value
         RECEIVING
-          RVAL = V_VALOR.
-      MOVE V_VALOR TO E_MSG.
+          rval = v_valor.
+      MOVE v_valor TO e_msg.
     ENDIF.
 
-    CALL METHOD XML_RET->FIND_NODE
+    CALL METHOD xml_ret->find_node
       EXPORTING
-        NAME = 'codigoRota'
+        name = 'codigoRota'
       RECEIVING
-        NODE = XML_NODE.
+        node = xml_node.
 
-    IF ( SY-SUBRC IS INITIAL ) AND ( NOT XML_NODE IS INITIAL ).
-      CALL METHOD XML_NODE->GET_VALUE
+    IF ( sy-subrc IS INITIAL ) AND ( NOT xml_node IS INITIAL ).
+      CALL METHOD xml_node->get_value
         RECEIVING
-          RVAL = V_VALOR.
-      MOVE V_VALOR TO E_ID_ROTA_ADM.
+          rval = v_valor.
+      MOVE v_valor TO e_id_rota_adm.
     ENDIF.
 
   ENDMETHOD.
 
 
-  METHOD LER_XML_ROTAS.
+  METHOD ler_xml_rotas.
 
-    TYPES: BEGIN OF TY_ROTAS,
-             BUKRS         TYPE ZLEST0084-BUKRS,
-             BRANCH        TYPE ZLEST0084-BRANCH,
-             ID_ROTA       TYPE ZLEST0084-ID_ROTA,
-             CAT_VEICULO   TYPE ZLEST0084-CAT_VEICULO,
-             DT_VIGENCIA   TYPE ZLEST0084-DT_VIGENCIA,
-             MUNIC_ORIGEM  TYPE ZLEST0084-MUNIC_ORIGEM,
-             MUNIC_DESTINO TYPE ZLEST0084-MUNIC_DESTINO,
-             DISTANCIA     TYPE ZLEST0084-DISTANCIA,
-             VLR_PEDAGIO   TYPE ZLEST0084-VLR_PEDAGIO,
-             DESCR_ROTA    TYPE ZLEST0084-DESCR_ROTA,
-           END OF TY_ROTAS.
+    TYPES: BEGIN OF ty_rotas,
+             bukrs         TYPE zlest0084-bukrs,
+             branch        TYPE zlest0084-branch,
+             id_rota       TYPE zlest0084-id_rota,
+             cat_veiculo   TYPE zlest0084-cat_veiculo,
+             dt_vigencia   TYPE zlest0084-dt_vigencia,
+             munic_origem  TYPE zlest0084-munic_origem,
+             munic_destino TYPE zlest0084-munic_destino,
+             distancia     TYPE zlest0084-distancia,
+             vlr_pedagio   TYPE zlest0084-vlr_pedagio,
+             descr_rota    TYPE zlest0084-descr_rota,
+           END OF ty_rotas.
 
-    DATA: IF_XML           TYPE REF TO IF_IXML,
-          IF_STREAMFACTORY TYPE REF TO IF_IXML_STREAM_FACTORY,
-          IF_STREAM        TYPE REF TO IF_IXML_ISTREAM,
-          IF_XML_PARSER    TYPE REF TO IF_IXML_PARSER,
-          IF_DOCUMENT      TYPE REF TO IF_IXML_DOCUMENT,
+    DATA: if_xml           TYPE REF TO if_ixml,
+          if_streamfactory TYPE REF TO if_ixml_stream_factory,
+          if_stream        TYPE REF TO if_ixml_istream,
+          if_xml_parser    TYPE REF TO if_ixml_parser,
+          if_document      TYPE REF TO if_ixml_document,
 
-          IF_NODE          TYPE REF TO IF_IXML_NODE,
-          IF_MAP           TYPE REF TO IF_IXML_NAMED_NODE_MAP,
-          IF_ATTR          TYPE REF TO IF_IXML_NODE,
+          if_node          TYPE REF TO if_ixml_node,
+          if_map           TYPE REF TO if_ixml_named_node_map,
+          if_attr          TYPE REF TO if_ixml_node,
 
-          ITERATOR         TYPE REF TO IF_IXML_NODE_ITERATOR,
-          TAG_NAME         TYPE STRING,
-          NAME_DOM         TYPE STRING,
-          COUNT_DOM        TYPE I,
-          INDEX_DOM        TYPE I,
-          PREFIX_DOM       TYPE STRING,
-          VALOR_DOM        TYPE STRING,
+          iterator         TYPE REF TO if_ixml_node_iterator,
+          tag_name         TYPE string,
+          name_dom         TYPE string,
+          count_dom        TYPE i,
+          index_dom        TYPE i,
+          prefix_dom       TYPE string,
+          valor_dom        TYPE string,
 
-          NODE_FILHO       TYPE REF TO IF_IXML_NODE,
-          VALOR_FILHO      TYPE STRING.
-
-
-    DATA: GT_ROTAS     TYPE TABLE OF TY_ROTAS,
-          GW_ROTAS     TYPE TY_ROTAS,
-          GW_ZLEST0084 TYPE ZLEST0084.
-
-    DATA: OBJ_ZCL_ROTA    TYPE REF TO ZCL_ROTA,
-          OBJ_ZCL_ROTA_DB TYPE REF TO ZCL_ROTA_DB.
+          node_filho       TYPE REF TO if_ixml_node,
+          valor_filho      TYPE string.
 
 
+    DATA: gt_rotas     TYPE TABLE OF ty_rotas,
+          gw_rotas     TYPE ty_rotas,
+          gw_zlest0084 TYPE zlest0084.
 
-    FIELD-SYMBOLS: <FS_ROTAS> TYPE TY_ROTAS.
-
-    SELECT SINGLE * INTO @DATA(WA_ZLEST0159)
-      FROM ZLEST0159
-     WHERE DS_GRUPO EQ @I_GRUPO.
-
-    IF_XML           = CL_IXML=>CREATE( ).
-    IF_DOCUMENT      = IF_XML->CREATE_DOCUMENT( ).
-    IF_STREAMFACTORY = IF_XML->CREATE_STREAM_FACTORY( ).
-    IF_STREAM        = IF_STREAMFACTORY->CREATE_ISTREAM_STRING( I_XML ).
-
-    IF_XML_PARSER    = IF_XML->CREATE_PARSER(  STREAM_FACTORY = IF_STREAMFACTORY
-                                               ISTREAM        = IF_STREAM
-                                               DOCUMENT       = IF_DOCUMENT ).
-
-    IF_XML_PARSER->PARSE( ).
-
-    IF_NODE ?= IF_DOCUMENT->GET_ROOT_ELEMENT( ).
-
-    IF NOT ( IF_NODE IS INITIAL ).
-
-      ITERATOR = IF_NODE->CREATE_ITERATOR( ).
-      IF_NODE = ITERATOR->GET_NEXT( ).
-
-      WHILE NOT IF_NODE IS INITIAL.
+    DATA: obj_zcl_rota    TYPE REF TO zcl_rota,
+          obj_zcl_rota_db TYPE REF TO zcl_rota_db.
 
 
-        CASE IF_NODE->GET_TYPE( ).
 
-          WHEN: IF_IXML_NODE=>CO_NODE_ELEMENT.
+    FIELD-SYMBOLS: <fs_rotas> TYPE ty_rotas.
 
-            TAG_NAME = IF_NODE->GET_NAME( ).
-            IF_MAP   = IF_NODE->GET_ATTRIBUTES( ).
+    SELECT SINGLE * INTO @DATA(wa_zlest0159)
+      FROM zlest0159
+     WHERE ds_grupo EQ @i_grupo.
 
-            IF NOT ( IF_MAP IS INITIAL ).
+    if_xml           = cl_ixml=>create( ).
+    if_document      = if_xml->create_document( ).
+    if_streamfactory = if_xml->create_stream_factory( ).
+    if_stream        = if_streamfactory->create_istream_string( i_xml ).
 
-              COUNT_DOM = IF_MAP->GET_LENGTH( ).
+    if_xml_parser    = if_xml->create_parser(  stream_factory = if_streamfactory
+                                               istream        = if_stream
+                                               document       = if_document ).
 
-              DO COUNT_DOM TIMES.
+    if_xml_parser->parse( ).
 
-                INDEX_DOM  = SY-INDEX - 1.
-                IF_ATTR    = IF_MAP->GET_ITEM( INDEX_DOM ).
-                NAME_DOM   = IF_ATTR->GET_NAME( ).
-                PREFIX_DOM = IF_ATTR->GET_NAMESPACE_PREFIX( ).
-                VALOR_DOM  = IF_ATTR->GET_VALUE( ).
+    if_node ?= if_document->get_root_element( ).
 
-                GW_ROTAS-ID_ROTA = VALOR_DOM.
+    IF NOT ( if_node IS INITIAL ).
 
-                IF NOT ( GW_ROTAS-ID_ROTA IS INITIAL ).
-                  APPEND GW_ROTAS TO GT_ROTAS.
+      iterator = if_node->create_iterator( ).
+      if_node = iterator->get_next( ).
+
+      WHILE NOT if_node IS INITIAL.
+
+
+        CASE if_node->get_type( ).
+
+          WHEN: if_ixml_node=>co_node_element.
+
+            tag_name = if_node->get_name( ).
+            if_map   = if_node->get_attributes( ).
+
+            IF NOT ( if_map IS INITIAL ).
+
+              count_dom = if_map->get_length( ).
+
+              DO count_dom TIMES.
+
+                index_dom  = sy-index - 1.
+                if_attr    = if_map->get_item( index_dom ).
+                name_dom   = if_attr->get_name( ).
+                prefix_dom = if_attr->get_namespace_prefix( ).
+                valor_dom  = if_attr->get_value( ).
+
+                gw_rotas-id_rota = valor_dom.
+
+                IF NOT ( gw_rotas-id_rota IS INITIAL ).
+                  APPEND gw_rotas TO gt_rotas.
                 ENDIF.
 
               ENDDO.
 
-              CASE TAG_NAME.
+              CASE tag_name.
                 WHEN: 'categoriaVeiculo'.
 
-                  IF NOT ( GW_ROTAS-ID_ROTA IS INITIAL ).
-                    LOOP AT GT_ROTAS ASSIGNING <FS_ROTAS> WHERE ID_ROTA EQ GW_ROTAS-ID_ROTA.
-                      <FS_ROTAS>-CAT_VEICULO = IF_NODE->GET_VALUE( ).
+                  IF NOT ( gw_rotas-id_rota IS INITIAL ).
+                    LOOP AT gt_rotas ASSIGNING <fs_rotas> WHERE id_rota EQ gw_rotas-id_rota.
+                      <fs_rotas>-cat_veiculo = if_node->get_value( ).
                     ENDLOOP.
-                    UNASSIGN <FS_ROTAS>.
+                    UNASSIGN <fs_rotas>.
                   ENDIF.
 
                 WHEN: 'valorPedagio'.
 
-                  IF NOT ( GW_ROTAS-ID_ROTA IS INITIAL ).
-                    LOOP AT GT_ROTAS ASSIGNING <FS_ROTAS> WHERE ID_ROTA EQ GW_ROTAS-ID_ROTA.
-                      <FS_ROTAS>-VLR_PEDAGIO = IF_NODE->GET_VALUE( ).
+                  IF NOT ( gw_rotas-id_rota IS INITIAL ).
+                    LOOP AT gt_rotas ASSIGNING <fs_rotas> WHERE id_rota EQ gw_rotas-id_rota.
+                      <fs_rotas>-vlr_pedagio = if_node->get_value( ).
                     ENDLOOP.
 
-                    UNASSIGN <FS_ROTAS>.
+                    UNASSIGN <fs_rotas>.
                   ENDIF.
 
 
                 WHEN: 'percurso'.
 
-                  IF NOT ( GW_ROTAS-ID_ROTA IS INITIAL ).
-                    LOOP AT GT_ROTAS ASSIGNING <FS_ROTAS> WHERE ID_ROTA EQ GW_ROTAS-ID_ROTA.
-                      <FS_ROTAS>-DESCR_ROTA = IF_NODE->GET_VALUE( ).
+                  IF NOT ( gw_rotas-id_rota IS INITIAL ).
+                    LOOP AT gt_rotas ASSIGNING <fs_rotas> WHERE id_rota EQ gw_rotas-id_rota.
+                      <fs_rotas>-descr_rota = if_node->get_value( ).
                     ENDLOOP.
-                    UNASSIGN <FS_ROTAS>.
+                    UNASSIGN <fs_rotas>.
                   ENDIF.
 
 
                 WHEN: 'distanciaPercurso'.
 
-                  IF NOT ( GW_ROTAS-ID_ROTA IS INITIAL ).
-                    LOOP AT GT_ROTAS ASSIGNING <FS_ROTAS> WHERE ID_ROTA EQ GW_ROTAS-ID_ROTA.
-                      <FS_ROTAS>-DISTANCIA = IF_NODE->GET_VALUE( ).
+                  IF NOT ( gw_rotas-id_rota IS INITIAL ).
+                    LOOP AT gt_rotas ASSIGNING <fs_rotas> WHERE id_rota EQ gw_rotas-id_rota.
+                      <fs_rotas>-distancia = if_node->get_value( ).
                     ENDLOOP.
                   ENDIF.
 
                 WHEN: 'inicioVigencia'.
 
-                  IF NOT ( GW_ROTAS-ID_ROTA IS INITIAL ).
-                    LOOP AT GT_ROTAS ASSIGNING <FS_ROTAS> WHERE ID_ROTA EQ GW_ROTAS-ID_ROTA.
-                      <FS_ROTAS>-DT_VIGENCIA = IF_NODE->GET_VALUE( ).
+                  IF NOT ( gw_rotas-id_rota IS INITIAL ).
+                    LOOP AT gt_rotas ASSIGNING <fs_rotas> WHERE id_rota EQ gw_rotas-id_rota.
+                      <fs_rotas>-dt_vigencia = if_node->get_value( ).
                     ENDLOOP.
-                    UNASSIGN <FS_ROTAS>.
+                    UNASSIGN <fs_rotas>.
                   ENDIF.
 
                 WHEN: 'municipios'.
 
-                  IF NOT ( GW_ROTAS-ID_ROTA IS INITIAL ).
+                  IF NOT ( gw_rotas-id_rota IS INITIAL ).
 
-                    NODE_FILHO    = IF_NODE->GET_FIRST_CHILD( ).
-                    VALOR_FILHO   = NODE_FILHO->GET_VALUE( ).
+                    node_filho    = if_node->get_first_child( ).
+                    valor_filho   = node_filho->get_value( ).
 
-                    LOOP AT GT_ROTAS ASSIGNING <FS_ROTAS> WHERE ID_ROTA EQ GW_ROTAS-ID_ROTA.
-                      <FS_ROTAS>-MUNIC_ORIGEM = VALOR_FILHO.
+                    LOOP AT gt_rotas ASSIGNING <fs_rotas> WHERE id_rota EQ gw_rotas-id_rota.
+                      <fs_rotas>-munic_origem = valor_filho.
                     ENDLOOP.
-                    UNASSIGN <FS_ROTAS>.
+                    UNASSIGN <fs_rotas>.
 
-                    CLEAR: NODE_FILHO, VALOR_FILHO.
+                    CLEAR: node_filho, valor_filho.
 
-                    NODE_FILHO  = IF_NODE->GET_LAST_CHILD( ).
-                    VALOR_FILHO = NODE_FILHO->GET_VALUE( ).
+                    node_filho  = if_node->get_last_child( ).
+                    valor_filho = node_filho->get_value( ).
 
-                    LOOP AT GT_ROTAS ASSIGNING <FS_ROTAS> WHERE ID_ROTA EQ GW_ROTAS-ID_ROTA.
-                      <FS_ROTAS>-MUNIC_DESTINO = VALOR_FILHO.
+                    LOOP AT gt_rotas ASSIGNING <fs_rotas> WHERE id_rota EQ gw_rotas-id_rota.
+                      <fs_rotas>-munic_destino = valor_filho.
                     ENDLOOP.
-                    UNASSIGN <FS_ROTAS>.
+                    UNASSIGN <fs_rotas>.
 
-                    CLEAR: VALOR_FILHO.
+                    CLEAR: valor_filho.
                   ENDIF.
               ENDCASE.
             ENDIF.
         ENDCASE.
 
-        IF_NODE = ITERATOR->GET_NEXT( ).
+        if_node = iterator->get_next( ).
       ENDWHILE.
     ENDIF.
 
-    IF NOT ( GT_ROTAS[] IS INITIAL ).
+    IF NOT ( gt_rotas[] IS INITIAL ).
 
-      LOOP AT GT_ROTAS INTO GW_ROTAS.
+      LOOP AT gt_rotas INTO gw_rotas.
 
-        FREE: OBJ_ZCL_ROTA,
-              OBJ_ZCL_ROTA_DB.
+        FREE: obj_zcl_rota,
+              obj_zcl_rota_db.
 
-        CREATE OBJECT: OBJ_ZCL_ROTA,
-                       OBJ_ZCL_ROTA_DB.
+        CREATE OBJECT: obj_zcl_rota,
+                       obj_zcl_rota_db.
 
-        SELECT SINGLE * FROM ZLEST0084 INTO GW_ZLEST0084 WHERE ID_ROTA     EQ GW_ROTAS-ID_ROTA
-                                                           AND CAT_VEICULO EQ GW_ROTAS-CAT_VEICULO
-                                                           AND BUKRS       EQ GW_ROTAS-BUKRS
-                                                           AND BRANCH      EQ GW_ROTAS-BRANCH.
-        CASE SY-SUBRC.
+        SELECT SINGLE * FROM zlest0084 INTO gw_zlest0084 WHERE id_rota     EQ gw_rotas-id_rota
+                                                           AND cat_veiculo EQ gw_rotas-cat_veiculo
+                                                           AND bukrs       EQ gw_rotas-bukrs
+                                                           AND branch      EQ gw_rotas-branch.
+        CASE sy-subrc.
           WHEN: 0.
 
-            OBJ_ZCL_ROTA->SET_BUKRS( WA_ZLEST0159-BUKRS ).
-            OBJ_ZCL_ROTA->SET_BRANCH( WA_ZLEST0159-BRANCH ).
-            OBJ_ZCL_ROTA->SET_ID_ROTA( GW_ROTAS-ID_ROTA ).
-            OBJ_ZCL_ROTA->SET_CAT_VEICULO( GW_ROTAS-CAT_VEICULO ).
-            OBJ_ZCL_ROTA->SET_DT_VIGENCIA( GW_ROTAS-DT_VIGENCIA ).
-            OBJ_ZCL_ROTA->SET_VLR_PEDAGIO( GW_ROTAS-VLR_PEDAGIO ).
-            OBJ_ZCL_ROTA->SET_DESCR_ROTA( GW_ROTAS-DESCR_ROTA ).
+            obj_zcl_rota->set_bukrs( wa_zlest0159-bukrs ).
+            obj_zcl_rota->set_branch( wa_zlest0159-branch ).
+            obj_zcl_rota->set_id_rota( gw_rotas-id_rota ).
+            obj_zcl_rota->set_cat_veiculo( gw_rotas-cat_veiculo ).
+            obj_zcl_rota->set_dt_vigencia( gw_rotas-dt_vigencia ).
+            obj_zcl_rota->set_vlr_pedagio( gw_rotas-vlr_pedagio ).
+            obj_zcl_rota->set_descr_rota( gw_rotas-descr_rota ).
 
             "Atualizar as Informações no Banco de Dados.
-            OBJ_ZCL_ROTA_DB->ZIF_ROTA_DB~ATUALIZAR( OBJ_ZCL_ROTA ).
+            obj_zcl_rota_db->zif_rota_db~atualizar( obj_zcl_rota ).
 
           WHEN OTHERS.
 
-            OBJ_ZCL_ROTA->SET_BUKRS( WA_ZLEST0159-BUKRS ).
-            OBJ_ZCL_ROTA->SET_BRANCH( WA_ZLEST0159-BRANCH ).
-            OBJ_ZCL_ROTA->SET_ID_ROTA( GW_ROTAS-ID_ROTA  ).
-            OBJ_ZCL_ROTA->SET_CAT_VEICULO( GW_ROTAS-CAT_VEICULO ).
-            OBJ_ZCL_ROTA->SET_DT_VIGENCIA( GW_ROTAS-DT_VIGENCIA ).
-            OBJ_ZCL_ROTA->SET_MUNIC_ORIGEM( GW_ROTAS-MUNIC_ORIGEM ).
-            OBJ_ZCL_ROTA->SET_MUNIC_DESTINO( GW_ROTAS-MUNIC_DESTINO ).
-            OBJ_ZCL_ROTA->SET_DISTANCIA( GW_ROTAS-DISTANCIA ).
-            OBJ_ZCL_ROTA->SET_VLR_PEDAGIO( GW_ROTAS-VLR_PEDAGIO ).
-            OBJ_ZCL_ROTA->SET_DESCR_ROTA( GW_ROTAS-DESCR_ROTA ).
+            obj_zcl_rota->set_bukrs( wa_zlest0159-bukrs ).
+            obj_zcl_rota->set_branch( wa_zlest0159-branch ).
+            obj_zcl_rota->set_id_rota( gw_rotas-id_rota  ).
+            obj_zcl_rota->set_cat_veiculo( gw_rotas-cat_veiculo ).
+            obj_zcl_rota->set_dt_vigencia( gw_rotas-dt_vigencia ).
+            obj_zcl_rota->set_munic_origem( gw_rotas-munic_origem ).
+            obj_zcl_rota->set_munic_destino( gw_rotas-munic_destino ).
+            obj_zcl_rota->set_distancia( gw_rotas-distancia ).
+            obj_zcl_rota->set_vlr_pedagio( gw_rotas-vlr_pedagio ).
+            obj_zcl_rota->set_descr_rota( gw_rotas-descr_rota ).
 
             "Inserir no Banco de Dados.
-            OBJ_ZCL_ROTA_DB->ZIF_ROTA_DB~INSERIR( OBJ_ZCL_ROTA ).
+            obj_zcl_rota_db->zif_rota_db~inserir( obj_zcl_rota ).
 
 
         ENDCASE.
@@ -3190,122 +3190,122 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD LER_XML_SITUACAO_TRANSPORTADOR.
+  METHOD ler_xml_situacao_transportador.
 
-    DATA: IF_XML           TYPE REF TO IF_IXML,
-          IF_DOCUMENT      TYPE REF TO IF_IXML_DOCUMENT,
-          IF_STREAMFACTORY TYPE REF TO IF_IXML_STREAM_FACTORY,
-          IF_STREAM        TYPE REF TO IF_IXML_ISTREAM,
-          IF_XML_PARSER    TYPE REF TO IF_IXML_PARSER,
-          IF_NODE          TYPE REF TO IF_IXML_NODE,
-          ITERATOR         TYPE REF TO IF_IXML_NODE_ITERATOR.
+    DATA: if_xml           TYPE REF TO if_ixml,
+          if_document      TYPE REF TO if_ixml_document,
+          if_streamfactory TYPE REF TO if_ixml_stream_factory,
+          if_stream        TYPE REF TO if_ixml_istream,
+          if_xml_parser    TYPE REF TO if_ixml_parser,
+          if_node          TYPE REF TO if_ixml_node,
+          iterator         TYPE REF TO if_ixml_node_iterator.
 
-    DATA: TAG_NAME      TYPE STRING,
-          VALOR_DOM     TYPE STRING,
-          FILHO         TYPE REF TO IF_IXML_NODE_LIST,
-          ITERATOR2     TYPE REF TO IF_IXML_NODE_ITERATOR,
-          IF_NODE_FILHO TYPE REF TO IF_IXML_NODE.
+    DATA: tag_name      TYPE string,
+          valor_dom     TYPE string,
+          filho         TYPE REF TO if_ixml_node_list,
+          iterator2     TYPE REF TO if_ixml_node_iterator,
+          if_node_filho TYPE REF TO if_ixml_node.
 
-    CLEAR: E_ZLEST0135.
+    CLEAR: e_zlest0135.
 
-    IF_XML           = CL_IXML=>CREATE( ).
-    IF_DOCUMENT      = IF_XML->CREATE_DOCUMENT( ).
-    IF_STREAMFACTORY = IF_XML->CREATE_STREAM_FACTORY( ).
-    IF_STREAM        = IF_STREAMFACTORY->CREATE_ISTREAM_STRING( I_XML ).
-    IF_XML_PARSER    = IF_XML->CREATE_PARSER(  STREAM_FACTORY = IF_STREAMFACTORY ISTREAM = IF_STREAM DOCUMENT = IF_DOCUMENT ).
-    IF_XML_PARSER->PARSE( ).
+    if_xml           = cl_ixml=>create( ).
+    if_document      = if_xml->create_document( ).
+    if_streamfactory = if_xml->create_stream_factory( ).
+    if_stream        = if_streamfactory->create_istream_string( i_xml ).
+    if_xml_parser    = if_xml->create_parser(  stream_factory = if_streamfactory istream = if_stream document = if_document ).
+    if_xml_parser->parse( ).
 
-    IF_NODE ?= IF_DOCUMENT->GET_ROOT_ELEMENT( ).
+    if_node ?= if_document->get_root_element( ).
 
-    IF NOT ( IF_NODE IS INITIAL ).
+    IF NOT ( if_node IS INITIAL ).
 
-      ITERATOR = IF_NODE->CREATE_ITERATOR( ).
-      IF_NODE  = ITERATOR->GET_NEXT( ).
+      iterator = if_node->create_iterator( ).
+      if_node  = iterator->get_next( ).
 
-      WHILE NOT IF_NODE IS INITIAL.
-        CASE IF_NODE->GET_TYPE( ).
-          WHEN: IF_IXML_NODE=>CO_NODE_ELEMENT.
-            TAG_NAME = IF_NODE->GET_NAME( ).
+      WHILE NOT if_node IS INITIAL.
+        CASE if_node->get_type( ).
+          WHEN: if_ixml_node=>co_node_element.
+            tag_name = if_node->get_name( ).
 
-            CASE TAG_NAME.
+            CASE tag_name.
               WHEN 'transportador'.
-                FILHO         = IF_NODE->GET_CHILDREN( ).
-                ITERATOR2     = FILHO->CREATE_ITERATOR( ).
-                IF_NODE_FILHO = ITERATOR2->GET_NEXT( ).
+                filho         = if_node->get_children( ).
+                iterator2     = filho->create_iterator( ).
+                if_node_filho = iterator2->get_next( ).
 
-                WHILE NOT IF_NODE_FILHO IS INITIAL.
-                  TAG_NAME  = IF_NODE_FILHO->GET_NAME( ).
-                  VALOR_DOM = IF_NODE_FILHO->GET_VALUE( ).
-                  CASE TAG_NAME.
+                WHILE NOT if_node_filho IS INITIAL.
+                  tag_name  = if_node_filho->get_name( ).
+                  valor_dom = if_node_filho->get_value( ).
+                  CASE tag_name.
                     WHEN 'razaoSocial'.
-                      E_ZLEST0135-DS_RAZAO_SOCIAL = VALOR_DOM.
+                      e_zlest0135-ds_razao_social = valor_dom.
                     WHEN 'tipo'.
-                      TRANSLATE VALOR_DOM TO UPPER CASE.
-                      CASE VALOR_DOM.
+                      TRANSLATE valor_dom TO UPPER CASE.
+                      CASE valor_dom.
                         WHEN 'TAC'.
-                          E_ZLEST0135-TP_TRANSPORTADOR = '1'.
+                          e_zlest0135-tp_transportador = '1'.
                         WHEN 'ETC'.
-                          E_ZLEST0135-TP_TRANSPORTADOR = '2'.
+                          e_zlest0135-tp_transportador = '2'.
                         WHEN 'CTC'.
-                          E_ZLEST0135-TP_TRANSPORTADOR = '3'.
+                          e_zlest0135-tp_transportador = '3'.
                       ENDCASE.
                     WHEN 'validadeRntrc'.
-                      IF VALOR_DOM IS NOT INITIAL.
-                        CONCATENATE VALOR_DOM+6(4) VALOR_DOM+3(2) VALOR_DOM(2) INTO E_ZLEST0135-DT_VALIDADE_RNTRC.
+                      IF valor_dom IS NOT INITIAL.
+                        CONCATENATE valor_dom+6(4) valor_dom+3(2) valor_dom(2) INTO e_zlest0135-dt_validade_rntrc.
                       ENDIF.
                     WHEN 'rntrcAtivo'.
-                      TRANSLATE VALOR_DOM TO UPPER CASE.
-                      CASE VALOR_DOM.
+                      TRANSLATE valor_dom TO UPPER CASE.
+                      CASE valor_dom.
                         WHEN 'FALSE'.
-                          E_ZLEST0135-CK_RNTRC_ATIVO = ABAP_FALSE.
+                          e_zlest0135-ck_rntrc_ativo = abap_false.
                         WHEN 'TRUE'.
-                          E_ZLEST0135-CK_RNTRC_ATIVO = ABAP_TRUE.
+                          e_zlest0135-ck_rntrc_ativo = abap_true.
                       ENDCASE.
                     WHEN 'equiparadoTac'.
-                      TRANSLATE VALOR_DOM TO UPPER CASE.
-                      CASE VALOR_DOM.
+                      TRANSLATE valor_dom TO UPPER CASE.
+                      CASE valor_dom.
                         WHEN 'FALSE'.
-                          E_ZLEST0135-CK_ETC_EQUIPARADO = ABAP_FALSE.
+                          e_zlest0135-ck_etc_equiparado = abap_false.
                         WHEN 'TRUE'.
-                          E_ZLEST0135-CK_ETC_EQUIPARADO = ABAP_TRUE.
+                          e_zlest0135-ck_etc_equiparado = abap_true.
                       ENDCASE.
                     WHEN 'msg'.
-                      E_ZLEST0135-DS_MSG_TRANSPORTADOR = VALOR_DOM.
+                      e_zlest0135-ds_msg_transportador = valor_dom.
                   ENDCASE.
-                  IF_NODE_FILHO = ITERATOR2->GET_NEXT( ).
+                  if_node_filho = iterator2->get_next( ).
                 ENDWHILE.
               WHEN 'veiculoTransportador'.
-                FILHO     = IF_NODE->GET_CHILDREN( ).
-                ITERATOR2 = FILHO->CREATE_ITERATOR( ).
-                IF_NODE_FILHO = ITERATOR2->GET_NEXT( ).
+                filho     = if_node->get_children( ).
+                iterator2 = filho->create_iterator( ).
+                if_node_filho = iterator2->get_next( ).
 
-                WHILE NOT IF_NODE_FILHO IS INITIAL.
-                  TAG_NAME  = IF_NODE_FILHO->GET_NAME( ).
-                  VALOR_DOM = IF_NODE_FILHO->GET_VALUE( ).
-                  CASE TAG_NAME.
+                WHILE NOT if_node_filho IS INITIAL.
+                  tag_name  = if_node_filho->get_name( ).
+                  valor_dom = if_node_filho->get_value( ).
+                  CASE tag_name.
                     WHEN 'descricao'.
-                      E_ZLEST0135-DS_VEICULO = VALOR_DOM.
+                      e_zlest0135-ds_veiculo = valor_dom.
                     WHEN 'eixo'.
-                      E_ZLEST0135-QT_EIXOS = VALOR_DOM.
+                      e_zlest0135-qt_eixos = valor_dom.
                     WHEN 'proprietario'.
-                      E_ZLEST0135-DS_PROPRIETARIO = VALOR_DOM.
+                      e_zlest0135-ds_proprietario = valor_dom.
                     WHEN 'tag'.
-                      E_ZLEST0135-NR_TAG = VALOR_DOM.
+                      e_zlest0135-nr_tag = valor_dom.
                     WHEN 'msg'.
-                      E_ZLEST0135-DS_MSG_VEICULO = VALOR_DOM.
-                      TRANSLATE VALOR_DOM TO UPPER CASE.
-                      IF VALOR_DOM = '[WS SEMPARAR] - SUCESSO'.
-                        E_ZLEST0135-CK_SEM_PARAR = ABAP_TRUE.
+                      e_zlest0135-ds_msg_veiculo = valor_dom.
+                      TRANSLATE valor_dom TO UPPER CASE.
+                      IF valor_dom = '[WS SEMPARAR] - SUCESSO'.
+                        e_zlest0135-ck_sem_parar = abap_true.
                       ELSE.
-                        E_ZLEST0135-CK_SEM_PARAR = ABAP_FALSE.
+                        e_zlest0135-ck_sem_parar = abap_false.
                       ENDIF.
                   ENDCASE.
-                  IF_NODE_FILHO = ITERATOR2->GET_NEXT( ).
+                  if_node_filho = iterator2->get_next( ).
                 ENDWHILE.
             ENDCASE.
         ENDCASE.
 
-        IF_NODE = ITERATOR->GET_NEXT( ).
+        if_node = iterator->get_next( ).
       ENDWHILE.
 
     ENDIF.
@@ -3313,20 +3313,20 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-   METHOD processar_arquivo_cobranca.
+  METHOD processar_arquivo_cobranca.
 
-     TYPES: BEGIN OF ty_lines,
+    TYPES: BEGIN OF ty_lines,
               line(500),
             END OF ty_lines.
 
-     TYPES BEGIN OF ty_valores.
-     TYPES: cd_ciot   TYPE zciot,
+    TYPES BEGIN OF ty_valores.
+    TYPES: cd_ciot   TYPE zciot,
             docnum    TYPE j_1bdocnum,
             vl_perda  TYPE kwert,
             vl_quebra TYPE kwert.
-     TYPES END OF ty_valores.
+    TYPES END OF ty_valores.
 
-     DATA: it_lines_arq       TYPE zde_linha_txt_1000_t,
+    DATA: it_lines_arq       TYPE zde_linha_txt_1000_t,
            it_lines_arq_ped   TYPE zde_linha_txt_1000_t,
            it_lines           TYPE STANDARD TABLE OF ty_lines,
            wa_0062            TYPE zlest0062,
@@ -3349,7 +3349,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            vg_diferenca       TYPE j_1bnetqty,
            vg_toleravel       TYPE j_1bnetqty.
 
-     DEFINE insert_line_log.
+    DEFINE insert_line_log.
 
        CLEAR: wa_0062.
        wa_0062-nr_lote_adm = &1.
@@ -3365,22 +3365,22 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          MODIFY zlest0062 FROM wa_0062.
        ENDIF.
 
-     END-OF-DEFINITION.
+    END-OF-DEFINITION.
 
-     CLEAR: it_reg_cabecalho, it_reg_cabecalho[], it_reg_itens, it_reg_itens[], e_lotes[].
+    CLEAR: it_reg_cabecalho, it_reg_cabecalho[], it_reg_itens, it_reg_itens[], e_lotes[].
 
-     DATA: url TYPE string.
-     DATA: t_url TYPE string.
-     DATA: client TYPE REF TO if_http_client.
-     DATA: c_xml TYPE string.
-     DATA: c_separador TYPE c LENGTH 1.
+    DATA: url TYPE string.
+    DATA: t_url TYPE string.
+    DATA: client TYPE REF TO if_http_client.
+    DATA: c_xml TYPE string.
+    DATA: c_separador TYPE c LENGTH 1.
 
-     IF i_filename IS NOT INITIAL.
+    IF i_filename IS NOT INITIAL.
 *-US 130492-08.04.2024-JT-inicio
-       IF i_filename(4) = 'http'.
-         url = i_filename.
+      IF i_filename(4) = 'http'.
+        url = i_filename.
 
-         cl_http_client=>create_by_url(
+        cl_http_client=>create_by_url(
            EXPORTING
              url                = url
 *           PROXY_HOST         =
@@ -3396,8 +3396,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              internal_error     = 3
              OTHERS             = 4 ).
 
-         IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zescx_erro_arquivo
+        IF sy-subrc IS NOT INITIAL.
+          RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3407,9 +3407,9 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                msgv2  = sy-msgv2
                msgv3  = sy-msgv3
                msgv4  = sy-msgv4.
-         ENDIF.
+        ENDIF.
 
-         client->send(
+        client->send(
            EXCEPTIONS
              http_communication_failure = 1
              http_invalid_state         = 2
@@ -3418,8 +3418,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              OTHERS                     = 5
          ).
 
-         IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zescx_erro_arquivo
+        IF sy-subrc IS NOT INITIAL.
+          RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3429,9 +3429,9 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                msgv2  = sy-msgv2
                msgv3  = sy-msgv3
                msgv4  = sy-msgv4.
-         ENDIF.
+        ENDIF.
 
-         client->receive(
+        client->receive(
            EXCEPTIONS
              http_communication_failure = 1
              http_invalid_state         = 2
@@ -3439,8 +3439,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              OTHERS                     = 4
          ).
 
-         IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zescx_erro_arquivo
+        IF sy-subrc IS NOT INITIAL.
+          RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3450,24 +3450,24 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                msgv2  = sy-msgv2
                msgv3  = sy-msgv3
                msgv4  = sy-msgv4.
-         ENDIF.
+        ENDIF.
 
-         c_xml = client->response->get_cdata( ).
-         client->close( ).
-       ELSE.
-         c_xml = zescl_string=>base64_to_string( i_texto = CONV #( i_content_filename ) ).
-       ENDIF.
+        c_xml = client->response->get_cdata( ).
+        client->close( ).
+      ELSE.
+        c_xml = zescl_string=>base64_to_string( i_texto = CONV #( i_content_filename ) ).
+      ENDIF.
 *-US 130492-08.04.2024-JT-fim
 
-       SPLIT c_xml AT cl_abap_char_utilities=>newline INTO: TABLE it_lines_arq.
-     ENDIF.
+      SPLIT c_xml AT cl_abap_char_utilities=>newline INTO: TABLE it_lines_arq.
+    ENDIF.
 
-     IF i_filename_pedagio IS NOT INITIAL.
+    IF i_filename_pedagio IS NOT INITIAL.
 *-US 130492-08.04.2024-JT-inicio
-       IF i_filename_pedagio(4) = 'http'.
-         url = i_filename_pedagio.
+      IF i_filename_pedagio(4) = 'http'.
+        url = i_filename_pedagio.
 
-         cl_http_client=>create_by_url(
+        cl_http_client=>create_by_url(
            EXPORTING
              url                = url
 *           PROXY_HOST         =
@@ -3483,8 +3483,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              internal_error     = 3
              OTHERS             = 4 ).
 
-         IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zescx_erro_arquivo
+        IF sy-subrc IS NOT INITIAL.
+          RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3494,9 +3494,9 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                msgv2  = sy-msgv2
                msgv3  = sy-msgv3
                msgv4  = sy-msgv4.
-         ENDIF.
+        ENDIF.
 
-         client->send(
+        client->send(
            EXCEPTIONS
              http_communication_failure = 1
              http_invalid_state         = 2
@@ -3505,8 +3505,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              OTHERS                     = 5
          ).
 
-         IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zescx_erro_arquivo
+        IF sy-subrc IS NOT INITIAL.
+          RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3516,9 +3516,9 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                msgv2  = sy-msgv2
                msgv3  = sy-msgv3
                msgv4  = sy-msgv4.
-         ENDIF.
+        ENDIF.
 
-         client->receive(
+        client->receive(
            EXCEPTIONS
              http_communication_failure = 1
              http_invalid_state         = 2
@@ -3526,8 +3526,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              OTHERS                     = 4
          ).
 
-         IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zescx_erro_arquivo
+        IF sy-subrc IS NOT INITIAL.
+          RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3537,25 +3537,25 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                msgv2  = sy-msgv2
                msgv3  = sy-msgv3
                msgv4  = sy-msgv4.
-         ENDIF.
+        ENDIF.
 
-         c_xml = client->response->get_cdata( ).
-         client->close( ).
-       ELSE.
-         c_xml = zescl_string=>base64_to_string( i_texto = CONV #( i_content_filename_pedagio ) ).
-       ENDIF.
+        c_xml = client->response->get_cdata( ).
+        client->close( ).
+      ELSE.
+        c_xml = zescl_string=>base64_to_string( i_texto = CONV #( i_content_filename_pedagio ) ).
+      ENDIF.
 *-US 130492-08.04.2024-JT-fim
 
-       SPLIT c_xml AT cl_abap_char_utilities=>newline INTO: TABLE it_lines_arq_ped.
-     ENDIF.
+      SPLIT c_xml AT cl_abap_char_utilities=>newline INTO: TABLE it_lines_arq_ped.
+    ENDIF.
 
-     LOOP AT it_lines_arq INTO DATA(wa_line).
-       APPEND wa_line TO it_arquivo.
-     ENDLOOP.
+    LOOP AT it_lines_arq INTO DATA(wa_line).
+      APPEND wa_line TO it_arquivo.
+    ENDLOOP.
 
-     vg_lote = 0.
+    vg_lote = 0.
 
-     CALL FUNCTION 'Z_PFE_ARQUIVO_REGISTOS'
+    CALL FUNCTION 'Z_PFE_ARQUIVO_REGISTOS'
        TABLES
          t_arquivo           = it_arquivo
          t_reg_cabecalho     = it_reg_cabecalho
@@ -3571,8 +3571,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          nao_ciot_info       = 6
          OTHERS              = 7.
 
-     IF sy-subrc IS NOT INITIAL.
-       RAISE EXCEPTION TYPE zescx_erro_arquivo
+    IF sy-subrc IS NOT INITIAL.
+      RAISE EXCEPTION TYPE zescx_erro_arquivo
          EXPORTING
            textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
            msgid  = sy-msgid
@@ -3582,53 +3582,53 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            msgv2  = sy-msgv2
            msgv3  = sy-msgv3
            msgv4  = sy-msgv4.
-     ENDIF.
+    ENDIF.
 
-     CHECK it_reg_itens IS NOT INITIAL.
+    CHECK it_reg_itens IS NOT INITIAL.
 
-     SELECT * INTO TABLE @DATA(it_zlest0025)
+    SELECT * INTO TABLE @DATA(it_zlest0025)
        FROM zlest0025.
 
-     MOVE it_reg_itens[] TO it_reg_itens_ad[].
-     DELETE it_reg_itens    WHERE chvid EQ '1'.
-     DELETE it_reg_itens_ad WHERE chvid NE '1'.
-     MOVE it_reg_itens[] TO it_reg_itens_aux[].
+    MOVE it_reg_itens[] TO it_reg_itens_ad[].
+    DELETE it_reg_itens    WHERE chvid EQ '1'.
+    DELETE it_reg_itens_ad WHERE chvid NE '1'.
+    MOVE it_reg_itens[] TO it_reg_itens_aux[].
 
-     SORT it_reg_cabecalho BY nr_lote_adm.
+    SORT it_reg_cabecalho BY nr_lote_adm.
 
-     DATA(it_reg_copia) = it_reg_cabecalho[].
-     SORT it_reg_copia BY nr_lote_adm.
-     DELETE ADJACENT DUPLICATES FROM it_reg_copia COMPARING nr_lote_adm.
-     LOOP AT it_reg_copia INTO DATA(wa_reg_copia).
-       SELECT SINGLE * INTO @DATA(wa_zpfe_lote) FROM zpfe_lote WHERE nr_lote_adm EQ @wa_reg_copia-nr_lote_adm.
-       IF sy-subrc IS INITIAL.
-         DELETE it_reg_cabecalho WHERE nr_lote_adm = wa_reg_copia-nr_lote_adm .
-       ENDIF.
-     ENDLOOP.
+    DATA(it_reg_copia) = it_reg_cabecalho[].
+    SORT it_reg_copia BY nr_lote_adm.
+    DELETE ADJACENT DUPLICATES FROM it_reg_copia COMPARING nr_lote_adm.
+    LOOP AT it_reg_copia INTO DATA(wa_reg_copia).
+      SELECT SINGLE * INTO @DATA(wa_zpfe_lote) FROM zpfe_lote WHERE nr_lote_adm EQ @wa_reg_copia-nr_lote_adm.
+      IF sy-subrc IS INITIAL.
+        DELETE it_reg_cabecalho WHERE nr_lote_adm = wa_reg_copia-nr_lote_adm .
+      ENDIF.
+    ENDLOOP.
 
 
      "Adiantamento
-     vg_nm_lote_item = 1.
-     LOOP AT it_reg_cabecalho INTO DATA(wa_reg_cabecalho).
+    vg_nm_lote_item = 1.
+    LOOP AT it_reg_cabecalho INTO DATA(wa_reg_cabecalho).
 
-       READ TABLE it_arquivo INDEX 1 INTO DATA(wa_arquivo).
-       CLEAR: vg_tipcontabil.
+      READ TABLE it_arquivo INDEX 1 INTO DATA(wa_arquivo).
+      CLEAR: vg_tipcontabil.
 
-       READ TABLE it_reg_itens_ad WITH KEY nm_lote = wa_reg_cabecalho-nm_lote TRANSPORTING NO FIELDS.
-       IF NOT sy-subrc IS INITIAL.
-         CONTINUE.
-       ENDIF.
+      READ TABLE it_reg_itens_ad WITH KEY nm_lote = wa_reg_cabecalho-nm_lote TRANSPORTING NO FIELDS.
+      IF NOT sy-subrc IS INITIAL.
+        CONTINUE.
+      ENDIF.
 
-       wa_reg_cabecalho-vl_total_lote = 0.
-       wa_reg_cabecalho-vl_confi_lote = 0.
+      wa_reg_cabecalho-vl_total_lote = 0.
+      wa_reg_cabecalho-vl_confi_lote = 0.
 
-       CALL FUNCTION 'Z_PFE_TIPO_CONTAB'
+      CALL FUNCTION 'Z_PFE_TIPO_CONTAB'
          EXPORTING
            p_dt_posicao  = wa_reg_cabecalho-dt_posicao
          IMPORTING
            p_tipcontabil = vg_tipcontabil.
 
-       CALL FUNCTION 'NUMBER_GET_NEXT'
+      CALL FUNCTION 'NUMBER_GET_NEXT'
          EXPORTING
            nr_range_nr             = '01'
            object                  = 'ZPFELOTE'
@@ -3644,8 +3644,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            buffer_overflow         = 7
            OTHERS                  = 8.
 
-       IF sy-subrc IS NOT INITIAL.
-         RAISE EXCEPTION TYPE zescx_erro_arquivo
+      IF sy-subrc IS NOT INITIAL.
+        RAISE EXCEPTION TYPE zescx_erro_arquivo
            EXPORTING
              textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
              msgid  = sy-msgid
@@ -3655,49 +3655,49 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              msgv2  = sy-msgv2
              msgv3  = sy-msgv3
              msgv4  = sy-msgv4.
-       ENDIF.
+      ENDIF.
 
-       st_lote_aux = wa_reg_cabecalho-nm_lote.
+      st_lote_aux = wa_reg_cabecalho-nm_lote.
 
-       wa_reg_cabecalho-status  = 'I'.
-       wa_reg_cabecalho-nm_lote = st_lote.
-       IF it_reg_itens_ad[] IS NOT INITIAL.
+      wa_reg_cabecalho-status  = 'I'.
+      wa_reg_cabecalho-nm_lote = st_lote.
+      IF it_reg_itens_ad[] IS NOT INITIAL.
 
-         SELECT *
+        SELECT *
            FROM zpfe_lote_item
            INTO TABLE it_reg_itens_aux
             FOR ALL ENTRIES IN it_reg_itens_ad
             WHERE nucontrato EQ it_reg_itens_ad-nucontrato
               AND chvid      EQ it_reg_itens_ad-chvid.
 
-         SELECT  *
+        SELECT  *
            FROM zcte_ciot
            INTO TABLE @DATA(it_zcte_ciot)
             FOR ALL ENTRIES IN @it_reg_itens_ad
             WHERE nucontrato EQ @it_reg_itens_ad-nucontrato.
 
-         IF sy-subrc IS INITIAL.
-           SELECT  *
+        IF sy-subrc IS INITIAL.
+          SELECT  *
              FROM zcte_identifica
              INTO TABLE @DATA(it_zcte_identifica)
              FOR ALL ENTRIES IN @it_zcte_ciot
               WHERE docnum EQ @it_zcte_ciot-docnum.
-         ENDIF.
-         SORT: it_reg_itens_aux BY nucontrato chvid.
-         SORT: it_zcte_ciot BY nucontrato.
-         SORT: it_zcte_identifica BY docnum.
-       ENDIF.
+        ENDIF.
+        SORT: it_reg_itens_aux BY nucontrato chvid.
+        SORT: it_zcte_ciot BY nucontrato.
+        SORT: it_zcte_identifica BY docnum.
+      ENDIF.
 
-       LOOP AT it_reg_itens_ad INTO DATA(wa_reg_itens) WHERE nm_lote EQ st_lote_aux.
-         DATA(lc_tabix) = sy-tabix.
-         ADD 1 TO lc_tabix.
-         READ TABLE it_arquivo INDEX lc_tabix INTO wa_arquivo.
+      LOOP AT it_reg_itens_ad INTO DATA(wa_reg_itens) WHERE nm_lote EQ st_lote_aux.
+        DATA(lc_tabix) = sy-tabix.
+        ADD 1 TO lc_tabix.
+        READ TABLE it_arquivo INDEX lc_tabix INTO wa_arquivo.
 
-         READ TABLE it_reg_itens_aux INTO DATA(wa_reg_itens_aux)
+        READ TABLE it_reg_itens_aux INTO DATA(wa_reg_itens_aux)
          WITH KEY nucontrato = wa_reg_itens-nucontrato chvid = wa_reg_itens-chvid BINARY SEARCH.
 
-         IF sy-subrc IS INITIAL.
-           insert_line_log wa_reg_cabecalho-nr_lote_adm
+        IF sy-subrc IS INITIAL.
+          insert_line_log wa_reg_cabecalho-nr_lote_adm
                            space
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -3707,21 +3707,21 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            'E'.
 
            "Erro de existência de chave já importada
-           CONTINUE.
-         ENDIF.
+          CONTINUE.
+        ENDIF.
 
-         wa_reg_itens-nm_lote      = st_lote.
-         wa_reg_itens-status       = 'I'.
-         wa_reg_itens-nm_lote_item = vg_nm_lote_item.
+        wa_reg_itens-nm_lote      = st_lote.
+        wa_reg_itens-status       = 'I'.
+        wa_reg_itens-nm_lote_item = vg_nm_lote_item.
 
 *        SELECT SINGLE * INTO WA_ZCTE_CIOT
 *          FROM ZCTE_CIOT
 *         WHERE NUCONTRATO EQ WA_REG_ITENS-NUCONTRATO.
-         READ TABLE it_zcte_ciot INTO DATA(wa_zcte_ciot) WITH KEY nucontrato = wa_reg_itens-nucontrato BINARY SEARCH.
+        READ TABLE it_zcte_ciot INTO DATA(wa_zcte_ciot) WITH KEY nucontrato = wa_reg_itens-nucontrato BINARY SEARCH.
 
-         IF ( sy-subrc IS INITIAL ) AND ( wa_reg_itens-nucontrato IS NOT INITIAL ).
-           IF wa_reg_itens-vl_transacao NE wa_zcte_ciot-vlr_adiantamento.
-             insert_line_log wa_reg_cabecalho-nr_lote_adm
+        IF ( sy-subrc IS INITIAL ) AND ( wa_reg_itens-nucontrato IS NOT INITIAL ).
+          IF wa_reg_itens-vl_transacao NE wa_zcte_ciot-vlr_adiantamento.
+            insert_line_log wa_reg_cabecalho-nr_lote_adm
                              space
                              wa_reg_itens-chvid
                              wa_reg_itens-nucontrato
@@ -3729,44 +3729,44 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                              'Erro no adiantamento, valor da transação diferente do valor da cte'
                              wa_arquivo-linha
                              'E'.
-             CONTINUE.
-           ENDIF.
+            CONTINUE.
+          ENDIF.
 
-           READ TABLE it_zcte_identifica INTO DATA(wa_zcte_identifica) WITH KEY docnum = wa_zcte_ciot-docnum BINARY SEARCH.
+          READ TABLE it_zcte_identifica INTO DATA(wa_zcte_identifica) WITH KEY docnum = wa_zcte_ciot-docnum BINARY SEARCH.
 
-           wa_reg_itens-tp_plano_administradora = wa_zcte_ciot-tp_plano_administradora.
-           wa_reg_itens-cd_ciot                 = wa_zcte_ciot-cd_ciot.
-           wa_reg_itens-nr_ciot                 = wa_zcte_ciot-nr_ciot.
-           wa_reg_itens-docnum                  = wa_zcte_ciot-docnum.
-           wa_reg_itens-tknum                   = wa_zcte_ciot-tknum.
-           wa_reg_itens-ctenum                  = wa_zcte_identifica-nct.
-           wa_reg_itens-cteserie                = wa_zcte_identifica-serie.
-           wa_reg_cabecalho-vl_total_lote       = wa_reg_cabecalho-vl_total_lote + wa_reg_itens-vl_transacao.
+          wa_reg_itens-tp_plano_administradora = wa_zcte_ciot-tp_plano_administradora.
+          wa_reg_itens-cd_ciot                 = wa_zcte_ciot-cd_ciot.
+          wa_reg_itens-nr_ciot                 = wa_zcte_ciot-nr_ciot.
+          wa_reg_itens-docnum                  = wa_zcte_ciot-docnum.
+          wa_reg_itens-tknum                   = wa_zcte_ciot-tknum.
+          wa_reg_itens-ctenum                  = wa_zcte_identifica-nct.
+          wa_reg_itens-cteserie                = wa_zcte_identifica-serie.
+          wa_reg_cabecalho-vl_total_lote       = wa_reg_cabecalho-vl_total_lote + wa_reg_itens-vl_transacao.
 
-           wa_reg_itens-vl_conferido    = wa_reg_itens-vl_transacao.
-           wa_reg_itens-vl_pago_lote    = wa_reg_itens-vl_transacao.
-           wa_reg_itens-ck_conferido    = ''.
-           wa_reg_itens-ds_usuario_conf = sy-uname.
+          wa_reg_itens-vl_conferido    = wa_reg_itens-vl_transacao.
+          wa_reg_itens-vl_pago_lote    = wa_reg_itens-vl_transacao.
+          wa_reg_itens-ck_conferido    = ''.
+          wa_reg_itens-ds_usuario_conf = sy-uname.
 
-           wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_transacao.
+          wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_transacao.
 
-           CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+          CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
              EXPORTING
                input  = wa_reg_itens-nm_lote_item
              IMPORTING
                output = wa_reg_itens-nm_lote_item.
 
-           CASE wa_reg_itens-tp_plano_administradora.
-             	WHEN zescl_ciot=>st_tp_plano_pre_pago.
-               vg_tipcontabil_itm = 'FP'.
-             	WHEN OTHERS.
-               vg_tipcontabil_itm = vg_tipcontabil.
-           ENDCASE.
+          CASE wa_reg_itens-tp_plano_administradora.
+            WHEN zescl_ciot=>st_tp_plano_pre_pago.
+              vg_tipcontabil_itm = 'FP'.
+            WHEN OTHERS.
+              vg_tipcontabil_itm = vg_tipcontabil.
+          ENDCASE.
 
-           MODIFY zpfe_lote_item FROM wa_reg_itens.
-           vg_nm_lote_item = vg_nm_lote_item + 1.
+          MODIFY zpfe_lote_item FROM wa_reg_itens.
+          vg_nm_lote_item = vg_nm_lote_item + 1.
 
-           insert_line_log wa_reg_itens-nr_lote_adm
+          insert_line_log wa_reg_itens-nr_lote_adm
                            wa_reg_itens-nm_lote
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -3774,8 +3774,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            'A linha do arquivo foi importado com sucesso'
                            space
                            'S'.
-         ELSE.
-           insert_line_log wa_reg_cabecalho-nr_lote_adm
+        ELSE.
+          insert_line_log wa_reg_cabecalho-nr_lote_adm
                            space
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -3785,15 +3785,15 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            'E'.
            "Erro de Contrato não encontrado
 
-         ENDIF.
-       ENDLOOP.
+        ENDIF.
+      ENDLOOP.
 
-       wa_reg_cabecalho-tplote = 'A'.
+      wa_reg_cabecalho-tplote = 'A'.
 
-       MODIFY zpfe_lote FROM wa_reg_cabecalho.
-       APPEND wa_reg_cabecalho-nm_lote TO e_lotes.
+      MODIFY zpfe_lote FROM wa_reg_cabecalho.
+      APPEND wa_reg_cabecalho-nm_lote TO e_lotes.
 
-       insert_line_log wa_reg_cabecalho-nr_lote_adm
+      insert_line_log wa_reg_cabecalho-nr_lote_adm
                        wa_reg_cabecalho-nm_lote
                        space
                        space
@@ -3802,53 +3802,53 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                        space
                        'S'.
 
-     ENDLOOP.
+    ENDLOOP.
 
-     IF it_reg_itens[] IS NOT INITIAL.
-       SELECT * INTO TABLE it_reg_itens_aux
+    IF it_reg_itens[] IS NOT INITIAL.
+      SELECT * INTO TABLE it_reg_itens_aux
          FROM zpfe_lote_item
           FOR ALL ENTRIES IN it_reg_itens
         WHERE nucontrato EQ it_reg_itens-nucontrato
           AND chvid      EQ it_reg_itens-chvid.
 
-       SELECT * INTO TABLE it_zcte_ciot
+      SELECT * INTO TABLE it_zcte_ciot
          FROM zcte_ciot
           FOR ALL ENTRIES IN it_reg_itens
         WHERE nucontrato EQ it_reg_itens-nucontrato.
 
-       IF sy-subrc IS INITIAL.
-         SELECT * INTO TABLE it_zcte_identifica
+      IF sy-subrc IS INITIAL.
+        SELECT * INTO TABLE it_zcte_identifica
            FROM zcte_identifica
             FOR ALL ENTRIES IN it_zcte_ciot
           WHERE docnum EQ it_zcte_ciot-docnum.
-       ENDIF.
+      ENDIF.
 
-       SORT: it_reg_itens_aux BY nucontrato chvid.
-       SORT: it_zcte_ciot BY nucontrato.
-       SORT: it_zcte_identifica BY docnum.
-     ENDIF.
+      SORT: it_reg_itens_aux BY nucontrato chvid.
+      SORT: it_zcte_ciot BY nucontrato.
+      SORT: it_zcte_identifica BY docnum.
+    ENDIF.
 
      "Resto de Chaves
-     vg_nm_lote_item = 1.
-     LOOP AT it_reg_cabecalho INTO wa_reg_cabecalho.
+    vg_nm_lote_item = 1.
+    LOOP AT it_reg_cabecalho INTO wa_reg_cabecalho.
 
-       CLEAR: vg_tipcontabil.
+      CLEAR: vg_tipcontabil.
 
-       READ TABLE it_reg_itens WITH KEY nm_lote = wa_reg_cabecalho-nm_lote TRANSPORTING NO FIELDS.
-       IF NOT sy-subrc IS INITIAL.
-         CONTINUE.
-       ENDIF.
+      READ TABLE it_reg_itens WITH KEY nm_lote = wa_reg_cabecalho-nm_lote TRANSPORTING NO FIELDS.
+      IF NOT sy-subrc IS INITIAL.
+        CONTINUE.
+      ENDIF.
 
-       wa_reg_cabecalho-vl_total_lote = 0.
-       wa_reg_cabecalho-vl_confi_lote = 0.
+      wa_reg_cabecalho-vl_total_lote = 0.
+      wa_reg_cabecalho-vl_confi_lote = 0.
 
-       CALL FUNCTION 'Z_PFE_TIPO_CONTAB'
+      CALL FUNCTION 'Z_PFE_TIPO_CONTAB'
          EXPORTING
            p_dt_posicao  = wa_reg_cabecalho-dt_posicao
          IMPORTING
            p_tipcontabil = vg_tipcontabil.
 
-       CALL FUNCTION 'NUMBER_GET_NEXT'
+      CALL FUNCTION 'NUMBER_GET_NEXT'
          EXPORTING
            nr_range_nr             = '01'
            object                  = 'ZPFELOTE'
@@ -3864,8 +3864,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            buffer_overflow         = 7
            OTHERS                  = 8.
 
-       IF sy-subrc IS NOT INITIAL.
-         RAISE EXCEPTION TYPE zescx_erro_arquivo
+      IF sy-subrc IS NOT INITIAL.
+        RAISE EXCEPTION TYPE zescx_erro_arquivo
            EXPORTING
              textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
              msgid  = sy-msgid
@@ -3875,36 +3875,36 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              msgv2  = sy-msgv2
              msgv3  = sy-msgv3
              msgv4  = sy-msgv4.
-       ENDIF.
+      ENDIF.
 
-       st_lote_aux = wa_reg_cabecalho-nm_lote.
+      st_lote_aux = wa_reg_cabecalho-nm_lote.
 
-       wa_reg_cabecalho-status  = 'I'.
-       wa_reg_cabecalho-nm_lote = st_lote.
+      wa_reg_cabecalho-status  = 'I'.
+      wa_reg_cabecalho-nm_lote = st_lote.
 
        "Verificações de Saldo de Frete
-       LOOP AT it_reg_itens INTO wa_reg_itens WHERE nm_lote EQ st_lote_aux AND chvid EQ '2'.
+      LOOP AT it_reg_itens INTO wa_reg_itens WHERE nm_lote EQ st_lote_aux AND chvid EQ '2'.
 
-         CASE wa_reg_itens-tp_plano_administradora.
-           	WHEN zescl_ciot=>st_tp_plano_pre_pago.
-             vg_tipcontabil_itm = 'FP'.
-           WHEN OTHERS.
-             vg_tipcontabil_itm = vg_tipcontabil.
-         ENDCASE.
+        CASE wa_reg_itens-tp_plano_administradora.
+          WHEN zescl_ciot=>st_tp_plano_pre_pago.
+            vg_tipcontabil_itm = 'FP'.
+          WHEN OTHERS.
+            vg_tipcontabil_itm = vg_tipcontabil.
+        ENDCASE.
 
-         lc_tabix = sy-tabix.
-         ADD 1 TO lc_tabix.
-         READ TABLE it_arquivo INDEX lc_tabix INTO wa_arquivo.
-         READ TABLE it_zlest0025 WITH KEY chvid = wa_reg_itens-chvid INTO DATA(wa_zlest0025).
-         IF ( wa_reg_itens-chvid IS INITIAL ) OR ( NOT sy-subrc IS INITIAL ).
-           CONTINUE.
-         ENDIF.
+        lc_tabix = sy-tabix.
+        ADD 1 TO lc_tabix.
+        READ TABLE it_arquivo INDEX lc_tabix INTO wa_arquivo.
+        READ TABLE it_zlest0025 WITH KEY chvid = wa_reg_itens-chvid INTO DATA(wa_zlest0025).
+        IF ( wa_reg_itens-chvid IS INITIAL ) OR ( NOT sy-subrc IS INITIAL ).
+          CONTINUE.
+        ENDIF.
 
-         READ TABLE it_reg_itens_aux INTO wa_reg_itens_aux
+        READ TABLE it_reg_itens_aux INTO wa_reg_itens_aux
          WITH KEY nucontrato = wa_reg_itens-nucontrato chvid = wa_reg_itens-chvid BINARY SEARCH.
 
-         IF sy-subrc IS INITIAL.
-           insert_line_log wa_reg_cabecalho-nr_lote_adm
+        IF sy-subrc IS INITIAL.
+          insert_line_log wa_reg_cabecalho-nr_lote_adm
                            space
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -3913,79 +3913,79 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            wa_arquivo-linha
                            'E'.
            "Erro de existência de chave já importada
-           CONTINUE.
-         ENDIF.
+          CONTINUE.
+        ENDIF.
 
-         wa_reg_itens-nm_lote      = st_lote.
-         wa_reg_itens-status       = 'I'.
-         wa_reg_itens-nm_lote_item = vg_nm_lote_item.
+        wa_reg_itens-nm_lote      = st_lote.
+        wa_reg_itens-status       = 'I'.
+        wa_reg_itens-nm_lote_item = vg_nm_lote_item.
 
-         READ TABLE it_zcte_ciot INTO wa_zcte_ciot
+        READ TABLE it_zcte_ciot INTO wa_zcte_ciot
          WITH KEY nucontrato = wa_reg_itens-nucontrato BINARY SEARCH.
 
-         IF ( sy-subrc IS INITIAL ) AND ( wa_reg_itens-nucontrato IS NOT INITIAL ).
+        IF ( sy-subrc IS INITIAL ) AND ( wa_reg_itens-nucontrato IS NOT INITIAL ).
 
-           READ TABLE it_zcte_identifica INTO wa_zcte_identifica WITH KEY docnum = wa_zcte_ciot-docnum BINARY SEARCH.
+          READ TABLE it_zcte_identifica INTO wa_zcte_identifica WITH KEY docnum = wa_zcte_ciot-docnum BINARY SEARCH.
 
-           wa_valores-cd_ciot   = wa_zcte_ciot-cd_ciot.
-           wa_valores-docnum    = wa_zcte_ciot-docnum.
-           wa_valores-vl_quebra = 0.
-           wa_valores-vl_perda  = 0.
+          wa_valores-cd_ciot   = wa_zcte_ciot-cd_ciot.
+          wa_valores-docnum    = wa_zcte_ciot-docnum.
+          wa_valores-vl_quebra = 0.
+          wa_valores-vl_perda  = 0.
 
-           wa_reg_itens-cd_ciot     = wa_zcte_ciot-cd_ciot.
-           wa_reg_itens-nr_ciot     = wa_zcte_ciot-nr_ciot.
-           wa_reg_itens-docnum       = wa_zcte_ciot-docnum.
-           wa_reg_itens-tknum       = wa_zcte_ciot-tknum.
-           wa_reg_itens-peso_origem = wa_zcte_ciot-quantidade.
-           wa_reg_itens-ctenum      = wa_zcte_identifica-nct.
-           wa_reg_itens-cteserie    = wa_zcte_identifica-serie.
-           wa_reg_cabecalho-vl_total_lote = wa_reg_cabecalho-vl_total_lote + wa_reg_itens-vl_transacao.
+          wa_reg_itens-cd_ciot     = wa_zcte_ciot-cd_ciot.
+          wa_reg_itens-nr_ciot     = wa_zcte_ciot-nr_ciot.
+          wa_reg_itens-docnum       = wa_zcte_ciot-docnum.
+          wa_reg_itens-tknum       = wa_zcte_ciot-tknum.
+          wa_reg_itens-peso_origem = wa_zcte_ciot-quantidade.
+          wa_reg_itens-ctenum      = wa_zcte_identifica-nct.
+          wa_reg_itens-cteserie    = wa_zcte_identifica-serie.
+          wa_reg_cabecalho-vl_total_lote = wa_reg_cabecalho-vl_total_lote + wa_reg_itens-vl_transacao.
 
-           IF vg_tipcontabil_itm EQ 'FC'.
-             wa_reg_itens-peso_chegada = wa_reg_itens-peso_importado.
-             wa_zcte_ciot-vlr_frete = wa_zcte_ciot-vlr_frete - wa_zcte_ciot-vlr_adiantamento - wa_zcte_ciot-vlr_seguro - wa_zcte_ciot-vlr_impostos.
+          IF vg_tipcontabil_itm EQ 'FC'.
+            wa_reg_itens-peso_chegada = wa_reg_itens-peso_importado.
+            wa_zcte_ciot-vlr_frete = wa_zcte_ciot-vlr_frete - wa_zcte_ciot-vlr_adiantamento - wa_zcte_ciot-vlr_seguro - wa_zcte_ciot-vlr_impostos.
 
-             IF wa_reg_itens-peso_chegada GT wa_reg_itens-peso_origem.
-               wa_reg_itens-peso_chegada = wa_reg_itens-peso_origem.
-             ENDIF.
-             wa_reg_itens-vl_pago_lote = wa_zcte_ciot-vlr_frete.
+            IF wa_reg_itens-peso_chegada GT wa_reg_itens-peso_origem.
+              wa_reg_itens-peso_chegada = wa_reg_itens-peso_origem.
+            ENDIF.
+            wa_reg_itens-vl_pago_lote = wa_zcte_ciot-vlr_frete.
 
-             IF ( wa_reg_itens-peso_chegada LT wa_reg_itens-peso_origem ) OR
+            IF ( wa_reg_itens-peso_chegada LT wa_reg_itens-peso_origem ) OR
                 ( wa_reg_itens-vl_transacao GT wa_zcte_ciot-vlr_frete ).
-               vg_diferenca = wa_reg_itens-peso_origem - wa_reg_itens-peso_chegada.
+              vg_diferenca = wa_reg_itens-peso_origem - wa_reg_itens-peso_chegada.
 
                "Valor de Quebra
-               wa_valores-vl_quebra  = ( vg_diferenca * ( wa_zcte_ciot-vlr_unit_frete / 1000 ) ).
+              wa_valores-vl_quebra  = ( vg_diferenca * ( wa_zcte_ciot-vlr_unit_frete / 1000 ) ).
                "Valor da Perda
-               vg_toleravel          = wa_reg_itens-peso_origem * ( wa_zcte_ciot-perc_tolerancia / 100 ).
-               IF vg_diferenca GT vg_toleravel.
-                 wa_valores-vl_perda = ( ( vg_diferenca - vg_toleravel ) * wa_zcte_ciot-vlr_unit_merc  ).
-               ENDIF.
-             ENDIF.
-           ELSEIF vg_tipcontabil_itm EQ 'FS' OR vg_tipcontabil_itm EQ 'FP'.
-             wa_reg_itens-vl_conferido    = wa_reg_itens-vl_transacao.
-             wa_reg_itens-vl_pago_lote    = wa_reg_itens-vl_transacao.
-             wa_reg_itens-peso_chegada    = wa_reg_itens-peso_importado.
-             wa_reg_itens-ck_conferido    = 'X'.
-             wa_reg_itens-ds_usuario_conf = sy-uname.
-           ENDIF.
+              vg_toleravel          = wa_reg_itens-peso_origem * ( wa_zcte_ciot-perc_tolerancia / 100 ).
+              IF vg_diferenca GT vg_toleravel.
+                wa_valores-vl_perda = ( ( vg_diferenca - vg_toleravel ) * wa_zcte_ciot-vlr_unit_merc  ).
+              ENDIF.
+            ENDIF.
+          ELSEIF vg_tipcontabil_itm EQ 'FS' OR vg_tipcontabil_itm EQ 'FP'.
+            wa_reg_itens-vl_conferido    = wa_reg_itens-vl_transacao.
+            wa_reg_itens-vl_pago_lote    = wa_reg_itens-vl_transacao.
+            wa_reg_itens-peso_chegada    = wa_reg_itens-peso_importado.
+            wa_reg_itens-ck_conferido    = 'X'.
+            wa_reg_itens-ds_usuario_conf = sy-uname.
+          ENDIF.
 
-           APPEND wa_valores TO it_valores.
-           IF wa_zlest0025-naturezachvid EQ 'S'.
-             wa_reg_itens-vl_pago_lote = wa_reg_itens-vl_pago_lote * ( -1 ).
-           ENDIF.
+          APPEND wa_valores TO it_valores.
+          IF wa_zlest0025-naturezachvid EQ 'S'.
+            wa_reg_itens-vl_pago_lote = wa_reg_itens-vl_pago_lote * ( -1 ).
+          ENDIF.
 
-           wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_pago_lote.
+          wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_pago_lote.
 
-           CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+          CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
              EXPORTING
                input  = wa_reg_itens-nm_lote_item
              IMPORTING
                output = wa_reg_itens-nm_lote_item.
 
-           MODIFY zpfe_lote_item FROM wa_reg_itens.
-           vg_nm_lote_item = vg_nm_lote_item + 1.
-           insert_line_log wa_reg_itens-nr_lote_adm
+          MODIFY zpfe_lote_item FROM wa_reg_itens.
+          vg_nm_lote_item = vg_nm_lote_item + 1.
+          insert_line_log wa_reg_itens-nr_lote_adm
                            wa_reg_itens-nm_lote
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -3993,8 +3993,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            'A linha do arquivo foi importado com sucesso'
                            space
                            'S'.
-         ELSE.
-           insert_line_log wa_reg_cabecalho-nr_lote_adm
+        ELSE.
+          insert_line_log wa_reg_cabecalho-nr_lote_adm
                            space
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -4002,24 +4002,24 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            'Erro de Contrato não encontrado'
                            wa_arquivo-linha
                            'E'.
-         ENDIF.
-       ENDLOOP.
+        ENDIF.
+      ENDLOOP.
 
-       LOOP AT it_reg_itens INTO wa_reg_itens WHERE nm_lote EQ st_lote_aux AND chvid NE '2'.
-         lc_tabix = sy-tabix.
-         ADD 1 TO lc_tabix.
-         READ TABLE it_arquivo INDEX lc_tabix INTO wa_arquivo.
+      LOOP AT it_reg_itens INTO wa_reg_itens WHERE nm_lote EQ st_lote_aux AND chvid NE '2'.
+        lc_tabix = sy-tabix.
+        ADD 1 TO lc_tabix.
+        READ TABLE it_arquivo INDEX lc_tabix INTO wa_arquivo.
 
-         READ TABLE it_zlest0025 WITH KEY chvid = wa_reg_itens-chvid INTO wa_zlest0025.
-         IF ( wa_reg_itens-chvid IS INITIAL ) OR ( NOT sy-subrc IS INITIAL ).
-           CONTINUE.
-         ENDIF.
+        READ TABLE it_zlest0025 WITH KEY chvid = wa_reg_itens-chvid INTO wa_zlest0025.
+        IF ( wa_reg_itens-chvid IS INITIAL ) OR ( NOT sy-subrc IS INITIAL ).
+          CONTINUE.
+        ENDIF.
 
-         READ TABLE it_reg_itens_aux INTO wa_reg_itens_aux
+        READ TABLE it_reg_itens_aux INTO wa_reg_itens_aux
          WITH KEY nucontrato = wa_reg_itens-nucontrato chvid = wa_reg_itens-chvid BINARY SEARCH.
 
-         IF sy-subrc IS INITIAL.
-           insert_line_log wa_reg_cabecalho-nr_lote_adm
+        IF sy-subrc IS INITIAL.
+          insert_line_log wa_reg_cabecalho-nr_lote_adm
                            space
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -4028,88 +4028,88 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            wa_arquivo-linha
                            'E'.
            "Erro de existência de chave já importada
-           CONTINUE.
-         ENDIF.
+          CONTINUE.
+        ENDIF.
 
-         wa_reg_itens-nm_lote      = st_lote.
-         wa_reg_itens-status       = 'I'.
-         wa_reg_itens-nm_lote_item = vg_nm_lote_item.
+        wa_reg_itens-nm_lote      = st_lote.
+        wa_reg_itens-status       = 'I'.
+        wa_reg_itens-nm_lote_item = vg_nm_lote_item.
 
-         READ TABLE it_zcte_ciot INTO wa_zcte_ciot WITH KEY nucontrato = wa_reg_itens-nucontrato BINARY SEARCH.
+        READ TABLE it_zcte_ciot INTO wa_zcte_ciot WITH KEY nucontrato = wa_reg_itens-nucontrato BINARY SEARCH.
 
-         IF ( sy-subrc IS INITIAL ) AND ( wa_reg_itens-nucontrato IS NOT INITIAL ).
+        IF ( sy-subrc IS INITIAL ) AND ( wa_reg_itens-nucontrato IS NOT INITIAL ).
 
-           READ TABLE it_zcte_identifica INTO wa_zcte_identifica WITH KEY docnum = wa_zcte_ciot-docnum BINARY SEARCH.
-           wa_reg_itens-cd_ciot     = wa_zcte_ciot-cd_ciot.
-           wa_reg_itens-nr_ciot     = wa_zcte_ciot-nr_ciot.
-           wa_reg_itens-docnum      = wa_zcte_ciot-docnum.
-           wa_reg_itens-tknum       = wa_zcte_ciot-tknum.
-           wa_reg_itens-peso_origem = wa_zcte_ciot-quantidade.
-           wa_reg_itens-ctenum      = wa_zcte_identifica-nct.
-           wa_reg_itens-cteserie    = wa_zcte_identifica-serie.
-           wa_reg_itens-tp_plano_administradora = wa_zcte_ciot-tp_plano_administradora.
+          READ TABLE it_zcte_identifica INTO wa_zcte_identifica WITH KEY docnum = wa_zcte_ciot-docnum BINARY SEARCH.
+          wa_reg_itens-cd_ciot     = wa_zcte_ciot-cd_ciot.
+          wa_reg_itens-nr_ciot     = wa_zcte_ciot-nr_ciot.
+          wa_reg_itens-docnum      = wa_zcte_ciot-docnum.
+          wa_reg_itens-tknum       = wa_zcte_ciot-tknum.
+          wa_reg_itens-peso_origem = wa_zcte_ciot-quantidade.
+          wa_reg_itens-ctenum      = wa_zcte_identifica-nct.
+          wa_reg_itens-cteserie    = wa_zcte_identifica-serie.
+          wa_reg_itens-tp_plano_administradora = wa_zcte_ciot-tp_plano_administradora.
 
-           IF wa_zlest0025-naturezachvid EQ 'S'.
-             wa_reg_itens-vl_transacao = wa_reg_itens-vl_transacao * ( -1 ).
-           ENDIF.
-           wa_reg_cabecalho-vl_total_lote = wa_reg_cabecalho-vl_total_lote + wa_reg_itens-vl_transacao.
+          IF wa_zlest0025-naturezachvid EQ 'S'.
+            wa_reg_itens-vl_transacao = wa_reg_itens-vl_transacao * ( -1 ).
+          ENDIF.
+          wa_reg_cabecalho-vl_total_lote = wa_reg_cabecalho-vl_total_lote + wa_reg_itens-vl_transacao.
 
-           CASE wa_reg_itens-tp_plano_administradora.
-             	WHEN zescl_ciot=>st_tp_plano_pre_pago.
-               vg_tipcontabil_itm = 'FP'.
-             WHEN OTHERS.
-               vg_tipcontabil_itm = vg_tipcontabil.
-           ENDCASE.
+          CASE wa_reg_itens-tp_plano_administradora.
+            WHEN zescl_ciot=>st_tp_plano_pre_pago.
+              vg_tipcontabil_itm = 'FP'.
+            WHEN OTHERS.
+              vg_tipcontabil_itm = vg_tipcontabil.
+          ENDCASE.
 
-           IF vg_tipcontabil_itm EQ 'FC'.
-             wa_reg_itens-vl_diferenca  = 0.
+          IF vg_tipcontabil_itm EQ 'FC'.
+            wa_reg_itens-vl_diferenca  = 0.
 
-             CASE wa_reg_itens-chvid.
-               WHEN '30'.
-                 READ TABLE it_valores INTO wa_valores
+            CASE wa_reg_itens-chvid.
+              WHEN '30'.
+                READ TABLE it_valores INTO wa_valores
                  WITH KEY cd_ciot = wa_zcte_ciot-cd_ciot
                           docnum  = wa_zcte_ciot-docnum.
-                 IF sy-subrc IS INITIAL.
-                   DATA(vg_tabix) = sy-tabix.
-                   wa_reg_itens-vl_pago_lote = wa_valores-vl_quebra * -1.
-                   wa_valores-vl_quebra      = 0.
-                   MODIFY it_valores FROM wa_valores INDEX vg_tabix TRANSPORTING vl_quebra.
-                 ENDIF.
+                IF sy-subrc IS INITIAL.
+                  DATA(vg_tabix) = sy-tabix.
+                  wa_reg_itens-vl_pago_lote = wa_valores-vl_quebra * -1.
+                  wa_valores-vl_quebra      = 0.
+                  MODIFY it_valores FROM wa_valores INDEX vg_tabix TRANSPORTING vl_quebra.
+                ENDIF.
                  "Quebra
-               WHEN '31'.
+              WHEN '31'.
                  "Perda
-                 READ TABLE it_valores INTO wa_valores
+                READ TABLE it_valores INTO wa_valores
                  WITH KEY cd_ciot = wa_zcte_ciot-cd_ciot
                           docnum  = wa_zcte_ciot-docnum.
 
-                 IF sy-subrc IS INITIAL.
-                   vg_tabix = sy-tabix.
-                   wa_reg_itens-vl_pago_lote = wa_valores-vl_perda * -1.
-                   wa_valores-vl_perda       = 0.
-                   MODIFY it_valores FROM wa_valores INDEX vg_tabix TRANSPORTING vl_perda.
-                 ENDIF.
-               WHEN OTHERS.
-                 wa_reg_itens-vl_pago_lote = wa_reg_itens-vl_transacao.
-             ENDCASE.
+                IF sy-subrc IS INITIAL.
+                  vg_tabix = sy-tabix.
+                  wa_reg_itens-vl_pago_lote = wa_valores-vl_perda * -1.
+                  wa_valores-vl_perda       = 0.
+                  MODIFY it_valores FROM wa_valores INDEX vg_tabix TRANSPORTING vl_perda.
+                ENDIF.
+              WHEN OTHERS.
+                wa_reg_itens-vl_pago_lote = wa_reg_itens-vl_transacao.
+            ENDCASE.
 
-           ELSEIF vg_tipcontabil_itm EQ 'FS' OR vg_tipcontabil_itm EQ 'FP'.
-             wa_reg_itens-vl_conferido    = wa_reg_itens-vl_transacao.
-             wa_reg_itens-vl_pago_lote    = wa_reg_itens-vl_transacao.
-             wa_reg_itens-ck_conferido    = 'X'.
-             wa_reg_itens-ds_usuario_conf = sy-uname.
-           ENDIF.
+          ELSEIF vg_tipcontabil_itm EQ 'FS' OR vg_tipcontabil_itm EQ 'FP'.
+            wa_reg_itens-vl_conferido    = wa_reg_itens-vl_transacao.
+            wa_reg_itens-vl_pago_lote    = wa_reg_itens-vl_transacao.
+            wa_reg_itens-ck_conferido    = 'X'.
+            wa_reg_itens-ds_usuario_conf = sy-uname.
+          ENDIF.
 
-           wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_pago_lote.
+          wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_pago_lote.
 
-           CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+          CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
              EXPORTING
                input  = wa_reg_itens-nm_lote_item
              IMPORTING
                output = wa_reg_itens-nm_lote_item.
 
-           MODIFY zpfe_lote_item FROM wa_reg_itens.
-           vg_nm_lote_item = vg_nm_lote_item + 1.
-           insert_line_log wa_reg_itens-nr_lote_adm
+          MODIFY zpfe_lote_item FROM wa_reg_itens.
+          vg_nm_lote_item = vg_nm_lote_item + 1.
+          insert_line_log wa_reg_itens-nr_lote_adm
                            wa_reg_itens-nm_lote
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -4117,8 +4117,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            'A linha do arquivo foi importado com sucesso'
                            space
                            'S'.
-         ELSE.
-           insert_line_log wa_reg_cabecalho-nr_lote_adm
+        ELSE.
+          insert_line_log wa_reg_cabecalho-nr_lote_adm
                            space
                            wa_reg_itens-chvid
                            wa_reg_itens-nucontrato
@@ -4127,79 +4127,79 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            wa_arquivo-linha
                            'E'.
            "Erro de Contrato não encontrado
-         ENDIF.
-       ENDLOOP.
+        ENDIF.
+      ENDLOOP.
 
-       IF vg_tipcontabil EQ 'FC'.
-         IF it_valores[] IS NOT INITIAL.
-           SELECT *
+      IF vg_tipcontabil EQ 'FC'.
+        IF it_valores[] IS NOT INITIAL.
+          SELECT *
              FROM zcte_ciot
              INTO TABLE it_zcte_ciot
               FOR ALL ENTRIES IN it_valores
               WHERE cd_ciot EQ it_valores-cd_ciot.
 
-           SELECT *
+          SELECT *
              FROM zcte_identifica
              INTO TABLE it_zcte_identifica
              FOR ALL ENTRIES IN it_valores
               WHERE docnum EQ it_valores-docnum.
 
-           SORT it_zcte_ciot BY cd_ciot.
-           SORT it_zcte_identifica BY docnum.
-         ENDIF.
+          SORT it_zcte_ciot BY cd_ciot.
+          SORT it_zcte_identifica BY docnum.
+        ENDIF.
 
-         LOOP AT it_valores INTO wa_valores WHERE ( vl_quebra GT 0 OR vl_perda GT 0 ) .
+        LOOP AT it_valores INTO wa_valores WHERE ( vl_quebra GT 0 OR vl_perda GT 0 ) .
 
-           wa_reg_itens-nm_lote = st_lote.
-           wa_reg_itens-status  = 'I'.
+          wa_reg_itens-nm_lote = st_lote.
+          wa_reg_itens-status  = 'I'.
 
-           READ TABLE it_zcte_ciot INTO wa_zcte_ciot WITH KEY cd_ciot = wa_valores-cd_ciot BINARY SEARCH.
+          READ TABLE it_zcte_ciot INTO wa_zcte_ciot WITH KEY cd_ciot = wa_valores-cd_ciot BINARY SEARCH.
 
-           READ TABLE it_zcte_identifica INTO wa_zcte_identifica WITH KEY docnum = wa_valores-docnum BINARY SEARCH.
+          READ TABLE it_zcte_identifica INTO wa_zcte_identifica WITH KEY docnum = wa_valores-docnum BINARY SEARCH.
 
-           wa_reg_itens-cd_ciot       = wa_zcte_ciot-cd_ciot.
-           wa_reg_itens-nr_ciot       = wa_zcte_ciot-nr_ciot.
-           wa_reg_itens-docnum         = wa_zcte_ciot-docnum.
-           wa_reg_itens-tknum         = wa_zcte_ciot-tknum.
-           wa_reg_itens-ctenum        = wa_zcte_identifica-nct.
-           wa_reg_itens-cteserie      = wa_zcte_identifica-serie.
+          wa_reg_itens-cd_ciot       = wa_zcte_ciot-cd_ciot.
+          wa_reg_itens-nr_ciot       = wa_zcte_ciot-nr_ciot.
+          wa_reg_itens-docnum         = wa_zcte_ciot-docnum.
+          wa_reg_itens-tknum         = wa_zcte_ciot-tknum.
+          wa_reg_itens-ctenum        = wa_zcte_identifica-nct.
+          wa_reg_itens-cteserie      = wa_zcte_identifica-serie.
 
-           wa_reg_itens-vl_pago_lote  = 0.
-           wa_reg_itens-vl_transacao  = 0.
-           wa_reg_itens-vl_diferenca  = 0.
+          wa_reg_itens-vl_pago_lote  = 0.
+          wa_reg_itens-vl_transacao  = 0.
+          wa_reg_itens-vl_diferenca  = 0.
 
-           IF wa_valores-vl_quebra GT 0.
-             READ TABLE it_zlest0025 WITH KEY chvid = '30' INTO wa_zlest0025.
-             wa_reg_itens-vl_pago_lote = wa_valores-vl_quebra * ( -1 ).
-             wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_pago_lote.
-             wa_reg_itens-chvid = '30'.
-             wa_reg_itens-nm_lote_item = vg_nm_lote_item.
+          IF wa_valores-vl_quebra GT 0.
+            READ TABLE it_zlest0025 WITH KEY chvid = '30' INTO wa_zlest0025.
+            wa_reg_itens-vl_pago_lote = wa_valores-vl_quebra * ( -1 ).
+            wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_pago_lote.
+            wa_reg_itens-chvid = '30'.
+            wa_reg_itens-nm_lote_item = vg_nm_lote_item.
 
-             CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+            CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
                EXPORTING
                  input  = wa_reg_itens-nm_lote_item
                IMPORTING
                  output = wa_reg_itens-nm_lote_item.
 
-             MODIFY zpfe_lote_item FROM wa_reg_itens.
-             vg_nm_lote_item = vg_nm_lote_item + 1.
-           ENDIF.
-           IF wa_valores-vl_perda GT 0.
-             READ TABLE it_zlest0025 WITH KEY chvid = '31' INTO wa_zlest0025.
-             wa_reg_itens-vl_pago_lote = wa_valores-vl_perda * ( -1 ).
-             wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_pago_lote.
-             wa_reg_itens-chvid = '31'.
-             wa_reg_itens-nm_lote_item = vg_nm_lote_item.
+            MODIFY zpfe_lote_item FROM wa_reg_itens.
+            vg_nm_lote_item = vg_nm_lote_item + 1.
+          ENDIF.
+          IF wa_valores-vl_perda GT 0.
+            READ TABLE it_zlest0025 WITH KEY chvid = '31' INTO wa_zlest0025.
+            wa_reg_itens-vl_pago_lote = wa_valores-vl_perda * ( -1 ).
+            wa_reg_cabecalho-vl_confi_lote = wa_reg_cabecalho-vl_confi_lote + wa_reg_itens-vl_pago_lote.
+            wa_reg_itens-chvid = '31'.
+            wa_reg_itens-nm_lote_item = vg_nm_lote_item.
 
-             CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+            CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
                EXPORTING
                  input  = wa_reg_itens-nm_lote_item
                IMPORTING
                  output = wa_reg_itens-nm_lote_item.
 
-             MODIFY zpfe_lote_item FROM wa_reg_itens.
-             vg_nm_lote_item = vg_nm_lote_item + 1.
-             insert_line_log wa_reg_itens-nr_lote_adm
+            MODIFY zpfe_lote_item FROM wa_reg_itens.
+            vg_nm_lote_item = vg_nm_lote_item + 1.
+            insert_line_log wa_reg_itens-nr_lote_adm
                              wa_reg_itens-nm_lote
                              wa_reg_itens-chvid
                              wa_reg_itens-nucontrato
@@ -4207,17 +4207,17 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                              'A linha do arquivo foi importado com sucesso'
                              space
                              'S'.
-           ENDIF.
-         ENDLOOP.
-       ENDIF.
+          ENDIF.
+        ENDLOOP.
+      ENDIF.
 
-       CLEAR: it_valores[].
+      CLEAR: it_valores[].
 
-       wa_reg_cabecalho-tplote = 'S'.
-       MODIFY zpfe_lote FROM wa_reg_cabecalho.
-       APPEND wa_reg_cabecalho-nm_lote TO e_lotes.
+      wa_reg_cabecalho-tplote = 'S'.
+      MODIFY zpfe_lote FROM wa_reg_cabecalho.
+      APPEND wa_reg_cabecalho-nm_lote TO e_lotes.
 
-       insert_line_log wa_reg_cabecalho-nr_lote_adm
+      insert_line_log wa_reg_cabecalho-nr_lote_adm
                        wa_reg_cabecalho-nm_lote
                        space
                        space
@@ -4225,46 +4225,46 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                        'A linha do cabeçalho do arquivo foi importado com sucesso'
                        space
                        'S'.
-     ENDLOOP.
+    ENDLOOP.
 
-     COMMIT WORK AND WAIT.
+    COMMIT WORK AND WAIT.
 
-     LOOP AT it_reg_cabecalho INTO wa_reg_cabecalho.
-       CREATE OBJECT arquivo.
-       arquivo->set_bukrs( i_bukrs = i_bukrs ).
-       arquivo->set_branch( i_branch = i_branch  ).
-       arquivo->set_ds_filename( i_ds_filename = i_filename ).
-       arquivo->set_ds_filename_ped( i_ds_filename = i_filename_pedagio ).
-       arquivo->set_corpo_arquivo( i_corpo_arquivo = it_lines_arq ).
-       arquivo->set_corpo_arquivo_ped( i_corpo_arquivo = it_lines_arq_ped ).
-       arquivo->set_nr_lote_adm( i_nr_lote_adm = wa_reg_cabecalho-nr_lote_adm ).
-       arquivo->zesif_cadastro~gravar_registro( ).
-       CLEAR: arquivo.
-     ENDLOOP.
+    LOOP AT it_reg_cabecalho INTO wa_reg_cabecalho.
+      CREATE OBJECT arquivo.
+      arquivo->set_bukrs( i_bukrs = i_bukrs ).
+      arquivo->set_branch( i_branch = i_branch  ).
+      arquivo->set_ds_filename( i_ds_filename = i_filename ).
+      arquivo->set_ds_filename_ped( i_ds_filename = i_filename_pedagio ).
+      arquivo->set_corpo_arquivo( i_corpo_arquivo = it_lines_arq ).
+      arquivo->set_corpo_arquivo_ped( i_corpo_arquivo = it_lines_arq_ped ).
+      arquivo->set_nr_lote_adm( i_nr_lote_adm = wa_reg_cabecalho-nr_lote_adm ).
+      arquivo->zesif_cadastro~gravar_registro( ).
+      CLEAR: arquivo.
+    ENDLOOP.
 
-   ENDMETHOD.
+  ENDMETHOD.
 
 
-   METHOD PROCESSAR_ARQUIVO_CONFERENCIA.
+  METHOD processar_arquivo_conferencia.
 
-     TYPES: BEGIN OF TY_LINES,
-              LINE(500),
-            END OF TY_LINES.
+    TYPES: BEGIN OF ty_lines,
+              line(500),
+            END OF ty_lines.
 
-     DATA: IT_LINES_ARQ        TYPE ZDE_LINHA_TXT_1000_T,
-           IT_LINES            TYPE STANDARD TABLE OF TY_LINES,
-           WA_ZPFE_LOTE_ITEM   TYPE ZPFE_LOTE_ITEM,
-           WA_ZPFE_LOTE_ITEM_C TYPE ZPFE_LOTE_ITEM,
-           IT_ZPFE_LOTE_ITEM   TYPE TABLE OF ZPFE_LOTE_ITEM,
-           IT_ZPFE_LOTE_ITEM_C TYPE TABLE OF ZPFE_LOTE_ITEM,
-           WA_CHVID_ADM(10),
-           WA_0062             TYPE ZLEST0062,
-           IT_0062             TYPE TABLE OF ZLEST0062,
-           LC_SUCESSO          TYPE C LENGTH 1,
-           ARQUIVO             TYPE REF TO ZCL_TIP_FRETE_AQ_CONF,
-           LC_NR_LOTE_ADM	     TYPE ZPFE_NR_LOTE_ADM.
+    DATA: it_lines_arq        TYPE zde_linha_txt_1000_t,
+           it_lines            TYPE STANDARD TABLE OF ty_lines,
+           wa_zpfe_lote_item   TYPE zpfe_lote_item,
+           wa_zpfe_lote_item_c TYPE zpfe_lote_item,
+           it_zpfe_lote_item   TYPE TABLE OF zpfe_lote_item,
+           it_zpfe_lote_item_c TYPE TABLE OF zpfe_lote_item,
+           wa_chvid_adm(10),
+           wa_0062             TYPE zlest0062,
+           it_0062             TYPE TABLE OF zlest0062,
+           lc_sucesso          TYPE c LENGTH 1,
+           arquivo             TYPE REF TO zcl_tip_frete_aq_conf,
+           lc_nr_lote_adm	     TYPE zpfe_nr_lote_adm.
 
-     DEFINE INSERT_LINE_LOG.
+    DEFINE insert_line_log.
 
        CLEAR: WA_0062.
        WA_0062-NR_LOTE_ADM = &1.
@@ -4280,93 +4280,93 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          MODIFY ZLEST0062 FROM WA_0062.
        ENDIF.
 
-     END-OF-DEFINITION.
+    END-OF-DEFINITION.
 
-     CLEAR: IT_ZPFE_LOTE_ITEM_C, IT_ZPFE_LOTE_ITEM, IT_ZPFE_LOTE_ITEM_C[], IT_ZPFE_LOTE_ITEM[].
+    CLEAR: it_zpfe_lote_item_c, it_zpfe_lote_item, it_zpfe_lote_item_c[], it_zpfe_lote_item[].
 
-     DATA: URL TYPE STRING.
-     DATA: T_URL TYPE STRING.
-     DATA: CLIENT TYPE REF TO IF_HTTP_CLIENT.
-     DATA: C_XML TYPE STRING.
-     DATA: C_SEPARADOR TYPE C LENGTH 1.
+    DATA: url TYPE string.
+    DATA: t_url TYPE string.
+    DATA: client TYPE REF TO if_http_client.
+    DATA: c_xml TYPE string.
+    DATA: c_separador TYPE c LENGTH 1.
 
-     URL = I_FILENAME.
+    url = i_filename.
 
-     CL_HTTP_CLIENT=>CREATE_BY_URL(
+    cl_http_client=>create_by_url(
        EXPORTING
-         URL                = URL
+         url                = url
 *           PROXY_HOST         =
 *           PROXY_SERVICE      =
 *           SSL_ID             =
 *           SAP_USERNAME       =
 *           SAP_CLIENT         =
        IMPORTING
-         CLIENT             = CLIENT
+         client             = client
        EXCEPTIONS
-         ARGUMENT_NOT_FOUND = 1
-         PLUGIN_NOT_ACTIVE  = 2
-         INTERNAL_ERROR     = 3
+         argument_not_found = 1
+         plugin_not_active  = 2
+         internal_error     = 3
          OTHERS             = 4 ).
 
-     IF SY-SUBRC IS NOT INITIAL.
-       RAISE EXCEPTION TYPE ZCX_ERRO_ARQUIVO
+    IF sy-subrc IS NOT INITIAL.
+      RAISE EXCEPTION TYPE zcx_erro_arquivo
          EXPORTING
-           TEXTID = VALUE #( MSGID = SY-MSGID MSGNO = SY-MSGNO ATTR1 = CONV #( SY-MSGV1 ) ATTR2 = CONV #( SY-MSGV2 ) ATTR3 = CONV #( SY-MSGV3 ) ATTR4 = CONV #( SY-MSGV4 ) )
-           MSGID  = SY-MSGID
-           MSGNO  = SY-MSGNO
-           MSGTY  = 'E'
-           MSGV1  = SY-MSGV1
-           MSGV2  = SY-MSGV2
-           MSGV3  = SY-MSGV3
-           MSGV4  = SY-MSGV4.
-     ENDIF.
+           textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
+           msgid  = sy-msgid
+           msgno  = sy-msgno
+           msgty  = 'E'
+           msgv1  = sy-msgv1
+           msgv2  = sy-msgv2
+           msgv3  = sy-msgv3
+           msgv4  = sy-msgv4.
+    ENDIF.
 
-     CLIENT->SEND(
+    client->send(
        EXCEPTIONS
-         HTTP_COMMUNICATION_FAILURE = 1
-         HTTP_INVALID_STATE         = 2
-         HTTP_PROCESSING_FAILED     = 3
-         HTTP_INVALID_TIMEOUT       = 4
+         http_communication_failure = 1
+         http_invalid_state         = 2
+         http_processing_failed     = 3
+         http_invalid_timeout       = 4
          OTHERS                     = 5
      ).
 
-     IF SY-SUBRC IS NOT INITIAL.
-       RAISE EXCEPTION TYPE ZCX_ERRO_ARQUIVO
+    IF sy-subrc IS NOT INITIAL.
+      RAISE EXCEPTION TYPE zcx_erro_arquivo
          EXPORTING
-           TEXTID = VALUE #( MSGID = SY-MSGID MSGNO = SY-MSGNO ATTR1 = CONV #( SY-MSGV1 ) ATTR2 = CONV #( SY-MSGV2 ) ATTR3 = CONV #( SY-MSGV3 ) ATTR4 = CONV #( SY-MSGV4 ) )
-           MSGID  = SY-MSGID
-           MSGNO  = SY-MSGNO
-           MSGTY  = 'E'
-           MSGV1  = SY-MSGV1
-           MSGV2  = SY-MSGV2
-           MSGV3  = SY-MSGV3
-           MSGV4  = SY-MSGV4.
-     ENDIF.
+           textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
+           msgid  = sy-msgid
+           msgno  = sy-msgno
+           msgty  = 'E'
+           msgv1  = sy-msgv1
+           msgv2  = sy-msgv2
+           msgv3  = sy-msgv3
+           msgv4  = sy-msgv4.
+    ENDIF.
 
-     CLIENT->RECEIVE(
+    client->receive(
        EXCEPTIONS
-         HTTP_COMMUNICATION_FAILURE = 1
-         HTTP_INVALID_STATE         = 2
-         HTTP_PROCESSING_FAILED     = 3
+         http_communication_failure = 1
+         http_invalid_state         = 2
+         http_processing_failed     = 3
          OTHERS                     = 4
      ).
 
-     IF SY-SUBRC IS NOT INITIAL.
-       RAISE EXCEPTION TYPE ZCX_ERRO_ARQUIVO
+    IF sy-subrc IS NOT INITIAL.
+      RAISE EXCEPTION TYPE zcx_erro_arquivo
          EXPORTING
-           TEXTID = VALUE #( MSGID = SY-MSGID MSGNO = SY-MSGNO ATTR1 = CONV #( SY-MSGV1 ) ATTR2 = CONV #( SY-MSGV2 ) ATTR3 = CONV #( SY-MSGV3 ) ATTR4 = CONV #( SY-MSGV4 ) )
-           MSGID  = SY-MSGID
-           MSGNO  = SY-MSGNO
-           MSGTY  = 'E'
-           MSGV1  = SY-MSGV1
-           MSGV2  = SY-MSGV2
-           MSGV3  = SY-MSGV3
-           MSGV4  = SY-MSGV4.
-     ENDIF.
+           textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
+           msgid  = sy-msgid
+           msgno  = sy-msgno
+           msgty  = 'E'
+           msgv1  = sy-msgv1
+           msgv2  = sy-msgv2
+           msgv3  = sy-msgv3
+           msgv4  = sy-msgv4.
+    ENDIF.
 
-     C_XML = CLIENT->RESPONSE->GET_CDATA( ).
+    c_xml = client->response->get_cdata( ).
 
-     SPLIT C_XML AT CL_ABAP_CHAR_UTILITIES=>NEWLINE INTO: TABLE IT_LINES_ARQ.
+    SPLIT c_xml AT cl_abap_char_utilities=>newline INTO: TABLE it_lines_arq.
 
 *     CALL FUNCTION 'CONVERT_STRING_TO_TABLE'
 *       EXPORTING
@@ -4375,207 +4375,207 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 *       TABLES
 *         ET_TABLE         = IT_LINES_ARQ.
 
-     LOOP AT IT_LINES_ARQ INTO DATA(WA_LINES_ARQ).
-       CLEAR: WA_ZPFE_LOTE_ITEM,
-              WA_ZPFE_LOTE_ITEM_C.
+    LOOP AT it_lines_arq INTO DATA(wa_lines_arq).
+      CLEAR: wa_zpfe_lote_item,
+              wa_zpfe_lote_item_c.
 
-       SPLIT WA_LINES_ARQ AT '|' INTO TABLE IT_LINES.
-       READ TABLE IT_LINES INDEX 1 INTO DATA(WA_LINES).
+      SPLIT wa_lines_arq AT '|' INTO TABLE it_lines.
+      READ TABLE it_lines INDEX 1 INTO DATA(wa_lines).
 
-       CASE WA_LINES-LINE.
-         WHEN '1'.
+      CASE wa_lines-line.
+        WHEN '1'.
 
-           READ TABLE IT_LINES INDEX 4 INTO WA_LINES.
-           CONDENSE WA_LINES-LINE NO-GAPS.
+          READ TABLE it_lines INDEX 4 INTO wa_lines.
+          CONDENSE wa_lines-line NO-GAPS.
 
-           CONCATENATE WA_LINES-LINE+4(4) WA_LINES-LINE+2(2) WA_LINES-LINE(2) INTO DATA(WL_DATA).
-           WA_ZPFE_LOTE_ITEM-DT_CONF_ADM = WL_DATA.
+          CONCATENATE wa_lines-line+4(4) wa_lines-line+2(2) wa_lines-line(2) INTO DATA(wl_data).
+          wa_zpfe_lote_item-dt_conf_adm = wl_data.
 
-           READ TABLE IT_LINES INDEX 7 INTO WA_LINES.
+          READ TABLE it_lines INDEX 7 INTO wa_lines.
 
-           CONDENSE WA_LINES-LINE NO-GAPS.
-           CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+          CONDENSE wa_lines-line NO-GAPS.
+          CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
              EXPORTING
-               INPUT  = WA_LINES-LINE
+               input  = wa_lines-line
              IMPORTING
-               OUTPUT = WA_ZPFE_LOTE_ITEM-NR_LOTE_ADM.
+               output = wa_zpfe_lote_item-nr_lote_adm.
 
-           LC_NR_LOTE_ADM = WA_ZPFE_LOTE_ITEM-NR_LOTE_ADM.
+          lc_nr_lote_adm = wa_zpfe_lote_item-nr_lote_adm.
 
-         WHEN '2'.
+        WHEN '2'.
 
-           READ TABLE IT_LINES INDEX 12 INTO WA_LINES.
-           CONDENSE WA_LINES-LINE NO-GAPS.
-           IF WA_LINES-LINE EQ 'A'.
-             CLEAR: WA_LINES.
-             READ TABLE IT_LINES INDEX 13 INTO WA_LINES.
-             CONDENSE WA_LINES-LINE NO-GAPS.
-             IF WA_LINES-LINE IS INITIAL.
+          READ TABLE it_lines INDEX 12 INTO wa_lines.
+          CONDENSE wa_lines-line NO-GAPS.
+          IF wa_lines-line EQ 'A'.
+            CLEAR: wa_lines.
+            READ TABLE it_lines INDEX 13 INTO wa_lines.
+            CONDENSE wa_lines-line NO-GAPS.
+            IF wa_lines-line IS INITIAL.
 **          Inclusao de nova linha na tabela e lote itens
-               WA_ZPFE_LOTE_ITEM_C-NR_LOTE_ADM = WA_ZPFE_LOTE_ITEM-NR_LOTE_ADM.
-               READ TABLE IT_LINES INDEX 8 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
-               WA_ZPFE_LOTE_ITEM_C-NR_CIOT = WA_LINES-LINE.
+              wa_zpfe_lote_item_c-nr_lote_adm = wa_zpfe_lote_item-nr_lote_adm.
+              READ TABLE it_lines INDEX 8 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
+              wa_zpfe_lote_item_c-nr_ciot = wa_lines-line.
 
-               READ TABLE IT_LINES INDEX 2 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
-               WA_ZPFE_LOTE_ITEM_C-NUCONTRATO = WA_LINES-LINE.
+              READ TABLE it_lines INDEX 2 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
+              wa_zpfe_lote_item_c-nucontrato = wa_lines-line.
 
-               READ TABLE IT_LINES INDEX 5 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
-               WA_ZPFE_LOTE_ITEM_C-CTENUM = WA_LINES-LINE.
+              READ TABLE it_lines INDEX 5 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
+              wa_zpfe_lote_item_c-ctenum = wa_lines-line.
 
-               READ TABLE IT_LINES INDEX 3 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
+              READ TABLE it_lines INDEX 3 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
 
-               CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+              CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
                  EXPORTING
-                   INPUT  = WA_LINES-LINE
+                   input  = wa_lines-line
                  IMPORTING
-                   OUTPUT = WA_CHVID_ADM.
+                   output = wa_chvid_adm.
 
-               SELECT SINGLE * INTO @DATA(WA_ZPFE_LOTE_HIS_DE)
-                 FROM ZPFE_LOTE_HIS_DE
-                WHERE CHVID_ADM EQ @WA_CHVID_ADM.
+              SELECT SINGLE * INTO @DATA(wa_zpfe_lote_his_de)
+                 FROM zpfe_lote_his_de
+                WHERE chvid_adm EQ @wa_chvid_adm.
 
-               IF SY-SUBRC IS INITIAL.
-                 WA_ZPFE_LOTE_ITEM_C-CHVID = WA_ZPFE_LOTE_HIS_DE-CHVID_EMP.
-               ENDIF.
+              IF sy-subrc IS INITIAL.
+                wa_zpfe_lote_item_c-chvid = wa_zpfe_lote_his_de-chvid_emp.
+              ENDIF.
 
-               READ TABLE IT_LINES INDEX 4 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
-               CONCATENATE WA_LINES-LINE+4(4) WA_LINES-LINE+2(2) WA_LINES-LINE(2) INTO WA_ZPFE_LOTE_ITEM_C-DT_TRANSACAO.
+              READ TABLE it_lines INDEX 4 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
+              CONCATENATE wa_lines-line+4(4) wa_lines-line+2(2) wa_lines-line(2) INTO wa_zpfe_lote_item_c-dt_transacao.
 
-               READ TABLE IT_LINES INDEX 9 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
-               WA_ZPFE_LOTE_ITEM_C-PESO_ORIGEM = WA_LINES-LINE.
+              READ TABLE it_lines INDEX 9 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
+              wa_zpfe_lote_item_c-peso_origem = wa_lines-line.
 
-               READ TABLE IT_LINES INDEX 10 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
-               WA_ZPFE_LOTE_ITEM_C-PESO_CHEGADA = WA_ZPFE_LOTE_ITEM_C-PESO_CONF_ADM = WA_LINES-LINE.
+              READ TABLE it_lines INDEX 10 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
+              wa_zpfe_lote_item_c-peso_chegada = wa_zpfe_lote_item_c-peso_conf_adm = wa_lines-line.
 
-               READ TABLE IT_LINES INDEX 11 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
-               CONCATENATE WA_LINES-LINE+4(4) WA_LINES-LINE+2(2) WA_LINES-LINE(2) INTO  WA_ZPFE_LOTE_ITEM_C-DT_CHEGADA.
+              READ TABLE it_lines INDEX 11 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
+              CONCATENATE wa_lines-line+4(4) wa_lines-line+2(2) wa_lines-line(2) INTO  wa_zpfe_lote_item_c-dt_chegada.
 
-               WA_ZPFE_LOTE_ITEM_C-DT_BAIXA = WA_ZPFE_LOTE_ITEM_C-DT_CONF_ADM = WA_ZPFE_LOTE_ITEM-DT_CONF_ADM.
+              wa_zpfe_lote_item_c-dt_baixa = wa_zpfe_lote_item_c-dt_conf_adm = wa_zpfe_lote_item-dt_conf_adm.
 
-               READ TABLE IT_LINES INDEX 7 INTO WA_LINES.
-               CONDENSE WA_LINES-LINE NO-GAPS.
-               IF NOT WA_LINES-LINE IS INITIAL.
-                 DATA(LC_CONT) = STRLEN( WA_LINES-LINE ).
-                 SUBTRACT 2 FROM LC_CONT.
-                 CONCATENATE WA_LINES-LINE(LC_CONT) '.' WA_LINES-LINE+LC_CONT INTO WA_LINES-LINE.
-               ELSE.
-                 WA_LINES-LINE  = '0.00'.
-               ENDIF.
+              READ TABLE it_lines INDEX 7 INTO wa_lines.
+              CONDENSE wa_lines-line NO-GAPS.
+              IF NOT wa_lines-line IS INITIAL.
+                DATA(lc_cont) = strlen( wa_lines-line ).
+                SUBTRACT 2 FROM lc_cont.
+                CONCATENATE wa_lines-line(lc_cont) '.' wa_lines-line+lc_cont INTO wa_lines-line.
+              ELSE.
+                wa_lines-line  = '0.00'.
+              ENDIF.
 
-               WA_ZPFE_LOTE_ITEM_C-VL_CONF_ADM = WA_ZPFE_LOTE_ITEM_C-VL_AJUS_ADM = WA_LINES-LINE.
+              wa_zpfe_lote_item_c-vl_conf_adm = wa_zpfe_lote_item_c-vl_ajus_adm = wa_lines-line.
 
-               SELECT SINGLE * INTO @DATA(WA_0025)
-                 FROM ZLEST0025
-                WHERE CHVID EQ @WA_ZPFE_LOTE_ITEM_C-CHVID.
+              SELECT SINGLE * INTO @DATA(wa_0025)
+                 FROM zlest0025
+                WHERE chvid EQ @wa_zpfe_lote_item_c-chvid.
 
-               IF WA_0025-NATUREZACHVID EQ 'S'.
-                 MULTIPLY WA_ZPFE_LOTE_ITEM_C-VL_AJUS_ADM BY -1.
-               ENDIF.
-               WA_ZPFE_LOTE_ITEM_C-CK_CONF_ADM = 'X'.
+              IF wa_0025-naturezachvid EQ 'S'.
+                MULTIPLY wa_zpfe_lote_item_c-vl_ajus_adm BY -1.
+              ENDIF.
+              wa_zpfe_lote_item_c-ck_conf_adm = 'X'.
 
-               APPEND WA_ZPFE_LOTE_ITEM_C TO IT_ZPFE_LOTE_ITEM_C.
-             ENDIF.
-           ELSE.
-             READ TABLE IT_LINES INDEX 2 INTO WA_LINES.
-             CONDENSE WA_LINES-LINE NO-GAPS.
-             WA_ZPFE_LOTE_ITEM-NUCONTRATO = WA_LINES-LINE.
+              APPEND wa_zpfe_lote_item_c TO it_zpfe_lote_item_c.
+            ENDIF.
+          ELSE.
+            READ TABLE it_lines INDEX 2 INTO wa_lines.
+            CONDENSE wa_lines-line NO-GAPS.
+            wa_zpfe_lote_item-nucontrato = wa_lines-line.
 
-             READ TABLE IT_LINES INDEX 3 INTO WA_LINES.
-             CONDENSE WA_LINES-LINE NO-GAPS.
-             SHIFT WA_LINES-LINE LEFT DELETING LEADING '0'.
+            READ TABLE it_lines INDEX 3 INTO wa_lines.
+            CONDENSE wa_lines-line NO-GAPS.
+            SHIFT wa_lines-line LEFT DELETING LEADING '0'.
 
-             CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+            CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
                EXPORTING
-                 INPUT  = WA_LINES-LINE
+                 input  = wa_lines-line
                IMPORTING
-                 OUTPUT = WA_CHVID_ADM.
+                 output = wa_chvid_adm.
 
-             SELECT SINGLE * INTO WA_ZPFE_LOTE_HIS_DE
-               FROM ZPFE_LOTE_HIS_DE
-              WHERE CHVID_ADM EQ WA_CHVID_ADM.
+            SELECT SINGLE * INTO wa_zpfe_lote_his_de
+               FROM zpfe_lote_his_de
+              WHERE chvid_adm EQ wa_chvid_adm.
 
-             IF SY-SUBRC IS INITIAL.
-               WA_ZPFE_LOTE_ITEM-CHVID = WA_ZPFE_LOTE_HIS_DE-CHVID_EMP.
-             ENDIF.
+            IF sy-subrc IS INITIAL.
+              wa_zpfe_lote_item-chvid = wa_zpfe_lote_his_de-chvid_emp.
+            ENDIF.
 
-             READ TABLE IT_LINES INDEX 7 INTO WA_LINES.
-             CONDENSE WA_LINES-LINE NO-GAPS.
+            READ TABLE it_lines INDEX 7 INTO wa_lines.
+            CONDENSE wa_lines-line NO-GAPS.
 
-             CLEAR: LC_CONT.
-             LC_CONT = STRLEN( WA_LINES-LINE ).
-             IF LC_CONT GT 2.
-               SUBTRACT 2 FROM LC_CONT.
-               CONCATENATE WA_LINES-LINE(LC_CONT) '.' WA_LINES-LINE+LC_CONT(2) INTO WA_LINES-LINE.
-               WA_ZPFE_LOTE_ITEM-VL_CONF_ADM = WA_LINES-LINE.
-             ENDIF.
+            CLEAR: lc_cont.
+            lc_cont = strlen( wa_lines-line ).
+            IF lc_cont GT 2.
+              SUBTRACT 2 FROM lc_cont.
+              CONCATENATE wa_lines-line(lc_cont) '.' wa_lines-line+lc_cont(2) INTO wa_lines-line.
+              wa_zpfe_lote_item-vl_conf_adm = wa_lines-line.
+            ENDIF.
 
-             READ TABLE IT_LINES INDEX 10 INTO WA_LINES.
-             CONDENSE WA_LINES-LINE NO-GAPS.
-             WA_ZPFE_LOTE_ITEM-PESO_CONF_ADM = WA_LINES-LINE.
+            READ TABLE it_lines INDEX 10 INTO wa_lines.
+            CONDENSE wa_lines-line NO-GAPS.
+            wa_zpfe_lote_item-peso_conf_adm = wa_lines-line.
 
-             APPEND WA_ZPFE_LOTE_ITEM TO IT_ZPFE_LOTE_ITEM.
-           ENDIF.
-       ENDCASE.
+            APPEND wa_zpfe_lote_item TO it_zpfe_lote_item.
+          ENDIF.
+      ENDCASE.
 
-     ENDLOOP.
+    ENDLOOP.
 
-     IF IT_ZPFE_LOTE_ITEM_C IS NOT INITIAL.
+    IF it_zpfe_lote_item_c IS NOT INITIAL.
 
-       SELECT * INTO TABLE @DATA(IT_LOTE)
-         FROM ZPFE_LOTE
-          FOR ALL ENTRIES IN @IT_ZPFE_LOTE_ITEM_C
-        WHERE NR_LOTE_ADM EQ @IT_ZPFE_LOTE_ITEM_C-NR_LOTE_ADM
-          AND TPLOTE      EQ 'S'.
+      SELECT * INTO TABLE @DATA(it_lote)
+         FROM zpfe_lote
+          FOR ALL ENTRIES IN @it_zpfe_lote_item_c
+        WHERE nr_lote_adm EQ @it_zpfe_lote_item_c-nr_lote_adm
+          AND tplote      EQ 'S'.
 
-       READ TABLE IT_LOTE INDEX 1 INTO DATA(WA_LOTE).
+      READ TABLE it_lote INDEX 1 INTO DATA(wa_lote).
 
-       SELECT * INTO TABLE @DATA(IT_ITENS)
-         FROM ZPFE_LOTE_ITEM
-          FOR ALL ENTRIES IN @IT_ZPFE_LOTE_ITEM_C
-        WHERE NR_LOTE_ADM EQ @IT_ZPFE_LOTE_ITEM_C-NR_LOTE_ADM
-          AND NM_LOTE     EQ @WA_LOTE-NM_LOTE.
+      SELECT * INTO TABLE @DATA(it_itens)
+         FROM zpfe_lote_item
+          FOR ALL ENTRIES IN @it_zpfe_lote_item_c
+        WHERE nr_lote_adm EQ @it_zpfe_lote_item_c-nr_lote_adm
+          AND nm_lote     EQ @wa_lote-nm_lote.
 
-       SELECT * INTO TABLE @DATA(IT_ZCTE_CIOT)
-         FROM ZCTE_CIOT
-          FOR ALL ENTRIES IN @IT_ZPFE_LOTE_ITEM_C
-        WHERE NUCONTRATO EQ @IT_ZPFE_LOTE_ITEM_C-NUCONTRATO.
+      SELECT * INTO TABLE @DATA(it_zcte_ciot)
+         FROM zcte_ciot
+          FOR ALL ENTRIES IN @it_zpfe_lote_item_c
+        WHERE nucontrato EQ @it_zpfe_lote_item_c-nucontrato.
 
-       SORT IT_ITENS BY NM_LOTE_ITEM DESCENDING.
+      SORT it_itens BY nm_lote_item DESCENDING.
 
-       LOOP AT IT_ZPFE_LOTE_ITEM_C INTO WA_ZPFE_LOTE_ITEM_C.
+      LOOP AT it_zpfe_lote_item_c INTO wa_zpfe_lote_item_c.
 
-         READ TABLE IT_ITENS INTO DATA(WA_ITENS) WITH KEY NR_LOTE_ADM = WA_ZPFE_LOTE_ITEM_C-NR_LOTE_ADM.
-         IF SY-SUBRC IS NOT INITIAL.
-           CLEAR: WA_ITENS.
-         ENDIF.
+        READ TABLE it_itens INTO DATA(wa_itens) WITH KEY nr_lote_adm = wa_zpfe_lote_item_c-nr_lote_adm.
+        IF sy-subrc IS NOT INITIAL.
+          CLEAR: wa_itens.
+        ENDIF.
 
-         READ TABLE IT_ZCTE_CIOT INTO DATA(WA_ZCTE_CIOT) WITH KEY NUCONTRATO = WA_ZPFE_LOTE_ITEM_C-NUCONTRATO.
-         IF SY-SUBRC IS NOT INITIAL.
-           CLEAR: WA_ZCTE_CIOT.
-         ENDIF.
+        READ TABLE it_zcte_ciot INTO DATA(wa_zcte_ciot) WITH KEY nucontrato = wa_zpfe_lote_item_c-nucontrato.
+        IF sy-subrc IS NOT INITIAL.
+          CLEAR: wa_zcte_ciot.
+        ENDIF.
 
-         WA_ZPFE_LOTE_ITEM_C-NM_LOTE_ITEM = WA_ITENS-NM_LOTE_ITEM + 1.
-         WA_ZPFE_LOTE_ITEM_C-NM_LOTE      = WA_ITENS-NM_LOTE.
-         WA_ZPFE_LOTE_ITEM_C-CD_CIOT      = WA_ZCTE_CIOT-CD_CIOT.
-         WA_ZPFE_LOTE_ITEM_C-DOCNUM       = WA_ZCTE_CIOT-DOCNUM.
-         WA_ZPFE_LOTE_ITEM_C-TKNUM        = WA_ZCTE_CIOT-TKNUM.
+        wa_zpfe_lote_item_c-nm_lote_item = wa_itens-nm_lote_item + 1.
+        wa_zpfe_lote_item_c-nm_lote      = wa_itens-nm_lote.
+        wa_zpfe_lote_item_c-cd_ciot      = wa_zcte_ciot-cd_ciot.
+        wa_zpfe_lote_item_c-docnum       = wa_zcte_ciot-docnum.
+        wa_zpfe_lote_item_c-tknum        = wa_zcte_ciot-tknum.
 
-         CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+        CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
            EXPORTING
-             INPUT  = WA_ZPFE_LOTE_ITEM_C-NM_LOTE_ITEM
+             input  = wa_zpfe_lote_item_c-nm_lote_item
            IMPORTING
-             OUTPUT = WA_ZPFE_LOTE_ITEM_C-NM_LOTE_ITEM.
+             output = wa_zpfe_lote_item_c-nm_lote_item.
 
-         LC_SUCESSO = 'X'.
-         INSERT_LINE_LOG  WA_ZPFE_LOTE_ITEM_C-NR_LOTE_ADM
+        lc_sucesso = 'X'.
+        INSERT_LINE_LOG  WA_ZPFE_LOTE_ITEM_C-NR_LOTE_ADM
                           WA_ZPFE_LOTE_ITEM_C-NM_LOTE
                           WA_ZPFE_LOTE_ITEM_C-CHVID
                           WA_ZPFE_LOTE_ITEM_C-NUCONTRATO
@@ -4584,55 +4584,55 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                           SPACE
                           'S'.
 
-         MODIFY ZPFE_LOTE_ITEM FROM WA_ZPFE_LOTE_ITEM_C.
-       ENDLOOP.
-       REFRESH: IT_ITENS.
-     ENDIF.
+        MODIFY zpfe_lote_item FROM wa_zpfe_lote_item_c.
+      ENDLOOP.
+      REFRESH: it_itens.
+    ENDIF.
 
-     IF IT_ZPFE_LOTE_ITEM IS NOT INITIAL.
+    IF it_zpfe_lote_item IS NOT INITIAL.
 
-       SELECT * INTO TABLE IT_ITENS
-         FROM ZPFE_LOTE_ITEM
-          FOR ALL ENTRIES IN IT_ZPFE_LOTE_ITEM
-        WHERE NR_LOTE_ADM EQ IT_ZPFE_LOTE_ITEM-NR_LOTE_ADM
-          AND NUCONTRATO  EQ IT_ZPFE_LOTE_ITEM-NUCONTRATO
-          AND CHVID       EQ IT_ZPFE_LOTE_ITEM-CHVID.
+      SELECT * INTO TABLE it_itens
+         FROM zpfe_lote_item
+          FOR ALL ENTRIES IN it_zpfe_lote_item
+        WHERE nr_lote_adm EQ it_zpfe_lote_item-nr_lote_adm
+          AND nucontrato  EQ it_zpfe_lote_item-nucontrato
+          AND chvid       EQ it_zpfe_lote_item-chvid.
 
-       IF IT_ITENS IS NOT INITIAL.
-         SELECT * INTO TABLE @DATA(IT_ZLEST0025)
-           FROM ZLEST0025
-            FOR ALL ENTRIES IN @IT_ITENS
-          WHERE CHVID EQ @IT_ITENS-CHVID.
-       ENDIF.
+      IF it_itens IS NOT INITIAL.
+        SELECT * INTO TABLE @DATA(it_zlest0025)
+           FROM zlest0025
+            FOR ALL ENTRIES IN @it_itens
+          WHERE chvid EQ @it_itens-chvid.
+      ENDIF.
 
-       LOOP AT IT_ZPFE_LOTE_ITEM INTO WA_ZPFE_LOTE_ITEM.
-         DATA(LC_TABIX) = SY-TABIX.
-         ADD 1 TO LC_TABIX.
+      LOOP AT it_zpfe_lote_item INTO wa_zpfe_lote_item.
+        DATA(lc_tabix) = sy-tabix.
+        ADD 1 TO lc_tabix.
 
-         READ TABLE IT_LINES_ARQ INDEX LC_TABIX INTO WA_LINES_ARQ.
-         READ TABLE IT_ITENS INTO WA_ITENS
-           WITH KEY NR_LOTE_ADM = WA_ZPFE_LOTE_ITEM-NR_LOTE_ADM
-                    NUCONTRATO  = WA_ZPFE_LOTE_ITEM-NUCONTRATO
-                    CHVID       = WA_ZPFE_LOTE_ITEM-CHVID.
+        READ TABLE it_lines_arq INDEX lc_tabix INTO wa_lines_arq.
+        READ TABLE it_itens INTO wa_itens
+           WITH KEY nr_lote_adm = wa_zpfe_lote_item-nr_lote_adm
+                    nucontrato  = wa_zpfe_lote_item-nucontrato
+                    chvid       = wa_zpfe_lote_item-chvid.
 
-         IF SY-SUBRC IS INITIAL.
-           IF WA_ITENS-CK_CONF_ADM IS INITIAL.
-             LC_TABIX = SY-TABIX.
+        IF sy-subrc IS INITIAL.
+          IF wa_itens-ck_conf_adm IS INITIAL.
+            lc_tabix = sy-tabix.
 
-             READ TABLE IT_ZLEST0025 INTO DATA(WA_ZLEST0025) WITH KEY CHVID = WA_ITENS-CHVID.
-             IF SY-SUBRC IS INITIAL.
-               MOVE: WA_ZPFE_LOTE_ITEM-DT_CONF_ADM   TO WA_ITENS-DT_CONF_ADM,
-                     WA_ZPFE_LOTE_ITEM-VL_CONF_ADM   TO WA_ITENS-VL_CONF_ADM,
-                     WA_ZPFE_LOTE_ITEM-PESO_CONF_ADM TO WA_ITENS-PESO_CONF_ADM,
-                     'X'                             TO WA_ITENS-CK_CONF_ADM.
+            READ TABLE it_zlest0025 INTO DATA(wa_zlest0025) WITH KEY chvid = wa_itens-chvid.
+            IF sy-subrc IS INITIAL.
+              MOVE: wa_zpfe_lote_item-dt_conf_adm   TO wa_itens-dt_conf_adm,
+                     wa_zpfe_lote_item-vl_conf_adm   TO wa_itens-vl_conf_adm,
+                     wa_zpfe_lote_item-peso_conf_adm TO wa_itens-peso_conf_adm,
+                     'X'                             TO wa_itens-ck_conf_adm.
 
-               IF WA_ZLEST0025-NATUREZACHVID EQ 'S'.
-                 MULTIPLY WA_ITENS-VL_CONF_ADM  BY -1.
-               ENDIF.
+              IF wa_zlest0025-naturezachvid EQ 'S'.
+                MULTIPLY wa_itens-vl_conf_adm  BY -1.
+              ENDIF.
 
-               MODIFY IT_ITENS INDEX LC_TABIX FROM WA_ITENS.
-               LC_SUCESSO = 'X'.
-               INSERT_LINE_LOG WA_ITENS-NR_LOTE_ADM
+              MODIFY it_itens INDEX lc_tabix FROM wa_itens.
+              lc_sucesso = 'X'.
+              INSERT_LINE_LOG WA_ITENS-NR_LOTE_ADM
                                WA_ITENS-NM_LOTE
                                WA_ITENS-CHVID
                                WA_ITENS-NUCONTRATO
@@ -4640,8 +4640,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                                'A linha do arquivo foi importado com sucesso'
                                SPACE
                                'S'.
-             ELSE.
-               INSERT_LINE_LOG WA_ITENS-NR_LOTE_ADM
+            ELSE.
+              INSERT_LINE_LOG WA_ITENS-NR_LOTE_ADM
                                WA_ITENS-NM_LOTE
                                WA_ITENS-CHVID
                                WA_ITENS-NUCONTRATO
@@ -4649,9 +4649,9 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                                'A chave de identificação nao foi encontrada na tabela de "Controle chave de identificação de lote" ZLEST0025'
                                WA_LINES_ARQ
                                'E'.
-             ENDIF.
-           ELSE.
-             INSERT_LINE_LOG WA_ITENS-NR_LOTE_ADM
+            ENDIF.
+          ELSE.
+            INSERT_LINE_LOG WA_ITENS-NR_LOTE_ADM
                              WA_ITENS-NM_LOTE
                              WA_ITENS-CHVID
                              WA_ITENS-NUCONTRATO
@@ -4660,10 +4660,10 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                              WA_LINES_ARQ
                              'E'.
 
-           ENDIF .
-         ELSE.
+          ENDIF .
+        ELSE.
 
-           INSERT_LINE_LOG WA_ZPFE_LOTE_ITEM-NR_LOTE_ADM
+          INSERT_LINE_LOG WA_ZPFE_LOTE_ITEM-NR_LOTE_ADM
                            SPACE
                            WA_ZPFE_LOTE_ITEM-CHVID
                            WA_ZPFE_LOTE_ITEM-NUCONTRATO
@@ -4671,208 +4671,208 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                            'A linha do documento financeiro não foi encontrado.'
                            WA_LINES_ARQ
                            'E'.
-         ENDIF .
+        ENDIF .
 
-       ENDLOOP.
+      ENDLOOP.
 
-       IF LC_SUCESSO IS NOT INITIAL.
-         IF IT_ITENS[] IS NOT INITIAL.
-           MODIFY ZPFE_LOTE_ITEM FROM TABLE IT_ITENS.
-         ENDIF.
-       ENDIF.
+      IF lc_sucesso IS NOT INITIAL.
+        IF it_itens[] IS NOT INITIAL.
+          MODIFY zpfe_lote_item FROM TABLE it_itens.
+        ENDIF.
+      ENDIF.
 
-       CREATE OBJECT ARQUIVO.
-       ARQUIVO->SET_BUKRS( I_BUKRS = I_BUKRS ).
-       ARQUIVO->SET_BRANCH( I_BRANCH = I_BRANCH  ).
-       ARQUIVO->SET_DT_INICIAL( I_DT_INICIAL = I_DT_INICIAL ).
-       ARQUIVO->SET_DT_FINAL( I_DT_FINAL = I_DT_FINAL ).
-       ARQUIVO->SET_DS_FILENAME( I_DS_FILENAME = I_FILENAME ).
-       ARQUIVO->SET_CORPO_ARQUIVO( I_CORPO_ARQUIVO = IT_LINES_ARQ ).
-       ARQUIVO->SET_NR_LOTE_ADM( I_NR_LOTE_ADM = LC_NR_LOTE_ADM ).
-       ARQUIVO->ZIF_CADASTRO~GRAVAR_REGISTRO( ).
-     ENDIF.
-
-   ENDMETHOD.
-
-
-  METHOD SALVA_XML.
-
-    TYPES: BEGIN OF TY_XML_VIAGEM.
-    TYPES:   XML TYPE STRING.
-    TYPES: END OF TY_XML_VIAGEM.
-
-    DATA: WA_XML TYPE TY_XML_VIAGEM,
-          IT_XML TYPE STANDARD TABLE OF TY_XML_VIAGEM.
-
-    CLEAR: IT_XML.
-    WA_XML-XML = I_XML.
-    APPEND WA_XML TO IT_XML.
-
-    CALL FUNCTION 'GUI_DOWNLOAD'
-      EXPORTING
-        FILENAME                = I_NAME_FILE
-      TABLES
-        DATA_TAB                = IT_XML
-      EXCEPTIONS
-        FILE_WRITE_ERROR        = 1
-        NO_BATCH                = 2
-        GUI_REFUSE_FILETRANSFER = 3
-        INVALID_TYPE            = 4
-        NO_AUTHORITY            = 5
-        UNKNOWN_ERROR           = 6
-        HEADER_NOT_ALLOWED      = 7
-        SEPARATOR_NOT_ALLOWED   = 8
-        FILESIZE_NOT_ALLOWED    = 9
-        HEADER_TOO_LONG         = 10
-        DP_ERROR_CREATE         = 11
-        DP_ERROR_SEND           = 12
-        DP_ERROR_WRITE          = 13
-        UNKNOWN_DP_ERROR        = 14
-        ACCESS_DENIED           = 15
-        DP_OUT_OF_MEMORY        = 16
-        DISK_FULL               = 17
-        DP_TIMEOUT              = 18
-        FILE_NOT_FOUND          = 19
-        DATAPROVIDER_EXCEPTION  = 20
-        CONTROL_FLUSH_ERROR     = 21
-        OTHERS                  = 22.
-
-    IF SY-SUBRC <> 0.
-      MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4.
+      CREATE OBJECT arquivo.
+      arquivo->set_bukrs( i_bukrs = i_bukrs ).
+      arquivo->set_branch( i_branch = i_branch  ).
+      arquivo->set_dt_inicial( i_dt_inicial = i_dt_inicial ).
+      arquivo->set_dt_final( i_dt_final = i_dt_final ).
+      arquivo->set_ds_filename( i_ds_filename = i_filename ).
+      arquivo->set_corpo_arquivo( i_corpo_arquivo = it_lines_arq ).
+      arquivo->set_nr_lote_adm( i_nr_lote_adm = lc_nr_lote_adm ).
+      arquivo->zif_cadastro~gravar_registro( ).
     ENDIF.
 
   ENDMETHOD.
 
 
-  METHOD SOLICITA_ROTA.
+  METHOD salva_xml.
 
-    DATA: E_CHAVE       TYPE CHAR32,
-          LC_MSG        TYPE STRING,
-          LC_MSG_ADM    TYPE STRING,
-          CX_EXCEPTION  TYPE REF TO ZESCX_WEBSERVICE,
-          LC_XML        TYPE STRING,
-          LC_HTTP       TYPE REF TO IF_HTTP_CLIENT,
-          WA_ZLEST0101  TYPE ZLEST0101,
-          IT_ZLEST0107  TYPE TABLE OF ZLEST0107,
-          WA_ZLEST0107  TYPE ZLEST0107,
-          IT_ZLEST0107B TYPE ZLEST0107_T.
+    TYPES: BEGIN OF ty_xml_viagem.
+    TYPES:   xml TYPE string.
+    TYPES: END OF ty_xml_viagem.
 
-    SELECT SINGLE * INTO @DATA(WA_ZLEST0160)
-      FROM ZLEST0160
-     WHERE BUKRS  EQ @I_BUKRS
-       AND BRANCH EQ @I_BRANCH.
+    DATA: wa_xml TYPE ty_xml_viagem,
+          it_xml TYPE STANDARD TABLE OF ty_xml_viagem.
 
-    SELECT SINGLE * INTO WA_ZLEST0101
-      FROM ZLEST0101
-     WHERE ID_ROTA EQ I_ROTA
-       AND BUKRS   EQ I_BUKRS
-       AND BRANCH  EQ I_BRANCH.
+    CLEAR: it_xml.
+    wa_xml-xml = i_xml.
+    APPEND wa_xml TO it_xml.
 
-    IF SY-SUBRC IS NOT INITIAL.
-      MESSAGE E088(ZLES) WITH I_ROTA RAISING ZWEBSERVICE.
-    ELSEIF WA_ZLEST0101-ID_ROTA_ADM IS NOT INITIAL.
-      MESSAGE E087(ZLES) RAISING ZWEBSERVICE.
+    CALL FUNCTION 'GUI_DOWNLOAD'
+      EXPORTING
+        filename                = i_name_file
+      TABLES
+        data_tab                = it_xml
+      EXCEPTIONS
+        file_write_error        = 1
+        no_batch                = 2
+        gui_refuse_filetransfer = 3
+        invalid_type            = 4
+        no_authority            = 5
+        unknown_error           = 6
+        header_not_allowed      = 7
+        separator_not_allowed   = 8
+        filesize_not_allowed    = 9
+        header_too_long         = 10
+        dp_error_create         = 11
+        dp_error_send           = 12
+        dp_error_write          = 13
+        unknown_dp_error        = 14
+        access_denied           = 15
+        dp_out_of_memory        = 16
+        disk_full               = 17
+        dp_timeout              = 18
+        file_not_found          = 19
+        dataprovider_exception  = 20
+        control_flush_error     = 21
+        OTHERS                  = 22.
+
+    IF sy-subrc <> 0.
+      MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
     ENDIF.
 
-    SELECT * INTO TABLE IT_ZLEST0107
-      FROM ZLEST0107
-     WHERE ID_ROTA EQ I_ROTA
-       AND BUKRS   EQ I_BUKRS
-       AND BRANCH  EQ I_BRANCH
-     ORDER BY ID_ROTA_ITEM.
+  ENDMETHOD.
 
-    LOOP AT IT_ZLEST0107 INTO WA_ZLEST0107.
-      APPEND WA_ZLEST0107 TO IT_ZLEST0107B.
+
+  METHOD solicita_rota.
+
+    DATA: e_chave       TYPE char32,
+          lc_msg        TYPE string,
+          lc_msg_adm    TYPE string,
+          cx_exception  TYPE REF TO zescx_webservice,
+          lc_xml        TYPE string,
+          lc_http       TYPE REF TO if_http_client,
+          wa_zlest0101  TYPE zlest0101,
+          it_zlest0107  TYPE TABLE OF zlest0107,
+          wa_zlest0107  TYPE zlest0107,
+          it_zlest0107b TYPE zlest0107_t.
+
+    SELECT SINGLE * INTO @DATA(wa_zlest0160)
+      FROM zlest0160
+     WHERE bukrs  EQ @i_bukrs
+       AND branch EQ @i_branch.
+
+    SELECT SINGLE * INTO wa_zlest0101
+      FROM zlest0101
+     WHERE id_rota EQ i_rota
+       AND bukrs   EQ i_bukrs
+       AND branch  EQ i_branch.
+
+    IF sy-subrc IS NOT INITIAL.
+      MESSAGE e088(zles) WITH i_rota RAISING zwebservice.
+    ELSEIF wa_zlest0101-id_rota_adm IS NOT INITIAL.
+      MESSAGE e087(zles) RAISING zwebservice.
+    ENDIF.
+
+    SELECT * INTO TABLE it_zlest0107
+      FROM zlest0107
+     WHERE id_rota EQ i_rota
+       AND bukrs   EQ i_bukrs
+       AND branch  EQ i_branch
+     ORDER BY id_rota_item.
+
+    LOOP AT it_zlest0107 INTO wa_zlest0107.
+      APPEND wa_zlest0107 TO it_zlest0107b.
     ENDLOOP.
 
     TRY .
-        E_CHAVE = ME->CHAVE_SEGURANCA( I_GRUPO = WA_ZLEST0160-DS_GRUPO ).
-      CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-        LC_MSG  = CX_EXCEPTION->GET_TEXT( ).
-        MESSAGE E007(ZWEBSERVICE) WITH LC_MSG.
+        e_chave = me->chave_seguranca( i_grupo = wa_zlest0160-ds_grupo ).
+      CATCH zescx_webservice INTO cx_exception .
+        lc_msg  = cx_exception->get_text( ).
+        MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    LC_XML = XML_CRIAR_ROTA( I_CHAVE = E_CHAVE I_ZLEST0101 = WA_ZLEST0101 I_ZLEST0107 = IT_ZLEST0107B ).
+    lc_xml = xml_criar_rota( i_chave = e_chave i_zlest0101 = wa_zlest0101 i_zlest0107 = it_zlest0107b ).
 
     TRY .
         "Atribui o serviço que precisa ser consultado.
         "RO - Criar Rota.
-        ME->SET_SERVICO( EXPORTING I_SERVICO = 'RO' ).
+        me->set_servico( EXPORTING i_servico = 'RO' ).
 
-      CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-        LC_MSG  = CX_EXCEPTION->GET_TEXT( ).
-        MESSAGE E007(ZWEBSERVICE) WITH LC_MSG.
+      CATCH zescx_webservice INTO cx_exception .
+        lc_msg  = cx_exception->get_text( ).
+        MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    ME->SET_TIPO( EXPORTING I_TIPO = 'R').
+    me->set_tipo( EXPORTING i_tipo = 'R').
 
     TRY .
         "Atribui as Informações do HTTP Client para consultar o WebService.
-        LC_HTTP = ME->URL( ).
+        lc_http = me->url( ).
 
-      CATCH ZESCX_WEBSERVICE INTO CX_EXCEPTION .
-        LC_MSG  = CX_EXCEPTION->GET_TEXT( ).
-        MESSAGE E007(ZWEBSERVICE) WITH LC_MSG.
+      CATCH zescx_webservice INTO cx_exception .
+        lc_msg  = cx_exception->get_text( ).
+        MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    ME->ZESIF_WEBSERVICE~ABRIR_CONEXAO( LC_HTTP ).
+    me->zesif_webservice~abrir_conexao( lc_http ).
 
     "Envia para Criar Rota.
     "O retorno é de um arquivo XML com o Código da Rota Administradora.
-    CALL METHOD ME->ZESIF_WEBSERVICE~CONSULTAR
+    CALL METHOD me->zesif_webservice~consultar
       EXPORTING
-        I_HTTP                     = LC_HTTP
-        I_XML                      = LC_XML
+        i_http                     = lc_http
+        i_xml                      = lc_xml
       RECEIVING
-        E_RESULTADO                = LC_MSG_ADM
+        e_resultado                = lc_msg_adm
       EXCEPTIONS
-        HTTP_COMMUNICATION_FAILURE = 1
-        HTTP_INVALID_STATE         = 2
-        HTTP_PROCESSING_FAILED     = 3
-        HTTP_INVALID_TIMEOUT       = 4
+        http_communication_failure = 1
+        http_invalid_state         = 2
+        http_processing_failed     = 3
+        http_invalid_timeout       = 4
         OTHERS                     = 5.
 
-    IF SY-SUBRC IS NOT INITIAL.
-      MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4 RAISING ZWEBSERVICE.
+    IF sy-subrc IS NOT INITIAL.
+      MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4 RAISING zwebservice.
     ENDIF.
 
     "LC_MSG_ADM = ME->ZESIF_WEBSERVICE~CONSULTAR( I_HTTP = LC_HTTP I_XML = LC_XML ).
 
-    CLEAR: E_ID_ROTA_ADM, E_MSG.
+    CLEAR: e_id_rota_adm, e_msg.
 
-    CALL METHOD ME->LER_XML_CRIAR_ROTA
+    CALL METHOD me->ler_xml_criar_rota
       EXPORTING
-        I_XML         = LC_MSG_ADM
+        i_xml         = lc_msg_adm
       IMPORTING
-        E_MSG         = E_MSG
-        E_ID_ROTA_ADM = E_ID_ROTA_ADM.
+        e_msg         = e_msg
+        e_id_rota_adm = e_id_rota_adm.
 
-    IF E_ID_ROTA_ADM IS NOT INITIAL.
-      WA_ZLEST0101-ID_ROTA_ADM = E_ID_ROTA_ADM.
-      MODIFY ZLEST0101 FROM WA_ZLEST0101.
+    IF e_id_rota_adm IS NOT INITIAL.
+      wa_zlest0101-id_rota_adm = e_id_rota_adm.
+      MODIFY zlest0101 FROM wa_zlest0101.
       COMMIT WORK.
     ELSE.
-      MESSAGE E_MSG TYPE 'E' RAISING ZWEBSERVICE.
+      MESSAGE e_msg TYPE 'E' RAISING zwebservice.
     ENDIF.
 
   ENDMETHOD.
 
 
-  METHOD XML_ATUALIZAR_ROTA.
+  METHOD xml_atualizar_rota.
 
-    DATA: WA_J_1BBRANCH TYPE J_1BBRANCH.
+    DATA: wa_j_1bbranch TYPE j_1bbranch.
 
-    CLEAR: E_XML. "Limpar o retorno.
+    CLEAR: e_xml. "Limpar o retorno.
 
     "Criar uma MACRO para concatenar as informações do arquivo XML.
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
-    SELECT SINGLE * INTO WA_J_1BBRANCH
-      FROM J_1BBRANCH
-     WHERE BUKRS   EQ I_BUKRS
-       AND BRANCH  EQ I_BRANCH.
+    SELECT SINGLE * INTO wa_j_1bbranch
+      FROM j_1bbranch
+     WHERE bukrs   EQ i_bukrs
+       AND branch  EQ i_branch.
 
     "Montar o Arquivo XML da Solicitação de Nova Rota
     CONC_XML '<atualizaRota>'.
@@ -4892,11 +4892,11 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD XML_ATUALIZA_ROTA.
+  METHOD xml_atualiza_rota.
 
-    CLEAR: E_XML. "Limpar a variavel de retorno.
+    CLEAR: e_xml. "Limpar a variavel de retorno.
 
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
@@ -4916,17 +4916,17 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD XML_AUTENTICA.
+  METHOD xml_autentica.
 *****************
 *  Descrição: Método para Montar a estrutura do arquivo XML de Autenticação.
 *  Data: 07.04.2014 14:29:28
 *  Developer: Victor Hugo Souza Nunes
 *****************
 
-    CLEAR: E_XML. "Limpar o retorno.
+    CLEAR: e_xml. "Limpar o retorno.
 
     "Criar uma MACRO para concatenar as informações do arquivo XML.
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
@@ -4943,21 +4943,21 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD XML_CONSULTAR_ARQ_COBRANCA.
+  METHOD xml_consultar_arq_cobranca.
 
-    DATA: WA_J_1BBRANCH   TYPE J_1BBRANCH.
+    DATA: wa_j_1bbranch   TYPE j_1bbranch.
 
-    CLEAR: E_XML. "Limpar o retorno.
+    CLEAR: e_xml. "Limpar o retorno.
 
     "Criar uma MACRO para concatenar as informações do arquivo XML.
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
-    SELECT SINGLE * INTO WA_J_1BBRANCH
-      FROM J_1BBRANCH
-     WHERE BUKRS  EQ I_BUKRS
-       AND BRANCH EQ I_BRANCH.
+    SELECT SINGLE * INTO wa_j_1bbranch
+      FROM j_1bbranch
+     WHERE bukrs  EQ i_bukrs
+       AND branch EQ i_branch.
 
     "Montar o Arquivo XML da Solicitação de Nova Rota
     CONC_XML '<arquivoCobrancaPedagio>'.
@@ -4979,23 +4979,23 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD XML_CONSULTAR_ARQ_CONFERENCIA.
+  METHOD xml_consultar_arq_conferencia.
 
-    DATA: WA_J_1BBRANCH   TYPE J_1BBRANCH,
-          LC_DATA_INICIAL TYPE C LENGTH 8,
-          LC_DATA_FINAL   TYPE C LENGTH 8.
+    DATA: wa_j_1bbranch   TYPE j_1bbranch,
+          lc_data_inicial TYPE c LENGTH 8,
+          lc_data_final   TYPE c LENGTH 8.
 
-    CLEAR: E_XML. "Limpar o retorno.
+    CLEAR: e_xml. "Limpar o retorno.
 
     "Criar uma MACRO para concatenar as informações do arquivo XML.
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
-    SELECT SINGLE * INTO WA_J_1BBRANCH
-      FROM J_1BBRANCH
-     WHERE BUKRS  EQ I_BUKRS
-       AND BRANCH EQ I_BRANCH.
+    SELECT SINGLE * INTO wa_j_1bbranch
+      FROM j_1bbranch
+     WHERE bukrs  EQ i_bukrs
+       AND branch EQ i_branch.
 
     "Montar o Arquivo XML da Solicitação de Nova Rota
     CONC_XML '<requisicaoArquivoConferencia>'.
@@ -5008,8 +5008,8 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
     CONC_XML WA_J_1BBRANCH-STCD1.
     CONC_XML '</cnpjContratante>'.
 
-    CONCATENATE I_DT_INICIAL+6(2) I_DT_INICIAL+4(2) I_DT_INICIAL(4) INTO LC_DATA_INICIAL.
-    CONCATENATE I_DT_FINAL+6(2)   I_DT_FINAL+4(2)   I_DT_FINAL(4)   INTO LC_DATA_FINAL.
+    CONCATENATE i_dt_inicial+6(2) i_dt_inicial+4(2) i_dt_inicial(4) INTO lc_data_inicial.
+    CONCATENATE i_dt_final+6(2)   i_dt_final+4(2)   i_dt_final(4)   INTO lc_data_final.
 
     CONC_XML '<dataConferenciaInicio>'.
     CONC_XML LC_DATA_INICIAL.
@@ -5024,21 +5024,21 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD XML_CONSULTAR_ROTA.
+  METHOD xml_consultar_rota.
 
-    DATA: WA_J_1BBRANCH TYPE J_1BBRANCH.
+    DATA: wa_j_1bbranch TYPE j_1bbranch.
 
-    CLEAR: E_XML. "Limpar o retorno.
+    CLEAR: e_xml. "Limpar o retorno.
 
     "Criar uma MACRO para concatenar as informações do arquivo XML.
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
-    SELECT SINGLE * INTO WA_J_1BBRANCH
-      FROM J_1BBRANCH
-     WHERE BUKRS   EQ I_ZLEST0101-BUKRS
-       AND BRANCH  EQ I_ZLEST0101-BRANCH.
+    SELECT SINGLE * INTO wa_j_1bbranch
+      FROM j_1bbranch
+     WHERE bukrs   EQ i_zlest0101-bukrs
+       AND branch  EQ i_zlest0101-branch.
 
     "Montar o Arquivo XML da Solicitação de Nova Rota
     CONC_XML '<consultaRota>'.
@@ -5060,17 +5060,17 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD XML_CONSULTA_ROTA.
+  METHOD xml_consulta_rota.
 
   ENDMETHOD.
 
 
-  METHOD XML_CONSULTA_TRANSPORTADOR.
+  METHOD xml_consulta_transportador.
 
-    CLEAR: E_XML. "Limpar o retorno.
+    CLEAR: e_xml. "Limpar o retorno.
 
     "Criar uma MACRO para concatenar as informações do arquivo XML.
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
@@ -5102,22 +5102,22 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD XML_CRIAR_ROTA.
+  METHOD xml_criar_rota.
 
-    DATA: WA_J_1BBRANCH TYPE J_1BBRANCH,
-          WA_ZLEST0107  TYPE ZLEST0107.
+    DATA: wa_j_1bbranch TYPE j_1bbranch,
+          wa_zlest0107  TYPE zlest0107.
 
-    CLEAR: E_XML. "Limpar o retorno.
+    CLEAR: e_xml. "Limpar o retorno.
 
     "Criar uma MACRO para concatenar as informações do arquivo XML.
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
-    SELECT SINGLE * INTO WA_J_1BBRANCH
-      FROM J_1BBRANCH
-     WHERE BUKRS   EQ I_ZLEST0101-BUKRS
-       AND BRANCH  EQ I_ZLEST0101-BRANCH.
+    SELECT SINGLE * INTO wa_j_1bbranch
+      FROM j_1bbranch
+     WHERE bukrs   EQ i_zlest0101-bukrs
+       AND branch  EQ i_zlest0101-branch.
 
     "Montar o Arquivo XML da Solicitação de Nova Rota
     CONC_XML '<rota>'.
@@ -5141,7 +5141,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
     CONC_XML I_ZLEST0101-CD_CID_ORIGEM+3(7).
     CONC_XML '</codigoCidade>'.
 
-    LOOP AT I_ZLEST0107 INTO WA_ZLEST0107.
+    LOOP AT i_zlest0107 INTO wa_zlest0107.
       CONC_XML '<codigoCidade>'.
       CONC_XML WA_ZLEST0107-CD_CIDADE+3(7).
       CONC_XML '</codigoCidade>'.
@@ -5607,12 +5607,12 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
   ENDMETHOD.
 
 
-  method XML_CONSULTA_STATUS_PARCEIRO.
+  METHOD xml_consulta_status_parceiro.
 
-    CLEAR: E_XML. "Limpar o retorno.
+    CLEAR: e_xml. "Limpar o retorno.
 
     "Criar uma MACRO para concatenar as informações do arquivo XML.
-    DEFINE CONC_XML.
+    DEFINE conc_xml.
       CONCATENATE E_XML &1 INTO E_XML.
     END-OF-DEFINITION.
 
@@ -5640,5 +5640,5 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
     CONC_XML '</tipo>'.
 
     CONC_XML '</consultaParceiro>'.
-  endmethod.
+  ENDMETHOD.
 ENDCLASS.

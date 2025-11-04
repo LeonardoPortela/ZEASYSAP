@@ -29,4 +29,4 @@ CONSTANTS: OK_SALVAR    TYPE SY-UCOMM VALUE 'SALVAR',
            OK_ULTIMO    TYPE SY-UCOMM VALUE 'ULTIMO'.
 
 INCLUDE LSVIMDAT                                . "general data decl.
-INCLUDE LZCTE_DISTT00                           . "view rel. data dcl.
+INCLUDE LZESCTE_DISTT00                           . "view rel. data dcl.

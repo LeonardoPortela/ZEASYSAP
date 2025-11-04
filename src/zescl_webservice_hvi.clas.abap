@@ -1,68 +1,68 @@
-class ZESCL_WEBSERVICE_HVI definition
-  public
-  create public .
+CLASS zescl_webservice_hvi DEFINITION
+  PUBLIC
+  CREATE PUBLIC .
 
 *"* public components of class ZESCL_WEBSERVICE_HVI
 *"* do not include other source files here!!!
-public section.
+  PUBLIC SECTION.
 
-  types:
-    BEGIN OF TY_OAUTH,
-        TOKEN      TYPE STRING,
-        IDENTIDADE TYPE STRING,
-        IDUSUARIO  TYPE STRING,
-        USUARIO    TYPE STRING,
-        SUCCESS    TYPE STRING,
-      END OF TY_OAUTH .
-  types:
-    BEGIN OF TY_RESULTADO_FARDO,
-        NR_FARDO       TYPE STRING,
-        VL_UHML        TYPE STRING,
-        VL_ML          TYPE STRING,
-        VL_UI          TYPE STRING,
-        VL_STR         TYPE STRING,
-        VL_ELG         TYPE STRING,
-        VL_MIC         TYPE STRING,
-        VL_AMT         TYPE STRING,
-        VL_RD          TYPE STRING,
-        VL_MB          TYPE STRING,
-        VL_CG          TYPE STRING,
-        VL_TCNT        TYPE STRING,
-        VL_TAREA       TYPE STRING,
-        VL_LEAF        TYPE STRING,
-        VL_MR          TYPE STRING,
-        VL_SFI         TYPE STRING,
-        VL_MST         TYPE STRING,
-        SCI            TYPE STRING,
-        CSP            TYPE STRING,
-        MALA           TYPE STRING,
-        DT_FINALIZACAO TYPE STRING,
-        HR_FINALIZACAO TYPE STRING,
-        OS             TYPE STRING,
-        NR_LOTE        TYPE STRING,
-      END OF TY_RESULTADO_FARDO .
-  types:
-    TY_T_RESULTADO_FARDO TYPE TABLE OF TY_RESULTADO_FARDO WITH EMPTY KEY .
-  types:
-    BEGIN OF TY_ROOT_RESULTADO_FARDO,
-        SUCCESS TYPE STRING,
-        RESULT  TYPE TY_T_RESULTADO_FARDO,
-      END OF TY_ROOT_RESULTADO_FARDO .
+    TYPES:
+    BEGIN OF ty_oauth,
+        token      TYPE string,
+        identidade TYPE string,
+        idusuario  TYPE string,
+        usuario    TYPE string,
+        success    TYPE string,
+      END OF ty_oauth .
+    TYPES:
+    BEGIN OF ty_resultado_fardo,
+        nr_fardo       TYPE string,
+        vl_uhml        TYPE string,
+        vl_ml          TYPE string,
+        vl_ui          TYPE string,
+        vl_str         TYPE string,
+        vl_elg         TYPE string,
+        vl_mic         TYPE string,
+        vl_amt         TYPE string,
+        vl_rd          TYPE string,
+        vl_mb          TYPE string,
+        vl_cg          TYPE string,
+        vl_tcnt        TYPE string,
+        vl_tarea       TYPE string,
+        vl_leaf        TYPE string,
+        vl_mr          TYPE string,
+        vl_sfi         TYPE string,
+        vl_mst         TYPE string,
+        sci            TYPE string,
+        csp            TYPE string,
+        mala           TYPE string,
+        dt_finalizacao TYPE string,
+        hr_finalizacao TYPE string,
+        os             TYPE string,
+        nr_lote        TYPE string,
+      END OF ty_resultado_fardo .
+    TYPES:
+    ty_t_resultado_fardo TYPE TABLE OF ty_resultado_fardo WITH EMPTY KEY .
+    TYPES:
+    BEGIN OF ty_root_resultado_fardo,
+        success TYPE string,
+        result  TYPE ty_t_resultado_fardo,
+      END OF ty_root_resultado_fardo .
 
-  methods BUSCA_MALA_HVI
-    importing
-      !I_LOGIN type STRING
-      !I_SENHA type STRING
-      !I_DATAI type DATUM
-      !I_DATAF type DATUM
-    returning
-      value(RESULT) type TY_ROOT_RESULTADO_FARDO .
-  methods AUTHENTICATION
-    importing
-      !I_LOGIN type STRING
-      !I_SENHA type STRING
-    returning
-      value(RESULT) type TY_OAUTH .
+    METHODS busca_mala_hvi
+    IMPORTING
+      !i_login TYPE string
+      !i_senha TYPE string
+      !i_datai TYPE datum
+      !i_dataf TYPE datum
+    RETURNING
+      VALUE(result) TYPE ty_root_resultado_fardo .
+    METHODS authentication
+    IMPORTING
+      !i_login TYPE string
+      !i_senha TYPE string
+    RETURNING
+      VALUE(result) TYPE ty_oauth .
   PROTECTED SECTION.
 *"* protected components of class ZCL_WEBSERVICE_HVI
 *"* do not include other source files here!!!
@@ -71,154 +71,154 @@ ENDCLASS.
 
 
 
-CLASS ZCL_WEBSERVICE_HVI IMPLEMENTATION.
+CLASS zcl_webservice_hvi IMPLEMENTATION.
 
 
-  METHOD AUTHENTICATION.
+  METHOD authentication.
     "//Call service
-    CALL METHOD CL_HTTP_CLIENT=>CREATE_BY_URL
+    CALL METHOD cl_http_client=>create_by_url
       EXPORTING
-        URL                = CONV #( 'http://kerpweb.kuhlmann.agr.br/rest/usuarios/login' )
+        url                = CONV #( 'http://kerpweb.kuhlmann.agr.br/rest/usuarios/login' )
       IMPORTING
-        CLIENT             = DATA(HTTP_CLIENT)
+        client             = DATA(http_client)
       EXCEPTIONS
-        ARGUMENT_NOT_FOUND = 1
-        PLUGIN_NOT_ACTIVE  = 2
-        INTERNAL_ERROR     = 3
+        argument_not_found = 1
+        plugin_not_active  = 2
+        internal_error     = 3
         OTHERS             = 4.
 
-    CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+    CALL METHOD http_client->request->set_header_field
       EXPORTING
-        NAME  = '~request_method'
-        VALUE = 'POST'.
+        name  = '~request_method'
+        value = 'POST'.
 
-    CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+    CALL METHOD http_client->request->set_header_field
       EXPORTING
-        NAME  = '~server_protocol'
-        VALUE = 'HTTP/1.1'.
+        name  = '~server_protocol'
+        value = 'HTTP/1.1'.
 
-    CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+    CALL METHOD http_client->request->set_header_field
       EXPORTING
-        NAME  = 'Content-Type'
-        VALUE = 'application/x-www-form-urlencoded'.
+        name  = 'Content-Type'
+        value = 'application/x-www-form-urlencoded'.
 
-    HTTP_CLIENT->REQUEST->SET_FORM_FIELD(
+    http_client->request->set_form_field(
       EXPORTING
-        NAME  = 'login'
-        VALUE = I_LOGIN
+        name  = 'login'
+        value = i_login
     ).
 
-    HTTP_CLIENT->REQUEST->SET_FORM_FIELD(
+    http_client->request->set_form_field(
       EXPORTING
-        NAME  = 'senha'
-        VALUE = I_SENHA
+        name  = 'senha'
+        value = i_senha
     ).
 
-    HTTP_CLIENT->SEND( ).
+    http_client->send( ).
 
-    CALL METHOD HTTP_CLIENT->RECEIVE
+    CALL METHOD http_client->receive
       EXCEPTIONS
-        HTTP_COMMUNICATION_FAILURE = 1
-        HTTP_INVALID_STATE         = 2
-        HTTP_PROCESSING_FAILED     = 3
+        http_communication_failure = 1
+        http_invalid_state         = 2
+        http_processing_failed     = 3
         OTHERS                     = 4.
 
-    DATA(_RESULT) = HTTP_CLIENT->RESPONSE->GET_CDATA( ).
-    DATA(_JSON_DESERIALIZER) = NEW CL_TREX_JSON_DESERIALIZER( ).
+    DATA(_result) = http_client->response->get_cdata( ).
+    DATA(_json_deserializer) = NEW cl_trex_json_deserializer( ).
 
-    /UI2/CL_JSON=>DESERIALIZE(
+    /ui2/cl_json=>deserialize(
       EXPORTING
-        JSON        = _RESULT
+        json        = _result
       CHANGING
-        DATA        = RESULT
+        data        = result
     ).
 
   ENDMETHOD.
 
 
-  METHOD BUSCA_MALA_HVI.
-    DATA: V_AUTHOR TYPE TY_OAUTH.
-    DATA: OBJ_ZCL_UTIL TYPE REF TO ZCL_UTIL.
-    DATA: VAR_DATAI     TYPE STRING. " C LENGTH 10.
-    DATA: VAR_DATAF TYPE STRING. " C LENGTH 10.
+  METHOD busca_mala_hvi.
+    DATA: v_author TYPE ty_oauth.
+    DATA: obj_zcl_util TYPE REF TO zcl_util.
+    DATA: var_datai     TYPE string. " C LENGTH 10.
+    DATA: var_dataf TYPE string. " C LENGTH 10.
 
-    FREE: OBJ_ZCL_UTIL.
+    FREE: obj_zcl_util.
 
-    CREATE OBJECT OBJ_ZCL_UTIL.
-    OBJ_ZCL_UTIL->CONV_DATA_US_BR( EXPORTING I_DATA = I_DATAI
-                                             I_OPCAO = '/'
-                                   RECEIVING E_DATA = VAR_DATAI ).
+    CREATE OBJECT obj_zcl_util.
+    obj_zcl_util->conv_data_us_br( EXPORTING i_data = i_datai
+                                             i_opcao = '/'
+                                   RECEIVING e_data = var_datai ).
 
-    OBJ_ZCL_UTIL->CONV_DATA_US_BR( EXPORTING I_DATA = I_DATAF
-                                             I_OPCAO = '/'
-                                   RECEIVING E_DATA = VAR_DATAF ).
+    obj_zcl_util->conv_data_us_br( EXPORTING i_data = i_dataf
+                                             i_opcao = '/'
+                                   RECEIVING e_data = var_dataf ).
 
-    V_AUTHOR = AUTHENTICATION( I_LOGIN = I_LOGIN
-                               I_SENHA = I_SENHA ).
+    v_author = authentication( i_login = i_login
+                               i_senha = i_senha ).
 
-    IF V_AUTHOR-TOKEN IS NOT INITIAL.
+    IF v_author-token IS NOT INITIAL.
       "//Call service
-      CALL METHOD CL_HTTP_CLIENT=>CREATE_BY_URL
+      CALL METHOD cl_http_client=>create_by_url
         EXPORTING
-          URL                = CONV #( 'http://kerpweb.kuhlmann.agr.br/rest/hvi-fardos/list-fardos-by-cliente' )
+          url                = CONV #( 'http://kerpweb.kuhlmann.agr.br/rest/hvi-fardos/list-fardos-by-cliente' )
         IMPORTING
-          CLIENT             = DATA(HTTP_CLIENT)
+          client             = DATA(http_client)
         EXCEPTIONS
-          ARGUMENT_NOT_FOUND = 1
-          PLUGIN_NOT_ACTIVE  = 2
-          INTERNAL_ERROR     = 3
+          argument_not_found = 1
+          plugin_not_active  = 2
+          internal_error     = 3
           OTHERS             = 4.
 
-      CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+      CALL METHOD http_client->request->set_header_field
         EXPORTING
-          NAME  = '~request_method'
-          VALUE = 'POST'.
+          name  = '~request_method'
+          value = 'POST'.
 
-      CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+      CALL METHOD http_client->request->set_header_field
         EXPORTING
-          NAME  = '~server_protocol'
-          VALUE = 'HTTP/1.1'.
+          name  = '~server_protocol'
+          value = 'HTTP/1.1'.
 
-      CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+      CALL METHOD http_client->request->set_header_field
         EXPORTING
-          NAME  = 'Content-Type'
-          VALUE = 'application/x-www-form-urlencoded'.
+          name  = 'Content-Type'
+          value = 'application/x-www-form-urlencoded'.
 
-      HTTP_CLIENT->REQUEST->SET_FORM_FIELD(
+      http_client->request->set_form_field(
         EXPORTING
-          NAME  = 'token'
-          VALUE = V_AUTHOR-TOKEN
+          name  = 'token'
+          value = v_author-token
       ).
 
-      HTTP_CLIENT->REQUEST->SET_FORM_FIELD(
+      http_client->request->set_form_field(
         EXPORTING
-          NAME  = 'data_inicial'
-          VALUE = VAR_DATAI
+          name  = 'data_inicial'
+          value = var_datai
       ).
 
-      HTTP_CLIENT->REQUEST->SET_FORM_FIELD(
+      http_client->request->set_form_field(
         EXPORTING
-          NAME  = 'data_final'
-          VALUE = VAR_DATAF
+          name  = 'data_final'
+          value = var_dataf
       ).
 
-      HTTP_CLIENT->SEND( ).
+      http_client->send( ).
 
-      CALL METHOD HTTP_CLIENT->RECEIVE
+      CALL METHOD http_client->receive
         EXCEPTIONS
-          HTTP_COMMUNICATION_FAILURE = 1
-          HTTP_INVALID_STATE         = 2
-          HTTP_PROCESSING_FAILED     = 3
+          http_communication_failure = 1
+          http_invalid_state         = 2
+          http_processing_failed     = 3
           OTHERS                     = 4.
 
-      DATA(_RESULT) = HTTP_CLIENT->RESPONSE->GET_CDATA( ).
-      DATA(_JSON_DESERIALIZER) = NEW CL_TREX_JSON_DESERIALIZER( ).
+      DATA(_result) = http_client->response->get_cdata( ).
+      DATA(_json_deserializer) = NEW cl_trex_json_deserializer( ).
 
-      /UI2/CL_JSON=>DESERIALIZE(
+      /ui2/cl_json=>deserialize(
         EXPORTING
-          JSON        = _RESULT
+          json        = _result
         CHANGING
-          DATA        = RESULT
+          data        = result
       ).
 
     ELSE.

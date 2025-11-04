@@ -1,37 +1,37 @@
 *******************************************************************
 *   System-defined Include-files.                                 *
 *******************************************************************
-  INCLUDE lzgrctop.                          " Global Data
-  INCLUDE lzgrcuxx.                          " Function Modules
+  INCLUDE lzesgrctop.                        " Global Data
+  INCLUDE lzesgrcuxx.                        " Function Modules
 
 *******************************************************************
 *   User-defined Include-files (if necessary).                    *
 *******************************************************************
-* INCLUDE LZGRCF...                          " Subroutines
-* INCLUDE LZGRCO...                          " PBO-Modules
-* INCLUDE LZGRCI...                          " PAI-Modules
+* INCLUDE LZESGRCF...                          " Subroutines
+* INCLUDE LZESGRCO...                          " PBO-Modules
+* INCLUDE LZESGRCI...                          " PAI-Modules
 * INCLUDE LZGRCE...                          " Events
 * INCLUDE LZGRCP...                          " Local class implement.
-* INCLUDE LZGRCT99.                          " ABAP Unit tests
+* INCLUDE LZESGRCT99.                          " ABAP Unit tests
 
-*INCLUDE lzgrcf03.
+*INCLUDE LZESGRCF03.
 
-*INCLUDE LZGRCF01.
+*INCLUDE LZESGRCF01.
 
-*INCLUDE LZGRCF04.
+*INCLUDE LZESGRCF04.
 
-  INCLUDE lzgrcf01.
+  INCLUDE LZESGRCF01.
 
-  INCLUDE lzgrcf02.
+  INCLUDE LZESGRCF02.
 
-  INCLUDE lzgrcf03.
+  INCLUDE LZESGRCF03.
 
-  INCLUDE lzgrcf04.
+  INCLUDE LZESGRCF04.
 
-  INCLUDE lzgrcf05.
+  INCLUDE LZESGRCF05.
 
-  INCLUDE lzgrco01.
+  INCLUDE LZESGRCO01.
 
-  INCLUDE lzgrcf06.
+  INCLUDE LZESGRCF06.
 
-INCLUDE lzgrcf07.
+INCLUDE LZESGRCF07.

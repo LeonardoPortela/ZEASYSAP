@@ -1,41 +1,41 @@
-class ZESCL_WEBSERVICE_TRACE definition
-  public
-  create public .
+CLASS zescl_webservice_trace DEFINITION
+  PUBLIC
+  CREATE PUBLIC .
 
 *"* public components of class ZESCL_WEBSERVICE_TRACE
 *"* do not include other source files here!!!
-public section.
+  PUBLIC SECTION.
 
-  types:
-    BEGIN OF TY_OAUTH,
-        LOGIN        TYPE STRING,
-        ACCESS_TOKEN TYPE STRING,
-      END OF TY_OAUTH .
+    TYPES:
+    BEGIN OF ty_oauth,
+        login        TYPE string,
+        access_token TYPE string,
+      END OF ty_oauth .
 
-  methods ATUALIZA_TRACE
-    importing
-      !T_FARDO type ZPMT0059
-      !I_JSON type STRING optional
-      !ID_REFERENCIA type CHAR11 optional
-    returning
-      value(RET_CODE) type I .
-  methods AUTHENTICATION
-    returning
-      value(RESULT) type TY_OAUTH .
-  methods ENVIA_INTEGRACAO
-    importing
-      !E_CLIENT type ref to CL_HTTP_CLIENT
-      !ID_REFERENCIA type CHAR11
-      !ID_INTERFACE type ZDE_ID_INTERFACE optional .
+    METHODS atualiza_trace
+    IMPORTING
+      !t_fardo TYPE zpmt0059
+      !i_json TYPE string OPTIONAL
+      !id_referencia TYPE char11 OPTIONAL
+    RETURNING
+      VALUE(ret_code) TYPE i .
+    METHODS authentication
+    RETURNING
+      VALUE(result) TYPE ty_oauth .
+    METHODS envia_integracao
+    IMPORTING
+      !e_client TYPE REF TO cl_http_client
+      !id_referencia TYPE char11
+      !id_interface TYPE zde_id_interface OPTIONAL .
   PROTECTED SECTION.
 *"* protected components of class ZCL_WEBSERVICE_TRACE
 *"* do not include other source files here!!!
-private section.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_WEBSERVICE_TRACE IMPLEMENTATION.
+CLASS zcl_webservice_trace IMPLEMENTATION.
 
 
   METHOD atualiza_trace.
@@ -152,78 +152,78 @@ CLASS ZCL_WEBSERVICE_TRACE IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD AUTHENTICATION.
+  METHOD authentication.
 
 
-    DATA: LV_JSON     TYPE STRING,
-          RETURN_CODE TYPE I.
+    DATA: lv_json     TYPE string,
+          return_code TYPE i.
 
     SELECT SINGLE *
-          FROM ZAUTH_WEBSERVICE INTO @DATA(WS_SERVICE)
-         WHERE SERVICE = 'ENVIA_TRACE_TOKEN'.
+          FROM zauth_webservice INTO @DATA(ws_service)
+         WHERE service = 'ENVIA_TRACE_TOKEN'.
 
-    IF SY-SUBRC NE 0.
+    IF sy-subrc NE 0.
       EXIT.
     ENDIF.
 
-    LV_JSON = '{ "username": '.
-    CONCATENATE LV_JSON '"' WS_SERVICE-USERNAME '","password": "' WS_SERVICE-PASSWORD '"}' INTO LV_JSON.
+    lv_json = '{ "username": '.
+    CONCATENATE lv_json '"' ws_service-username '","password": "' ws_service-password '"}' INTO lv_json.
 
-    DATA(_URL) =  WS_SERVICE-URL.
+    DATA(_url) =  ws_service-url.
     "//Call service
-    CALL METHOD CL_HTTP_CLIENT=>CREATE_BY_URL
+    CALL METHOD cl_http_client=>create_by_url
       EXPORTING
-        URL                = CONV #( _URL )
+        url                = CONV #( _url )
       IMPORTING
-        CLIENT             = DATA(HTTP_CLIENT)
+        client             = DATA(http_client)
       EXCEPTIONS
-        ARGUMENT_NOT_FOUND = 1
-        PLUGIN_NOT_ACTIVE  = 2
-        INTERNAL_ERROR     = 3
+        argument_not_found = 1
+        plugin_not_active  = 2
+        internal_error     = 3
         OTHERS             = 4.
 
-    CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+    CALL METHOD http_client->request->set_header_field
       EXPORTING
-        NAME  = '~request_method'
-        VALUE = 'POST'.
+        name  = '~request_method'
+        value = 'POST'.
 
-    CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+    CALL METHOD http_client->request->set_header_field
       EXPORTING
-        NAME  = '~server_protocol'
-        VALUE = 'HTTP/1.1'.
+        name  = '~server_protocol'
+        value = 'HTTP/1.1'.
 
-    CALL METHOD HTTP_CLIENT->REQUEST->SET_HEADER_FIELD
+    CALL METHOD http_client->request->set_header_field
       EXPORTING
-        NAME  = 'Content-Type'
-        VALUE = 'application/json'.
+        name  = 'Content-Type'
+        value = 'application/json'.
 
-    CALL METHOD HTTP_CLIENT->REQUEST->SET_CDATA
+    CALL METHOD http_client->request->set_cdata
       EXPORTING
-        DATA = LV_JSON.
+        data = lv_json.
 
 
 
-    HTTP_CLIENT->SEND( ).
+    http_client->send( ).
 
-    CALL METHOD HTTP_CLIENT->RECEIVE
+    CALL METHOD http_client->receive
       EXCEPTIONS
-        HTTP_COMMUNICATION_FAILURE = 1
-        HTTP_INVALID_STATE         = 2
-        HTTP_PROCESSING_FAILED     = 3
+        http_communication_failure = 1
+        http_invalid_state         = 2
+        http_processing_failed     = 3
         OTHERS                     = 4.
 
-    DATA(_RESULT) = HTTP_CLIENT->RESPONSE->GET_CDATA( ).
+    DATA(_result) = http_client->response->get_cdata( ).
 
-    HTTP_CLIENT->RESPONSE->GET_STATUS( IMPORTING CODE = RETURN_CODE ).
+    http_client->response->get_status( IMPORTING code = return_code ).
 
-    DATA(_JSON_DESERIALIZER) = NEW CL_TREX_JSON_DESERIALIZER( ).
+    DATA(_json_deserializer) = NEW cl_trex_json_deserializer( ).
 
-    IF RETURN_CODE EQ '200'.
-      /UI2/CL_JSON=>DESERIALIZE(
+    IF return_code EQ '200'.
+      /ui2/cl_json=>deserialize(
         EXPORTING
-          JSON        = _RESULT
+          json        = _result
         CHANGING
-          DATA        = RESULT
+          data        = result
       ).
     ELSE.
 

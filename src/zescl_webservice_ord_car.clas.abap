@@ -1,74 +1,74 @@
-class ZESCL_WEBSERVICE_ORD_CAR definition
-  public
-  inheriting from ZESCL_WEBSERVICE
-  final
-  create public .
+CLASS zescl_webservice_ord_car DEFINITION
+  PUBLIC
+  INHERITING FROM zescl_webservice
+  FINAL
+  CREATE PUBLIC .
 
 *"* public components of class ZESCL_WEBSERVICE_ORD_CAR
 *"* do not include other source files here!!!
-public section.
+  PUBLIC SECTION.
 
-  methods BUSCAR_TRANSPORTE
-    importing
-      value(I_NR_ORDEM) type STRING
-      value(I_SAFRA) type STRING
-      value(I_FILIAL) type WERKS_D optional
-    returning
-      value(E_ORDEM_CAR) type ref to ZCL_ORDEM_CAR .
-protected section.
+    METHODS buscar_transporte
+    IMPORTING
+      VALUE(i_nr_ordem) TYPE string
+      VALUE(i_safra) TYPE string
+      VALUE(i_filial) TYPE werks_d OPTIONAL
+    RETURNING
+      VALUE(e_ordem_car) TYPE REF TO zcl_ordem_car .
+  PROTECTED SECTION.
 *"* protected components of class ZCL_WEBSERVICE_ORD_CAR
 *"* do not include other source files here!!!
-private section.
+  PRIVATE SECTION.
 *"* private components of class ZCL_WEBSERVICE_ORD_CAR
 *"* do not include other source files here!!!
 
-  methods MONTA_XML_TRANSP
-    importing
-      !I_NR_ORDEM type STRING
-      !I_SAFRA type STRING
-    returning
-      value(E_XML) type STRING .
-  methods LER_XML_TRANSP
-    importing
-      !I_XML type STRING
-    returning
-      value(E_ORDEM_CAR) type ref to ZCL_ORDEM_CAR .
+    METHODS monta_xml_transp
+    IMPORTING
+      !i_nr_ordem TYPE string
+      !i_safra TYPE string
+    RETURNING
+      VALUE(e_xml) TYPE string .
+    METHODS ler_xml_transp
+    IMPORTING
+      !i_xml TYPE string
+    RETURNING
+      VALUE(e_ordem_car) TYPE REF TO zcl_ordem_car .
 ENDCLASS.
 
 
 
-CLASS ZCL_WEBSERVICE_ORD_CAR IMPLEMENTATION.
+CLASS zcl_webservice_ord_car IMPLEMENTATION.
 
 
-METHOD buscar_transporte.
+  METHOD buscar_transporte.
 
-  DATA: var_msg  TYPE string, "Variavel para mostrar a Mensagem texto da exception.
+    DATA: var_msg  TYPE string, "Variavel para mostrar a Mensagem texto da exception.
         var_http TYPE REF TO if_http_client. "Interface HTTP Client
 
-  DATA: cx_exception TYPE REF TO zescx_webservice. "Referencia para a Classe de Exception.
+    DATA: cx_exception TYPE REF TO zescx_webservice. "Referencia para a Classe de Exception.
 
-  DATA: gw_xml        TYPE string, "String para guardar informações do XML
+    DATA: gw_xml        TYPE string, "String para guardar informações do XML
         gw_xml_transp TYPE string, "String para guardar informações do XML do Transp.
         lc_nr_ordem   TYPE zsdt0001od-nr_ordem,  "*-CS2024000522-12.09.2024-JT-#152417-inicio
         lc_nr_safra   TYPE zsdt0001od-nr_safra,  "*-CS2024000522-12.09.2024-JT-#152417-inicio
-        lra_filial    TYPE RANGE OF  WERKS_D."IR246503 - Correção busca OC #184471 - BG
+        lra_filial    TYPE RANGE OF  werks_d."IR246503 - Correção busca OC #184471 - BG
 
-  lc_nr_ordem = i_nr_ordem.  "*-CS2024000522-12.09.2024-JT-#152417-inicio
-  lc_nr_safra = i_safra.     "*-CS2024000522-12.09.2024-JT-#152417-inicio
+    lc_nr_ordem = i_nr_ordem.  "*-CS2024000522-12.09.2024-JT-#152417-inicio
+    lc_nr_safra = i_safra.     "*-CS2024000522-12.09.2024-JT-#152417-inicio
 
-  APPEND VALUE #( sign = 'I' option = 'EQ' low = I_FILIAL ) TO lra_filial. "IR246503 - Correção busca OC #184471 - BG
+    APPEND VALUE #( sign = 'I' option = 'EQ' low = i_filial ) TO lra_filial. "IR246503 - Correção busca OC #184471 - BG
 
-  SELECT SINGLE * INTO @DATA(wa_zsdt0001od)
+    SELECT SINGLE * INTO @DATA(wa_zsdt0001od)
     FROM zsdt0001od
    WHERE nr_ordem  EQ @lc_nr_ordem  "@i_nr_ordem
      AND nr_safra  EQ @lc_nr_safra "@i_safra.
-     AND ID_BRANCH IN @lra_filial "IR246503 - Correção busca OC #184471 - BG
-     AND TP_STATUS EQ 'AB'.       "IR246503 - Correção busca OC #184471 - BG
+     AND id_branch IN @lra_filial "IR246503 - Correção busca OC #184471 - BG
+     AND tp_status EQ 'AB'.       "IR246503 - Correção busca OC #184471 - BG
 
-  IF sy-subrc IS NOT INITIAL.
+    IF sy-subrc IS NOT INITIAL.
 
-    CREATE OBJECT e_ordem_car.
-    e_ordem_car->set_mensagem_ret( 'Ordem de Carregamento não encontrada!' ).
+      CREATE OBJECT e_ordem_car.
+      e_ordem_car->set_mensagem_ret( 'Ordem de Carregamento não encontrada!' ).
 
 *    TRY .
 *        "Atribui o serviço que precisa ser consultado.
@@ -110,162 +110,162 @@ METHOD buscar_transporte.
 *                          I_XML = GW_XML_TRANSP
 *                        RECEIVING
 *                          E_ORDEM_CAR = E_ORDEM_CAR  ).
-  ELSE.
+    ELSE.
 
-    CREATE OBJECT e_ordem_car.
-    e_ordem_car->set_motorista( i_motorista = wa_zsdt0001od-id_motorista ).
-    e_ordem_car->set_placa_cav( i_placa_cav = wa_zsdt0001od-ds_placa_trator ).
-    e_ordem_car->set_placa1( i_placa1 = wa_zsdt0001od-ds_placa_reboq_1 ).
-    e_ordem_car->set_placa2( i_placa2 = wa_zsdt0001od-ds_placa_reboq_2 ).
-    e_ordem_car->set_placa3( i_placa3 = wa_zsdt0001od-ds_placa_reboq_3 ).
-    e_ordem_car->at_zsdt0001od = wa_zsdt0001od.
-    e_ordem_car->set_mensagem_ret( 'Sucesso' ).
+      CREATE OBJECT e_ordem_car.
+      e_ordem_car->set_motorista( i_motorista = wa_zsdt0001od-id_motorista ).
+      e_ordem_car->set_placa_cav( i_placa_cav = wa_zsdt0001od-ds_placa_trator ).
+      e_ordem_car->set_placa1( i_placa1 = wa_zsdt0001od-ds_placa_reboq_1 ).
+      e_ordem_car->set_placa2( i_placa2 = wa_zsdt0001od-ds_placa_reboq_2 ).
+      e_ordem_car->set_placa3( i_placa3 = wa_zsdt0001od-ds_placa_reboq_3 ).
+      e_ordem_car->at_zsdt0001od = wa_zsdt0001od.
+      e_ordem_car->set_mensagem_ret( 'Sucesso' ).
 
-  ENDIF.
-
-
-ENDMETHOD.
+    ENDIF.
 
 
-method LER_XML_TRANSP.
-
-  DATA: OBJ_ORDEM_CAR    TYPE REF TO ZCL_ORDEM_CAR.
-
-  DATA: IF_XML           TYPE REF TO IF_IXML,
-        IF_STREAMFACTORY TYPE REF TO IF_IXML_STREAM_FACTORY,
-        IF_STREAM        TYPE REF TO IF_IXML_ISTREAM,
-        IF_XML_PARSER    TYPE REF TO IF_IXML_PARSER,
-        IF_DOCUMENT      TYPE REF TO IF_IXML_DOCUMENT,
-
-        IF_NODE          TYPE REF TO IF_IXML_NODE,
-        IF_MAP           TYPE REF TO IF_IXML_NAMED_NODE_MAP,
-        IF_ATTR          TYPE REF TO IF_IXML_NODE,
-
-        ITERATOR         TYPE REF TO IF_IXML_NODE_ITERATOR,
-        TAG_NAME         TYPE STRING,
-        NAME_DOM         TYPE STRING,
-        COUNT_DOM        TYPE I,
-        INDEX_DOM        TYPE I,
-        PREFIX_DOM       TYPE STRING,
-        VALOR_DOM        TYPE STRING,
-
-        NODE_FILHO      TYPE REF TO IF_IXML_NODE,
-        VALOR_FILHO     TYPE STRING,
-
-        VL_MOTORISTA    TYPE ZMOTORISTA,
-        VL_PLACA_CAV    TYPE ZPLACA,
-        VL_PLACA1       TYPE ZPLACA,
-        VL_PLACA2       TYPE ZPLACA,
-        VL_MENSAGEM     TYPE STRING.
-
-  IF_XML           = CL_IXML=>CREATE( ).
-  IF_DOCUMENT      = IF_XML->CREATE_DOCUMENT( ).
-  IF_STREAMFACTORY = IF_XML->CREATE_STREAM_FACTORY( ).
-  IF_STREAM        = IF_STREAMFACTORY->CREATE_ISTREAM_STRING( I_XML ).
-
-  IF_XML_PARSER    = IF_XML->CREATE_PARSER(  STREAM_FACTORY = IF_STREAMFACTORY
-                                             ISTREAM        = IF_STREAM
-                                             DOCUMENT       = IF_DOCUMENT ).
-
-  IF_XML_PARSER->PARSE( ).
-
-  IF_NODE ?= IF_DOCUMENT->GET_ROOT_ELEMENT( ).
+  ENDMETHOD.
 
 
-  IF NOT ( IF_NODE IS INITIAL ).
+  METHOD ler_xml_transp.
 
-    FREE: OBJ_ORDEM_CAR.
-    CREATE OBJECT OBJ_ORDEM_CAR.
+    DATA: obj_ordem_car    TYPE REF TO zcl_ordem_car.
 
-    ITERATOR = IF_NODE->CREATE_ITERATOR( ).
-    IF_NODE = ITERATOR->GET_NEXT( ).
+    DATA: if_xml           TYPE REF TO if_ixml,
+        if_streamfactory TYPE REF TO if_ixml_stream_factory,
+        if_stream        TYPE REF TO if_ixml_istream,
+        if_xml_parser    TYPE REF TO if_ixml_parser,
+        if_document      TYPE REF TO if_ixml_document,
 
-    WHILE NOT IF_NODE IS INITIAL.
+        if_node          TYPE REF TO if_ixml_node,
+        if_map           TYPE REF TO if_ixml_named_node_map,
+        if_attr          TYPE REF TO if_ixml_node,
 
+        iterator         TYPE REF TO if_ixml_node_iterator,
+        tag_name         TYPE string,
+        name_dom         TYPE string,
+        count_dom        TYPE i,
+        index_dom        TYPE i,
+        prefix_dom       TYPE string,
+        valor_dom        TYPE string,
 
-      CASE IF_NODE->GET_TYPE( ).
+        node_filho      TYPE REF TO if_ixml_node,
+        valor_filho     TYPE string,
 
-        WHEN: IF_IXML_NODE=>CO_NODE_ELEMENT.
+        vl_motorista    TYPE zmotorista,
+        vl_placa_cav    TYPE zplaca,
+        vl_placa1       TYPE zplaca,
+        vl_placa2       TYPE zplaca,
+        vl_mensagem     TYPE string.
 
-          TAG_NAME = IF_NODE->GET_NAME( ).
-          IF_MAP   = IF_NODE->GET_ATTRIBUTES( ).
+    if_xml           = cl_ixml=>create( ).
+    if_document      = if_xml->create_document( ).
+    if_streamfactory = if_xml->create_stream_factory( ).
+    if_stream        = if_streamfactory->create_istream_string( i_xml ).
 
-          IF NOT ( IF_MAP IS INITIAL ).
+    if_xml_parser    = if_xml->create_parser(  stream_factory = if_streamfactory
+                                             istream        = if_stream
+                                             document       = if_document ).
 
-            COUNT_DOM = IF_MAP->GET_LENGTH( ).
+    if_xml_parser->parse( ).
 
-            DO COUNT_DOM TIMES.
-
-              INDEX_DOM  = SY-INDEX - 1.
-              IF_ATTR    = IF_MAP->GET_ITEM( INDEX_DOM ).
-              NAME_DOM   = IF_ATTR->GET_NAME( ).
-              PREFIX_DOM = IF_ATTR->GET_NAMESPACE_PREFIX( ).
-              VALOR_DOM  = IF_ATTR->GET_VALUE( ).
-
-            ENDDO.
-
-            CASE TAG_NAME.
-              WHEN: 'codigoSapMotorista'.
-                VL_MOTORISTA = IF_NODE->GET_VALUE( ).
-                OBJ_ORDEM_CAR->SET_MOTORISTA( VL_MOTORISTA ).
-              WHEN: 'placaCavalo'.
-                VL_PLACA_CAV = IF_NODE->GET_VALUE( ).
-                OBJ_ORDEM_CAR->SET_PLACA_CAV( VL_PLACA_CAV ).
-              WHEN: 'placaCarreta1'.
-                VL_PLACA1 = IF_NODE->GET_VALUE( ).
-                OBJ_ORDEM_CAR->SET_PLACA1( VL_PLACA1 ).
-              WHEN: 'placaCarreta2'.
-                VL_PLACA2 = IF_NODE->GET_VALUE( ).
-                OBJ_ORDEM_CAR->SET_PLACA2( VL_PLACA2 ).
-              WHEN: 'mensagem'.
-                VL_MENSAGEM = IF_NODE->GET_VALUE( ).
-                OBJ_ORDEM_CAR->SET_MENSAGEM_RET( VL_MENSAGEM ).
-
-            ENDCASE.
-          ENDIF.
-      ENDCASE.
-      IF_NODE = ITERATOR->GET_NEXT( ).
-    ENDWHILE.
-
-    E_ORDEM_CAR = OBJ_ORDEM_CAR.
+    if_node ?= if_document->get_root_element( ).
 
 
-  ENDIF.
+    IF NOT ( if_node IS INITIAL ).
+
+      FREE: obj_ordem_car.
+      CREATE OBJECT obj_ordem_car.
+
+      iterator = if_node->create_iterator( ).
+      if_node = iterator->get_next( ).
+
+      WHILE NOT if_node IS INITIAL.
 
 
-endmethod.
+        CASE if_node->get_type( ).
+
+          WHEN: if_ixml_node=>co_node_element.
+
+            tag_name = if_node->get_name( ).
+            if_map   = if_node->get_attributes( ).
+
+            IF NOT ( if_map IS INITIAL ).
+
+              count_dom = if_map->get_length( ).
+
+              DO count_dom TIMES.
+
+                index_dom  = sy-index - 1.
+                if_attr    = if_map->get_item( index_dom ).
+                name_dom   = if_attr->get_name( ).
+                prefix_dom = if_attr->get_namespace_prefix( ).
+                valor_dom  = if_attr->get_value( ).
+
+              ENDDO.
+
+              CASE tag_name.
+                WHEN: 'codigoSapMotorista'.
+                  vl_motorista = if_node->get_value( ).
+                  obj_ordem_car->set_motorista( vl_motorista ).
+                WHEN: 'placaCavalo'.
+                  vl_placa_cav = if_node->get_value( ).
+                  obj_ordem_car->set_placa_cav( vl_placa_cav ).
+                WHEN: 'placaCarreta1'.
+                  vl_placa1 = if_node->get_value( ).
+                  obj_ordem_car->set_placa1( vl_placa1 ).
+                WHEN: 'placaCarreta2'.
+                  vl_placa2 = if_node->get_value( ).
+                  obj_ordem_car->set_placa2( vl_placa2 ).
+                WHEN: 'mensagem'.
+                  vl_mensagem = if_node->get_value( ).
+                  obj_ordem_car->set_mensagem_ret( vl_mensagem ).
+
+              ENDCASE.
+            ENDIF.
+        ENDCASE.
+        if_node = iterator->get_next( ).
+      ENDWHILE.
+
+      e_ordem_car = obj_ordem_car.
 
 
-method MONTA_XML_TRANSP.
+    ENDIF.
 
-  CLEAR: E_XML. "Limpar a variavel de retorno.
 
-  DEFINE CONC_XML.
+  ENDMETHOD.
+
+
+  METHOD monta_xml_transp.
+
+    CLEAR: e_xml. "Limpar a variavel de retorno.
+
+    DEFINE conc_xml.
     CONCATENATE E_XML &1 INTO E_XML.
-  END-OF-DEFINITION.
+    END-OF-DEFINITION.
 
-  DATA: VAR_NR_ORDEM   TYPE STRING,
-        VAR_SAFRA      TYPE STRING.
+    DATA: var_nr_ordem   TYPE string,
+        var_safra      TYPE string.
 
-  VAR_NR_ORDEM   = I_NR_ORDEM.
-  VAR_SAFRA      = I_SAFRA.
+    var_nr_ordem   = i_nr_ordem.
+    var_safra      = i_safra.
 
-  CONC_XML '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">'.
-  CONC_XML    '<soap:Header/>'.
-  CONC_XML    '<soap:Body>'.
-  CONC_XML       '<tem:Get>'.
+    CONC_XML '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">'.
+    CONC_XML    '<soap:Header/>'.
+    CONC_XML    '<soap:Body>'.
+    CONC_XML       '<tem:Get>'.
 
-  CONC_XML         '<tem:numeroOrdem>'.
-  CONC_XML            VAR_NR_ORDEM.
-  CONC_XML         '</tem:numeroOrdem>'.
+    CONC_XML         '<tem:numeroOrdem>'.
+    CONC_XML            VAR_NR_ORDEM.
+    CONC_XML         '</tem:numeroOrdem>'.
 
-  CONC_XML          '<tem:safra>'.
-  CONC_XML            I_SAFRA.
-  CONC_XML         '</tem:safra>'.
+    CONC_XML          '<tem:safra>'.
+    CONC_XML            I_SAFRA.
+    CONC_XML         '</tem:safra>'.
 
-  CONC_XML       '</tem:Get>'.
-  CONC_XML    '</soap:Body>'.
-  CONC_XML '</soap:Envelope>'.
+    CONC_XML       '</tem:Get>'.
+    CONC_XML    '</soap:Body>'.
+    CONC_XML '</soap:Envelope>'.
 
-endmethod.
+  ENDMETHOD.
 ENDCLASS.
