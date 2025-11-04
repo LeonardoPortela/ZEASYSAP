@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <AREAT>Atualização ampliada de tabelas (gerada)</AREAT>
    <INCLUDES>
-    <SOBJ_NAME>LZSDT_EXPORTF00</SOBJ_NAME>
-    <SOBJ_NAME>LZSDT_EXPORTI00</SOBJ_NAME>
-    <SOBJ_NAME>LZSDT_EXPORTT00</SOBJ_NAME>
-    <SOBJ_NAME>LZSDT_EXPORTTOP</SOBJ_NAME>
-    <SOBJ_NAME>SAPLZSDT_EXPORT</SOBJ_NAME>
+    <SOBJ_NAME>lzessdt_exportF00</SOBJ_NAME>
+    <SOBJ_NAME>lzessdt_exportI00</SOBJ_NAME>
+    <SOBJ_NAME>lzessdt_exportT00</SOBJ_NAME>
+    <SOBJ_NAME>lzessdt_exportTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPlzessdt_export</SOBJ_NAME>
    </INCLUDES>
    <FUNCTIONS>
     <item>
@@ -242,7 +242,7 @@
    <DYNPROS>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZSDT_EXPORT</PROGRAM>
+      <PROGRAM>SAPlzessdt_export</PROGRAM>
       <SCREEN>0001</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização visão: síntese ZSDT_EXPORT</DESCRIPT>
@@ -644,7 +644,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZSDT_EXPORT</PROGRAM>
+      <PROGRAM>SAPlzessdt_export</PROGRAM>
       <SCREEN>0002</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização de visões: detalhe ZSDT_EXPORT</DESCRIPT>

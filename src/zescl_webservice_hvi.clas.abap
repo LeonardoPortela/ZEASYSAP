@@ -1,8 +1,8 @@
-class ZCL_WEBSERVICE_HVI definition
+class ZESCL_WEBSERVICE_HVI definition
   public
   create public .
 
-*"* public components of class ZCL_WEBSERVICE_HVI
+*"* public components of class ZESCL_WEBSERVICE_HVI
 *"* do not include other source files here!!!
 public section.
 

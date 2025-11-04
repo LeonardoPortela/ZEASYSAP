@@ -1,9 +1,9 @@
-class ZCL_WEBSERVICE_TX_CURVA definition
+class ZESCL_WEBSERVICE_TX_CURVA definition
   public
   inheriting from ZESCL_WEBSERVICE
   create public .
 
-*"* public components of class ZCL_WEBSERVICE_TX_CURVA
+*"* public components of class ZESCL_WEBSERVICE_TX_CURVA
 *"* do not include other source files here!!!
 public section.
 

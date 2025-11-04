@@ -1,19 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <AREAT>Grupo de Funções GRC</AREAT>
    <INCLUDES>
-    <SOBJ_NAME>LZGRCF01</SOBJ_NAME>
-    <SOBJ_NAME>LZGRCF02</SOBJ_NAME>
-    <SOBJ_NAME>LZGRCF03</SOBJ_NAME>
-    <SOBJ_NAME>LZGRCF04</SOBJ_NAME>
-    <SOBJ_NAME>LZGRCF05</SOBJ_NAME>
-    <SOBJ_NAME>LZGRCF06</SOBJ_NAME>
-    <SOBJ_NAME>LZGRCF07</SOBJ_NAME>
-    <SOBJ_NAME>LZGRCO01</SOBJ_NAME>
-    <SOBJ_NAME>LZGRCTOP</SOBJ_NAME>
-    <SOBJ_NAME>SAPLZGRC</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrcf01</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrcf02</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrcf03</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrcf04</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrcf05</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrcf06</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrcf07</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrco01</SOBJ_NAME>
+    <SOBJ_NAME>lzesgrctop</SOBJ_NAME>
+    <SOBJ_NAME>saplzesgrc</SOBJ_NAME>
    </INCLUDES>
    <FUNCTIONS>
     <item>
@@ -1737,7 +1737,7 @@
    <DYNPROS>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>1000</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Cadastro</DESCRIPT>
@@ -2480,7 +2480,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>1001</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Municípios de Coleta</DESCRIPT>
@@ -2524,7 +2524,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>1002</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Municípios de Descarregamentos</DESCRIPT>
@@ -2568,7 +2568,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>1003</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Rodoviário</DESCRIPT>
@@ -2612,7 +2612,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>2001</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Cadastro de Municípios de Embarque</DESCRIPT>
@@ -2705,7 +2705,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>2002</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Cadastro de UF&apos;s Percursos</DESCRIPT>
@@ -2799,7 +2799,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>2003</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Cadastro de Municípios de Descarregamento</DESCRIPT>
@@ -2896,7 +2896,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>2004</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Cadastro de Documentos Referênciados</DESCRIPT>
@@ -2974,7 +2974,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>2005</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Cadastro de Condutores</DESCRIPT>
@@ -3085,7 +3085,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>2006</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>MDF-e - Cadastro de Veículos</DESCRIPT>
@@ -3162,7 +3162,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5000</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Visao geral da NFe</DESCRIPT>
@@ -3532,7 +3532,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5001</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Nfe</DESCRIPT>
@@ -3563,7 +3563,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5002</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Emitente</DESCRIPT>
@@ -4088,7 +4088,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5003</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Destinatário</DESCRIPT>
@@ -4555,7 +4555,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5004</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Produtos e Serviços</DESCRIPT>
@@ -4595,7 +4595,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5005</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Totais</DESCRIPT>
@@ -5106,7 +5106,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5006</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Transporte</DESCRIPT>
@@ -5585,7 +5585,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5007</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Cobrança</DESCRIPT>
@@ -5630,7 +5630,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5008</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Informações Adicionai</DESCRIPT>
@@ -5675,7 +5675,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5009</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Notas Referencia Eletrônica</DESCRIPT>
@@ -5715,7 +5715,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5010</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Notas Referencia Formulário</DESCRIPT>
@@ -5755,7 +5755,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5100</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Produtos e Servicos detalhamento</DESCRIPT>
@@ -6376,7 +6376,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5101</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Detalhamento</DESCRIPT>
@@ -7157,7 +7157,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5102</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS Normal e ST</DESCRIPT>
@@ -7368,7 +7368,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5103</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 00</DESCRIPT>
@@ -7579,7 +7579,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5104</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 10</DESCRIPT>
@@ -7970,7 +7970,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5105</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 20</DESCRIPT>
@@ -8241,7 +8241,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5106</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 30</DESCRIPT>
@@ -8572,7 +8572,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5107</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 40</DESCRIPT>
@@ -8723,7 +8723,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5108</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 41</DESCRIPT>
@@ -8874,7 +8874,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5109</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 50</DESCRIPT>
@@ -9025,7 +9025,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5110</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 51</DESCRIPT>
@@ -9356,7 +9356,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5111</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 60</DESCRIPT>
@@ -9507,7 +9507,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5112</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 70</DESCRIPT>
@@ -9988,7 +9988,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5113</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS 90</DESCRIPT>
@@ -10469,7 +10469,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5114</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS Partilha</DESCRIPT>
@@ -10950,7 +10950,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5115</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS Partilha ST</DESCRIPT>
@@ -11161,7 +11161,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5116</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS Partilha SN101</DESCRIPT>
@@ -11312,7 +11312,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5117</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS Partilha SN102</DESCRIPT>
@@ -11403,7 +11403,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5118</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS SN201</DESCRIPT>
@@ -11734,7 +11734,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5119</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS SN202</DESCRIPT>
@@ -12005,7 +12005,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5120</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS SN500</DESCRIPT>
@@ -12050,7 +12050,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5121</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>ICMS SN900</DESCRIPT>
@@ -12531,7 +12531,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5122</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>PIS</DESCRIPT>
@@ -12682,7 +12682,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5123</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>COFINS</DESCRIPT>
@@ -12833,7 +12833,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5124</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>IPI</DESCRIPT>
@@ -13252,7 +13252,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5125</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>II - Imposto Importação</DESCRIPT>
@@ -13403,7 +13403,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5126</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Produtos e Serviços</DESCRIPT>
@@ -13443,7 +13443,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5127</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Informações adicionais</DESCRIPT>
@@ -13497,7 +13497,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZGRC</PROGRAM>
+      <PROGRAM>saplzesgrc</PROGRAM>
       <SCREEN>5128</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Caixa de texto</DESCRIPT>

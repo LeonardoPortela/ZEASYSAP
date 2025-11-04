@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <AREAT>Atualização ampliada de tabelas (gerada)</AREAT>
    <INCLUDES>
-    <SOBJ_NAME>LZCTE_VIAGEMF00</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_VIAGEMI00</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_VIAGEMT00</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_VIAGEMTOP</SOBJ_NAME>
-    <SOBJ_NAME>SAPLZCTE_VIAGEM</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_viagemF00</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_viagemI00</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_viagemT00</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_viagemTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPlzescte_viagem</SOBJ_NAME>
    </INCLUDES>
    <FUNCTIONS>
     <item>
@@ -242,7 +242,7 @@
    <DYNPROS>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_VIAGEM</PROGRAM>
+      <PROGRAM>SAPlzescte_viagem</PROGRAM>
       <SCREEN>0100</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização visão: síntese ZCTE_VIAGEM</DESCRIPT>

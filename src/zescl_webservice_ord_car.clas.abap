@@ -1,10 +1,10 @@
-class ZCL_WEBSERVICE_ORD_CAR definition
+class ZESCL_WEBSERVICE_ORD_CAR definition
   public
   inheriting from ZESCL_WEBSERVICE
   final
   create public .
 
-*"* public components of class ZCL_WEBSERVICE_ORD_CAR
+*"* public components of class ZESCL_WEBSERVICE_ORD_CAR
 *"* do not include other source files here!!!
 public section.
 

@@ -1,8 +1,8 @@
-class ZCL_WEBSERVICE_TRACE definition
+class ZESCL_WEBSERVICE_TRACE definition
   public
   create public .
 
-*"* public components of class ZCL_WEBSERVICE_TRACE
+*"* public components of class ZESCL_WEBSERVICE_TRACE
 *"* do not include other source files here!!!
 public section.
 

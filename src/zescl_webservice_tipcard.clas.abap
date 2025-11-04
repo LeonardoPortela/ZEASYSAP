@@ -1,9 +1,9 @@
-class ZCL_WEBSERVICE_TIPCARD definition
+class ZESCL_WEBSERVICE_TIPCARD definition
   public
   inheriting from ZESCL_WEBSERVICE
   create public .
 
-*"* public components of class ZCL_WEBSERVICE_TIPCARD
+*"* public components of class ZESCL_WEBSERVICE_TIPCARD
 *"* do not include other source files here!!!
 public section.
 

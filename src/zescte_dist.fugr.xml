@@ -1,19 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <AREAT>Atualização ampliada de tabelas (gerada)</AREAT>
    <INCLUDES>
-    <SOBJ_NAME>LZCTE_DISTF00</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_DISTF01</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_DISTF02</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_DISTF03</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_DISTF04</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_DISTF05</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_DISTI00</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_DISTT00</SOBJ_NAME>
-    <SOBJ_NAME>LZCTE_DISTTOP</SOBJ_NAME>
-    <SOBJ_NAME>SAPLZCTE_DIST</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distF00</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distF01</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distF02</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distF03</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distF04</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distF05</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distI00</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distT00</SOBJ_NAME>
+    <SOBJ_NAME>lzescte_distTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPlzescte_dist</SOBJ_NAME>
    </INCLUDES>
    <FUNCTIONS>
     <item>
@@ -819,7 +819,7 @@
    <DYNPROS>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0001</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização visão: síntese ZIB_CTE_DIST_FLG</DESCRIPT>
@@ -1538,7 +1538,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0002</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização de visões: detalhe ZIB_CTE_DIST_FLG</DESCRIPT>
@@ -1924,7 +1924,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0003</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização visão: síntese ZIB_CTE_DIST_IVA</DESCRIPT>
@@ -2252,7 +2252,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0004</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização de visões: detalhe ZIB_CTE_DIST_IVA</DESCRIPT>
@@ -2483,7 +2483,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0005</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização visão: síntese ZIB_CTE_DIST_GM</DESCRIPT>
@@ -2671,7 +2671,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0006</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Atualização visão: síntese ZIB_CTE_DIST_PLD</DESCRIPT>
@@ -2860,7 +2860,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0100</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Tela de Texto de Aprovação</DESCRIPT>
@@ -2935,7 +2935,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0101</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Tela de Selação de Estratégia de Aprovação</DESCRIPT>
@@ -2980,7 +2980,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0301</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Digitação de Peso por VT</DESCRIPT>
@@ -3025,7 +3025,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0302</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Digitação de Peso por VT - Itens</DESCRIPT>
@@ -4111,7 +4111,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0303</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Digitação de Peso por VT - NEW</DESCRIPT>
@@ -4156,7 +4156,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0304</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Digitação de Peso por VT - Itens - NEW</DESCRIPT>
@@ -5326,7 +5326,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0305</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Digitação de Peso por Nota</DESCRIPT>
@@ -5371,7 +5371,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>SAPLZCTE_DIST</PROGRAM>
+      <PROGRAM>SAPlzescte_dist</PROGRAM>
       <SCREEN>0306</SCREEN>
       <LANGUAGE>P</LANGUAGE>
       <DESCRIPT>Digitação de Peso por Nota - Itens</DESCRIPT>
