@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
@@ -244,7 +244,7 @@
      <CHECKTABLE>ZESIB_NFE_ITM</CHECKTABLE>
      <CHECKFIELD>CHAVE_NFE</CHECKFIELD>
      <PRIMPOS>0002</PRIMPOS>
-     <DOMNAME>ZDM_CHAVE_DOC_E</DOMNAME>
+     <DOMNAME>ZESDM_CHAVE_DOC_E</DOMNAME>
      <DATATYPE>CHAR</DATATYPE>
     </DD05M>
     <DD05M>
