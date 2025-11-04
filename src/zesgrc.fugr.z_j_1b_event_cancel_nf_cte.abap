@@ -2,7 +2,7 @@ function z_j_1b_event_cancel_nf_cte.
 *"----------------------------------------------------------------------
 *"*"Interface local:
 *"  IMPORTING
-*"     VALUE(I_CHNFE) TYPE  ZDE_CHAVE_NFE
+*"     VALUE(I_CHNFE) TYPE  ZESDE_CHAVE_NFE
 *"     VALUE(I_TPEVENTO) TYPE  ZXNFE_EV_TPEVENTO
 *"     VALUE(I_CSTAT) TYPE  ZXNFE_STATUSCODE
 *"----------------------------------------------------------------------

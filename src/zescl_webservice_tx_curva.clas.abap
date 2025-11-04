@@ -78,7 +78,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
     DATA: var_msg  TYPE string, "Variavel para mostrar a Mensagem texto da exception.
           var_http TYPE REF TO if_http_client. "Interface HTTP Client
 
-    DATA: cx_exception TYPE REF TO zcx_webservice. "Referencia para a Classe de Exception.
+    DATA: cx_exception TYPE REF TO zescx_webservice. "Referencia para a Classe de Exception.
 
     DATA: gw_xml      TYPE string, "String para guardar informações do XML
           gw_xml_taxa TYPE string. "String para guardar informações do XML da Rota.
@@ -88,7 +88,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
         "TX = Taxa Curva.
         me->set_servico( EXPORTING i_servico = 'TX' ).
 
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         var_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH var_msg.
     ENDTRY.
@@ -102,13 +102,13 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
         "Atribui as Informações do HTTP Client para consultar o WebService.
         var_http = me->url( ).
 
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         var_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH var_msg.
     ENDTRY.
 
     "Abrir a conexão com o serviço.
-    me->zif_webservice~abrir_conexao( var_http ).
+    me->zesif_webservice~abrir_conexao( var_http ).
     gw_xml = monta_xml_taxa( i_data     = i_data
                              i_data_lib = i_data_lib
                              i_tipo = i_tipo ).
@@ -119,7 +119,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
 *    GW_XML_TAXA = ME->ZESIF_WEBSERVICE~CONSULTAR( I_HTTP = VAR_HTTP
 *                                                I_XML  = GW_XML
 *                                                ).
-    me->zif_webservice~consultar( EXPORTING
+    me->zesif_webservice~consultar( EXPORTING
                                     i_http = var_http
                                     i_xml  = gw_xml
                                   RECEIVING
@@ -152,7 +152,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
 
   method executar.
 
-    data: gobj_taxa_curva_db type ref to zcl_taxa_curva_db.
+    data: gobj_taxa_curva_db type ref to zescl_taxa_curva_db.
     data: lw_zsdt0094 type zsdt0094.
     data: lw_setleaf  type setleaf.
 
@@ -236,8 +236,8 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
 
   METHOD hedge_aquaviario.
 
-    DATA(obj_tx_curva)    = NEW zcl_taxa_curva( ).
-    DATA(obj_tx_curva_db) = NEW zcl_taxa_curva_db( ).
+    DATA(obj_tx_curva)    = NEW zescl_taxa_curva( ).
+    DATA(obj_tx_curva_db) = NEW zescl_taxa_curva_db( ).
 
     DATA(r_aqv) = obj_tx_curva->get_auart( 'RV60AFZZ_HEDGE_AQV' ).
     DATA(r_spt) = obj_tx_curva->get_auart( 'RV60AFZZ_HEDGE_SPT' ).
@@ -301,7 +301,7 @@ CLASS ZCL_WEBSERVICE_TX_CURVA IMPLEMENTATION.
 
   METHOD hedge_insumos.
 
-    DATA: obj_taxa   TYPE REF TO zcl_taxa_curva_db.
+    DATA: obj_taxa   TYPE REF TO zescl_taxa_curva_db.
     CREATE OBJECT obj_taxa.
 
     CASE i_tipo.

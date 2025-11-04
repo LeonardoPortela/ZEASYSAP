@@ -308,7 +308,7 @@ CLASS ZESCL_CTE IMPLEMENTATION.
 
         READ TABLE IT_URLLIST WITH KEY protocol = 'http' INTO DATA(WA_URLLIST).
 
-        zcl_drc_utils=>get_host_port_url_documento( CHANGING  c_http_url = wa_urllist ).
+        zescl_drc_utils=>get_host_port_url_documento( CHANGING  c_http_url = wa_urllist ).
 
         "http://sapqas.maggi.corp:8001/custom/docfiscal?sap-client=300
         DATA(WA_DOMINIO) = WA_URLLIST-PROTOCOL && '://' && WA_URLLIST-HOST && ':' && WA_URLLIST-PORT && WA_URLLIST-URL.

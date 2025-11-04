@@ -69,16 +69,16 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~download_doc_fiscal.
+  METHOD zesif_doc_eletronico~download_doc_fiscal.
 
     r_instancia = me.
 
     IF i_xml EQ abap_true.
-      me->zif_doc_eletronico~get_xml( IMPORTING e_xml = e_xml ).
+      me->zesif_doc_eletronico~get_xml( IMPORTING e_xml = e_xml ).
     ENDIF.
 
     IF i_pdf EQ abap_true.
-      me->zif_doc_eletronico~get_pdf( IMPORTING e_pdf = e_pdf ).
+      me->zesif_doc_eletronico~get_pdf( IMPORTING e_pdf = e_pdf ).
     ENDIF.
 
   ENDMETHOD.
@@ -153,83 +153,83 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_aguardando_aut_uso.
+  METHOD zesif_doc_eletronico~get_ck_aguardando_aut_uso.
 
     r_instancia = me.
 
     CHECK NOT (
-          me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '3' AND
-          me->zif_doc_eletronico~at_info_doc_eletronico-msstat      EQ abap_false ).
+          me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '3' AND
+          me->zesif_doc_eletronico~at_info_doc_eletronico-msstat      EQ abap_false ).
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_nao_aguard_aut_uso-msgid
-                          msgno = zcx_doc_eletronico=>zcx_nao_aguard_aut_uso-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_nao_aguard_aut_uso-msgid
-        msgno  = zcx_doc_eletronico=>zcx_nao_aguard_aut_uso-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_nao_aguard_aut_uso-msgid
+                          msgno = zescx_doc_eletronico=>zescx_nao_aguard_aut_uso-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_nao_aguard_aut_uso-msgid
+        msgno  = zescx_doc_eletronico=>zescx_nao_aguard_aut_uso-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_autorizado_cancel.
+  METHOD zesif_doc_eletronico~get_ck_autorizado_cancel.
 
     r_instancia = me.
 
     CHECK NOT (
-          me->zif_doc_eletronico~at_info_doc_eletronico-docsta EQ '1' AND
-          me->zif_doc_eletronico~at_info_doc_eletronico-scssta EQ '2' ).
+          me->zesif_doc_eletronico~at_info_doc_eletronico-docsta EQ '1' AND
+          me->zesif_doc_eletronico~at_info_doc_eletronico-scssta EQ '2' ).
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_nao_autorizado_cancel-msgid
-                          msgno = zcx_doc_eletronico=>zcx_nao_autorizado_cancel-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_nao_autorizado_cancel-msgid
-        msgno  = zcx_doc_eletronico=>zcx_nao_autorizado_cancel-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_nao_autorizado_cancel-msgid
+                          msgno = zescx_doc_eletronico=>zescx_nao_autorizado_cancel-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_nao_autorizado_cancel-msgid
+        msgno  = zescx_doc_eletronico=>zescx_nao_autorizado_cancel-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_autorizado_uso.
+  METHOD zesif_doc_eletronico~get_ck_autorizado_uso.
 
     r_instancia = me.
 
-    CHECK NOT ( me->zif_doc_eletronico~at_info_doc_eletronico-docsta EQ '1' AND
-                me->zif_doc_eletronico~at_info_doc_eletronico-cancel EQ abap_false )
+    CHECK NOT ( me->zesif_doc_eletronico~at_info_doc_eletronico-docsta EQ '1' AND
+                me->zesif_doc_eletronico~at_info_doc_eletronico-cancel EQ abap_false )
               OR
-              ( me->zif_doc_eletronico~at_info_doc_eletronico-docsta EQ '1' AND
-                me->zif_doc_eletronico~at_info_doc_eletronico-scssta EQ '2' ).
+              ( me->zesif_doc_eletronico~at_info_doc_eletronico-docsta EQ '1' AND
+                me->zesif_doc_eletronico~at_info_doc_eletronico-scssta EQ '2' ).
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_nao_autorizado_uso-msgid
-                          msgno = zcx_doc_eletronico=>zcx_nao_autorizado_uso-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_nao_autorizado_uso-msgid
-        msgno  = zcx_doc_eletronico=>zcx_nao_autorizado_uso-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_nao_autorizado_uso-msgid
+                          msgno = zescx_doc_eletronico=>zescx_nao_autorizado_uso-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_nao_autorizado_uso-msgid
+        msgno  = zescx_doc_eletronico=>zescx_nao_autorizado_uso-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_certidao_negativa.
+  METHOD zesif_doc_eletronico~get_ck_certidao_negativa.
 
     r_instancia = me.
 
     TRY .
-        me->zif_doc_eletronico~get_ck_autorizado_uso( ).
-      CATCH zcx_doc_eletronico.    "
+        me->zesif_doc_eletronico~get_ck_autorizado_uso( ).
+      CATCH zescx_doc_eletronico.    "
 
         SELECT SINGLE * INTO @DATA(wa_j_1bbranch)
               FROM j_1bbranch
-             WHERE bukrs  EQ @me->zif_doc_eletronico~at_documento-bukrs
-               AND branch EQ @me->zif_doc_eletronico~at_documento-branch.
+             WHERE bukrs  EQ @me->zesif_doc_eletronico~at_documento-bukrs
+               AND branch EQ @me->zesif_doc_eletronico~at_documento-branch.
 
         CHECK sy-subrc IS INITIAL.
 
@@ -243,21 +243,21 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
         SELECT SINGLE * INTO @DATA(wa_zjcnd_branch)
           FROM zjcnd_branch
-         WHERE bukrs       EQ @me->zif_doc_eletronico~at_documento-bukrs
-           AND branch      EQ @me->zif_doc_eletronico~at_documento-branch
-           AND dt_emissao  LE @me->zif_doc_eletronico~at_documento-pstdat
-           AND dt_validade GE @me->zif_doc_eletronico~at_documento-pstdat.
+         WHERE bukrs       EQ @me->zesif_doc_eletronico~at_documento-bukrs
+           AND branch      EQ @me->zesif_doc_eletronico~at_documento-branch
+           AND dt_emissao  LE @me->zesif_doc_eletronico~at_documento-pstdat
+           AND dt_validade GE @me->zesif_doc_eletronico~at_documento-pstdat.
 
         CHECK sy-subrc IS NOT INITIAL.
 
-        RAISE EXCEPTION TYPE zcx_doc_eletronico
+        RAISE EXCEPTION TYPE zescx_doc_eletronico
           EXPORTING
-            textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_sem_certidao_negativa-msgid
-                              msgno = zcx_doc_eletronico=>zcx_sem_certidao_negativa-msgno
-                              attr1 = CONV #( me->zif_doc_eletronico~at_documento-branch ) )
-            msgid  = zcx_doc_eletronico=>zcx_sem_certidao_negativa-msgid
-            msgno  = zcx_doc_eletronico=>zcx_sem_certidao_negativa-msgno
-            msgv1  = CONV #( me->zif_doc_eletronico~at_documento-branch )
+            textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_sem_certidao_negativa-msgid
+                              msgno = zescx_doc_eletronico=>zescx_sem_certidao_negativa-msgno
+                              attr1 = CONV #( me->zesif_doc_eletronico~at_documento-branch ) )
+            msgid  = zescx_doc_eletronico=>zescx_sem_certidao_negativa-msgid
+            msgno  = zescx_doc_eletronico=>zescx_sem_certidao_negativa-msgno
+            msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-branch )
             msgty  = 'E'.
 
     ENDTRY.
@@ -266,45 +266,45 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_data_documento.
+  METHOD zesif_doc_eletronico~get_ck_data_documento.
 
     r_instancia = me.
 
     TRY .
-        me->zif_doc_eletronico~get_ck_autorizado_uso( ).
-      CATCH zcx_doc_eletronico.    "
+        me->zesif_doc_eletronico~get_ck_autorizado_uso( ).
+      CATCH zescx_doc_eletronico.    "
 
 *CONTINGENCIA MDF-E - JT - 06.05.2024 =================================
         SELECT SINGLE *
           FROM zsdt0102 INTO @DATA(wa_zsdt0102)
-         WHERE docnum = @me->zif_doc_eletronico~at_documento-docnum.
+         WHERE docnum = @me->zesif_doc_eletronico~at_documento-docnum.
 
         IF sy-subrc = 0 AND wa_zsdt0102-contingencia = abap_true.
           RETURN.
         ENDIF.
 *CONTINGENCIA MDF-E - JT - 06.05.2024 =================================
 
-        CHECK me->zif_doc_eletronico~at_documento-docdat NE sy-datum.
+        CHECK me->zesif_doc_eletronico~at_documento-docdat NE sy-datum.
 
-        CASE me->zif_doc_eletronico~at_documento-model.
-          WHEN zif_doc_eletronico=>at_st_model_mdfe.
+        CASE me->zesif_doc_eletronico~at_documento-model.
+          WHEN zesif_doc_eletronico=>at_st_model_mdfe.
             sy-subrc = 1.
-          WHEN zif_doc_eletronico=>at_st_model_cte.
+          WHEN zesif_doc_eletronico=>at_st_model_cte.
             sy-subrc = 1.
-          WHEN zif_doc_eletronico=>at_st_model_nfe.
+          WHEN zesif_doc_eletronico=>at_st_model_nfe.
             AUTHORITY-CHECK OBJECT 'ZSDRETRONF' ID 'Z_DT_RETNF' FIELD '1'.
         ENDCASE.
 
         CHECK sy-subrc IS NOT INITIAL.
 
-        RAISE EXCEPTION TYPE zcx_doc_eletronico
+        RAISE EXCEPTION TYPE zescx_doc_eletronico
           EXPORTING
-            textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_data_emissao_retroativa-msgid
-                              msgno = zcx_doc_eletronico=>zcx_data_emissao_retroativa-msgno
-                              attr1 = CONV #( me->zif_doc_eletronico~at_documento-branch ) )
-            msgid  = zcx_doc_eletronico=>zcx_data_emissao_retroativa-msgid
-            msgno  = zcx_doc_eletronico=>zcx_data_emissao_retroativa-msgno
-            msgv1  = CONV #( me->zif_doc_eletronico~at_documento-branch )
+            textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_data_emissao_retroativa-msgid
+                              msgno = zescx_doc_eletronico=>zescx_data_emissao_retroativa-msgno
+                              attr1 = CONV #( me->zesif_doc_eletronico~at_documento-branch ) )
+            msgid  = zescx_doc_eletronico=>zescx_data_emissao_retroativa-msgid
+            msgno  = zescx_doc_eletronico=>zescx_data_emissao_retroativa-msgno
+            msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-branch )
             msgty  = 'E'.
 
     ENDTRY.
@@ -312,177 +312,177 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_determinar_numero.
+  METHOD zesif_doc_eletronico~get_ck_determinar_numero.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-action_requ NE '9'.
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ NE '9'.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_nao_necessario_numero-msgid
-                          msgno = zcx_doc_eletronico=>zcx_nao_necessario_numero-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_nao_necessario_numero-msgid
-        msgno  = zcx_doc_eletronico=>zcx_nao_necessario_numero-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_nao_necessario_numero-msgid
+                          msgno = zescx_doc_eletronico=>zescx_nao_necessario_numero-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_nao_necessario_numero-msgid
+        msgno  = zescx_doc_eletronico=>zescx_nao_necessario_numero-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_doc_cancel.
+  METHOD zesif_doc_eletronico~get_ck_doc_cancel.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-scssta NE '2'.
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-scssta NE '2'.
 
-    CHECK me->zif_doc_eletronico~at_documento-cancel EQ abap_false.
+    CHECK me->zesif_doc_eletronico~at_documento-cancel EQ abap_false.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_doc_nao_cancelado-msgid msgno = zcx_doc_eletronico=>zcx_doc_nao_cancelado-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_doc_nao_cancelado-msgid
-        msgno  = zcx_doc_eletronico=>zcx_doc_nao_cancelado-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_doc_nao_cancelado-msgid msgno = zescx_doc_eletronico=>zescx_doc_nao_cancelado-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_doc_nao_cancelado-msgid
+        msgno  = zescx_doc_eletronico=>zescx_doc_nao_cancelado-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_doc_nao_cancel.
+  METHOD zesif_doc_eletronico~get_ck_doc_nao_cancel.
 
     r_instancia = me.
 
     SELECT SINGLE * INTO @DATA(wa_j_1bnfdoc)
       FROM j_1bnfdoc
-     WHERE docref EQ @me->zif_doc_eletronico~at_documento-docnum.
+     WHERE docref EQ @me->zesif_doc_eletronico~at_documento-docnum.
 
-    CHECK me->zif_doc_eletronico~at_documento-cancel           EQ abap_true OR
-          me->zif_doc_eletronico~at_info_doc_eletronico-cancel EQ abap_true .
+    CHECK me->zesif_doc_eletronico~at_documento-cancel           EQ abap_true OR
+          me->zesif_doc_eletronico~at_info_doc_eletronico-cancel EQ abap_true .
 
     "Encontrou o documento de estorno
     CHECK wa_j_1bnfdoc-docnum IS NOT INITIAL.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_doc_cancelado-msgid msgno = zcx_doc_eletronico=>zcx_doc_cancelado-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_doc_cancelado-msgid
-        msgno  = zcx_doc_eletronico=>zcx_doc_cancelado-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_doc_cancelado-msgid msgno = zescx_doc_eletronico=>zescx_doc_cancelado-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_doc_cancelado-msgid
+        msgno  = zescx_doc_eletronico=>zescx_doc_cancelado-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_doc_proprio.
+  METHOD zesif_doc_eletronico~get_ck_doc_proprio.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_documento-form IS INITIAL.
+    CHECK me->zesif_doc_eletronico~at_documento-form IS INITIAL.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_emissao_propria-msgid msgno = zcx_doc_eletronico=>zcx_erro_emissao_propria-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_erro_emissao_propria-msgid
-        msgno  = zcx_doc_eletronico=>zcx_erro_emissao_propria-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_emissao_propria-msgid msgno = zescx_doc_eletronico=>zescx_erro_emissao_propria-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_erro_emissao_propria-msgid
+        msgno  = zescx_doc_eletronico=>zescx_erro_emissao_propria-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_doc_relacionado.
+  METHOD zesif_doc_eletronico~get_ck_doc_relacionado.
 
     r_instancia = me.
 
     DATA(lo_cte_switch)        = cl_j_1bcte_swf=>get_instance( ).
-    DATA(is_cte_ctx_by_model)  = lo_cte_switch->is_cte_ctx_by_model( me->zif_doc_eletronico~at_documento-model ).
-    DATA(is_cte_ctx_by_docnum) = lo_cte_switch->is_cte_ctx_by_docnum( iv_docnum = me->zif_doc_eletronico~at_documento-docref ).
+    DATA(is_cte_ctx_by_model)  = lo_cte_switch->is_cte_ctx_by_model( me->zesif_doc_eletronico~at_documento-model ).
+    DATA(is_cte_ctx_by_docnum) = lo_cte_switch->is_cte_ctx_by_docnum( iv_docnum = me->zesif_doc_eletronico~at_documento-docref ).
     CLEAR: lo_cte_switch.
 
     CHECK NOT ( is_cte_ctx_by_model EQ abap_true OR is_cte_ctx_by_docnum EQ abap_true ).
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_doc_nao_relacionado-msgid msgno = zcx_doc_eletronico=>zcx_doc_nao_relacionado-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_doc_nao_relacionado-msgid
-        msgno  = zcx_doc_eletronico=>zcx_doc_nao_relacionado-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_doc_nao_relacionado-msgid msgno = zescx_doc_eletronico=>zescx_doc_nao_relacionado-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_doc_nao_relacionado-msgid
+        msgno  = zescx_doc_eletronico=>zescx_doc_nao_relacionado-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_estornar_doc_origem.
+  METHOD zesif_doc_eletronico~get_ck_estornar_doc_origem.
 
     r_instancia = me.
 
-    CHECK NOT ( ( me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '1' AND
-                  me->zif_doc_eletronico~at_info_doc_eletronico-docsta      EQ '2' ) OR
-                ( me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '1' AND
-                  me->zif_doc_eletronico~at_info_doc_eletronico-docsta      EQ '3' ) OR
-                ( me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '8' AND
-                  me->zif_doc_eletronico~at_info_doc_eletronico-msstat      EQ 'V' )
+    CHECK NOT ( ( me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '1' AND
+                  me->zesif_doc_eletronico~at_info_doc_eletronico-docsta      EQ '2' ) OR
+                ( me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '1' AND
+                  me->zesif_doc_eletronico~at_info_doc_eletronico-docsta      EQ '3' ) OR
+                ( me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '8' AND
+                  me->zesif_doc_eletronico~at_info_doc_eletronico-msstat      EQ 'V' )
               ).
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_nao_est_doc_origem-msgid
-                          msgno = zcx_doc_eletronico=>zcx_nao_est_doc_origem-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_nao_est_doc_origem-msgid
-        msgno  = zcx_doc_eletronico=>zcx_nao_est_doc_origem-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_nao_est_doc_origem-msgid
+                          msgno = zescx_doc_eletronico=>zescx_nao_est_doc_origem-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_nao_est_doc_origem-msgid
+        msgno  = zescx_doc_eletronico=>zescx_nao_est_doc_origem-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_estorno.
+  METHOD zesif_doc_eletronico~get_ck_estorno.
 
     r_instancia = me.
 
     TRY .
         "Documento Já cancelado sai da rotina
-        me->zif_doc_eletronico~get_ck_doc_cancel( ).
+        me->zesif_doc_eletronico~get_ck_doc_cancel( ).
         EXIT.
-      CATCH zcx_doc_eletronico.    "
+      CATCH zescx_doc_eletronico.    "
     ENDTRY.
 
     TRY .
-        me->zif_doc_eletronico~get_ck_numero_determinado( ).
-      CATCH zcx_doc_eletronico.
+        me->zesif_doc_eletronico~get_ck_numero_determinado( ).
+      CATCH zescx_doc_eletronico.
         "Não foi Determinado número
         EXIT.
     ENDTRY.
 
-    me->zif_doc_eletronico~get_ck_estorno_mdfe_possivel(
+    me->zesif_doc_eletronico~get_ck_estorno_mdfe_possivel(
     )->get_val_cancelamento_modal(
     ).
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_estorno_mdfe_possivel.
+  METHOD zesif_doc_eletronico~get_ck_estorno_mdfe_possivel.
 
     r_instancia = me.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_fatura_ativa.
+  METHOD zesif_doc_eletronico~get_ck_fatura_ativa.
 
     r_instancia = me.
 
 
     SELECT SINGLE * INTO @DATA(wl_lin)
       FROM j_1bnflin
-     WHERE docnum EQ @me->zif_doc_eletronico~at_documento-docnum.
+     WHERE docnum EQ @me->zesif_doc_eletronico~at_documento-docnum.
 
     CHECK ( sy-subrc IS INITIAL ) AND ( wl_lin-refkey IS NOT INITIAL ) AND ( wl_lin-reftyp EQ 'BI' ).
 
@@ -494,182 +494,182 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     CHECK sy-subrc IS NOT INITIAL.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_fatura_estornada-msgid msgno = zcx_doc_eletronico=>zcx_erro_fatura_estornada-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_erro_fatura_estornada-msgid
-        msgno  = zcx_doc_eletronico=>zcx_erro_fatura_estornada-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_fatura_estornada-msgid msgno = zescx_doc_eletronico=>zescx_erro_fatura_estornada-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_erro_fatura_estornada-msgid
+        msgno  = zescx_doc_eletronico=>zescx_erro_fatura_estornada-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_nao_processamento.
+  METHOD zesif_doc_eletronico~get_ck_nao_processamento.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ abap_false.
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ abap_false.
 
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-msstat EQ abap_false OR
-          me->zif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'A' OR
-          me->zif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'G' OR
-          me->zif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'V' OR
-          me->zif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'D'.
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-msstat EQ abap_false OR
+          me->zesif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'A' OR
+          me->zesif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'G' OR
+          me->zesif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'V' OR
+          me->zesif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'D'.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_em_processamento_aut_uso-msgid
-                          msgno = zcx_doc_eletronico=>zcx_em_processamento_aut_uso-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_em_processamento_aut_uso-msgid
-        msgno  = zcx_doc_eletronico=>zcx_em_processamento_aut_uso-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_em_processamento_aut_uso-msgid
+                          msgno = zescx_doc_eletronico=>zescx_em_processamento_aut_uso-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_em_processamento_aut_uso-msgid
+        msgno  = zescx_doc_eletronico=>zescx_em_processamento_aut_uso-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_nao_proc_cancel.
+  METHOD zesif_doc_eletronico~get_ck_nao_proc_cancel.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ abap_false AND   "Documento em Processamento
-          me->zif_doc_eletronico~at_info_doc_eletronico-docsta      EQ '1' AND          "Documento Autorizado na SEFAZ
-          me->zif_doc_eletronico~at_info_doc_eletronico-scssta      EQ '1'.             "Documento Autorizado e Solicitação de Cancelamento Solicitada...
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ abap_false AND   "Documento em Processamento
+          me->zesif_doc_eletronico~at_info_doc_eletronico-docsta      EQ '1' AND          "Documento Autorizado na SEFAZ
+          me->zesif_doc_eletronico~at_info_doc_eletronico-scssta      EQ '1'.             "Documento Autorizado e Solicitação de Cancelamento Solicitada...
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_em_processamento_aut_can-msgid
-                          msgno = zcx_doc_eletronico=>zcx_em_processamento_aut_can-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_em_processamento_aut_can-msgid
-        msgno  = zcx_doc_eletronico=>zcx_em_processamento_aut_can-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_em_processamento_aut_can-msgid
+                          msgno = zescx_doc_eletronico=>zescx_em_processamento_aut_can-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_em_processamento_aut_can-msgid
+        msgno  = zescx_doc_eletronico=>zescx_em_processamento_aut_can-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_nao_proc_inutilizacao.
+  METHOD zesif_doc_eletronico~get_ck_nao_proc_inutilizacao.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ abap_false AND  "Em processamento; nenhuma ação manual necessária
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ abap_false AND  "Em processamento; nenhuma ação manual necessária
 
-          ( me->zif_doc_eletronico~at_info_doc_eletronico-scssta      EQ '3' OR      "Solicitação de rejeição & autorização para inutilização
-            me->zif_doc_eletronico~at_info_doc_eletronico-scssta      EQ '9' ) AND   "Erro de validação & inutilização solicitada
+          ( me->zesif_doc_eletronico~at_info_doc_eletronico-scssta      EQ '3' OR      "Solicitação de rejeição & autorização para inutilização
+            me->zesif_doc_eletronico~at_info_doc_eletronico-scssta      EQ '9' ) AND   "Erro de validação & inutilização solicitada
 
-          me->zif_doc_eletronico~at_info_doc_eletronico-msstat      EQ 'C' AND      "Solicitação de não utilização recebida pelo SM
-          me->zif_doc_eletronico~at_info_doc_eletronico-reason      IS NOT INITIAL. "Motivo para Estorno/Não utilização
+          me->zesif_doc_eletronico~at_info_doc_eletronico-msstat      EQ 'C' AND      "Solicitação de não utilização recebida pelo SM
+          me->zesif_doc_eletronico~at_info_doc_eletronico-reason      IS NOT INITIAL. "Motivo para Estorno/Não utilização
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_em_processamento_aut_inut-msgid
-                          msgno = zcx_doc_eletronico=>zcx_em_processamento_aut_inut-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_em_processamento_aut_inut-msgid
-        msgno  = zcx_doc_eletronico=>zcx_em_processamento_aut_inut-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_em_processamento_aut_inut-msgid
+                          msgno = zescx_doc_eletronico=>zescx_em_processamento_aut_inut-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_em_processamento_aut_inut-msgid
+        msgno  = zescx_doc_eletronico=>zescx_em_processamento_aut_inut-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_numero_determinado.
+  METHOD zesif_doc_eletronico~get_ck_numero_determinado.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_documento-nfenum IS INITIAL.
+    CHECK me->zesif_doc_eletronico~at_documento-nfenum IS INITIAL.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_num_nao_determinado-msgid msgno = zcx_doc_eletronico=>zcx_erro_num_nao_determinado-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_erro_num_nao_determinado-msgid
-        msgno  = zcx_doc_eletronico=>zcx_erro_num_nao_determinado-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_num_nao_determinado-msgid msgno = zescx_doc_eletronico=>zescx_erro_num_nao_determinado-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_erro_num_nao_determinado-msgid
+        msgno  = zescx_doc_eletronico=>zescx_erro_num_nao_determinado-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_numero_nao_determinado.
+  METHOD zesif_doc_eletronico~get_ck_numero_nao_determinado.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_documento-nfenum IS NOT INITIAL.
+    CHECK me->zesif_doc_eletronico~at_documento-nfenum IS NOT INITIAL.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_num_determinado-msgid
-                          msgno = zcx_doc_eletronico=>zcx_erro_num_determinado-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_erro_num_determinado-msgid
-        msgno  = zcx_doc_eletronico=>zcx_erro_num_determinado-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_num_determinado-msgid
+                          msgno = zescx_doc_eletronico=>zescx_erro_num_determinado-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_erro_num_determinado-msgid
+        msgno  = zescx_doc_eletronico=>zescx_erro_num_determinado-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_sem_erro_autorizacao.
+  METHOD zesif_doc_eletronico~get_ck_sem_erro_autorizacao.
 
     r_instancia = me.
 
-    IF ( me->zif_doc_eletronico~at_info_doc_eletronico-docsta      NE '2' ) AND
-       ( me->zif_doc_eletronico~at_info_doc_eletronico-action_requ NE '8' ).
+    IF ( me->zesif_doc_eletronico~at_info_doc_eletronico-docsta      NE '2' ) AND
+       ( me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ NE '8' ).
 
-      CHECK me->zif_doc_eletronico~at_info_doc_eletronico-docsta NE space.
-      CHECK me->zif_doc_eletronico~at_info_doc_eletronico-docsta NE '1'.
-      CHECK me->zif_doc_eletronico~at_info_doc_eletronico-cancel NE abap_true.
+      CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-docsta NE space.
+      CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-docsta NE '1'.
+      CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-cancel NE abap_true.
 
-      CHECK ( me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '1' AND
-              me->zif_doc_eletronico~at_info_doc_eletronico-scssta EQ '0' ) OR
-            ( me->zif_doc_eletronico~at_info_doc_eletronico-docsta EQ '3' ).
+      CHECK ( me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '1' AND
+              me->zesif_doc_eletronico~at_info_doc_eletronico-scssta EQ '0' ) OR
+            ( me->zesif_doc_eletronico~at_info_doc_eletronico-docsta EQ '3' ).
 
     ENDIF.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_autorizacao_uso-msgid msgno = zcx_doc_eletronico=>zcx_erro_autorizacao_uso-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_erro_autorizacao_uso-msgid
-        msgno  = zcx_doc_eletronico=>zcx_erro_autorizacao_uso-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_autorizacao_uso-msgid msgno = zescx_doc_eletronico=>zescx_erro_autorizacao_uso-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_erro_autorizacao_uso-msgid
+        msgno  = zescx_doc_eletronico=>zescx_erro_autorizacao_uso-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_sem_erro_cancelamento.
+  METHOD zesif_doc_eletronico~get_ck_sem_erro_cancelamento.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ 'C'.
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'A'.
-    CHECK me->zif_doc_eletronico~at_info_doc_eletronico-reason IS NOT INITIAL.
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ 'C'.
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-msstat EQ 'A'.
+    CHECK me->zesif_doc_eletronico~at_info_doc_eletronico-reason IS NOT INITIAL.
 
     TRY .
-        me->zif_doc_eletronico~get_logs_erro( ).
-      CATCH zcx_doc_eletronico.
+        me->zesif_doc_eletronico~get_logs_erro( ).
+      CATCH zescx_doc_eletronico.
         EXIT.
     ENDTRY.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_autorizacao_uso-msgid msgno = zcx_doc_eletronico=>zcx_erro_autorizacao_uso-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum ) )
-        msgid  = zcx_doc_eletronico=>zcx_erro_autorizacao_uso-msgid
-        msgno  = zcx_doc_eletronico=>zcx_erro_autorizacao_uso-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_autorizacao_uso-msgid msgno = zescx_doc_eletronico=>zescx_erro_autorizacao_uso-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum ) )
+        msgid  = zescx_doc_eletronico=>zescx_erro_autorizacao_uso-msgid
+        msgno  = zescx_doc_eletronico=>zescx_erro_autorizacao_uso-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_valor_documento.
+  METHOD zesif_doc_eletronico~get_ck_valor_documento.
 
     DATA: lc_netwr TYPE j_1bnflin-netwr,
           wa_lin_i TYPE j_1binlin.
@@ -677,26 +677,26 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
     r_instancia = me.
 
     TRY .
-        me->zif_doc_eletronico~get_ck_autorizado_uso( ).
-      CATCH zcx_doc_eletronico.    "
+        me->zesif_doc_eletronico~get_ck_autorizado_uso( ).
+      CATCH zescx_doc_eletronico.    "
 
-        CHECK me->zif_doc_eletronico~at_documento-model EQ zif_doc_eletronico=>at_st_model_nfe OR
-              me->zif_doc_eletronico~at_documento-model EQ zif_doc_eletronico=>at_st_model_cte.
+        CHECK me->zesif_doc_eletronico~at_documento-model EQ zesif_doc_eletronico=>at_st_model_nfe OR
+              me->zesif_doc_eletronico~at_documento-model EQ zesif_doc_eletronico=>at_st_model_cte.
 
         SELECT * INTO TABLE @DATA(it_itens)
           FROM j_1bnflin
-         WHERE docnum EQ @me->zif_doc_eletronico~at_documento-docnum.
+         WHERE docnum EQ @me->zesif_doc_eletronico~at_documento-docnum.
 
         CHECK sy-subrc IS INITIAL.
 
         SELECT * INTO TABLE @DATA(it_tax)
           FROM j_1bnfstx
-         WHERE docnum EQ @me->zif_doc_eletronico~at_documento-docnum.
+         WHERE docnum EQ @me->zesif_doc_eletronico~at_documento-docnum.
 
         TRY.
-            me->zif_doc_eletronico~get_ck_doc_relacionado( ).
+            me->zesif_doc_eletronico~get_ck_doc_relacionado( ).
             DATA(ck_doc_related) = abap_true.
-          CATCH zcx_doc_eletronico .
+          CATCH zescx_doc_eletronico .
             ck_doc_related = abap_false.
         ENDTRY.
 
@@ -710,9 +710,9 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
           CALL FUNCTION 'J_1B_NF_VALUE_DETERMINATION_I'
             EXPORTING
               nf_item                 = wa_item
-              ix_posted_with_xml_data = me->zif_doc_eletronico~at_documento-autom_incoming
+              ix_posted_with_xml_data = me->zesif_doc_eletronico~at_documento-autom_incoming
               ix_cte_related          = ck_doc_related
-              iv_nf_direction         = me->zif_doc_eletronico~at_documento-direct
+              iv_nf_direction         = me->zesif_doc_eletronico~at_documento-direct
             IMPORTING
               ext_item                = wa_lin_i
             TABLES
@@ -728,12 +728,12 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
         ENDLOOP.
 
-        CASE me->zif_doc_eletronico~at_documento-model.
-          WHEN zif_doc_eletronico=>at_st_model_nfe.
+        CASE me->zesif_doc_eletronico~at_documento-model.
+          WHEN zesif_doc_eletronico=>at_st_model_nfe.
             SELECT SINGLE * INTO @DATA(wl_setleaf)
               FROM setleaf
              WHERE setname = 'MAGGI_VLIM_EMI_NFE'.
-          WHEN zif_doc_eletronico=>at_st_model_cte.
+          WHEN zesif_doc_eletronico=>at_st_model_cte.
             SELECT SINGLE * INTO wl_setleaf
               FROM setleaf
              WHERE setname = 'MAGGI_VLIM_EMI_CTE'.
@@ -756,21 +756,21 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
         "Verifica Tabela para aprovação Emissão NF-e/CT-e por Valor
         SELECT SINGLE * INTO @DATA(wa_zsdt0146)
           FROM zsdt0146
-         WHERE docnum EQ @me->zif_doc_eletronico~at_documento-docnum.
+         WHERE docnum EQ @me->zesif_doc_eletronico~at_documento-docnum.
 
         "Se encontrou aprovação sai da validação
         CHECK sy-subrc IS NOT INITIAL.
 
-        RAISE EXCEPTION TYPE zcx_doc_eletronico
+        RAISE EXCEPTION TYPE zescx_doc_eletronico
           EXPORTING
-            textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_geral-msgid
-                              msgno = zcx_doc_eletronico=>zcx_erro_geral-msgno
+            textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_geral-msgid
+                              msgno = zescx_doc_eletronico=>zescx_erro_geral-msgno
                               attr1 = 'Valor do documento ultrapassa o limite permitido '
                               attr2 = 'e necessita de uma aprovação do Departamento '
                               attr3 = 'Fiscal. Favor criar uma FI ao indiretos no Soft'
                               attr4 = 'Expert solicitando a validação deste documento' )
-            msgid  = zcx_doc_eletronico=>zcx_erro_geral-msgid
-            msgno  = zcx_doc_eletronico=>zcx_erro_geral-msgno
+            msgid  = zescx_doc_eletronico=>zescx_erro_geral-msgid
+            msgno  = zescx_doc_eletronico=>zescx_erro_geral-msgno
             msgty  = 'E'
             msgv1  = 'Valor do documento ultrapassa o limite permitido '
             msgv2  = 'e necessita de uma aprovação do Departamento '
@@ -782,29 +782,29 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_ck_verifica_modal.
+  METHOD zesif_doc_eletronico~get_ck_verifica_modal.
 
     r_instancia = me.
 
-    CHECK i_modal NE me->zif_doc_eletronico~at_documento-model.
+    CHECK i_modal NE me->zesif_doc_eletronico~at_documento-model.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_modelo-msgid msgno = zcx_doc_eletronico=>zcx_erro_modelo-msgno
-                          attr1 = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_modelo-msgid msgno = zescx_doc_eletronico=>zescx_erro_modelo-msgno
+                          attr1 = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
                           attr2 = CONV #( i_modal ) )
-        msgid  = zcx_doc_eletronico=>zcx_erro_modelo-msgid
-        msgno  = zcx_doc_eletronico=>zcx_erro_modelo-msgno
-        msgv1  = CONV #( me->zif_doc_eletronico~at_documento-docnum )
+        msgid  = zescx_doc_eletronico=>zescx_erro_modelo-msgid
+        msgno  = zescx_doc_eletronico=>zescx_erro_modelo-msgno
+        msgv1  = CONV #( me->zesif_doc_eletronico~at_documento-docnum )
         msgv2  = CONV #( i_modal )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_erro_geral.
+  METHOD zesif_doc_eletronico~get_erro_geral.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
         textid = VALUE #( msgid = sy-msgid
                           msgno = sy-msgno
@@ -823,7 +823,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_erro_geral_string.
+  METHOD zesif_doc_eletronico~get_erro_geral_string.
 
     DATA: lc_texto TYPE c LENGTH 200.
     lc_texto = i_texto.
@@ -832,16 +832,16 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
     sy-msgv3 = lc_texto+100(50).
     sy-msgv4 = lc_texto+150(50).
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_geral-msgid
-                          msgno = zcx_doc_eletronico=>zcx_erro_geral-msgno
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_geral-msgid
+                          msgno = zescx_doc_eletronico=>zescx_erro_geral-msgno
                           attr1 = CONV #( sy-msgv1 )
                           attr2 = CONV #( sy-msgv2 )
                           attr3 = CONV #( sy-msgv3 )
                           attr4 = CONV #( sy-msgv4 ) )
-        msgid  = zcx_doc_eletronico=>zcx_erro_geral-msgid
-        msgno  = zcx_doc_eletronico=>zcx_erro_geral-msgno
+        msgid  = zescx_doc_eletronico=>zescx_erro_geral-msgid
+        msgno  = zescx_doc_eletronico=>zescx_erro_geral-msgno
         msgty  = 'E'
         msgv1  = sy-msgv1
         msgv2  = sy-msgv2
@@ -851,44 +851,44 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_instance.
+  METHOD zesif_doc_eletronico~get_instance.
 
-    IF zif_doc_eletronico~at_instance IS NOT BOUND.
+    IF zesif_doc_eletronico~at_instance IS NOT BOUND.
 
       SELECT SINGLE model INTO @DATA(i_model)
         FROM j_1bnfdoc
        WHERE docnum EQ @i_docnum.
 
       CASE i_model.
-        WHEN zif_doc_eletronico=>at_st_model_cte.
-          CREATE OBJECT zif_doc_eletronico~at_instance TYPE zcl_cte.
-        WHEN zif_doc_eletronico=>at_st_model_nfe.
-          CREATE OBJECT zif_doc_eletronico~at_instance TYPE zcl_nfe.
-        WHEN zif_doc_eletronico=>at_st_model_mdfe.
-          CREATE OBJECT zif_doc_eletronico~at_instance TYPE zcl_mdfe_.
+        WHEN zesif_doc_eletronico=>at_st_model_cte.
+          CREATE OBJECT zesif_doc_eletronico~at_instance TYPE zescl_cte.
+        WHEN zesif_doc_eletronico=>at_st_model_nfe.
+          CREATE OBJECT zesif_doc_eletronico~at_instance TYPE zescl_nfe.
+        WHEN zesif_doc_eletronico=>at_st_model_mdfe.
+          CREATE OBJECT zesif_doc_eletronico~at_instance TYPE zescl_mdfe_.
         WHEN OTHERS.
-          RAISE EXCEPTION TYPE zcx_doc_eletronico
+          RAISE EXCEPTION TYPE zescx_doc_eletronico
             EXPORTING
-              textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_modelo_nao_previsto-msgid
-                                msgno = zcx_doc_eletronico=>zcx_modelo_nao_previsto-msgno
+              textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_modelo_nao_previsto-msgid
+                                msgno = zescx_doc_eletronico=>zescx_modelo_nao_previsto-msgno
                                 attr1 = CONV #( i_docnum )
                                 attr2 = CONV #( i_model  ) )
-              msgid  = zcx_doc_eletronico=>zcx_modelo_nao_previsto-msgid
-              msgno  = zcx_doc_eletronico=>zcx_modelo_nao_previsto-msgno
+              msgid  = zescx_doc_eletronico=>zescx_modelo_nao_previsto-msgid
+              msgno  = zescx_doc_eletronico=>zescx_modelo_nao_previsto-msgno
               msgty  = 'E'
               msgv1  = CONV #( i_docnum )
               msgv2  = CONV #( i_model ).
       ENDCASE.
-      r_instancia = zif_doc_eletronico~at_instance.
+      r_instancia = zesif_doc_eletronico~at_instance.
 
     ELSE.
-      r_instancia = zif_doc_eletronico~at_instance.
+      r_instancia = zesif_doc_eletronico~at_instance.
     ENDIF.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_load_log.
+  METHOD zesif_doc_eletronico~get_load_log.
 
     "Objeto de exemplo : CL_CFA_MESSAGE_HANDLER
 
@@ -905,7 +905,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     gs_extnum-sign   = 'I'.
     gs_extnum-option = 'EQ'.
-    gs_extnum-low = gs_extnum-high = me->zif_doc_eletronico~at_documento-docnum.
+    gs_extnum-low = gs_extnum-high = me->zesif_doc_eletronico~at_documento-docnum.
     APPEND gs_extnum TO gs_log_filter-extnumber.
 
     CALL FUNCTION 'BAL_GLB_MEMORY_REFRESH'
@@ -930,8 +930,8 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     IF sy-subrc <>  0.
       MESSAGE ID 'J1B_NFE' TYPE 'S' NUMBER '037'
-         WITH me->zif_doc_eletronico~at_documento-docnum.
-      me->zif_doc_eletronico~get_erro_geral( ).
+         WITH me->zesif_doc_eletronico~at_documento-docnum.
+      me->zesif_doc_eletronico~get_erro_geral( ).
     ENDIF.
 
     CHECK it_log_header2[] IS NOT INITIAL.
@@ -990,7 +990,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_logs_erro.
+  METHOD zesif_doc_eletronico~get_logs_erro.
 
     DATA: gs_log_filter TYPE bal_s_lfil,
           gs_subobject  TYPE bal_s_sub,
@@ -1010,7 +1010,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     APPEND gs_object    TO gs_log_filter-object.
     APPEND gs_subobject TO gs_log_filter-subobject.
-    gs_extnum-low = gs_extnum-high = me->zif_doc_eletronico~at_documento-docnum.
+    gs_extnum-low = gs_extnum-high = me->zesif_doc_eletronico~at_documento-docnum.
     APPEND gs_extnum TO gs_log_filter-extnumber.
 
     CALL FUNCTION 'BAL_DB_SEARCH'
@@ -1026,13 +1026,13 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     IF sy-subrc IS NOT INITIAL.
       MESSAGE ID 'J1B_NFE' TYPE 'S' NUMBER '034'.
-      me->zif_doc_eletronico~get_erro_geral( ).
+      me->zesif_doc_eletronico~get_erro_geral( ).
     ENDIF.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_motivo_cancelamento.
+  METHOD zesif_doc_eletronico~get_motivo_cancelamento.
 
     SELECT SINGLE * INTO e_motivo
       FROM j_1bnfe_cancelrt
@@ -1041,20 +1041,20 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     CHECK sy-subrc IS NOT INITIAL.
 
-    RAISE EXCEPTION TYPE zcx_doc_eletronico
+    RAISE EXCEPTION TYPE zescx_doc_eletronico
       EXPORTING
-        textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_motivo_cancel_nao_enc-msgid
-                          msgno = zcx_doc_eletronico=>zcx_motivo_cancel_nao_enc-msgno
+        textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_motivo_cancel_nao_enc-msgid
+                          msgno = zescx_doc_eletronico=>zescx_motivo_cancel_nao_enc-msgno
                           attr1 = CONV #( i_motivo ) )
-        msgid  = zcx_doc_eletronico=>zcx_motivo_cancel_nao_enc-msgid
-        msgno  = zcx_doc_eletronico=>zcx_motivo_cancel_nao_enc-msgno
+        msgid  = zescx_doc_eletronico=>zescx_motivo_cancel_nao_enc-msgid
+        msgno  = zescx_doc_eletronico=>zescx_motivo_cancel_nao_enc-msgno
         msgv1  = CONV #( i_motivo )
         msgty  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_pdf.
+  METHOD zesif_doc_eletronico~get_pdf.
 
     DATA: it_urllist TYPE tihttpurls2.
 
@@ -1088,17 +1088,17 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
     "http://sapqas.maggi.corp:8001/custom/docfiscal?sap-client=300
     DATA(wa_dominio) = wa_urllist-protocol && '://' && wa_urllist-host && ':' && wa_urllist-port && wa_urllist-url.
 
-    CASE me->zif_doc_eletronico~at_documento-model.
-      WHEN zif_doc_eletronico=>at_st_model_nfe.
-        DATA(e_link_pdf) = wa_dominio && '/getnfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
-      WHEN zif_doc_eletronico=>at_st_model_cte.
-        e_link_pdf = wa_dominio && '/getctepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
-      WHEN zif_doc_eletronico=>at_st_model_mdfe.
-        e_link_pdf = wa_dominio && '/getmdfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
+    CASE me->zesif_doc_eletronico~at_documento-model.
+      WHEN zesif_doc_eletronico=>at_st_model_nfe.
+        DATA(e_link_pdf) = wa_dominio && '/getnfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
+      WHEN zesif_doc_eletronico=>at_st_model_cte.
+        e_link_pdf = wa_dominio && '/getctepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
+      WHEN zesif_doc_eletronico=>at_st_model_mdfe.
+        e_link_pdf = wa_dominio && '/getmdfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
     ENDCASE.
 
     TRY .
-        zcl_arquivo=>get_file_uri_get_(
+        zescl_arquivo=>get_file_uri_get_(
           EXPORTING
             i_uri          = e_link_pdf
           IMPORTING
@@ -1109,21 +1109,21 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
         IF e_code NE '200'.
 
-          RAISE EXCEPTION TYPE zcx_doc_eletronico
+          RAISE EXCEPTION TYPE zescx_doc_eletronico
             EXPORTING
-              textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_geral-msgid
-                                msgno = zcx_doc_eletronico=>zcx_erro_geral-msgno
+              textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_geral-msgid
+                                msgno = zescx_doc_eletronico=>zescx_erro_geral-msgno
                                 attr1 = e_reason )
               msgty  = 'E'
-              msgid  = zcx_doc_eletronico=>zcx_erro_geral-msgid
-              msgno  = zcx_doc_eletronico=>zcx_erro_geral-msgno
+              msgid  = zescx_doc_eletronico=>zescx_erro_geral-msgid
+              msgno  = zescx_doc_eletronico=>zescx_erro_geral-msgno
               msgv1  = CONV #( e_reason ).
 
         ENDIF.
 
-      CATCH zcx_arquivo INTO DATA(ex_arquivo).
+      CATCH zescx_arquivo INTO DATA(ex_arquivo).
 
-        RAISE EXCEPTION TYPE zcx_doc_eletronico
+        RAISE EXCEPTION TYPE zescx_doc_eletronico
           EXPORTING
             textid = VALUE #( msgid = ex_arquivo->msgid
                               msgno = ex_arquivo->msgno
@@ -1145,21 +1145,21 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_registro.
+  METHOD zesif_doc_eletronico~get_registro.
     r_instancia = me.
-    e_documento = me->zif_doc_eletronico~at_documento.
-    e_info_doc_eletronico = me->zif_doc_eletronico~at_info_doc_eletronico.
+    e_documento = me->zesif_doc_eletronico~at_documento.
+    e_info_doc_eletronico = me->zesif_doc_eletronico~at_info_doc_eletronico.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_status.
+  METHOD zesif_doc_eletronico~get_status.
 
     r_instancia = me.
 
     "Documento Estornado
     TRY.
-        me->zif_doc_eletronico~get_ck_doc_nao_cancel( ).
-      CATCH zcx_doc_eletronico .
+        me->zesif_doc_eletronico~get_ck_doc_nao_cancel( ).
+      CATCH zescx_doc_eletronico .
         e_status = '09'.
         e_status_desc = 'Documento Estornado'.
         EXIT.
@@ -1167,17 +1167,17 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     "Autorizado o Cancelamento
     TRY.
-        me->zif_doc_eletronico~get_ck_autorizado_cancel( ).
+        me->zesif_doc_eletronico~get_ck_autorizado_cancel( ).
         e_status = '07'.
         e_status_desc = 'Autorizado o Cancelamento'.
         EXIT.
-      CATCH zcx_doc_eletronico .
+      CATCH zescx_doc_eletronico .
     ENDTRY.
 
     "Documento Cancelado
     TRY.
-        me->zif_doc_eletronico~get_ck_doc_nao_cancel( ).
-      CATCH zcx_doc_eletronico .
+        me->zesif_doc_eletronico~get_ck_doc_nao_cancel( ).
+      CATCH zescx_doc_eletronico .
         e_status = '05'.
         e_status_desc = 'Documento Cancelado'.
         EXIT.
@@ -1185,17 +1185,17 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     "Necessário Determinar Número
     TRY.
-        me->zif_doc_eletronico~get_ck_determinar_numero( ).
+        me->zesif_doc_eletronico~get_ck_determinar_numero( ).
         e_status = '00'.
         e_status_desc = 'Necessário Determinar Número'.
         EXIT.
-      CATCH zcx_doc_eletronico .
+      CATCH zescx_doc_eletronico .
     ENDTRY.
 
     "Em processamento de Autorização de USO
     TRY.
-        me->zif_doc_eletronico~get_ck_nao_processamento( ).
-      CATCH zcx_doc_eletronico .
+        me->zesif_doc_eletronico~get_ck_nao_processamento( ).
+      CATCH zescx_doc_eletronico .
         e_status = '01'.
         e_status_desc = 'Em processamento de Autorização de USO'.
         EXIT.
@@ -1203,8 +1203,8 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     "Em Processamento de Autorização para Cancelar
     TRY.
-        me->zif_doc_eletronico~get_ck_nao_proc_cancel( ).
-      CATCH zcx_doc_eletronico .
+        me->zesif_doc_eletronico~get_ck_nao_proc_cancel( ).
+      CATCH zescx_doc_eletronico .
         e_status = '06'.
         e_status_desc = 'Em Processamento de Autorização para Cancelar'.
         EXIT.
@@ -1212,34 +1212,34 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     "Autorizado o USO
     TRY.
-        me->zif_doc_eletronico~get_ck_autorizado_uso( ).
+        me->zesif_doc_eletronico~get_ck_autorizado_uso( ).
         e_status = '02'.
         e_status_desc = 'Autorizado o USO'.
         EXIT.
-      CATCH zcx_doc_eletronico.    "
+      CATCH zescx_doc_eletronico.    "
     ENDTRY.
 
     "Aguardando Envio de Autorização de USO
     TRY.
-        me->zif_doc_eletronico~get_ck_aguardando_aut_uso( ).
+        me->zesif_doc_eletronico~get_ck_aguardando_aut_uso( ).
         e_status = '04'.
         e_status_desc = 'Aguardando Envio de Autorização de USO'.
         EXIT.
-      CATCH zcx_doc_eletronico.    "
+      CATCH zescx_doc_eletronico.    "
     ENDTRY.
 
     "Em Processamento de Autorização para Inutilização
     TRY.
-        me->zif_doc_eletronico~get_ck_nao_proc_inutilizacao( ).
-      CATCH zcx_doc_eletronico .
+        me->zesif_doc_eletronico~get_ck_nao_proc_inutilizacao( ).
+      CATCH zescx_doc_eletronico .
         e_status = '10'.
         e_status_desc = 'Em Processamento de Autorização para Inutilização'.
         EXIT.
     ENDTRY.
 
     TRY.
-        me->zif_doc_eletronico~get_ck_sem_erro_cancelamento( ).
-      CATCH zcx_doc_eletronico .
+        me->zesif_doc_eletronico~get_ck_sem_erro_cancelamento( ).
+      CATCH zescx_doc_eletronico .
         e_status = '08'.
         e_status_desc = 'Erro ao solicitar cancelamento'.
         EXIT.
@@ -1247,14 +1247,14 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     "Erro Autorizado o USO
     TRY.
-        me->zif_doc_eletronico~get_ck_sem_erro_autorizacao( ).
-      CATCH zcx_doc_eletronico.    "
+        me->zesif_doc_eletronico~get_ck_sem_erro_autorizacao( ).
+      CATCH zescx_doc_eletronico.    "
 
         "Tentar obter Log de erros, pois pode levar alguns segundos para gravar nas tabelas
         DO 25 TIMES.
           TRY.
-              me->zif_doc_eletronico~get_load_log( IMPORTING et_message = DATA(et_message) ).
-            CATCH zcx_doc_eletronico.
+              me->zesif_doc_eletronico~get_load_log( IMPORTING et_message = DATA(et_message) ).
+            CATCH zescx_doc_eletronico.
           ENDTRY.
 
           IF et_message[] IS NOT INITIAL.
@@ -1276,7 +1276,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
                WITH wa_message-msgv1 wa_message-msgv2 wa_message-msgv3 wa_message-msgv4
                INTO DATA(ms_erro).
 
-            e_status_desc = zcl_string=>concat(
+            e_status_desc = zescl_string=>concat(
               EXPORTING
                 s1 = e_status_desc
                 s2 = ms_erro
@@ -1294,40 +1294,40 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_urls_docs.
+  METHOD zesif_doc_eletronico~get_urls_docs.
 
     r_instancia = me.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_val_autorizacao_modal.
-
-    r_instancia = me.
-
-    "Implementar nas classes filhas
-
-
-  ENDMETHOD.
-
-
-  METHOD zif_doc_eletronico~get_val_cancelamento_modal.
-
-    r_instancia = me.
-
-  ENDMETHOD.
-
-
-  METHOD zif_doc_eletronico~get_val_reinicializar_modal.
+  METHOD zesif_doc_eletronico~get_val_autorizacao_modal.
 
     r_instancia = me.
 
     "Implementar nas classes filhas
 
+
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_xml.
+  METHOD zesif_doc_eletronico~get_val_cancelamento_modal.
+
+    r_instancia = me.
+
+  ENDMETHOD.
+
+
+  METHOD zesif_doc_eletronico~get_val_reinicializar_modal.
+
+    r_instancia = me.
+
+    "Implementar nas classes filhas
+
+  ENDMETHOD.
+
+
+  METHOD zesif_doc_eletronico~get_xml.
 
     DATA: it_urllist TYPE tihttpurls2.
 
@@ -1361,17 +1361,17 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
     "http://sapqas.maggi.corp:8001/custom/docfiscal?sap-client=300
     DATA(wa_dominio) = wa_urllist-protocol && '://' && wa_urllist-host && ':' && wa_urllist-port && wa_urllist-url.
 
-    CASE me->zif_doc_eletronico~at_documento-model.
-      WHEN zif_doc_eletronico=>at_st_model_nfe.
-        DATA(e_link_xml) = wa_dominio && '/getnfexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
-      WHEN zif_doc_eletronico=>at_st_model_cte.
-        e_link_xml = wa_dominio && '/getctexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
-      WHEN zif_doc_eletronico=>at_st_model_mdfe.
-        e_link_xml = wa_dominio && '/getmdfexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
+    CASE me->zesif_doc_eletronico~at_documento-model.
+      WHEN zesif_doc_eletronico=>at_st_model_nfe.
+        DATA(e_link_xml) = wa_dominio && '/getnfexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
+      WHEN zesif_doc_eletronico=>at_st_model_cte.
+        e_link_xml = wa_dominio && '/getctexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
+      WHEN zesif_doc_eletronico=>at_st_model_mdfe.
+        e_link_xml = wa_dominio && '/getmdfexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
     ENDCASE.
 
     TRY .
-        zcl_arquivo=>get_file_uri_get_(
+        zescl_arquivo=>get_file_uri_get_(
           EXPORTING
             i_uri          = e_link_xml
           IMPORTING
@@ -1382,20 +1382,20 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
         IF e_code NE '200'.
 
-          RAISE EXCEPTION TYPE zcx_doc_eletronico
+          RAISE EXCEPTION TYPE zescx_doc_eletronico
             EXPORTING
-              textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_geral-msgid
-                                msgno = zcx_doc_eletronico=>zcx_erro_geral-msgno
+              textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_geral-msgid
+                                msgno = zescx_doc_eletronico=>zescx_erro_geral-msgno
                                 attr1 = e_reason )
               msgty  = 'E'
-              msgid  = zcx_doc_eletronico=>zcx_erro_geral-msgid
-              msgno  = zcx_doc_eletronico=>zcx_erro_geral-msgno
+              msgid  = zescx_doc_eletronico=>zescx_erro_geral-msgid
+              msgno  = zescx_doc_eletronico=>zescx_erro_geral-msgno
               msgv1  = CONV #( e_reason ).
 
         ENDIF.
 
-      CATCH zcx_arquivo INTO DATA(ex_arquivo).    "
-        RAISE EXCEPTION TYPE zcx_doc_eletronico
+      CATCH zescx_arquivo INTO DATA(ex_arquivo).    "
+        RAISE EXCEPTION TYPE zescx_doc_eletronico
           EXPORTING
             textid = VALUE #( msgid = ex_arquivo->msgid
                               msgno = ex_arquivo->msgno
@@ -1425,9 +1425,9 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
 *    CALL FUNCTION 'J_1B_NFE_CHECK_RFC_DESTINATION'
 *      EXPORTING
-*        i_bukrs      = me->zif_doc_eletronico~at_info_doc_eletronico-bukrs
-*        i_branch     = me->zif_doc_eletronico~at_info_doc_eletronico-branch
-*        i_model      = me->zif_doc_eletronico~at_info_doc_eletronico-model
+*        i_bukrs      = me->zesif_doc_eletronico~at_info_doc_eletronico-bukrs
+*        i_branch     = me->zesif_doc_eletronico~at_info_doc_eletronico-branch
+*        i_model      = me->zesif_doc_eletronico~at_info_doc_eletronico-model
 *      IMPORTING
 *        e_rfcdest    = lv_rfcdest
 *        e_xnfeactive = lv_xnfeactive
@@ -1441,22 +1441,22 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 *
 *    CHECK lv_destination IS NOT INITIAL.
 
-    CONCATENATE me->zif_doc_eletronico~at_info_doc_eletronico-regio
-                me->zif_doc_eletronico~at_info_doc_eletronico-nfyear
-                me->zif_doc_eletronico~at_info_doc_eletronico-nfmonth
-                me->zif_doc_eletronico~at_info_doc_eletronico-stcd1
-                me->zif_doc_eletronico~at_info_doc_eletronico-model
-                me->zif_doc_eletronico~at_info_doc_eletronico-serie
-                me->zif_doc_eletronico~at_info_doc_eletronico-nfnum9
-                me->zif_doc_eletronico~at_info_doc_eletronico-tpemis
-                me->zif_doc_eletronico~at_info_doc_eletronico-docnum9+1(8)
-                me->zif_doc_eletronico~at_info_doc_eletronico-cdv
+    CONCATENATE me->zesif_doc_eletronico~at_info_doc_eletronico-regio
+                me->zesif_doc_eletronico~at_info_doc_eletronico-nfyear
+                me->zesif_doc_eletronico~at_info_doc_eletronico-nfmonth
+                me->zesif_doc_eletronico~at_info_doc_eletronico-stcd1
+                me->zesif_doc_eletronico~at_info_doc_eletronico-model
+                me->zesif_doc_eletronico~at_info_doc_eletronico-serie
+                me->zesif_doc_eletronico~at_info_doc_eletronico-nfnum9
+                me->zesif_doc_eletronico~at_info_doc_eletronico-tpemis
+                me->zesif_doc_eletronico~at_info_doc_eletronico-docnum9+1(8)
+                me->zesif_doc_eletronico~at_info_doc_eletronico-cdv
            INTO lv_nfeid.
 
     CHECK: lv_nfeid IS NOT INITIAL.
 
 
-    e_xml_string = zcl_drc_utils=>get_xml_documento_eletronico( EXPORTING i_chave   = conv #( lv_nfeid )
+    e_xml_string = zescl_drc_utils=>get_xml_documento_eletronico( EXPORTING i_chave   = conv #( lv_nfeid )
                                                                           i_direcao = 'OUT'
                                                                           i_evento  = conv #( i_tpevento )
                                                                 IMPORTING e_xml_raw = e_xml_xstring   ).
@@ -1478,14 +1478,14 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 *        erro_nenhum_xml = 1
 *        OTHERS          = 2.
 *
-*    e_xml_string = zcl_string=>xstring_to_string( i_xstring =  e_xml_xstring ).
+*    e_xml_string = zescl_string=>xstring_to_string( i_xstring =  e_xml_xstring ).
 *
 *    e_retorno = sy-subrc.
 
   endmethod.
 
 
-  METHOD zif_doc_eletronico~get_xml_grc.
+  METHOD zesif_doc_eletronico~get_xml_grc.
 
     DATA: lv_destination TYPE char40, "syhost, ---> S4 Migration - 10/06/2023 - DG
           lv_nfeid       TYPE char44,
@@ -1497,9 +1497,9 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
 *    CALL FUNCTION 'J_1B_NFE_CHECK_RFC_DESTINATION'
 *      EXPORTING
-*        i_bukrs      = me->zif_doc_eletronico~at_info_doc_eletronico-bukrs
-*        i_branch     = me->zif_doc_eletronico~at_info_doc_eletronico-branch
-*        i_model      = me->zif_doc_eletronico~at_info_doc_eletronico-model
+*        i_bukrs      = me->zesif_doc_eletronico~at_info_doc_eletronico-bukrs
+*        i_branch     = me->zesif_doc_eletronico~at_info_doc_eletronico-branch
+*        i_model      = me->zesif_doc_eletronico~at_info_doc_eletronico-model
 *      IMPORTING
 *        e_rfcdest    = lv_rfcdest
 *        e_xnfeactive = lv_xnfeactive
@@ -1513,16 +1513,16 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 *
 *    CHECK lv_destination IS NOT INITIAL.
 *
-    CONCATENATE me->zif_doc_eletronico~at_info_doc_eletronico-regio
-                me->zif_doc_eletronico~at_info_doc_eletronico-nfyear
-                me->zif_doc_eletronico~at_info_doc_eletronico-nfmonth
-                me->zif_doc_eletronico~at_info_doc_eletronico-stcd1
-                me->zif_doc_eletronico~at_info_doc_eletronico-model
-                me->zif_doc_eletronico~at_info_doc_eletronico-serie
-                me->zif_doc_eletronico~at_info_doc_eletronico-nfnum9
-                me->zif_doc_eletronico~at_info_doc_eletronico-tpemis
-                me->zif_doc_eletronico~at_info_doc_eletronico-docnum9+1(8)
-                me->zif_doc_eletronico~at_info_doc_eletronico-cdv
+    CONCATENATE me->zesif_doc_eletronico~at_info_doc_eletronico-regio
+                me->zesif_doc_eletronico~at_info_doc_eletronico-nfyear
+                me->zesif_doc_eletronico~at_info_doc_eletronico-nfmonth
+                me->zesif_doc_eletronico~at_info_doc_eletronico-stcd1
+                me->zesif_doc_eletronico~at_info_doc_eletronico-model
+                me->zesif_doc_eletronico~at_info_doc_eletronico-serie
+                me->zesif_doc_eletronico~at_info_doc_eletronico-nfnum9
+                me->zesif_doc_eletronico~at_info_doc_eletronico-tpemis
+                me->zesif_doc_eletronico~at_info_doc_eletronico-docnum9+1(8)
+                me->zesif_doc_eletronico~at_info_doc_eletronico-cdv
            INTO lv_nfeid.
 
     CHECK: lv_nfeid IS NOT INITIAL.
@@ -1538,7 +1538,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 *        erro_nenhum_xml = 1
 *        OTHERS          = 2.
 
-    e_xml_string = zcl_drc_utils=>get_xml_documento_eletronico( EXPORTING i_chave   = conv #( lv_nfeid )
+    e_xml_string = zescl_drc_utils=>get_xml_documento_eletronico( EXPORTING i_chave   = conv #( lv_nfeid )
                                                                           i_direcao = 'OUT'
                                                                 IMPORTING e_xml_raw = e_xml_xstring ).
 
@@ -1552,7 +1552,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 *-S4H-US 122597-07.09.2023-JT-fim
 
 *    IF ( sy-subrc EQ 0 ) AND ( e_xml_xstring IS NOT INITIAL ).
-*      e_xml_string = zcl_string=>xstring_to_string( i_xstring =  e_xml_xstring ).
+*      e_xml_string = zescl_string=>xstring_to_string( i_xstring =  e_xml_xstring ).
 *    ELSE.
 *      sy-subrc = 4.
 *    ENDIF.
@@ -1563,7 +1563,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~get_xml_terceiro.
+  METHOD zesif_doc_eletronico~get_xml_terceiro.
 
     DATA: wa_active TYPE j_1bnfe_active.
 
@@ -1615,7 +1615,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     IF sy-subrc IS INITIAL.
 
-      e_xml_string = zcl_drc_utils=>get_xml_documento_eletronico( EXPORTING i_chave   = conv #( i_chave )
+      e_xml_string = zescl_drc_utils=>get_xml_documento_eletronico( EXPORTING i_chave   = conv #( i_chave )
                                                                             i_direcao = 'OUT'
                                                                   IMPORTING e_xml_raw = e_xml_xstring
 
@@ -1634,7 +1634,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     ELSE.
 
-      e_xml_string = zcl_drc_utils=>get_xml_documento_eletronico( EXPORTING i_chave   = conv #( i_chave )
+      e_xml_string = zescl_drc_utils=>get_xml_documento_eletronico( EXPORTING i_chave   = conv #( i_chave )
                                                                             i_direcao = 'IN'
                                                                   IMPORTING e_xml_raw = e_xml_xstring  ).
 
@@ -1653,7 +1653,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     ENDIF.
 
-    "e_xml_string = zcl_string=>xstring_to_string( i_xstring =  e_xml_xstring ).
+    "e_xml_string = zescl_string=>xstring_to_string( i_xstring =  e_xml_xstring ).
 
   ENDMETHOD.
 
@@ -1777,7 +1777,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   endmethod.
 
 
-  METHOD zif_doc_eletronico~set_altera_status.
+  METHOD zesif_doc_eletronico~set_altera_status.
 
     DATA: lc_texto TYPE c LENGTH 200.
 
@@ -1800,13 +1800,13 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
     "Verifica se CT-e está autorizado.
     SELECT SINGLE docnum INTO @DATA(v_docnum)
       FROM j_1bnfe_active
-     WHERE docnum   = @me->zif_doc_eletronico~at_documento-docnum
+     WHERE docnum   = @me->zesif_doc_eletronico~at_documento-docnum
        AND docsta   = '1'.
 
     CHECK sy-subrc NE 0.
 
     wa_nota-tp_authcod       = i_tp_authcod.
-    wa_nota-nu_documento_sap = me->zif_doc_eletronico~at_documento-docnum.
+    wa_nota-nu_documento_sap = me->zesif_doc_eletronico~at_documento-docnum.
     wa_nota-dt_authcod       = sy-datum.
 
     IF sy-timlo IS INITIAL.
@@ -1832,46 +1832,46 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_autorizar.
+  METHOD zesif_doc_eletronico~set_autorizar.
 
     r_instancia = me.
 
     IF i_ciclos IS NOT INITIAL.
-      me->zif_doc_eletronico~at_qtd_ciclos = i_ciclos.
+      me->zesif_doc_eletronico~at_qtd_ciclos = i_ciclos.
     ENDIF.
 
     IF i_segundos IS NOT INITIAL.
-      me->zif_doc_eletronico~at_qtd_segundos = i_segundos.
+      me->zesif_doc_eletronico~at_qtd_segundos = i_segundos.
     ENDIF.
 
-    me->zif_doc_eletronico~get_ck_doc_nao_cancel(
+    me->zesif_doc_eletronico~get_ck_doc_nao_cancel(
      )->get_ck_data_documento(
      )->get_ck_certidao_negativa(
      )->get_ck_doc_proprio(
      )->get_ck_valor_documento(
      ).
 
-    zcl_doc_eletronico=>validacao_autorizacao_uso( i_docnum =  me->zif_doc_eletronico~at_documento-docnum ).
+    zescl_doc_eletronico=>validacao_autorizacao_uso( i_docnum =  me->zesif_doc_eletronico~at_documento-docnum ).
 
     TRY .
-        me->zif_doc_eletronico~get_ck_autorizado_uso( ).
-      CATCH zcx_doc_eletronico.    "
+        me->zesif_doc_eletronico~get_ck_autorizado_uso( ).
+      CATCH zescx_doc_eletronico.    "
         "Validações Específicas do MODAL (Redefinir Método)
-        "me->zif_doc_eletronico~get_val_autorizacao_modal( ).
+        "me->zesif_doc_eletronico~get_val_autorizacao_modal( ).
 
         "Se Número não estiver gerado gera número
         TRY.
-            me->zif_doc_eletronico~get_ck_numero_determinado( ).
-          CATCH zcx_doc_eletronico .
+            me->zesif_doc_eletronico~get_ck_numero_determinado( ).
+          CATCH zescx_doc_eletronico .
             "Determinar Numeração
-            me->zif_doc_eletronico~set_autoriza_viagem_tip_frete(
+            me->zesif_doc_eletronico~set_autoriza_viagem_tip_frete(
             )->get_val_autorizacao_modal(
             )->set_det_numero(
             )->set_registra_autorizacao(
             )->get_aguardar(
                  i_aguardar = i_aguardar
-                 i_ciclos = me->zif_doc_eletronico~at_qtd_ciclos
-                 i_segundos = me->zif_doc_eletronico~at_qtd_segundos
+                 i_ciclos = me->zesif_doc_eletronico~at_qtd_ciclos
+                 i_segundos = me->zesif_doc_eletronico~at_qtd_segundos
             ).
             EXIT.
         ENDTRY.
@@ -1879,10 +1879,10 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     "Verifica se não está em Processamento
     TRY .
-        me->zif_doc_eletronico~get_ck_nao_processamento( ).
-      CATCH zcx_doc_eletronico .
+        me->zesif_doc_eletronico~get_ck_nao_processamento( ).
+      CATCH zescx_doc_eletronico .
         "Enviar solicitação de autorização de uso
-        me->zif_doc_eletronico~set_enviar_autorizacao_uso( i_resend = abap_true
+        me->zesif_doc_eletronico~set_enviar_autorizacao_uso( i_resend = abap_true
          )->get_aguardar( i_aguardar = i_aguardar i_ciclos = i_ciclos i_segundos = i_segundos
          ).
         EXIT.
@@ -1890,18 +1890,18 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     "Verifica se não tem Erro de Autorização
     TRY.
-        me->zif_doc_eletronico~get_ck_sem_erro_autorizacao( ).
-      CATCH zcx_doc_eletronico .
-        me->zif_doc_eletronico~set_eliminar_logs(
+        me->zesif_doc_eletronico~get_ck_sem_erro_autorizacao( ).
+      CATCH zescx_doc_eletronico .
+        me->zesif_doc_eletronico~set_eliminar_logs(
          )->set_reinicializar( ).
     ENDTRY.
 
     "Verificar se Autorizado o USO
     TRY .
-        me->zif_doc_eletronico~get_ck_autorizado_uso( ).
-      CATCH zcx_doc_eletronico.    "
+        me->zesif_doc_eletronico~get_ck_autorizado_uso( ).
+      CATCH zescx_doc_eletronico.    "
         "Enviar solicitação de autorização de uso
-        me->zif_doc_eletronico~set_enviar_autorizacao_uso(
+        me->zesif_doc_eletronico~set_enviar_autorizacao_uso(
          )->get_aguardar( i_aguardar = i_aguardar i_ciclos = i_ciclos i_segundos = i_segundos
          ).
     ENDTRY.
@@ -1909,48 +1909,48 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_autoriza_mdfe.
+  METHOD zesif_doc_eletronico~set_autoriza_mdfe.
 
     r_instancia = me.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_autoriza_mfde.
+  METHOD zesif_doc_eletronico~set_autoriza_mfde.
     r_instancia = me.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_autoriza_viagem_tip_frete.
+  METHOD zesif_doc_eletronico~set_autoriza_viagem_tip_frete.
 
     r_instancia = me.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_bloquear.
+  METHOD zesif_doc_eletronico~set_bloquear.
 
     r_instancia = me.
 
     CASE i_bloquear.
       WHEN abap_true.
-        me->zif_doc_eletronico~at_sem_lock = abap_false.
+        me->zesif_doc_eletronico~at_sem_lock = abap_false.
       WHEN abap_false.
-        me->zif_doc_eletronico~at_sem_lock = abap_true.
+        me->zesif_doc_eletronico~at_sem_lock = abap_true.
     ENDCASE.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_bloquear_registro.
+  METHOD zesif_doc_eletronico~set_bloquear_registro.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_sem_lock EQ abap_false.
+    CHECK me->zesif_doc_eletronico~at_sem_lock EQ abap_false.
 
     CALL FUNCTION 'ZENQUEUE_DOC_ELETRONICO'
       EXPORTING
-        docnum         = me->zif_doc_eletronico~at_documento-docnum
+        docnum         = me->zesif_doc_eletronico~at_documento-docnum
       EXCEPTIONS
         foreign_lock   = 1
         system_failure = 2
@@ -1958,7 +1958,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     IF sy-subrc IS NOT INITIAL.
 
-      me->zif_doc_eletronico~set_clear(
+      me->zesif_doc_eletronico~set_clear(
       )->get_erro_geral( ).
 
     ENDIF.
@@ -1966,33 +1966,33 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_cancelar.
+  METHOD zesif_doc_eletronico~set_cancelar.
 
     r_instancia = me.
 
     IF i_ciclos IS NOT INITIAL.
-      me->zif_doc_eletronico~at_qtd_ciclos = i_ciclos.
+      me->zesif_doc_eletronico~at_qtd_ciclos = i_ciclos.
     ENDIF.
 
     IF i_segundos IS NOT INITIAL.
-      me->zif_doc_eletronico~at_qtd_segundos = i_segundos.
+      me->zesif_doc_eletronico~at_qtd_segundos = i_segundos.
     ENDIF.
 
     TRY .
         "Documento Já cancelado sai da rotina
-        me->zif_doc_eletronico~get_ck_doc_cancel( ).
+        me->zesif_doc_eletronico~get_ck_doc_cancel( ).
         EXIT.
-      CATCH zcx_doc_eletronico.    "
+      CATCH zescx_doc_eletronico.    "
     ENDTRY.
 
     TRY .
-        me->zif_doc_eletronico~get_ck_numero_determinado( ).
-      CATCH zcx_doc_eletronico.
+        me->zesif_doc_eletronico~get_ck_numero_determinado( ).
+      CATCH zescx_doc_eletronico.
         "Não foi Determinado número
         EXIT.
     ENDTRY.
 
-    me->zif_doc_eletronico~get_ck_doc_nao_cancel(
+    me->zesif_doc_eletronico~get_ck_doc_nao_cancel(
      )->get_ck_doc_proprio(
      "Validações Específicas do MODAL (Redefinir Método)
      )->get_val_cancelamento_modal(
@@ -2000,76 +2000,76 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     "Verifica se Não está em processamento o Cancelamento
     TRY.
-        me->zif_doc_eletronico~get_ck_nao_proc_cancel( ).
-      CATCH zcx_doc_eletronico .
+        me->zesif_doc_eletronico~get_ck_nao_proc_cancel( ).
+      CATCH zescx_doc_eletronico .
         "Reenvia Cancelamento
-        me->zif_doc_eletronico~set_enviar_cancelamento( i_resend = abap_true
+        me->zesif_doc_eletronico~set_enviar_cancelamento( i_resend = abap_true
          )->get_aguardar(
            i_aguardar = i_aguardar
-           i_ciclos   = me->zif_doc_eletronico~at_qtd_ciclos
-           i_segundos = me->zif_doc_eletronico~at_qtd_segundos ).
+           i_ciclos   = me->zesif_doc_eletronico~at_qtd_ciclos
+           i_segundos = me->zesif_doc_eletronico~at_qtd_segundos ).
         EXIT.
     ENDTRY.
 
     "Verificar Erro de Solicitação de Cancelmanto
     TRY .
-        me->zif_doc_eletronico~get_ck_sem_erro_cancelamento( ).
+        me->zesif_doc_eletronico~get_ck_sem_erro_cancelamento( ).
 
-      CATCH zcx_doc_eletronico .
-        me->zif_doc_eletronico~set_eliminar_logs( ).
+      CATCH zescx_doc_eletronico .
+        me->zesif_doc_eletronico~set_eliminar_logs( ).
     ENDTRY.
 
 
     TRY .
-        me->zif_doc_eletronico~get_ck_estornar_doc_origem(
+        me->zesif_doc_eletronico~get_ck_estornar_doc_origem(
          )->set_motivo_cancelamento(
               i_motivo    = i_motivo
-              i_ds_motivo = zcl_string=>tira_acentos( zcl_string=>convert_to_utf8( i_ds_motivo ) )
+              i_ds_motivo = zescl_string=>tira_acentos( zescl_string=>convert_to_utf8( i_ds_motivo ) )
          )->set_enviar_cancelamento(
          )->get_aguardar(
            i_aguardar = i_aguardar
-           i_ciclos   = me->zif_doc_eletronico~at_qtd_ciclos
-           i_segundos = me->zif_doc_eletronico~at_qtd_segundos ).
+           i_ciclos   = me->zesif_doc_eletronico~at_qtd_ciclos
+           i_segundos = me->zesif_doc_eletronico~at_qtd_segundos ).
         EXIT.
-      CATCH zcx_doc_eletronico.
+      CATCH zescx_doc_eletronico.
     ENDTRY.
 
     "Verifica se Documento Está Autorizado e Somente Envia o Cancelamento
     TRY .
-        me->zif_doc_eletronico~get_ck_autorizado_cancel( ).
-      CATCH zcx_doc_eletronico.
+        me->zesif_doc_eletronico~get_ck_autorizado_cancel( ).
+      CATCH zescx_doc_eletronico.
         "Solicita Cancelamento
-        me->zif_doc_eletronico~get_ck_autorizado_uso(
+        me->zesif_doc_eletronico~get_ck_autorizado_uso(
          )->set_motivo_cancelamento(
               i_motivo    = i_motivo
-              i_ds_motivo = zcl_string=>tira_acentos( zcl_string=>convert_to_utf8( i_ds_motivo ) )
+              i_ds_motivo = zescl_string=>tira_acentos( zescl_string=>convert_to_utf8( i_ds_motivo ) )
          )->set_enviar_cancelamento(
          )->get_aguardar(
            i_aguardar = i_aguardar
-           i_ciclos   = me->zif_doc_eletronico~at_qtd_ciclos
-           i_segundos = me->zif_doc_eletronico~at_qtd_segundos ).
+           i_ciclos   = me->zesif_doc_eletronico~at_qtd_ciclos
+           i_segundos = me->zesif_doc_eletronico~at_qtd_segundos ).
     ENDTRY.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_clear.
+  METHOD zesif_doc_eletronico~set_clear.
 
     r_instancia = me.
 
-    me->zif_doc_eletronico~set_liberar_registro( ).
+    me->zesif_doc_eletronico~set_liberar_registro( ).
 
-    CLEAR: me->zif_doc_eletronico~at_info_doc_eletronico,
-           me->zif_doc_eletronico~at_documento,
-           me->zif_doc_eletronico~at_instance.
+    CLEAR: me->zesif_doc_eletronico~at_info_doc_eletronico,
+           me->zesif_doc_eletronico~at_documento,
+           me->zesif_doc_eletronico~at_instance.
 
-    me->zif_doc_eletronico~at_qtd_ciclos    = i_ciclos.
-    me->zif_doc_eletronico~at_qtd_segundos  = i_segundos.
+    me->zesif_doc_eletronico~at_qtd_ciclos    = i_ciclos.
+    me->zesif_doc_eletronico~at_qtd_segundos  = i_segundos.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_clear_log_erro.
+  METHOD zesif_doc_eletronico~set_clear_log_erro.
 
     DATA: gs_subobject   TYPE bal_s_sub,
           gs_object      TYPE bal_s_obj,
@@ -2081,7 +2081,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     r_instancia  = me.
 
-    CHECK me->zif_doc_eletronico~at_documento-docnum IS NOT INITIAL.
+    CHECK me->zesif_doc_eletronico~at_documento-docnum IS NOT INITIAL.
 
     gs_subobject-sign   = gs_object-sign    = gs_extnum-sign   = 'I'.
     gs_subobject-option = gs_object-option  = gs_extnum-option = 'EQ'.
@@ -2092,7 +2092,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
     CLEAR it_log_header2.
     APPEND gs_object    TO gs_log_filter-object.
     APPEND gs_subobject TO gs_log_filter-subobject.
-    gs_extnum-low = gs_extnum-high = me->zif_doc_eletronico~at_documento-docnum.
+    gs_extnum-low = gs_extnum-high = me->zesif_doc_eletronico~at_documento-docnum.
     APPEND gs_extnum TO gs_log_filter-extnumber.
 
 * Get header of application log for selected NF-e documents
@@ -2127,7 +2127,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_det_numero.
+  METHOD zesif_doc_eletronico~set_det_numero.
 
     DATA: wa_zib_nfe TYPE zib_nfe.
 
@@ -2137,22 +2137,22 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
       EXPORTING
-        doc_number = me->zif_doc_eletronico~at_documento-docnum
+        doc_number = me->zesif_doc_eletronico~at_documento-docnum
         lock_mode  = 'X'.
 
     CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
       EXPORTING
-        doc_number = me->zif_doc_eletronico~at_documento-docnum
+        doc_number = me->zesif_doc_eletronico~at_documento-docnum
         lock_mode  = 'S'.
 
     CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
       EXPORTING
-        doc_number = me->zif_doc_eletronico~at_documento-docnum
+        doc_number = me->zesif_doc_eletronico~at_documento-docnum
         lock_mode  = 'E'.
 
     CALL FUNCTION 'J_1B_NFE_SET_NUMBER'
       EXPORTING
-        iv_docnum                 = me->zif_doc_eletronico~at_documento-docnum
+        iv_docnum                 = me->zesif_doc_eletronico~at_documento-docnum
       IMPORTING
         es_active_mod             = e_j_1bnfe_active
       EXCEPTIONS
@@ -2169,50 +2169,50 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
       CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
         EXPORTING
-          doc_number = me->zif_doc_eletronico~at_documento-docnum
+          doc_number = me->zesif_doc_eletronico~at_documento-docnum
           lock_mode  = 'X'.
 
       CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
         EXPORTING
-          doc_number = me->zif_doc_eletronico~at_documento-docnum
+          doc_number = me->zesif_doc_eletronico~at_documento-docnum
           lock_mode  = 'S'.
 
       CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
         EXPORTING
-          doc_number = me->zif_doc_eletronico~at_documento-docnum
+          doc_number = me->zesif_doc_eletronico~at_documento-docnum
           lock_mode  = 'E'.
 
-      me->zif_doc_eletronico~get_erro_geral( ).
+      me->zesif_doc_eletronico~get_erro_geral( ).
 
     ENDIF.
 
-    me->zif_doc_eletronico~at_info_doc_eletronico = e_j_1bnfe_active.
+    me->zesif_doc_eletronico~at_info_doc_eletronico = e_j_1bnfe_active.
 
     CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
       EXPORTING
-        doc_number = me->zif_doc_eletronico~at_documento-docnum
+        doc_number = me->zesif_doc_eletronico~at_documento-docnum
         lock_mode  = 'X'.
 
     CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
       EXPORTING
-        doc_number = me->zif_doc_eletronico~at_documento-docnum
+        doc_number = me->zesif_doc_eletronico~at_documento-docnum
         lock_mode  = 'S'.
 
     CALL FUNCTION 'J_1B_NF_DOCUMENT_UNLOCK'
       EXPORTING
-        doc_number = me->zif_doc_eletronico~at_documento-docnum
+        doc_number = me->zesif_doc_eletronico~at_documento-docnum
         lock_mode  = 'E'.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_eliminar_logs.
+  METHOD zesif_doc_eletronico~set_eliminar_logs.
 
     r_instancia = me.
 
     TRY .
 
-        me->zif_doc_eletronico~get_logs_erro( IMPORTING e_balhdr = DATA(e_balhdr) ).
+        me->zesif_doc_eletronico~get_logs_erro( IMPORTING e_balhdr = DATA(e_balhdr) ).
 
 * Delete application-log entries for selected NF-e documents
         CALL FUNCTION 'BAL_DB_DELETE'
@@ -2228,22 +2228,22 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
         "  ME->ZESIF_DOC_ELETRONICO~GET_ERRO_GERAL( ).
         "ENDIF.
 
-      CATCH zcx_doc_eletronico.
+      CATCH zescx_doc_eletronico.
     ENDTRY.
 
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_enviar_autorizacao_uso.
+  METHOD zesif_doc_eletronico~set_enviar_autorizacao_uso.
 
     r_instancia = me.
 
-    IF me->zif_doc_eletronico~at_info_doc_eletronico-nfnum9 IS NOT INITIAL.
-      IF me->zif_doc_eletronico~at_info_doc_eletronico-action_requ  EQ '3' AND
-         me->zif_doc_eletronico~at_info_doc_eletronico-docsta EQ space AND
-         me->zif_doc_eletronico~at_info_doc_eletronico-scssta EQ space AND
-         me->zif_doc_eletronico~at_info_doc_eletronico-msstat EQ space.
+    IF me->zesif_doc_eletronico~at_info_doc_eletronico-nfnum9 IS NOT INITIAL.
+      IF me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ  EQ '3' AND
+         me->zesif_doc_eletronico~at_info_doc_eletronico-docsta EQ space AND
+         me->zesif_doc_eletronico~at_info_doc_eletronico-scssta EQ space AND
+         me->zesif_doc_eletronico~at_info_doc_eletronico-msstat EQ space.
         DATA(lc_resend) = abap_false.
       ELSE.
         lc_resend = abap_true.
@@ -2254,34 +2254,34 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
     CALL FUNCTION 'J_1B_NFE_SEND_C_NFE'
       EXPORTING
-        iv_docnum           = me->zif_doc_eletronico~at_documento-docnum
+        iv_docnum           = me->zesif_doc_eletronico~at_documento-docnum
         iv_resend           = lc_resend
       IMPORTING
-        es_active_mod       = me->zif_doc_eletronico~at_info_doc_eletronico
+        es_active_mod       = me->zesif_doc_eletronico~at_info_doc_eletronico
       EXCEPTIONS
         not_sent            = 1
         not_allowed_to_send = 2
         OTHERS              = 3.
 
     IF sy-subrc IS NOT INITIAL.
-      me->zif_doc_eletronico~get_erro_geral( ).
+      me->zesif_doc_eletronico~get_erro_geral( ).
     ENDIF.
 
-    me->zif_doc_eletronico~set_registra_autorizacao( ).
+    me->zesif_doc_eletronico~set_registra_autorizacao( ).
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_enviar_cancelamento.
+  METHOD zesif_doc_eletronico~set_enviar_cancelamento.
 
     DATA: it_acttab TYPE TABLE OF j_1bnfe_active.
 
     r_instancia = me.
 
-    APPEND me->zif_doc_eletronico~at_info_doc_eletronico TO it_acttab.
+    APPEND me->zesif_doc_eletronico~at_info_doc_eletronico TO it_acttab.
     "APPEND ME->ZESIF_DOC_ELETRONICO~AT_INFO_DOC_ELETRONICO TO IT_ACTTAB.
 
-    CASE me->zif_doc_eletronico~at_info_doc_eletronico-scssta.
+    CASE me->zesif_doc_eletronico~at_info_doc_eletronico-scssta.
       WHEN '1'.
         DATA(lc_resend) = abap_true.
       WHEN OTHERS.
@@ -2301,33 +2301,33 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
         OTHERS              = 4.
 
     IF sy-subrc IS NOT INITIAL.
-      me->zif_doc_eletronico~get_erro_geral( ).
+      me->zesif_doc_eletronico~get_erro_geral( ).
     ENDIF.
 
-    me->zif_doc_eletronico~set_registra_cancelamento( ).
+    me->zesif_doc_eletronico~set_registra_cancelamento( ).
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_liberar_registro.
+  METHOD zesif_doc_eletronico~set_liberar_registro.
 
     r_instancia = me.
 
-    CHECK me->zif_doc_eletronico~at_sem_lock EQ abap_false.
+    CHECK me->zesif_doc_eletronico~at_sem_lock EQ abap_false.
 
     CALL FUNCTION 'ZDENQUEUE_DOC_ELETRONICO'
       EXPORTING
-        docnum = me->zif_doc_eletronico~at_documento-docnum.
+        docnum = me->zesif_doc_eletronico~at_documento-docnum.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_motivo_cancelamento.
+  METHOD zesif_doc_eletronico~set_motivo_cancelamento.
 
     r_instancia = me.
 
     IF i_ds_motivo IS INITIAL.
-      me->zif_doc_eletronico~get_motivo_cancelamento(
+      me->zesif_doc_eletronico~get_motivo_cancelamento(
         EXPORTING
           i_motivo    = i_motivo
         IMPORTING
@@ -2337,23 +2337,23 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
     IF i_ds_motivo IS NOT INITIAL.
       DATA: lc_reason TYPE c LENGTH 256.
       lc_reason = i_ds_motivo.
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason  = '01'.
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason1 = lc_reason+000(64).
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason2 = lc_reason+064(64).
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason3 = lc_reason+128(64).
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason4 = lc_reason+192(64).
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason  = '01'.
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason1 = lc_reason+000(64).
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason2 = lc_reason+064(64).
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason3 = lc_reason+128(64).
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason4 = lc_reason+192(64).
     ELSE.
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason  = e_motivo-reason.
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason1 = e_motivo-reason1.
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason2 = e_motivo-reason2.
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason3 = e_motivo-reason3.
-      me->zif_doc_eletronico~at_info_doc_eletronico-reason4 = e_motivo-reason4.
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason  = e_motivo-reason.
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason1 = e_motivo-reason1.
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason2 = e_motivo-reason2.
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason3 = e_motivo-reason3.
+      me->zesif_doc_eletronico~at_info_doc_eletronico-reason4 = e_motivo-reason4.
     ENDIF.
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_registra_autorizacao.
+  METHOD zesif_doc_eletronico~set_registra_autorizacao.
 
     DATA: wa_zib_nfe TYPE zib_nfe.
 
@@ -2363,11 +2363,11 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
     SELECT SINGLE *
       FROM zib_nfe
       INTO wa_zib_nfe
-     WHERE docnum = me->zif_doc_eletronico~at_documento-docnum.
+     WHERE docnum = me->zesif_doc_eletronico~at_documento-docnum.
 *CONTINGENCIA MDF-E - JT - 06.05.2024 =================================
 
     "Regitrar Autorização
-    wa_zib_nfe-docnum     = me->zif_doc_eletronico~at_documento-docnum.
+    wa_zib_nfe-docnum     = me->zesif_doc_eletronico~at_documento-docnum.
     wa_zib_nfe-date_aut_1 = sy-datum.
     wa_zib_nfe-time_aut_1 = sy-uzeit.
     wa_zib_nfe-user_aut_1 = sy-uname.
@@ -2378,14 +2378,14 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_registra_cancelamento.
+  METHOD zesif_doc_eletronico~set_registra_cancelamento.
 
     r_instancia = me.
 
     "Regitrar Cancelamento
     SELECT SINGLE * INTO @DATA(wa_zib_nfe)
       FROM zib_nfe
-     WHERE docnum EQ @me->zif_doc_eletronico~at_documento-docnum.
+     WHERE docnum EQ @me->zesif_doc_eletronico~at_documento-docnum.
 
     IF sy-subrc IS INITIAL.
       wa_zib_nfe-date_aut_2 = sy-datum.
@@ -2398,54 +2398,54 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_registro.
+  METHOD zesif_doc_eletronico~set_registro.
 
     r_instancia = me.
 
-    me->zif_doc_eletronico~set_clear( ).
+    me->zesif_doc_eletronico~set_clear( ).
 
-    me->zif_doc_eletronico~at_sem_lock = i_sem_bloqueio.
+    me->zesif_doc_eletronico~at_sem_lock = i_sem_bloqueio.
 
-    SELECT SINGLE * INTO me->zif_doc_eletronico~at_documento
+    SELECT SINGLE * INTO me->zesif_doc_eletronico~at_documento
       FROM j_1bnfdoc
      WHERE docnum EQ i_docnum.
 
     IF sy-subrc IS NOT INITIAL.
-      RAISE EXCEPTION TYPE zcx_doc_eletronico
+      RAISE EXCEPTION TYPE zescx_doc_eletronico
         EXPORTING
-          textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_doc_cabe_nao_enc-msgid msgno = zcx_doc_eletronico=>zcx_doc_cabe_nao_enc-msgno attr1 = CONV #( i_docnum ) )
-          msgid  = zcx_doc_eletronico=>zcx_doc_cabe_nao_enc-msgid
-          msgno  = zcx_doc_eletronico=>zcx_doc_cabe_nao_enc-msgno
+          textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_doc_cabe_nao_enc-msgid msgno = zescx_doc_eletronico=>zescx_doc_cabe_nao_enc-msgno attr1 = CONV #( i_docnum ) )
+          msgid  = zescx_doc_eletronico=>zescx_doc_cabe_nao_enc-msgid
+          msgno  = zescx_doc_eletronico=>zescx_doc_cabe_nao_enc-msgno
           msgv1  = CONV #( i_docnum )
           msgty  = 'E'.
     ENDIF.
 
-    SELECT SINGLE * INTO me->zif_doc_eletronico~at_info_doc_eletronico
+    SELECT SINGLE * INTO me->zesif_doc_eletronico~at_info_doc_eletronico
       FROM j_1bnfe_active
      WHERE docnum EQ i_docnum.
 
     IF sy-subrc IS NOT INITIAL.
 
-      me->zif_doc_eletronico~set_clear( ).
+      me->zesif_doc_eletronico~set_clear( ).
 
-      RAISE EXCEPTION TYPE zcx_doc_eletronico
+      RAISE EXCEPTION TYPE zescx_doc_eletronico
         EXPORTING
-          textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_doc_eletronic_nao_enc-msgid msgno = zcx_doc_eletronico=>zcx_doc_eletronic_nao_enc-msgno attr1 = CONV #( i_docnum ) )
-          msgid  = zcx_doc_eletronico=>zcx_doc_eletronic_nao_enc-msgid
-          msgno  = zcx_doc_eletronico=>zcx_doc_eletronic_nao_enc-msgno
+          textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_doc_eletronic_nao_enc-msgid msgno = zescx_doc_eletronico=>zescx_doc_eletronic_nao_enc-msgno attr1 = CONV #( i_docnum ) )
+          msgid  = zescx_doc_eletronico=>zescx_doc_eletronic_nao_enc-msgid
+          msgno  = zescx_doc_eletronico=>zescx_doc_eletronic_nao_enc-msgno
           msgv1  = CONV #( i_docnum )
           msgty  = 'E'.
 
     ENDIF.
 
-    me->zif_doc_eletronico~set_bloquear_registro( ).
+    me->zesif_doc_eletronico~set_bloquear_registro( ).
 
   ENDMETHOD.
 
 
-  METHOD zif_doc_eletronico~set_reinicializar.
+  METHOD zesif_doc_eletronico~set_reinicializar.
 
-    r_instancia = me->zif_doc_eletronico~get_ck_fatura_ativa(
+    r_instancia = me->zesif_doc_eletronico~get_ck_fatura_ativa(
                   "Verifica Reinicializar por MODAL
                    )->get_val_reinicializar_modal(
                    ).
@@ -2457,9 +2457,9 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
         CALL FUNCTION 'J_1B_NFE_RESET_REJECT_STATUS'
           EXPORTING
-            i_docnum           = me->zif_doc_eletronico~at_documento-docnum
+            i_docnum           = me->zesif_doc_eletronico~at_documento-docnum
           IMPORTING
-            es_active_mod      = me->zif_doc_eletronico~at_info_doc_eletronico
+            es_active_mod      = me->zesif_doc_eletronico~at_info_doc_eletronico
           EXCEPTIONS
             document_not_found = 1
             enqueue_error      = 2
@@ -2473,15 +2473,15 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
       _erro_reinicializar = abap_true.
     ELSE.
 
-      DATA(_docnum)         = me->zif_doc_eletronico~at_documento-docnum.
+      DATA(_docnum)         = me->zesif_doc_eletronico~at_documento-docnum.
       DATA(_reinicializado) = abap_false.
 
       DO 100 TIMES.
-        SELECT SINGLE * INTO me->zif_doc_eletronico~at_info_doc_eletronico
+        SELECT SINGLE * INTO me->zesif_doc_eletronico~at_info_doc_eletronico
           FROM j_1bnfe_active
          WHERE docnum EQ _docnum.
 
-        IF ( sy-subrc = 0 ) AND ( me->zif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '3' ).
+        IF ( sy-subrc = 0 ) AND ( me->zesif_doc_eletronico~at_info_doc_eletronico-action_requ EQ '3' ).
           _reinicializado = abap_true.
           EXIT.
         ELSE.
@@ -2502,27 +2502,27 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
         EXPORTING
           mode_j_1bnfdoc = 'E'
           mandt          = sy-mandt
-          docnum         = me->zif_doc_eletronico~at_documento-docnum.
+          docnum         = me->zesif_doc_eletronico~at_documento-docnum.
 * Unlock J_1BNFE_ACTIVE
       CALL FUNCTION 'DEQUEUE_E_J1BNFE'
         EXPORTING
           mode_j_1bnfe_active = 'E'
           mandt               = sy-mandt
-          docnum              = me->zif_doc_eletronico~at_documento-docnum.
+          docnum              = me->zesif_doc_eletronico~at_documento-docnum.
 * Unlock J_1BNFDE_INVALID
       CALL FUNCTION 'DEQUEUE_E_J1B_INVALID'
         EXPORTING
           mode_j_1bnfe_invalid = 'E'
           mandt                = sy-mandt
-          docnum               = me->zif_doc_eletronico~at_documento-docnum.
+          docnum               = me->zesif_doc_eletronico~at_documento-docnum.
 
 
-      RAISE EXCEPTION TYPE zcx_doc_eletronico
+      RAISE EXCEPTION TYPE zescx_doc_eletronico
         EXPORTING
-          textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_reinicializar_doc-msgid
-                            msgno = zcx_doc_eletronico=>zcx_erro_reinicializar_doc-msgno )
-          msgid  = zcx_doc_eletronico=>zcx_erro_reinicializar_doc-msgid
-          msgno  = zcx_doc_eletronico=>zcx_erro_reinicializar_doc-msgno
+          textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_reinicializar_doc-msgid
+                            msgno = zescx_doc_eletronico=>zescx_erro_reinicializar_doc-msgno )
+          msgid  = zescx_doc_eletronico=>zescx_erro_reinicializar_doc-msgid
+          msgno  = zescx_doc_eletronico=>zescx_erro_reinicializar_doc-msgno
           msgty  = 'E'.
 
     ENDIF.
@@ -2545,11 +2545,11 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
       WHEN '55' OR '57'.
 
         "Validação CST x Impostos Documentos
-        DATA(r_msg_error) = zcl_doc_eletronico=>validacao_autorizacao_uso_0001( i_docnum = lwa_doc-docnum ).
+        DATA(r_msg_error) = zescl_doc_eletronico=>validacao_autorizacao_uso_0001( i_docnum = lwa_doc-docnum ).
 
         ".... Exemplo de como colocar mais Validações abaixo
 *        IF R_MSG_ERROR IS INITIAL.
-*           R_MSG_ERROR = zcl_doc_eletronico=>validacao_autorizacao_uso_0002( I_DOCNUM = i_docnum ).
+*           R_MSG_ERROR = zescl_doc_eletronico=>validacao_autorizacao_uso_0002( I_DOCNUM = i_docnum ).
 *        ENDIF.
 
     ENDCASE.
@@ -2563,16 +2563,16 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
       lva_msg_error = r_msg_error.
 
-      RAISE EXCEPTION TYPE zcx_doc_eletronico
+      RAISE EXCEPTION TYPE zescx_doc_eletronico
         EXPORTING
-          textid = VALUE #( msgid = zcx_doc_eletronico=>zcx_erro_geral-msgid
-                            msgno = zcx_doc_eletronico=>zcx_erro_geral-msgno
+          textid = VALUE #( msgid = zescx_doc_eletronico=>zescx_erro_geral-msgid
+                            msgno = zescx_doc_eletronico=>zescx_erro_geral-msgno
                             attr1 = lva_msg_error+000(50)
                             attr2 = lva_msg_error+050(50)
                             attr3 = lva_msg_error+100(50)
                             attr4 = lva_msg_error+150(50) )
-          msgid  = zcx_doc_eletronico=>zcx_erro_geral-msgid
-          msgno  = zcx_doc_eletronico=>zcx_erro_geral-msgno
+          msgid  = zescx_doc_eletronico=>zescx_erro_geral-msgid
+          msgno  = zescx_doc_eletronico=>zescx_erro_geral-msgno
           msgty  = 'E'
           msgv1  = lva_msg_error+000(50)
           msgv2  = lva_msg_error+050(50)

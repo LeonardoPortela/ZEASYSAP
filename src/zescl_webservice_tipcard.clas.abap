@@ -279,7 +279,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
     DATA: e_chave      TYPE char32,
           lc_msg       TYPE string,
           lc_msg_adm   TYPE string,
-          cx_exception TYPE REF TO zcx_webservice,
+          cx_exception TYPE REF TO zescx_webservice,
           lc_xml       TYPE string,
           lc_http      TYPE REF TO if_http_client,
           e_rotas	     TYPE	zlest0101_t,
@@ -306,7 +306,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
     TRY .
         e_chave = me->chave_seguranca( i_grupo = wa_zlest0160-ds_grupo ).
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
@@ -318,7 +318,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
         "RO - Criar Rota.
         me->set_servico( EXPORTING i_servico = 'RA' ).
 
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
@@ -329,16 +329,16 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
         "Atribui as Informações do HTTP Client para consultar o WebService.
         lc_http = me->url( ).
 
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    me->zif_webservice~abrir_conexao( lc_http ).
+    me->zesif_webservice~abrir_conexao( lc_http ).
 
     "Envia para Criar Rota.
     "O retorno é de um arquivo XML com o Código da Rota Administradora.
-    CALL METHOD me->zif_webservice~consultar
+    CALL METHOD me->zesif_webservice~consultar
       EXPORTING
         i_http                     = lc_http
         i_xml                      = lc_xml
@@ -785,7 +785,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
           var_tam       TYPE i, "Variavel para guardar o tamanho do XML de retorno.
           var_valor     TYPE string. "Valor da TAG.
 
-    DATA: zcl_rota_db TYPE REF TO zcl_rota_db. "Classe para Persistencia no Banco de Dados.
+    DATA: zescl_rota_db TYPE REF TO zescl_rota_db. "Classe para Persistencia no Banco de Dados.
 
 
     "Limpar as variaveis, work areas e objetos.
@@ -793,7 +793,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            gw_zlest0085,  xml_ret, xml_node, e_chave.
 
     "Clear no Objeto.
-    FREE: zcl_rota_db.
+    FREE: zescl_rota_db.
 
     "Selecionar o usuário e senha de autenticação da tipcard.
     SELECT SINGLE * FROM zlest0085 INTO gw_zlest0085
@@ -808,9 +808,9 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                                          i_senha   = gw_zlest0085-senha
                                        ).
 
-      me->zif_webservice~abrir_conexao( i_http = i_http ).
+      me->zesif_webservice~abrir_conexao( i_http = i_http ).
 
-      CALL METHOD me->zif_webservice~consultar
+      CALL METHOD me->zesif_webservice~consultar
         EXPORTING
           i_http                     = i_http
           i_xml                      = xml_autentica
@@ -827,7 +827,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 *-168836-26.02.2025-JT-inicio
         MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
 *       MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4 INTO DATA(msg_texto).
-*       zcx_webservice=>gera_erro_geral( i_texto = msg_texto ).
+*       zescx_webservice=>gera_erro_geral( i_texto = msg_texto ).
 *-168836-26.02.2025-JT-fim
       ENDIF.
 
@@ -868,14 +868,14 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                 RECEIVING
                   rval = var_valor.
 
-              CREATE OBJECT zcl_rota_db.
+              CREATE OBJECT zescl_rota_db.
 
-              zcl_rota_db->gravar_chave( i_chave = var_valor i_grupo = i_grupo ). "Método para gravar a chave no banco de dados e manter o seu controle.
+              zescl_rota_db->gravar_chave( i_chave = var_valor i_grupo = i_grupo ). "Método para gravar a chave no banco de dados e manter o seu controle.
 
               e_chave = var_valor. "Retorna o Valor da nova CHAVE
 
             ELSE.
-              RAISE EXCEPTION TYPE zcx_webservice EXPORTING textid = zcx_webservice=>erro_no_xml.
+              RAISE EXCEPTION TYPE zescx_webservice EXPORTING textid = zescx_webservice=>erro_no_xml.
             ENDIF.
 
           WHEN: OTHERS.
@@ -883,10 +883,10 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                                                              var_valor.
         ENDCASE.
       ELSE.
-        RAISE EXCEPTION TYPE zcx_webservice EXPORTING textid = zcx_webservice=>erro_no_xml.
+        RAISE EXCEPTION TYPE zescx_webservice EXPORTING textid = zescx_webservice=>erro_no_xml.
       ENDIF.
     ELSE.
-      RAISE EXCEPTION TYPE zcx_webservice EXPORTING textid = zcx_webservice=>autenticacao_nao_encontrado.
+      RAISE EXCEPTION TYPE zescx_webservice EXPORTING textid = zescx_webservice=>autenticacao_nao_encontrado.
     ENDIF.
 
   ENDMETHOD.
@@ -1097,7 +1097,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
   METHOD consultar_arquivo_cobranca.
 
-    DATA: cx_exception TYPE REF TO zcx_webservice.
+    DATA: cx_exception TYPE REF TO zescx_webservice.
 
     CLEAR: r_linkarquivo, e_msg.
 
@@ -1108,7 +1108,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
     TRY .
         DATA(e_chave) = me->chave_seguranca( i_grupo = wa_zlest0160-ds_grupo ).
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         DATA(lc_msg)  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
@@ -1120,7 +1120,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
         "RC - Consultar Rota.
         me->set_servico( EXPORTING i_servico = 'CB' ).
 
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
@@ -1130,16 +1130,16 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
     TRY .
         "Atribui as Informações do HTTP Client para consultar o WebService.
         DATA(lc_http) = me->url( ).
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    me->zif_webservice~abrir_conexao( lc_http ).
+    me->zesif_webservice~abrir_conexao( lc_http ).
 
     "Envia para Criar Rota.
     "O retorno é de um arquivo XML com o Código da Rota Administradora.
-    CALL METHOD me->zif_webservice~consultar
+    CALL METHOD me->zesif_webservice~consultar
       EXPORTING
         i_http                     = lc_http
         i_xml                      = lc_xml
@@ -1249,7 +1249,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
     DATA: e_chave      TYPE char32,
           lc_msg       TYPE string,
           lc_msg_adm   TYPE string,
-          cx_exception TYPE REF TO zcx_webservice,
+          cx_exception TYPE REF TO zescx_webservice,
           lc_xml       TYPE string,
           lc_http      TYPE REF TO if_http_client,
           wa_zlest0101 TYPE zlest0101,
@@ -1287,7 +1287,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
     TRY .
         e_chave = me->chave_seguranca( i_grupo = wa_zlest0160-ds_grupo ).
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
@@ -1299,7 +1299,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
         "RC - Consultar Rota.
         me->set_servico( EXPORTING i_servico = 'RC' ).
 
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
@@ -1310,16 +1310,16 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
         "Atribui as Informações do HTTP Client para consultar o WebService.
         lc_http = me->url( ).
 
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg.
     ENDTRY.
 
-    me->zif_webservice~abrir_conexao( lc_http ).
+    me->zesif_webservice~abrir_conexao( lc_http ).
 
     "Envia para Criar Rota.
     "O retorno é de um arquivo XML com o Código da Rota Administradora.
-    CALL METHOD me->zif_webservice~consultar
+    CALL METHOD me->zesif_webservice~consultar
       EXPORTING
         i_http                     = lc_http
         i_xml                      = lc_xml
@@ -1667,10 +1667,10 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
   METHOD cons_situacao_transportador.
 
-    DATA: lc_webservice TYPE REF TO zcl_webservice_tipcard.
+    DATA: lc_webservice TYPE REF TO zescl_webservice_tipcard.
 
     DATA: e_chave       TYPE char32,
-          cx_exception  TYPE REF TO zcx_webservice,
+          cx_exception  TYPE REF TO zescx_webservice,
           lc_msg        TYPE string,
           lc_xml        TYPE string,
           lc_msg_adm    TYPE string,
@@ -1705,7 +1705,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
       TRY .
           e_chave = lc_webservice->chave_seguranca( i_grupo = wa_zlest0160-ds_grupo ).
-        CATCH zcx_webservice INTO cx_exception .
+        CATCH zescx_webservice INTO cx_exception .
           lc_msg  = cx_exception->get_text( ).
           MESSAGE e007(zwebservice) WITH lc_msg RAISING erro.
       ENDTRY.
@@ -1851,7 +1851,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
       TRY .
           lc_webservice->set_servico( EXPORTING i_servico = 'ST' ).
-        CATCH zcx_webservice INTO cx_exception .
+        CATCH zescx_webservice INTO cx_exception .
           lc_msg  = cx_exception->get_text( ).
           MESSAGE e007(zwebservice) WITH lc_msg RAISING erro.
       ENDTRY.
@@ -1860,7 +1860,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
       TRY .
           lc_http = lc_webservice->url( ).
-        CATCH zcx_webservice INTO cx_exception .
+        CATCH zescx_webservice INTO cx_exception .
           lc_msg  = cx_exception->get_text( ).
           MESSAGE e007(zwebservice) WITH lc_msg RAISING erro.
       ENDTRY.
@@ -1869,7 +1869,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
         CLEAR: lc_msg_adm.
 
-        lc_webservice->zif_webservice~abrir_conexao( lc_http ).
+        lc_webservice->zesif_webservice~abrir_conexao( lc_http ).
 
         lc_xml = lc_webservice->xml_consulta_transportador( EXPORTING i_chave = e_chave i_consulta_rntrc = wa_consultas ).
 
@@ -1881,7 +1881,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
               i_xml       = lc_xml.
         ENDIF.
 
-        CALL METHOD lc_webservice->zif_webservice~consultar
+        CALL METHOD lc_webservice->zesif_webservice~consultar
           EXPORTING
             i_http                     = lc_http
             i_xml                      = lc_xml
@@ -3331,7 +3331,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            it_lines           TYPE STANDARD TABLE OF ty_lines,
            wa_0062            TYPE zlest0062,
            it_0062            TYPE TABLE OF zlest0062,
-           arquivo            TYPE REF TO zcl_tip_frete_aq_cobranca,
+           arquivo            TYPE REF TO zescl_tip_frete_aq_cobranca,
            "LC_NR_LOTE_ADM    TYPE ZPFE_NR_LOTE_ADM,
            it_reg_cabecalho   TYPE TABLE OF zpfe_lote,
            it_reg_itens       TYPE TABLE OF zpfe_lote_item,
@@ -3397,7 +3397,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              OTHERS             = 4 ).
 
          IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zcx_erro_arquivo
+           RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3419,7 +3419,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          ).
 
          IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zcx_erro_arquivo
+           RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3440,7 +3440,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          ).
 
          IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zcx_erro_arquivo
+           RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3455,7 +3455,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          c_xml = client->response->get_cdata( ).
          client->close( ).
        ELSE.
-         c_xml = zcl_string=>base64_to_string( i_texto = CONV #( i_content_filename ) ).
+         c_xml = zescl_string=>base64_to_string( i_texto = CONV #( i_content_filename ) ).
        ENDIF.
 *-US 130492-08.04.2024-JT-fim
 
@@ -3484,7 +3484,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
              OTHERS             = 4 ).
 
          IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zcx_erro_arquivo
+           RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3506,7 +3506,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          ).
 
          IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zcx_erro_arquivo
+           RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3527,7 +3527,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          ).
 
          IF sy-subrc IS NOT INITIAL.
-           RAISE EXCEPTION TYPE zcx_erro_arquivo
+           RAISE EXCEPTION TYPE zescx_erro_arquivo
              EXPORTING
                textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
                msgid  = sy-msgid
@@ -3542,7 +3542,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          c_xml = client->response->get_cdata( ).
          client->close( ).
        ELSE.
-         c_xml = zcl_string=>base64_to_string( i_texto = CONV #( i_content_filename_pedagio ) ).
+         c_xml = zescl_string=>base64_to_string( i_texto = CONV #( i_content_filename_pedagio ) ).
        ENDIF.
 *-US 130492-08.04.2024-JT-fim
 
@@ -3572,7 +3572,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
          OTHERS              = 7.
 
      IF sy-subrc IS NOT INITIAL.
-       RAISE EXCEPTION TYPE zcx_erro_arquivo
+       RAISE EXCEPTION TYPE zescx_erro_arquivo
          EXPORTING
            textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
            msgid  = sy-msgid
@@ -3645,7 +3645,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            OTHERS                  = 8.
 
        IF sy-subrc IS NOT INITIAL.
-         RAISE EXCEPTION TYPE zcx_erro_arquivo
+         RAISE EXCEPTION TYPE zescx_erro_arquivo
            EXPORTING
              textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
              msgid  = sy-msgid
@@ -3757,7 +3757,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
                output = wa_reg_itens-nm_lote_item.
 
            CASE wa_reg_itens-tp_plano_administradora.
-             	WHEN zcl_ciot=>st_tp_plano_pre_pago.
+             	WHEN zescl_ciot=>st_tp_plano_pre_pago.
                vg_tipcontabil_itm = 'FP'.
              	WHEN OTHERS.
                vg_tipcontabil_itm = vg_tipcontabil.
@@ -3865,7 +3865,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            OTHERS                  = 8.
 
        IF sy-subrc IS NOT INITIAL.
-         RAISE EXCEPTION TYPE zcx_erro_arquivo
+         RAISE EXCEPTION TYPE zescx_erro_arquivo
            EXPORTING
              textid = VALUE #( msgid = sy-msgid msgno = sy-msgno attr1 = CONV #( sy-msgv1 ) attr2 = CONV #( sy-msgv2 ) attr3 = CONV #( sy-msgv3 ) attr4 = CONV #( sy-msgv4 ) )
              msgid  = sy-msgid
@@ -3886,7 +3886,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
        LOOP AT it_reg_itens INTO wa_reg_itens WHERE nm_lote EQ st_lote_aux AND chvid EQ '2'.
 
          CASE wa_reg_itens-tp_plano_administradora.
-           	WHEN zcl_ciot=>st_tp_plano_pre_pago.
+           	WHEN zescl_ciot=>st_tp_plano_pre_pago.
              vg_tipcontabil_itm = 'FP'.
            WHEN OTHERS.
              vg_tipcontabil_itm = vg_tipcontabil.
@@ -4055,7 +4055,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
            wa_reg_cabecalho-vl_total_lote = wa_reg_cabecalho-vl_total_lote + wa_reg_itens-vl_transacao.
 
            CASE wa_reg_itens-tp_plano_administradora.
-             	WHEN zcl_ciot=>st_tp_plano_pre_pago.
+             	WHEN zescl_ciot=>st_tp_plano_pre_pago.
                vg_tipcontabil_itm = 'FP'.
              WHEN OTHERS.
                vg_tipcontabil_itm = vg_tipcontabil.
@@ -4238,7 +4238,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
        arquivo->set_corpo_arquivo( i_corpo_arquivo = it_lines_arq ).
        arquivo->set_corpo_arquivo_ped( i_corpo_arquivo = it_lines_arq_ped ).
        arquivo->set_nr_lote_adm( i_nr_lote_adm = wa_reg_cabecalho-nr_lote_adm ).
-       arquivo->zif_cadastro~gravar_registro( ).
+       arquivo->zesif_cadastro~gravar_registro( ).
        CLEAR: arquivo.
      ENDLOOP.
 
@@ -5251,7 +5251,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
   METHOD cons_status_parceiro.
 
-    DATA: lc_webservice TYPE REF TO zcl_webservice_tipcard.
+    DATA: lc_webservice TYPE REF TO zescl_webservice_tipcard.
 
 
     TYPES: BEGIN OF ty_dados,
@@ -5265,7 +5265,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
     DATA: ws_dados         TYPE zde_consulta_parceiro,
           it_dados         TYPE TABLE OF zde_consulta_parceiro,
           e_chave          TYPE char32,
-          cx_exception     TYPE REF TO zcx_webservice,
+          cx_exception     TYPE REF TO zescx_webservice,
           lc_msg           TYPE string,
           lc_xml           TYPE string,
           lc_msg_adm       TYPE string,
@@ -5297,7 +5297,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
     TRY .
         e_chave = lc_webservice->chave_seguranca( i_grupo = wa_zlest0160-ds_grupo ).
-      CATCH zcx_webservice INTO cx_exception .
+      CATCH zescx_webservice INTO cx_exception .
         lc_msg  = cx_exception->get_text( ).
         MESSAGE e007(zwebservice) WITH lc_msg RAISING erro.
     ENDTRY.
@@ -5345,7 +5345,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
       TRY .
           lc_webservice->set_servico( EXPORTING i_servico = 'SP' ).
-        CATCH zcx_webservice INTO cx_exception .
+        CATCH zescx_webservice INTO cx_exception .
           lc_msg  = cx_exception->get_text( ).
           MESSAGE e007(zwebservice) WITH lc_msg RAISING erro.
       ENDTRY.
@@ -5354,7 +5354,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
 
       TRY .
           lc_http = lc_webservice->url( ).
-        CATCH zcx_webservice INTO cx_exception .
+        CATCH zescx_webservice INTO cx_exception .
           lc_msg  = cx_exception->get_text( ).
           MESSAGE e007(zwebservice) WITH lc_msg RAISING erro.
       ENDTRY.
@@ -5375,7 +5375,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
           wa_zlest0135-ds_placa          = ws_dados-ds_placa.
         ENDIF.
 
-        lc_webservice->zif_webservice~abrir_conexao( lc_http ).
+        lc_webservice->zesif_webservice~abrir_conexao( lc_http ).
 
         lc_xml = lc_webservice->xml_consulta_status_parceiro( EXPORTING i_chave = e_chave i_consulta = ws_dados ).
 
@@ -5388,7 +5388,7 @@ CLASS ZCL_WEBSERVICE_TIPCARD IMPLEMENTATION.
         ENDIF.
 
 
-        CALL METHOD lc_webservice->zif_webservice~consultar
+        CALL METHOD lc_webservice->zesif_webservice~consultar
           EXPORTING
             i_http                     = lc_http
             i_xml                      = lc_xml

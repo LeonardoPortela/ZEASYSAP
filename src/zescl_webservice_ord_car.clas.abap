@@ -45,7 +45,7 @@ METHOD buscar_transporte.
   DATA: var_msg  TYPE string, "Variavel para mostrar a Mensagem texto da exception.
         var_http TYPE REF TO if_http_client. "Interface HTTP Client
 
-  DATA: cx_exception TYPE REF TO zcx_webservice. "Referencia para a Classe de Exception.
+  DATA: cx_exception TYPE REF TO zescx_webservice. "Referencia para a Classe de Exception.
 
   DATA: gw_xml        TYPE string, "String para guardar informações do XML
         gw_xml_transp TYPE string, "String para guardar informações do XML do Transp.

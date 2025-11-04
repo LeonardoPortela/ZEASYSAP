@@ -2,7 +2,7 @@ FUNCTION z_grc_retorno_event_inb .
 *"----------------------------------------------------------------------
 *"*"Interface local:
 *"  IMPORTING
-*"     VALUE(I_EVENT) TYPE  ZDE_RET_EVENT_INB
+*"     VALUE(I_EVENT) TYPE  ZESDE_RET_EVENT_INB
 *"     VALUE(I_FORCE_DADOS_AUTH) TYPE  CHAR01 OPTIONAL
 *"     VALUE(I_ANULAR_REJEICAO) TYPE  CHAR01 OPTIONAL
 *"----------------------------------------------------------------------

@@ -255,7 +255,7 @@ CLASS ZCL_WEBSERVICE_TRACE IMPLEMENTATION.
 
     CLEAR w_integracao.
 
-    zcl_integracao=>zif_integracao~get_instance( )->get_new_id_integracao(
+    zescl_integracao=>zesif_integracao~get_instance( )->get_new_id_integracao(
         IMPORTING e_id_integracao = w_integracao-id_integracao ).
 
     w_integracao-id_interface         = COND #( WHEN id_interface IS NOT INITIAL THEN id_interface ELSE '034' ).

@@ -23,18 +23,18 @@ ENDCLASS.
 CLASS ZESCL_NFE IMPLEMENTATION.
 
 
-  METHOD zif_doc_eletronico~get_urls_docs.
+  METHOD zesif_doc_eletronico~get_urls_docs.
 
     DATA: lc_tp_ambiente TYPE zde_tp_ambiente,
           it_urllist     TYPE tihttpurls2.
 
-    r_instancia = super->zif_doc_eletronico~get_urls_docs(
+    r_instancia = super->zesif_doc_eletronico~get_urls_docs(
                       IMPORTING
                         e_link_pdf  = e_link_pdf
                         e_link_xml  = e_link_xml ).
 
     TRY .
-        me->zif_doc_eletronico~get_ck_autorizado_uso( ).
+        me->zesif_doc_eletronico~get_ck_autorizado_uso( ).
 
         CLEAR: e_link_pdf, e_link_xml.
 
@@ -51,19 +51,19 @@ CLASS ZESCL_NFE IMPLEMENTATION.
 
         READ TABLE it_urllist WITH KEY protocol = 'http' INTO DATA(wa_urllist).
 
-        zcl_drc_utils=>get_host_port_url_documento( CHANGING  c_http_url = wa_urllist ).
+        zescl_drc_utils=>get_host_port_url_documento( CHANGING  c_http_url = wa_urllist ).
 
         "http://sapqas.maggi.corp:8001/custom/docfiscal?sap-client=300
         DATA(wa_dominio) = wa_urllist-protocol && '://' && wa_urllist-host && ':' && wa_urllist-port && wa_urllist-url.
 
         IF i_id_cce IS NOT INITIAL.
-          e_link_pdf = wa_dominio && '/getccenfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum && '&i_id_cce=' && i_id_cce.
+          e_link_pdf = wa_dominio && '/getccenfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum && '&i_id_cce=' && i_id_cce.
         ELSE.
-          e_link_pdf = wa_dominio && '/getnfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
-          e_link_xml = wa_dominio && '/getnfexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
+          e_link_pdf = wa_dominio && '/getnfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
+          e_link_xml = wa_dominio && '/getnfexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
         ENDIF.
 
-      CATCH zcx_doc_eletronico.    "
+      CATCH zescx_doc_eletronico.    "
     ENDTRY.
 
 

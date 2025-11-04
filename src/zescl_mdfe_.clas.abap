@@ -19,12 +19,12 @@ ENDCLASS.
 CLASS ZESCL_MDFE_ IMPLEMENTATION.
 
 
-  METHOD zif_doc_eletronico~get_urls_docs.
+  METHOD zesif_doc_eletronico~get_urls_docs.
 
     DATA: lc_tp_ambiente TYPE zde_tp_ambiente,
           it_urllist     TYPE tihttpurls2.
 
-    r_instancia = super->zif_doc_eletronico~get_urls_docs(
+    r_instancia = super->zesif_doc_eletronico~get_urls_docs(
                       IMPORTING
                         e_link_pdf  = e_link_pdf
                         e_link_xml  = e_link_xml ).
@@ -34,10 +34,10 @@ CLASS ZESCL_MDFE_ IMPLEMENTATION.
         SELECT SINGLE contingencia
           INTO @DATA(lv_contingencia)
           FROM zsdt0102
-         WHERE docnum = @me->zif_doc_eletronico~at_documento-docnum.
+         WHERE docnum = @me->zesif_doc_eletronico~at_documento-docnum.
 
         IF NOT ( sy-subrc = 0 AND lv_contingencia = abap_true ).
-          me->zif_doc_eletronico~get_ck_autorizado_uso( ).
+          me->zesif_doc_eletronico~get_ck_autorizado_uso( ).
         ENDIF.
 *CONTINGENCIA MDF-E - JT - 06.05.2024 =================================
 
@@ -56,14 +56,14 @@ CLASS ZESCL_MDFE_ IMPLEMENTATION.
 
         READ TABLE it_urllist WITH KEY protocol = 'http' INTO DATA(wa_urllist).
 
-        zcl_drc_utils=>get_host_port_url_documento( CHANGING  c_http_url = wa_urllist ).
+        zescl_drc_utils=>get_host_port_url_documento( CHANGING  c_http_url = wa_urllist ).
 
         "http://sapqas.maggi.corp:8001/custom/docfiscal?sap-client=300
         DATA(wa_dominio) = wa_urllist-protocol && '://' && wa_urllist-host && ':' && wa_urllist-port && wa_urllist-url.
-        e_link_pdf = wa_dominio && '/getmdfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
-        e_link_xml = wa_dominio && '/getmdfexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zif_doc_eletronico~at_documento-docnum.
+        e_link_pdf = wa_dominio && '/getmdfepdf?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
+        e_link_xml = wa_dominio && '/getmdfexml?' && 'sap-client=' && sy-mandt && '&i_docnum=' && me->zesif_doc_eletronico~at_documento-docnum.
 
-      CATCH zcx_doc_eletronico.    "
+      CATCH zescx_doc_eletronico.    "
     ENDTRY.
 
 
