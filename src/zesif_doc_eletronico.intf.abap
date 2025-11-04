@@ -26,7 +26,7 @@ interface ZESIF_DOC_ELETRONICO
       ZESCX_DOC_ELETRONICO .
   class-methods GET_XML_TERCEIRO
     importing
-      !I_CHAVE type ZDE_CHAVE_NFE
+      !I_CHAVE type ZESDE_CHAVE_NFE
     exporting
       !E_XML_XSTRING type FPCONTENT
       !E_XML_STRING type STRING

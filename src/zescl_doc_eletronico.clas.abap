@@ -9,7 +9,7 @@ public section.
   class-methods GET_ARQ_DOC_FISCAL
     importing
       !I_DOCNUM type J_1BDOCNUM optional
-      !I_CHAVE type ZDE_CHAVE_NFE optional
+      !I_CHAVE type ZESDE_CHAVE_NFE optional
       !I_TIPO type STRING default 'PDF'
       !I_JSON type STRING optional
     exporting
