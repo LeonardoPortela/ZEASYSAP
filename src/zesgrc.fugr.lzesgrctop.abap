@@ -109,20 +109,20 @@ DATA: ok_code     TYPE sy-ucomm,
 
 DATA: gb_tela TYPE c LENGTH 4 VALUE '1001'.
 
-TABLES: zde_zsdt0237, zde_zsdt0238, zde_zsdt0240, zde_zsdt0239, zsdt0241, zde_zsdt0242, zsdt0243.
+TABLES: ZESDE_zsdt0237, ZESDE_zsdt0238, ZESDE_zsdt0240, ZESDE_zsdt0239, zsdt0241, ZESDE_zsdt0242, zsdt0243.
 
 DATA: gb_zsdt0237 TYPE zsdt0237.
 DATA: gt_zsdt0238       TYPE TABLE OF zsdt0238,
-      gt_zde_zsdt0238   TYPE zde_zsdt0238_t,
+      gt_zde_zsdt0238   TYPE ZESDE_zsdt0238_t,
       gt_zsdt0240       TYPE TABLE OF zsdt0240,
-      gt_zde_zsdt0240   TYPE zde_zsdt0240_t,
+      gt_zde_zsdt0240   TYPE ZESDE_zsdt0240_t,
       gt_zsdt0239       TYPE TABLE OF zsdt0239,
-      gt_zde_zsdt0239   TYPE zde_zsdt0239_t,
+      gt_zde_zsdt0239   TYPE ZESDE_zsdt0239_t,
       gt_zsdt0241       TYPE TABLE OF zsdt0241,
       gt_zsdt0242       TYPE TABLE OF zsdt0242,
-      gt_zde_zsdt0242   TYPE zde_zsdt0242_t,
+      gt_zde_zsdt0242   TYPE ZESDE_zsdt0242_t,
       gt_zsdt0243       TYPE TABLE OF zsdt0243,
-      wa_local_desc_sel TYPE zde_zsdt0239,
+      wa_local_desc_sel TYPE ZESDE_zsdt0239,
       gt_jdoc           TYPE TABLE OF zsds0040,
       wa_jdoc           TYPE zsds0040.
 
@@ -330,7 +330,7 @@ DATA: l_xstring_out   TYPE xstring,
       l_line          TYPE i,
       l_ativa_ficha   TYPE c,
       l_screen_5400   TYPE c,
-      t_element_array TYPE zde_element_array_t,
+      t_element_array TYPE ZESDE_element_array_t,
       t_xml_sefaz     TYPE znfe_xml_sefaz_auth,
       t_det           TYPE TABLE OF zdet_nitem,
       w_det           TYPE zdet_nitem,

@@ -21,7 +21,7 @@ CLASS ZESCL_MDFE_ IMPLEMENTATION.
 
   METHOD zesif_doc_eletronico~get_urls_docs.
 
-    DATA: lc_tp_ambiente TYPE zde_tp_ambiente,
+    DATA: lc_tp_ambiente TYPE ZESDE_tp_ambiente,
           it_urllist     TYPE tihttpurls2.
 
     r_instancia = super->zesif_doc_eletronico~get_urls_docs(

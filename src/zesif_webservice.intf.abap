@@ -7,7 +7,7 @@ interface ZESIF_WEBSERVICE
   data CK_USA_AUTH_WEBSERVICE type CHAR01 .
   data NM_AUTH_WEBSERVICE type /UI2/SERVICE_NAME .
   data AUTENTICA_API_AD type CHAR01 .
-  data AUTENTICA_MODULE type ZDE_AUTENTICA_MODULE .
+  data AUTENTICA_MODULE type ZESDE_AUTENTICA_MODULE .
 
   class-methods ADD_TOKEN_OPUS_HTTP_CLIENTE
     importing
@@ -24,7 +24,7 @@ interface ZESIF_WEBSERVICE
     importing
       !I_URL_DESTINO type STRING
       !I_URL_TOKEN type STRING
-      !I_AUTENTICA_MODULE type ZDE_AUTENTICA_MODULE optional
+      !I_AUTENTICA_MODULE type ZESDE_AUTENTICA_MODULE optional
     exporting
       !E_TOKEN type STRING
     exceptions
@@ -48,7 +48,7 @@ interface ZESIF_WEBSERVICE
     importing
       !I_URL_DESTINO type STRING
       !I_URL_TOKEN type STRING optional
-      !I_AUTENTICA_MODULE type ZDE_AUTENTICA_MODULE optional
+      !I_AUTENTICA_MODULE type ZESDE_AUTENTICA_MODULE optional
     changing
       value(I_HTTP) type ref to IF_HTTP_CLIENT
     exceptions

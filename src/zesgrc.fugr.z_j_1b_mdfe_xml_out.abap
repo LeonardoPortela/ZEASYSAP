@@ -899,7 +899,7 @@ FUNCTION z_j_1b_mdfe_xml_out.
 
     DATA(lc_tabix) = sy-tabix.
 
-    SELECT SINGLE text INTO @zde_zsdt0239-text
+    SELECT SINGLE text INTO @ZESDE_zsdt0239-text
       FROM j_1btxjurt
      WHERE spras      EQ @sy-langu
        AND country    EQ @wa_zsdt0239-country
@@ -907,7 +907,7 @@ FUNCTION z_j_1b_mdfe_xml_out.
 
     wit_mdfe_inf_mundescarg-id             = lc_tabix.
     wit_mdfe_inf_mundescarg-c_mun_descarga = wa_zsdt0239-cmundesc.
-    wit_mdfe_inf_mundescarg-x_mun_descarga = zcl_string=>tira_acentos( zcl_string=>convert_to_utf8( CONV #( zde_zsdt0239-text ) ) ).
+    wit_mdfe_inf_mundescarg-x_mun_descarga = zcl_string=>tira_acentos( zcl_string=>convert_to_utf8( CONV #( ZESDE_zsdt0239-text ) ) ).
     wit_mdfe_inf_mundescarg-infcte_ref     = lc_tabix.
     wit_mdfe_inf_mundescarg-infnfe_ref     = lc_tabix.
     APPEND wit_mdfe_inf_mundescarg TO zit_mdfe_inf_mundescarg.

@@ -14,8 +14,8 @@ interface ZESIF_DOC_ELETRONICO
   constants AT_ACAO_VIAGEM_FRETE_CANCELAR type CHAR01 value '3' ##NO_TEXT.
   constants AT_ACAO_MDFE_AUTORIZA type CHAR01 value '1' ##NO_TEXT.
   constants AT_ACAO_MDFE_CANCELAR type CHAR01 value '2' ##NO_TEXT.
-  data AT_QTD_CICLOS type ZDE_QTD_CICLOS .
-  data AT_QTD_SEGUNDOS type ZDE_QTD_SEGUNDOS_CICLO .
+  data AT_QTD_CICLOS type ZESDE_QTD_CICLOS .
+  data AT_QTD_SEGUNDOS type ZESDE_QTD_SEGUNDOS_CICLO .
 
   class-methods GET_INSTANCE
     importing
@@ -36,12 +36,12 @@ interface ZESIF_DOC_ELETRONICO
       ZESCX_DOC_ELETRONICO .
   class-methods IMPRIMIR_DOCUMENTO_AUX
     importing
-      !I_CHAVE type ZDE_CHAVE_DOC_E .
+      !I_CHAVE type ZESDE_CHAVE_DOC_E .
   methods SET_AUTORIZAR
     importing
       !I_AGUARDAR type CHAR01 default ' '
-      !I_CICLOS type ZDE_QTD_CICLOS default 0
-      !I_SEGUNDOS type ZDE_QTD_SEGUNDOS_CICLO default 0
+      !I_CICLOS type ZESDE_QTD_CICLOS default 0
+      !I_SEGUNDOS type ZESDE_QTD_SEGUNDOS_CICLO default 0
     returning
       value(R_INSTANCIA) type ref to ZESIF_DOC_ELETRONICO
     raising
@@ -51,8 +51,8 @@ interface ZESIF_DOC_ELETRONICO
       !I_MOTIVO type J_1BNFE_CANCEL_REASON optional
       !I_DS_MOTIVO type STRING optional
       !I_AGUARDAR type CHAR01 default ' '
-      !I_CICLOS type ZDE_QTD_CICLOS default 0
-      !I_SEGUNDOS type ZDE_QTD_SEGUNDOS_CICLO default 0
+      !I_CICLOS type ZESDE_QTD_CICLOS default 0
+      !I_SEGUNDOS type ZESDE_QTD_SEGUNDOS_CICLO default 0
     returning
       value(R_INSTANCIA) type ref to ZESIF_DOC_ELETRONICO
     raising
@@ -89,7 +89,7 @@ interface ZESIF_DOC_ELETRONICO
       ZESCX_DOC_ELETRONICO .
   methods GET_STATUS
     exporting
-      !E_STATUS type ZDE_STATUS_DOC_ELETRONICO
+      !E_STATUS type ZESDE_STATUS_DOC_ELETRONICO
       !E_STATUS_DESC type STRING
     returning
       value(R_INSTANCIA) type ref to ZESIF_DOC_ELETRONICO .
@@ -103,8 +103,8 @@ interface ZESIF_DOC_ELETRONICO
   methods GET_AGUARDAR
     importing
       !I_AGUARDAR type CHAR01 default ' '
-      !I_CICLOS type ZDE_QTD_CICLOS default 0
-      !I_SEGUNDOS type ZDE_QTD_SEGUNDOS_CICLO default 0
+      !I_CICLOS type ZESDE_QTD_CICLOS default 0
+      !I_SEGUNDOS type ZESDE_QTD_SEGUNDOS_CICLO default 0
     returning
       value(R_INSTANCIA) type ref to ZESIF_DOC_ELETRONICO
     raising
@@ -127,8 +127,8 @@ interface ZESIF_DOC_ELETRONICO
       value(R_INSTANCIA) type ref to ZESIF_DOC_ELETRONICO .
   methods SET_CLEAR
     importing
-      !I_CICLOS type ZDE_QTD_CICLOS default 60
-      !I_SEGUNDOS type ZDE_QTD_SEGUNDOS_CICLO default 10
+      !I_CICLOS type ZESDE_QTD_CICLOS default 60
+      !I_SEGUNDOS type ZESDE_QTD_SEGUNDOS_CICLO default 10
     returning
       value(R_INSTANCIA) type ref to ZESIF_DOC_ELETRONICO
     raising
@@ -353,8 +353,8 @@ interface ZESIF_DOC_ELETRONICO
       !I_ACAO type CHAR01 default ZESIF_DOC_ELETRONICO=>AT_ACAO_MDFE_AUTORIZA
       !I_JUSTIFICATIVA_CANCEL type STRING optional
       !I_AGUARDAR type CHAR01 default ' '
-      !I_CICLOS type ZDE_QTD_CICLOS default 0
-      !I_SEGUNDOS type ZDE_QTD_SEGUNDOS_CICLO default 0
+      !I_CICLOS type ZESDE_QTD_CICLOS default 0
+      !I_SEGUNDOS type ZESDE_QTD_SEGUNDOS_CICLO default 0
     returning
       value(R_INSTANCIA) type ref to ZESIF_DOC_ELETRONICO
     raising

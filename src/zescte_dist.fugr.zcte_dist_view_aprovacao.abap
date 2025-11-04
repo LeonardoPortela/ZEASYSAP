@@ -2,7 +2,7 @@ FUNCTION ZCTE_DIST_VIEW_APROVACAO.
 *"----------------------------------------------------------------------
 *"*"Interface local:
 *"  IMPORTING
-*"     REFERENCE(P_CD_APROVACAO) TYPE  ZDE_EST_APROVACAO
+*"     REFERENCE(P_CD_APROVACAO) TYPE  ZESDE_EST_APROVACAO
 *"  EXCEPTIONS
 *"      ID
 *"      LANGUAGE

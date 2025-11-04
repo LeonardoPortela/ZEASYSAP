@@ -27,7 +27,7 @@ FUNCTION z_grc_arquivo_doc.
 
 
   DATA: wa_active TYPE j_1bnfe_active.
-  DATA: p_chave TYPE zde_chave_nfe.
+  DATA: p_chave TYPE ZESDE_chave_nfe.
   DATA: tp_doc TYPE c LENGTH 3.
   DATA: t_zib_nfe_dist_ter TYPE TABLE OF zib_nfe_dist_ter.
 

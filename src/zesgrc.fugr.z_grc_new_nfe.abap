@@ -2,7 +2,7 @@ FUNCTION Z_GRC_NEW_NFE.
 *"----------------------------------------------------------------------
 *"*"Interface local:
 *"  IMPORTING
-*"     REFERENCE(I_INFO) TYPE  ZDE_INTEGRACAO_HTTP_CONFIG
+*"     REFERENCE(I_INFO) TYPE  ZESDE_INTEGRACAO_HTTP_CONFIG
 *"  EXPORTING
 *"     REFERENCE(E_PROTOCOLO) TYPE  STRING
 *"  RAISING

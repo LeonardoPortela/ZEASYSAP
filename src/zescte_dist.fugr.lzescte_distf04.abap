@@ -42,8 +42,8 @@ DATA: gb_index            TYPE i,
       wa_zib_cte_dist_eap TYPE zib_cte_dist_eap,
       e_tipo_contrato     TYPE char04,
       it_exclude_fcode    TYPE TABLE OF sy-ucomm,
-      it_0301_vt          TYPE TABLE OF zde_cte_dist_vt_alv WITH HEADER LINE,
-      it_0301_vt_aux      TYPE TABLE OF zde_cte_dist_vt_alv WITH HEADER LINE.
+      it_0301_vt          TYPE TABLE OF ZESDE_cte_dist_vt_alv WITH HEADER LINE,
+      it_0301_vt_aux      TYPE TABLE OF ZESDE_cte_dist_vt_alv WITH HEADER LINE.
 
 
 DATA: ctl_alv_0301       TYPE REF TO cl_gui_alv_grid,
@@ -147,7 +147,7 @@ FORM faturar_cte  USING p_cte TYPE zib_cte_dist_ter
          e_tipo_contrato,
          wa_info_forne.
 
-  FIELD-SYMBOLS: <fs_0301_vt> TYPE zde_cte_dist_vt_alv.
+  FIELD-SYMBOLS: <fs_0301_vt> TYPE ZESDE_cte_dist_vt_alv.
 
   gb_index               = p_index.
   gb_index_ultimo        = p_index_ultimo.
@@ -262,7 +262,7 @@ FORM faturar_cte  USING p_cte TYPE zib_cte_dist_ter
         DATA: lc_ck_autorizados TYPE c LENGTH 1,
               lc_matnr          TYPE matnr,
               lc_grupo          TYPE matkl,
-              lc_tipo           TYPE zde_tp_aut_frete.
+              lc_tipo           TYPE ZESDE_tp_aut_frete.
 
         lc_ck_autorizados = abap_true.
 
@@ -601,7 +601,7 @@ ENDFORM.                    " EDITAR_0301_VT
 *&---------------------------------------------------------------------*
 *       Importação de Peso Digitado
 *----------------------------------------------------------------------*
-FORM busca_peso_chegada  CHANGING p_digitar  TYPE zde_cte_dist_vt_alv
+FORM busca_peso_chegada  CHANGING p_digitar  TYPE ZESDE_cte_dist_vt_alv
                                   p_achou    TYPE sy-subrc.
 
   DATA: wa_0039 TYPE zlest0039.
@@ -991,7 +991,7 @@ FORM fill_it_fieldcatalog_0301 .
 
   CALL FUNCTION 'LVC_FIELDCATALOG_MERGE'
     EXPORTING
-      i_structure_name = 'ZDE_CTE_DIST_VT_ALV'
+      i_structure_name = 'ZESDE_CTE_DIST_VT_ALV'
     CHANGING
       ct_fieldcat      = it_catalog_0301.
 
@@ -1402,7 +1402,7 @@ FORM faturar_cte_ferr  USING p_cte TYPE zib_cte_dist_ter
          e_tipo_contrato,
          wa_info_forne.
 
-  FIELD-SYMBOLS: <fs_0301_vt> TYPE zde_cte_dist_vt_alv.
+  FIELD-SYMBOLS: <fs_0301_vt> TYPE ZESDE_cte_dist_vt_alv.
 
   gb_index               = p_index.
   gb_index_ultimo        = p_index_ultimo.
@@ -1517,7 +1517,7 @@ FORM faturar_cte_ferr  USING p_cte TYPE zib_cte_dist_ter
         DATA: lc_ck_autorizados TYPE c LENGTH 1,
               lc_matnr          TYPE matnr,
               lc_grupo          TYPE matkl,
-              lc_tipo           TYPE zde_tp_aut_frete.
+              lc_tipo           TYPE ZESDE_tp_aut_frete.
 
         lc_ck_autorizados = abap_true.
 

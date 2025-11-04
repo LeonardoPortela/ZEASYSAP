@@ -2,7 +2,7 @@ FUNCTION Z_DETALHAMENTO_NFE.
 *"----------------------------------------------------------------------
 *"*"Interface local:
 *"  IMPORTING
-*"     REFERENCE(I_CHAVE_NFE) TYPE  ZDE_CHAVE_DOC_E
+*"     REFERENCE(I_CHAVE_NFE) TYPE  ZESDE_CHAVE_DOC_E
 *"  EXPORTING
 *"     REFERENCE(E_XML_NFE) TYPE  ZNFE_XML_SEFAZ_AUTH
 *"  EXCEPTIONS

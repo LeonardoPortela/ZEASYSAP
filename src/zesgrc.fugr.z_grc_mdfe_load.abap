@@ -6,10 +6,10 @@ FUNCTION Z_GRC_MDFE_LOAD.
 *"----------------------------------------------------------------------
 
   CLEAR: ZESDE_ZSDT0237,
-         ZDE_ZSDT0238,
-         ZDE_ZSDT0240,
-         ZDE_ZSDT0239,
-         ZDE_ZSDT0242,
+         ZESDE_ZSDT0238,
+         ZESDE_ZSDT0240,
+         ZESDE_ZSDT0239,
+         ZESDE_ZSDT0242,
          GB_ZSDT0237,
          GT_ZSDT0238,
          GT_ZDE_ZSDT0238[], GT_ZDE_ZSDT0238,

@@ -10,13 +10,13 @@ FUNCTION z_detalhamento_cte_in_massa.
 *"     VALUE(E_XML_CTE) TYPE  ZCTMM_XML_CTE
 *"----------------------------------------------------------------------
 
-  DATA: t_xstring       TYPE TABLE OF zde_s_xstring,
+  DATA: t_xstring       TYPE TABLE OF ZESDE_s_xstring,
         lv_evento       TYPE n LENGTH 6,
         lv_destination  TYPE syhost,
         lv_rfcdest      TYPE rfcdest,
         lv_xnfeactive   TYPE j_1bxnfeactive,
         wl_xml_cte      TYPE zcte_xml_sefaz_auth,
-        wl_zde_xml_cte  TYPE zde_xml_cte,
+        wl_zde_xml_cte  TYPE ZESDE_xml_cte,
         t_zctmm_xml_cte TYPE zctmm_xml_cte.
 
   CALL FUNCTION 'J_1B_NFE_CHECK_RFC_DESTINATION'
@@ -51,7 +51,7 @@ FUNCTION z_detalhamento_cte_in_massa.
   DATA: l_chave_nfe      TYPE string,
         l_xstring_out    TYPE xstring,
         l_xml_doc        TYPE string,
-        lt_element_array TYPE zde_element_array_t.
+        lt_element_array TYPE ZESDE_element_array_t.
 
   LOOP AT t_xstring INTO DATA(wl_xstring).
 

@@ -29,7 +29,7 @@ CLASS zescl_webservice DEFINITION
         VALUE(e_tipo) TYPE ztipowebadm .
     METHODS get_senha
       RETURNING
-        VALUE(e_senha) TYPE zde_ui_src_password60
+        VALUE(e_senha) TYPE ZESDE_ui_src_password60
       RAISING
         zescx_webservice .
     METHODS get_uri
@@ -39,7 +39,7 @@ CLASS zescl_webservice DEFINITION
         zescx_webservice .
     METHODS get_usuario
       RETURNING
-        VALUE(e_usuario) TYPE zde_usuario
+        VALUE(e_usuario) TYPE ZESDE_usuario
       RAISING
         zescx_webservice .
     METHODS url
@@ -69,7 +69,7 @@ private section.
   data AT_SERVICO type ZTIPOWEBSERV .
   data AT_TIPO type ZTIPOWEBADM .
   data AT_HTTP type ref to IF_HTTP_CLIENT .
-  data AT_CONTENT_TYPE type ZDE_WEB_SERV_CTX .
+  data AT_CONTENT_TYPE type ZESDE_WEB_SERV_CTX .
   data AT_METHOD type STRING .
   data AT_USUARIO type STRING .
   data AT_SENHA type STRING .
@@ -745,7 +745,7 @@ CLASS ZESCL_WEBSERVICE IMPLEMENTATION.
 
     IF ( sy-subrc = 0 ).
 
-      DATA(lwa_body) = VALUE zde_token_api_body(
+      DATA(lwa_body) = VALUE ZESDE_token_api_body(
           ip       = 'aroeira.corp'
 *          module   = |SAP_{ sy-sysid }|
           module   = i_autentica_module

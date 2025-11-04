@@ -164,7 +164,7 @@ CLASS lcl_alv_toolbar_1001a IMPLEMENTATION.
       IMPORTING
         et_index_rows = et_index_rows.
 
-    DATA: it_zde_zsdt0238 TYPE zde_zsdt0238_t.
+    DATA: it_zde_zsdt0238 TYPE ZESDE_zsdt0238_t.
 
     LOOP AT et_index_rows INTO DATA(wa_index_rows).
       READ TABLE gt_zde_zsdt0238 INTO DATA(wa_zde_zsdt0238) INDEX wa_index_rows-index.
@@ -240,7 +240,7 @@ CLASS lcl_alv_toolbar_1001b IMPLEMENTATION.
       IMPORTING
         et_index_rows = et_index_rows.
 
-    DATA: it_zde_zsdt0240 TYPE zde_zsdt0240_t.
+    DATA: it_zde_zsdt0240 TYPE ZESDE_zsdt0240_t.
 
     LOOP AT et_index_rows INTO DATA(wa_index_rows).
       READ TABLE gt_zde_zsdt0240 INTO DATA(wa_zde_zsdt0240) INDEX wa_index_rows-index.
@@ -316,7 +316,7 @@ CLASS lcl_alv_toolbar_1002a IMPLEMENTATION.
       IMPORTING
         et_index_rows = et_index_rows.
 
-    DATA: it_zde_zsdt0239 TYPE zde_zsdt0239_t.
+    DATA: it_zde_zsdt0239 TYPE ZESDE_zsdt0239_t.
 
     LOOP AT et_index_rows INTO DATA(wa_index_rows).
       READ TABLE gt_zde_zsdt0239 INTO DATA(wa_zde_zsdt0239) INDEX wa_index_rows-index.
@@ -498,7 +498,7 @@ CLASS lcl_alv_toolbar_1003a IMPLEMENTATION.
       IMPORTING
         et_index_rows = et_index_rows.
 
-    DATA: it_zde_zsdt0242 TYPE zde_zsdt0242_t.
+    DATA: it_zde_zsdt0242 TYPE ZESDE_zsdt0242_t.
 
     LOOP AT et_index_rows INTO DATA(wa_index_rows).
       READ TABLE gt_zde_zsdt0242 INTO DATA(wa_zde_zsdt0242) INDEX wa_index_rows-index.
@@ -605,69 +605,69 @@ ENDCLASS.
 
 FORM carrega_empresa .
 
-  CLEAR: zde_zsdt0237-butxt.
+  CLEAR: ZESDE_zsdt0237-butxt.
 
-  IF zde_zsdt0237-bukrs IS NOT INITIAL.
-    SELECT SINGLE butxt INTO @zde_zsdt0237-butxt
+  IF ZESDE_zsdt0237-bukrs IS NOT INITIAL.
+    SELECT SINGLE butxt INTO @ZESDE_zsdt0237-butxt
       FROM t001
-     WHERE bukrs EQ @zde_zsdt0237-bukrs.
+     WHERE bukrs EQ @ZESDE_zsdt0237-bukrs.
   ENDIF.
 
 ENDFORM.
 
 FORM carrega_filial .
 
-  CLEAR: zde_zsdt0237-name.
+  CLEAR: ZESDE_zsdt0237-name.
 
-  IF zde_zsdt0237-bukrs IS NOT INITIAL.
-    SELECT SINGLE name INTO @zde_zsdt0237-name
+  IF ZESDE_zsdt0237-bukrs IS NOT INITIAL.
+    SELECT SINGLE name INTO @ZESDE_zsdt0237-name
       FROM j_1bbranch
-     WHERE branch EQ @zde_zsdt0237-branch.
+     WHERE branch EQ @ZESDE_zsdt0237-branch.
   ENDIF.
 
 ENDFORM.
 
 FORM carrega_municiopio_origem .
 
-  CLEAR: zde_zsdt0237-tx_mun_origem.
+  CLEAR: ZESDE_zsdt0237-tx_mun_origem.
 
-  IF zde_zsdt0237-cmunini IS NOT INITIAL.
-    SELECT SINGLE text INTO @zde_zsdt0237-tx_mun_origem
+  IF ZESDE_zsdt0237-cmunini IS NOT INITIAL.
+    SELECT SINGLE text INTO @ZESDE_zsdt0237-tx_mun_origem
       FROM j_1btxjurt
      WHERE spras      EQ @sy-langu
-       AND country    EQ @zde_zsdt0237-country
-       AND taxjurcode EQ @zde_zsdt0237-cmunini.
+       AND country    EQ @ZESDE_zsdt0237-country
+       AND taxjurcode EQ @ZESDE_zsdt0237-cmunini.
   ENDIF.
 
 ENDFORM.
 
 FORM carrega_municiopio_final .
 
-  CLEAR: zde_zsdt0237-tx_mun_final.
+  CLEAR: ZESDE_zsdt0237-tx_mun_final.
 
-  IF zde_zsdt0237-cmunfim IS NOT INITIAL.
-    SELECT SINGLE text INTO @zde_zsdt0237-tx_mun_final
+  IF ZESDE_zsdt0237-cmunfim IS NOT INITIAL.
+    SELECT SINGLE text INTO @ZESDE_zsdt0237-tx_mun_final
       FROM j_1btxjurt
      WHERE spras      EQ @sy-langu
-       AND country    EQ @zde_zsdt0237-country
-       AND taxjurcode EQ @zde_zsdt0237-cmunfim.
+       AND country    EQ @ZESDE_zsdt0237-country
+       AND taxjurcode EQ @ZESDE_zsdt0237-cmunfim.
   ENDIF.
 
 ENDFORM.
 
 FORM carrega_doc_eletronico .
 
-  CLEAR: zde_zsdt0237-nfenum, zde_zsdt0237-series, zde_zsdt0237-chave.
+  CLEAR: ZESDE_zsdt0237-nfenum, ZESDE_zsdt0237-series, ZESDE_zsdt0237-chave.
 
-  IF zde_zsdt0237-docnum IS NOT INITIAL.
+  IF ZESDE_zsdt0237-docnum IS NOT INITIAL.
     SELECT SINGLE * INTO @DATA(lc_mdfe)
       FROM j_1bnfe_active
-     WHERE docnum EQ @zde_zsdt0237-docnum.
+     WHERE docnum EQ @ZESDE_zsdt0237-docnum.
 
     IF sy-subrc IS INITIAL.
-      zde_zsdt0237-nfenum = lc_mdfe-nfnum9.
-      zde_zsdt0237-series = lc_mdfe-serie.
-      zde_zsdt0237-chave  = lc_mdfe-regio && lc_mdfe-nfyear && lc_mdfe-nfmonth && lc_mdfe-stcd1 && lc_mdfe-model && lc_mdfe-serie &&
+      ZESDE_zsdt0237-nfenum = lc_mdfe-nfnum9.
+      ZESDE_zsdt0237-series = lc_mdfe-serie.
+      ZESDE_zsdt0237-chave  = lc_mdfe-regio && lc_mdfe-nfyear && lc_mdfe-nfmonth && lc_mdfe-stcd1 && lc_mdfe-model && lc_mdfe-serie &&
                             lc_mdfe-nfnum9 && lc_mdfe-docnum9 && lc_mdfe-cdv.
     ENDIF.
 
@@ -700,13 +700,13 @@ FORM carrega_local_carregamentos .
   SORT it_j_1btxjurt BY taxjurcode.
 
   LOOP AT gt_zsdt0238 INTO DATA(wa_zsdt0238).
-    CLEAR zde_zsdt0238.
-    MOVE-CORRESPONDING wa_zsdt0238 TO zde_zsdt0238.
-    READ TABLE it_j_1btxjurt WITH KEY taxjurcode = zde_zsdt0238-cmuncar INTO DATA(wa_j_1btxjurt) BINARY SEARCH.
+    CLEAR ZESDE_zsdt0238.
+    MOVE-CORRESPONDING wa_zsdt0238 TO ZESDE_zsdt0238.
+    READ TABLE it_j_1btxjurt WITH KEY taxjurcode = ZESDE_zsdt0238-cmuncar INTO DATA(wa_j_1btxjurt) BINARY SEARCH.
     IF sy-subrc IS INITIAL.
-      zde_zsdt0238-text = wa_j_1btxjurt-text.
+      ZESDE_zsdt0238-text = wa_j_1btxjurt-text.
     ENDIF.
-    APPEND zde_zsdt0238 TO gt_zde_zsdt0238.
+    APPEND ZESDE_zsdt0238 TO gt_zde_zsdt0238.
   ENDLOOP.
 
 ENDFORM.
@@ -727,13 +727,13 @@ FORM carrega_ufs_percurso .
   SORT it_t005u BY bland.
 
   LOOP AT gt_zsdt0240 INTO DATA(wa_zsdt0240).
-    CLEAR zde_zsdt0240.
-    MOVE-CORRESPONDING wa_zsdt0240 TO zde_zsdt0240.
-    READ TABLE it_t005u WITH KEY bezei = zde_zsdt0240-bezei INTO DATA(wa_t005u) BINARY SEARCH.
+    CLEAR ZESDE_zsdt0240.
+    MOVE-CORRESPONDING wa_zsdt0240 TO ZESDE_zsdt0240.
+    READ TABLE it_t005u WITH KEY bezei = ZESDE_zsdt0240-bezei INTO DATA(wa_t005u) BINARY SEARCH.
     IF sy-subrc IS INITIAL.
-      zde_zsdt0240-bezei = wa_t005u-bezei.
+      ZESDE_zsdt0240-bezei = wa_t005u-bezei.
     ENDIF.
-    APPEND zde_zsdt0240 TO gt_zde_zsdt0240.
+    APPEND ZESDE_zsdt0240 TO gt_zde_zsdt0240.
   ENDLOOP.
 
 ENDFORM.
@@ -754,13 +754,13 @@ FORM carrega_mun_descarregamentos .
   SORT it_j_1btxjurt BY taxjurcode.
 
   LOOP AT gt_zsdt0239 INTO DATA(wa_zsdt0239).
-    CLEAR zde_zsdt0239.
-    MOVE-CORRESPONDING wa_zsdt0239 TO zde_zsdt0239.
-    READ TABLE it_j_1btxjurt WITH KEY taxjurcode = zde_zsdt0239-cmundesc INTO DATA(wa_j_1btxjurt) BINARY SEARCH.
+    CLEAR ZESDE_zsdt0239.
+    MOVE-CORRESPONDING wa_zsdt0239 TO ZESDE_zsdt0239.
+    READ TABLE it_j_1btxjurt WITH KEY taxjurcode = ZESDE_zsdt0239-cmundesc INTO DATA(wa_j_1btxjurt) BINARY SEARCH.
     IF sy-subrc IS INITIAL.
-      zde_zsdt0239-text = wa_j_1btxjurt-text.
+      ZESDE_zsdt0239-text = wa_j_1btxjurt-text.
     ENDIF.
-    APPEND zde_zsdt0239 TO gt_zde_zsdt0239.
+    APPEND ZESDE_zsdt0239 TO gt_zde_zsdt0239.
   ENDLOOP.
 
 ENDFORM.
@@ -879,12 +879,12 @@ FORM gerar_mdfe .
   mdfe->set_data_emi( sy-datlo ).
   mdfe->set_hora_emi( sy-timlo ).
 
-  IF ( sy-subrc = 0 ) AND ( zde_zsdt0237-docnum IS NOT INITIAL ).
+  IF ( sy-subrc = 0 ) AND ( ZESDE_zsdt0237-docnum IS NOT INITIAL ).
     DATA: v_time_br TYPE erzet.
     CALL FUNCTION 'Z_FUSO_HORARIO_FILIAL'
       EXPORTING
-        i_bukrs  = zde_zsdt0237-bukrs
-        i_branch = zde_zsdt0237-branch
+        i_bukrs  = ZESDE_zsdt0237-bukrs
+        i_branch = ZESDE_zsdt0237-branch
       IMPORTING
         e_time   = v_time_br.
     IF v_time_br IS NOT INITIAL.
@@ -945,29 +945,29 @@ FORM gerar_mdfe .
   "03	Hidroviário
   "04	Ferroviário
 
-  mdfe->at_modal   = zde_zsdt0237-modal.
-  mdfe->at_ufini   = zde_zsdt0237-cmunini(2).
-  mdfe->at_cmunini = zde_zsdt0237-cmunini+3(7).
+  mdfe->at_modal   = ZESDE_zsdt0237-modal.
+  mdfe->at_ufini   = ZESDE_zsdt0237-cmunini(2).
+  mdfe->at_cmunini = ZESDE_zsdt0237-cmunini+3(7).
 
   SELECT SINGLE text INTO @mdfe->at_nmunini
     FROM j_1btxjurt
    WHERE spras      EQ @sy-langu
-     AND country    EQ @zde_zsdt0237-country
-     AND taxjurcode EQ @zde_zsdt0237-cmunini.
+     AND country    EQ @ZESDE_zsdt0237-country
+     AND taxjurcode EQ @ZESDE_zsdt0237-cmunini.
 
-  mdfe->at_uffim   = zde_zsdt0237-cmunfim(2).
-  mdfe->at_cmunfim = zde_zsdt0237-cmunfim+3(7).
+  mdfe->at_uffim   = ZESDE_zsdt0237-cmunfim(2).
+  mdfe->at_cmunfim = ZESDE_zsdt0237-cmunfim+3(7).
 
   SELECT SINGLE text INTO @mdfe->at_nmunfim
     FROM j_1btxjurt
    WHERE spras      EQ @sy-langu
-     AND country    EQ @zde_zsdt0237-country
-     AND taxjurcode EQ @zde_zsdt0237-cmunfim.
+     AND country    EQ @ZESDE_zsdt0237-country
+     AND taxjurcode EQ @ZESDE_zsdt0237-cmunfim.
 
-  mdfe->at_qcarga    = zde_zsdt0237-qcarga.
-  mdfe->at_vcarga    = zde_zsdt0237-vcarga.
-  mdfe->at_cunid     = zde_zsdt0237-cunid.
-  CASE zde_zsdt0237-cunid.
+  mdfe->at_qcarga    = ZESDE_zsdt0237-qcarga.
+  mdfe->at_vcarga    = ZESDE_zsdt0237-vcarga.
+  mdfe->at_cunid     = ZESDE_zsdt0237-cunid.
+  CASE ZESDE_zsdt0237-cunid.
     WHEN '01'.
       mdfe->at_cunid_sap = 'KG'.
     WHEN '02'.
@@ -975,7 +975,7 @@ FORM gerar_mdfe .
   ENDCASE.
 
   DATA: lc_zsdt0237 TYPE zsdt0237.
-  MOVE-CORRESPONDING zde_zsdt0237 TO lc_zsdt0237.
+  MOVE-CORRESPONDING ZESDE_zsdt0237 TO lc_zsdt0237.
 
   CLEAR: mdfe->at_it_uf_perc[].
 
@@ -983,9 +983,9 @@ FORM gerar_mdfe .
     APPEND VALUE #( uf = wa_zde_zsdt0240-bland ) TO mdfe->at_it_uf_perc.
   ENDLOOP.
 
-  zde_zsdt0237-docnum = mdfe->gravar_mdfe( i_zsdt0237 = lc_zsdt0237 ).
+  ZESDE_zsdt0237-docnum = mdfe->gravar_mdfe( i_zsdt0237 = lc_zsdt0237 ).
 
-  CHECK zde_zsdt0237-docnum IS NOT INITIAL.
+  CHECK ZESDE_zsdt0237-docnum IS NOT INITIAL.
 
   PERFORM gravar_mdfe.
 
@@ -1008,7 +1008,7 @@ FORM gravar_mdfe .
 
   CLEAR: gb_zsdt0237, gt_zsdt0238[], gt_zsdt0240[], gt_zsdt0239[], gt_zsdt0242[].
 
-  MOVE-CORRESPONDING zde_zsdt0237 TO gb_zsdt0237.
+  MOVE-CORRESPONDING ZESDE_zsdt0237 TO gb_zsdt0237.
   DELETE FROM zsdt0238 WHERE docnum EQ gb_zsdt0237-docnum AND docnum NE space.
   DELETE FROM zsdt0239 WHERE docnum EQ gb_zsdt0237-docnum AND docnum NE space.
   DELETE FROM zsdt0240 WHERE docnum EQ gb_zsdt0237-docnum AND docnum NE space.
@@ -1177,7 +1177,7 @@ FORM fill_it_fieldcatalog_1001a .
 
   CALL FUNCTION 'LVC_FIELDCATALOG_MERGE'
     EXPORTING
-      i_structure_name = 'ZDE_ZSDT0238'
+      i_structure_name = 'ZESDE_ZSDT0238'
     CHANGING
       ct_fieldcat      = it_fieldcatalog_1001a.
 
@@ -1229,19 +1229,19 @@ MODULE user_command_2001 INPUT.
 
       ADD 1 TO lc_tabix.
 
-      zde_zsdt0238-sequencia = lc_tabix.
+      ZESDE_zsdt0238-sequencia = lc_tabix.
 
-      IF zde_zsdt0238-cmuncar IS NOT INITIAL.
-        SELECT SINGLE text INTO @zde_zsdt0238-text
+      IF ZESDE_zsdt0238-cmuncar IS NOT INITIAL.
+        SELECT SINGLE text INTO @ZESDE_zsdt0238-text
           FROM j_1btxjurt
          WHERE spras      EQ @sy-langu
-           AND country    EQ @zde_zsdt0238-country
-           AND taxjurcode EQ @zde_zsdt0238-cmuncar.
+           AND country    EQ @ZESDE_zsdt0238-country
+           AND taxjurcode EQ @ZESDE_zsdt0238-cmuncar.
 
       ENDIF.
 
-      APPEND zde_zsdt0238 TO gt_zde_zsdt0238.
-      CLEAR: zde_zsdt0238.
+      APPEND ZESDE_zsdt0238 TO gt_zde_zsdt0238.
+      CLEAR: ZESDE_zsdt0238.
       CLEAR: ok_code.
       LEAVE TO SCREEN 0.
 
@@ -1259,14 +1259,14 @@ MODULE status_2001 OUTPUT.
   SET PF-STATUS 'PF2001'.
   SET TITLEBAR 'TL2001'.
 
-  zde_zsdt0238-country = 'BR'.
+  ZESDE_zsdt0238-country = 'BR'.
 
-  IF zde_zsdt0238-cmuncar IS NOT INITIAL.
-    SELECT SINGLE text INTO @zde_zsdt0238-text
+  IF ZESDE_zsdt0238-cmuncar IS NOT INITIAL.
+    SELECT SINGLE text INTO @ZESDE_zsdt0238-text
       FROM j_1btxjurt
      WHERE spras      EQ @sy-langu
-       AND country    EQ @zde_zsdt0238-country
-       AND taxjurcode EQ @zde_zsdt0238-cmuncar.
+       AND country    EQ @ZESDE_zsdt0238-country
+       AND taxjurcode EQ @ZESDE_zsdt0238-cmuncar.
 
   ENDIF.
 
@@ -1328,14 +1328,14 @@ MODULE status_2002 OUTPUT.
   SET PF-STATUS 'PF2001'.
   SET TITLEBAR 'TL2002'.
 
-  zde_zsdt0240-land1 = 'BR'.
+  ZESDE_zsdt0240-land1 = 'BR'.
 
-  IF zde_zsdt0240-bland IS NOT INITIAL.
-    SELECT SINGLE bezei INTO @zde_zsdt0240-bezei
+  IF ZESDE_zsdt0240-bland IS NOT INITIAL.
+    SELECT SINGLE bezei INTO @ZESDE_zsdt0240-bezei
       FROM t005u
      WHERE spras EQ @sy-langu
-       AND land1 EQ @zde_zsdt0240-land1
-       AND bland EQ @zde_zsdt0240-bland.
+       AND land1 EQ @ZESDE_zsdt0240-land1
+       AND bland EQ @ZESDE_zsdt0240-bland.
   ENDIF.
 
 ENDMODULE.
@@ -1367,18 +1367,18 @@ MODULE user_command_2002 INPUT.
 
       ADD 1 TO lc_tabix.
 
-      zde_zsdt0240-sequencia = lc_tabix.
+      ZESDE_zsdt0240-sequencia = lc_tabix.
 
-      IF zde_zsdt0240-bland IS NOT INITIAL.
-        SELECT SINGLE bezei INTO @zde_zsdt0240-bezei
+      IF ZESDE_zsdt0240-bland IS NOT INITIAL.
+        SELECT SINGLE bezei INTO @ZESDE_zsdt0240-bezei
           FROM t005u
          WHERE spras EQ @sy-langu
-           AND land1 EQ @zde_zsdt0240-land1
-           AND bland EQ @zde_zsdt0240-bland.
+           AND land1 EQ @ZESDE_zsdt0240-land1
+           AND bland EQ @ZESDE_zsdt0240-bland.
       ENDIF.
 
-      APPEND zde_zsdt0240 TO gt_zde_zsdt0240.
-      CLEAR: zde_zsdt0240.
+      APPEND ZESDE_zsdt0240 TO gt_zde_zsdt0240.
+      CLEAR: ZESDE_zsdt0240.
       CLEAR: ok_code.
       LEAVE TO SCREEN 0.
 
@@ -1397,14 +1397,14 @@ MODULE status_2003 OUTPUT.
   SET PF-STATUS 'PF2001'.
   SET TITLEBAR 'TL2003'.
 
-  zde_zsdt0239-country = 'BR'.
+  ZESDE_zsdt0239-country = 'BR'.
 
-  IF zde_zsdt0239-cmundesc IS NOT INITIAL.
-    SELECT SINGLE text INTO @zde_zsdt0239-text
+  IF ZESDE_zsdt0239-cmundesc IS NOT INITIAL.
+    SELECT SINGLE text INTO @ZESDE_zsdt0239-text
       FROM j_1btxjurt
      WHERE spras      EQ @sy-langu
-       AND country    EQ @zde_zsdt0239-country
-       AND taxjurcode EQ @zde_zsdt0239-cmundesc.
+       AND country    EQ @ZESDE_zsdt0239-country
+       AND taxjurcode EQ @ZESDE_zsdt0239-cmundesc.
 
   ENDIF.
 
@@ -1436,19 +1436,19 @@ MODULE user_command_2003 INPUT.
 
       ADD 1 TO lc_tabix.
 
-      zde_zsdt0239-sequencia = lc_tabix.
+      ZESDE_zsdt0239-sequencia = lc_tabix.
 
-      IF zde_zsdt0239-cmundesc IS NOT INITIAL.
-        SELECT SINGLE text INTO @zde_zsdt0239-text
+      IF ZESDE_zsdt0239-cmundesc IS NOT INITIAL.
+        SELECT SINGLE text INTO @ZESDE_zsdt0239-text
           FROM j_1btxjurt
          WHERE spras      EQ @sy-langu
-           AND country    EQ @zde_zsdt0239-country
-           AND taxjurcode EQ @zde_zsdt0239-cmundesc.
+           AND country    EQ @ZESDE_zsdt0239-country
+           AND taxjurcode EQ @ZESDE_zsdt0239-cmundesc.
 
       ENDIF.
 
-      APPEND zde_zsdt0239 TO gt_zde_zsdt0239.
-      CLEAR: zde_zsdt0239.
+      APPEND ZESDE_zsdt0239 TO gt_zde_zsdt0239.
+      CLEAR: ZESDE_zsdt0239.
       CLEAR: ok_code.
       LEAVE TO SCREEN 0.
 
@@ -1566,7 +1566,7 @@ FORM fill_it_fieldcatalog_1002a .
 
   CALL FUNCTION 'LVC_FIELDCATALOG_MERGE'
     EXPORTING
-      i_structure_name = 'ZDE_ZSDT0239'
+      i_structure_name = 'ZESDE_ZSDT0239'
     CHANGING
       ct_fieldcat      = it_fieldcatalog_1002a.
 
@@ -1697,14 +1697,14 @@ FORM carrega_condutores .
   SORT it_lfa1 BY lifnr.
 
   LOOP AT gt_zsdt0242 INTO DATA(wa_zsdt0242).
-    CLEAR zde_zsdt0242.
-    MOVE-CORRESPONDING wa_zsdt0242 TO zde_zsdt0242.
-    READ TABLE it_lfa1 WITH KEY lifnr = zde_zsdt0242-lifnr INTO DATA(wa_lfa1) BINARY SEARCH.
+    CLEAR ZESDE_zsdt0242.
+    MOVE-CORRESPONDING wa_zsdt0242 TO ZESDE_zsdt0242.
+    READ TABLE it_lfa1 WITH KEY lifnr = ZESDE_zsdt0242-lifnr INTO DATA(wa_lfa1) BINARY SEARCH.
     IF sy-subrc IS INITIAL.
-      zde_zsdt0242-name1 = wa_lfa1-name1.
-      zde_zsdt0242-stcd2 = wa_lfa1-stcd2.
+      ZESDE_zsdt0242-name1 = wa_lfa1-name1.
+      ZESDE_zsdt0242-stcd2 = wa_lfa1-stcd2.
     ENDIF.
-    APPEND zde_zsdt0242 TO gt_zde_zsdt0242.
+    APPEND ZESDE_zsdt0242 TO gt_zde_zsdt0242.
   ENDLOOP.
 
 ENDFORM.
@@ -1821,19 +1821,19 @@ MODULE user_command_2005 INPUT.
   CASE ok_code.
     WHEN 'SAVE'.
 
-      IF zde_zsdt0242-lifnr IS NOT INITIAL.
+      IF ZESDE_zsdt0242-lifnr IS NOT INITIAL.
         SELECT SINGLE * INTO @DATA(wa_lfa1)
           FROM lfa1
-         WHERE lifnr EQ @zde_zsdt0242-lifnr.
+         WHERE lifnr EQ @ZESDE_zsdt0242-lifnr.
 
         IF sy-subrc IS INITIAL.
-          zde_zsdt0242-name1 = wa_lfa1-name1.
-          zde_zsdt0242-stcd2 = wa_lfa1-stcd2.
+          ZESDE_zsdt0242-name1 = wa_lfa1-name1.
+          ZESDE_zsdt0242-stcd2 = wa_lfa1-stcd2.
         ENDIF.
       ENDIF.
 
-      APPEND zde_zsdt0242 TO gt_zde_zsdt0242.
-      CLEAR: zde_zsdt0242.
+      APPEND ZESDE_zsdt0242 TO gt_zde_zsdt0242.
+      CLEAR: ZESDE_zsdt0242.
 
       CLEAR: ok_code.
       LEAVE TO SCREEN 0.
@@ -1872,7 +1872,7 @@ FORM fill_it_fieldcatalog_1003a .
 
   CALL FUNCTION 'LVC_FIELDCATALOG_MERGE'
     EXPORTING
-      i_structure_name = 'ZDE_ZSDT0242'
+      i_structure_name = 'ZESDE_ZSDT0242'
     CHANGING
       ct_fieldcat      = it_fieldcatalog_1003a.
 
@@ -2016,7 +2016,7 @@ MODULE user_command_2006 INPUT.
 
           CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
             EXPORTING
-              input  = zde_zsdt0237-branch
+              input  = ZESDE_zsdt0237-branch
             IMPORTING
               output = vlifnr_f.
 
@@ -2098,28 +2098,28 @@ ENDMODULE.
 *----------------------------------------------------------------------*
 FORM carrega_prod_predominante .
 
-  CLEAR: zde_zsdt0237-tpcarga,
-         zde_zsdt0237-xprod.
+  CLEAR: ZESDE_zsdt0237-tpcarga,
+         ZESDE_zsdt0237-xprod.
 
-  IF zde_zsdt0237-matnr IS NOT INITIAL.
+  IF ZESDE_zsdt0237-matnr IS NOT INITIAL.
 
-    SELECT SINGLE matkl INTO @zde_zsdt0237-matkl
+    SELECT SINGLE matkl INTO @ZESDE_zsdt0237-matkl
       FROM mara
-     WHERE matnr EQ @zde_zsdt0237-matnr.
+     WHERE matnr EQ @ZESDE_zsdt0237-matnr.
 
     IF sy-subrc IS INITIAL.
 
       SELECT SINGLE * INTO @DATA(wa_zlest0193)
         FROM zlest0193
-       WHERE matkl EQ @zde_zsdt0237-matkl.
+       WHERE matkl EQ @ZESDE_zsdt0237-matkl.
 
       IF sy-subrc IS INITIAL.
-        zde_zsdt0237-tpcarga = zcl_string=>lpad( i_str  = CONV #( wa_zlest0193-tipo_carga ) i_qtd  = 2 i_char = '0' ).
+        ZESDE_zsdt0237-tpcarga = zcl_string=>lpad( i_str  = CONV #( wa_zlest0193-tipo_carga ) i_qtd  = 2 i_char = '0' ).
       ENDIF.
 
-      SELECT SINGLE maktx INTO @zde_zsdt0237-xprod
+      SELECT SINGLE maktx INTO @ZESDE_zsdt0237-xprod
         FROM makt
-       WHERE matnr EQ @zde_zsdt0237-matnr
+       WHERE matnr EQ @ZESDE_zsdt0237-matnr
          AND spras EQ @sy-langu.
 
     ENDIF.
@@ -2135,35 +2135,35 @@ FORM carrega_cep .
   SELECT c~pstcd_from, c~taxjurcode INTO TABLE @DATA(lt_cep) FROM  j_1btxjurt AS m
   INNER JOIN j_1btreg_city AS c ON m~country = c~country
     AND m~taxjurcode = c~taxjurcode
-      WHERE m~text IN ( @zde_zsdt0237-tx_mun_origem,@zde_zsdt0237-tx_mun_final ).
+      WHERE m~text IN ( @ZESDE_zsdt0237-tx_mun_origem,@ZESDE_zsdt0237-tx_mun_final ).
   ""AND spras EQ 'P'. ""AHSS 11/07/2024 ajuste para buscar somente brasil
 
 
-  READ TABLE lt_cep INTO DATA(ls_cep) WITH KEY taxjurcode = zde_zsdt0237-cmunini.
+  READ TABLE lt_cep INTO DATA(ls_cep) WITH KEY taxjurcode = ZESDE_zsdt0237-cmunini.
   "138695 CS2024000345 Ajustes emissão de MDFe manual - PSA DEVK9A1ZPM
   IF sy-subrc EQ 0.
-    IF zde_zsdt0237-locc_cep IS INITIAL.
-      zde_zsdt0237-locc_cep = ls_cep-pstcd_from.
+    IF ZESDE_zsdt0237-locc_cep IS INITIAL.
+      ZESDE_zsdt0237-locc_cep = ls_cep-pstcd_from.
     ENDIF.
-    "    zde_zsdt0237-locc_cep = ls_cep-pstcd_from. "138695 CS2024000345 Ajustes emissão de MDFe manual - PSA DEVK9A1ZPM
+    "    ZESDE_zsdt0237-locc_cep = ls_cep-pstcd_from. "138695 CS2024000345 Ajustes emissão de MDFe manual - PSA DEVK9A1ZPM
   ENDIF.
 
-  READ TABLE lt_cep INTO ls_cep WITH KEY taxjurcode = zde_zsdt0237-cmunfim.
+  READ TABLE lt_cep INTO ls_cep WITH KEY taxjurcode = ZESDE_zsdt0237-cmunfim.
   IF sy-subrc EQ 0.
     "138695 CS2024000345 Ajustes emissão de MDFe manual - PSA
-    IF zde_zsdt0237-locd_cep IS INITIAL.
-      zde_zsdt0237-locd_cep = ls_cep-pstcd_from.
+    IF ZESDE_zsdt0237-locd_cep IS INITIAL.
+      ZESDE_zsdt0237-locd_cep = ls_cep-pstcd_from.
     ENDIF.
-    "    zde_zsdt0237-locd_cep = ls_cep-pstcd_from. "138695 CS2024000345 Ajustes emissão de MDFe manual - PSA
+    "    ZESDE_zsdt0237-locd_cep = ls_cep-pstcd_from. "138695 CS2024000345 Ajustes emissão de MDFe manual - PSA
   ENDIF.
 
 
-  IF zde_zsdt0237-locd_cep IS NOT INITIAL.
-    REPLACE ALL OCCURRENCES OF '-' IN zde_zsdt0237-locd_cep WITH ''.
+  IF ZESDE_zsdt0237-locd_cep IS NOT INITIAL.
+    REPLACE ALL OCCURRENCES OF '-' IN ZESDE_zsdt0237-locd_cep WITH ''.
   ENDIF.
 
-  IF zde_zsdt0237-locc_cep IS NOT INITIAL.
-    REPLACE ALL OCCURRENCES OF '-' IN zde_zsdt0237-locc_cep WITH ''.
+  IF ZESDE_zsdt0237-locc_cep IS NOT INITIAL.
+    REPLACE ALL OCCURRENCES OF '-' IN ZESDE_zsdt0237-locc_cep WITH ''.
   ENDIF.
 
 

@@ -16,7 +16,7 @@ DATA: container       TYPE REF TO cl_gui_custom_container,
       ck_read_only    TYPE char01,
       ck_bt_tela      TYPE char04,
       ck_bt_text      TYPE char100,
-      ck_tp_aprovacao TYPE zde_tip_aprovacao.
+      ck_tp_aprovacao TYPE ZESDE_tip_aprovacao.
 
 DATA: gv_longtext_tab TYPE catsxt_longtext_itab,
       gv_confirmado   TYPE abap_bool,
@@ -28,8 +28,8 @@ DATA: status_icon   TYPE icons-text,
       icon_info(50) TYPE c.
 
 
-CONSTANTS: ck_aprovado TYPE zde_tp_autorizacao VALUE '01', "Autorizado
-           ck_negado   TYPE zde_tp_autorizacao VALUE '02'. "Negado
+CONSTANTS: ck_aprovado TYPE ZESDE_tp_autorizacao VALUE '01', "Autorizado
+           ck_negado   TYPE ZESDE_tp_autorizacao VALUE '02'. "Negado
 
 *&---------------------------------------------------------------------*
 *&      Form  AUTORIZACAO_CTE
@@ -41,10 +41,10 @@ CONSTANTS: ck_aprovado TYPE zde_tp_autorizacao VALUE '01', "Autorizado
 *      <--P_P_CD_APROVACAO   Código de Retorna da "Aprovação"
 *      <--P_P_TP_AUTORIZADO  Qual Autorização foi Informada Pelo Usuário
 *----------------------------------------------------------------------*
-FORM autorizacao_cte  USING    p_cd_chave_cte  TYPE zde_chave_doc_e
-                               p_tp_aprovacao  TYPE zde_tip_aprovacao
-                      CHANGING p_cd_aprovacao  TYPE zde_est_aprovacao
-                               p_tp_autorizado TYPE zde_tp_autorizacao.
+FORM autorizacao_cte  USING    p_cd_chave_cte  TYPE ZESDE_chave_doc_e
+                               p_tp_aprovacao  TYPE ZESDE_tip_aprovacao
+                      CHANGING p_cd_aprovacao  TYPE ZESDE_est_aprovacao
+                               p_tp_autorizado TYPE ZESDE_tp_autorizacao.
 
   CLEAR: zib_cte_dist_eap, ck_confirmado, ck_read_only.
 
@@ -96,7 +96,7 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 *       Grava Registro de Autorização
 *----------------------------------------------------------------------*
-FORM gravar_autorizacao CHANGING pcd_aprovacao TYPE zde_est_aprovacao ptp_autorizado TYPE zde_tp_autorizacao.
+FORM gravar_autorizacao CHANGING pcd_aprovacao TYPE ZESDE_est_aprovacao ptp_autorizado TYPE ZESDE_tp_autorizacao.
 
   CALL FUNCTION 'NUMBER_GET_NEXT'
     EXPORTING

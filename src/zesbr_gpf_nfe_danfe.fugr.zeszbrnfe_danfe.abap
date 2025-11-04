@@ -1,4 +1,4 @@
-﻿FUNCTION ZESZBRNFE_DANFE.
+FUNCTION ZESZBRNFE_DANFE.
 *"----------------------------------------------------------------------
 *"*"Interface local:
 *"  IMPORTING
@@ -14,7 +14,7 @@
 *"      NFE_NAO_APROVADA
 *"----------------------------------------------------------------------
 
-  DATA: T_ELEMENT_ARRAY TYPE ZDE_ELEMENT_ARRAY_T.
+  DATA: T_ELEMENT_ARRAY TYPE ZESDE_ELEMENT_ARRAY_T.
 
   CLEAR: WG_XML_SEFAZ, T_ELEMENT_ARRAY[].
 

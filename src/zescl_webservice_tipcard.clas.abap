@@ -13,32 +13,32 @@ CLASS zescl_webservice_tipcard DEFINITION
     IMPORTING
       !i_http TYPE REF TO if_http_client OPTIONAL
       !i_operadora TYPE char3
-      !i_grupo TYPE zde_ds_grupo_empresa
+      !i_grupo TYPE ZESDE_ds_grupo_empresa
     RETURNING
       VALUE(e_chave) TYPE char32
     RAISING
       zescx_webservice .
     METHODS buscar_rotas
     IMPORTING
-      !i_grupo TYPE zde_ds_grupo_empresa
+      !i_grupo TYPE ZESDE_ds_grupo_empresa
     RAISING
       zescx_webservice .
     METHODS ler_xml_rotas
     IMPORTING
-      !i_grupo TYPE zde_ds_grupo_empresa
+      !i_grupo TYPE ZESDE_ds_grupo_empresa
       !i_xml TYPE string
     RAISING
       zescx_webservice .
     METHODS chave_seguranca
     IMPORTING
-      !i_grupo TYPE zde_ds_grupo_empresa
+      !i_grupo TYPE ZESDE_ds_grupo_empresa
     RETURNING
       VALUE(e_chave) TYPE char32
     RAISING
       zescx_webservice .
     METHODS atualizar_valores
     IMPORTING
-      !i_grupo TYPE zde_ds_grupo_empresa .
+      !i_grupo TYPE ZESDE_ds_grupo_empresa .
     METHODS xml_autentica
     IMPORTING
       !i_usuario TYPE zuse_web
@@ -79,7 +79,7 @@ CLASS zescl_webservice_tipcard DEFINITION
       zwebservice .
     METHODS consultar_rota
     IMPORTING
-      !i_rota TYPE zde_id_rota
+      !i_rota TYPE ZESDE_id_rota
       !i_bukrs TYPE bukrs
       !i_branch TYPE j_1bbranc_
     EXPORTING
@@ -88,12 +88,12 @@ CLASS zescl_webservice_tipcard DEFINITION
       zwebservice .
     METHODS solicita_rota
     IMPORTING
-      !i_rota TYPE zde_id_rota
+      !i_rota TYPE ZESDE_id_rota
       !i_bukrs TYPE bukrs
       !i_branch TYPE j_1bbranc_
     EXPORTING
       !e_msg TYPE char255
-      !e_id_rota_adm TYPE zde_id_rota_adm
+      !e_id_rota_adm TYPE ZESDE_id_rota_adm
     EXCEPTIONS
       zwebservice .
     METHODS atualizar_rota
@@ -113,7 +113,7 @@ CLASS zescl_webservice_tipcard DEFINITION
       !i_pesquisa_livre TYPE char01 DEFAULT ' '
       !i_cnpj TYPE stcd1 OPTIONAL
       !i_rntrc TYPE stcd3 OPTIONAL
-      !i_ck_consulta TYPE zde_ck_rntrc_cs OPTIONAL
+      !i_ck_consulta TYPE ZESDE_ck_rntrc_cs OPTIONAL
     RETURNING
       VALUE(e_consultas) TYPE zlest0135_t
     EXCEPTIONS
@@ -180,7 +180,7 @@ CLASS zescl_webservice_tipcard DEFINITION
     METHODS xml_consulta_status_parceiro
     IMPORTING
       !i_chave TYPE char32
-      !i_consulta TYPE zde_consulta_parceiro
+      !i_consulta TYPE ZESDE_consulta_parceiro
     RETURNING
       VALUE(e_xml) TYPE string .
     METHODS enviar_email_tip
@@ -229,11 +229,11 @@ CLASS zescl_webservice_tipcard DEFINITION
       !i_xml TYPE string
     EXPORTING
       !e_msg TYPE char255
-      !e_id_rota_adm TYPE zde_id_rota_adm .
+      !e_id_rota_adm TYPE ZESDE_id_rota_adm .
     METHODS xml_consulta_transportador
     IMPORTING
       !i_chave TYPE char32
-      !i_consulta_rntrc TYPE zde_consulta_rntrc
+      !i_consulta_rntrc TYPE ZESDE_consulta_rntrc
     RETURNING
       VALUE(e_xml) TYPE string .
     METHODS ler_xml_consultar_arq_cobranca
@@ -293,7 +293,7 @@ CLASS zcl_webservice_tipcard IMPLEMENTATION.
           wa_zlest0102 TYPE zlest0102,
           wa_zlest0084 TYPE zlest0084,
           wa_zlest0091 TYPE zlest0091,
-          cd_id_rota   TYPE zde_id_rota.
+          cd_id_rota   TYPE ZESDE_id_rota.
 
     FIELD-SYMBOLS: <z101> TYPE zlest0101,
                    <z102> TYPE zlest0102,
@@ -1674,8 +1674,8 @@ CLASS zcl_webservice_tipcard IMPLEMENTATION.
           lc_msg        TYPE string,
           lc_xml        TYPE string,
           lc_msg_adm    TYPE string,
-          it_consultas  TYPE TABLE OF zde_consulta_rntrc,
-          wa_consultas  TYPE zde_consulta_rntrc,
+          it_consultas  TYPE TABLE OF ZESDE_consulta_rntrc,
+          wa_consultas  TYPE ZESDE_consulta_rntrc,
           wa_j_1bbranch TYPE j_1bbranch,
           wa_lfa1       TYPE lfa1,
           it_lfa1       TYPE TABLE OF lfa1,
@@ -1686,8 +1686,8 @@ CLASS zcl_webservice_tipcard IMPLEMENTATION.
           wa_veiculos   TYPE zlest0002,
           wa_lifnr      TYPE range_lifnr,
           it_lifnr      TYPE TABLE OF range_lifnr,
-          wa_placa      TYPE zde_placa_range,
-          it_placa      TYPE TABLE OF zde_placa_range,
+          wa_placa      TYPE ZESDE_placa_range,
+          it_placa      TYPE TABLE OF ZESDE_placa_range,
           i_name_file   TYPE string,
           wa_zlest0137  TYPE zlest0137,
           i_parceiro    TYPE j_1bparid.
@@ -3326,8 +3326,8 @@ CLASS zcl_webservice_tipcard IMPLEMENTATION.
             vl_quebra TYPE kwert.
     TYPES END OF ty_valores.
 
-    DATA: it_lines_arq       TYPE zde_linha_txt_1000_t,
-           it_lines_arq_ped   TYPE zde_linha_txt_1000_t,
+    DATA: it_lines_arq       TYPE ZESDE_linha_txt_1000_t,
+           it_lines_arq_ped   TYPE ZESDE_linha_txt_1000_t,
            it_lines           TYPE STANDARD TABLE OF ty_lines,
            wa_0062            TYPE zlest0062,
            it_0062            TYPE TABLE OF zlest0062,
@@ -4251,7 +4251,7 @@ CLASS zcl_webservice_tipcard IMPLEMENTATION.
               line(500),
             END OF ty_lines.
 
-    DATA: it_lines_arq        TYPE zde_linha_txt_1000_t,
+    DATA: it_lines_arq        TYPE ZESDE_linha_txt_1000_t,
            it_lines            TYPE STANDARD TABLE OF ty_lines,
            wa_zpfe_lote_item   TYPE zpfe_lote_item,
            wa_zpfe_lote_item_c TYPE zpfe_lote_item,
@@ -5262,16 +5262,16 @@ CLASS zcl_webservice_tipcard IMPLEMENTATION.
              cpf_contratado   TYPE  stcd1.
     TYPES END OF ty_dados.
 
-    DATA: ws_dados         TYPE zde_consulta_parceiro,
-          it_dados         TYPE TABLE OF zde_consulta_parceiro,
+    DATA: ws_dados         TYPE ZESDE_consulta_parceiro,
+          it_dados         TYPE TABLE OF ZESDE_consulta_parceiro,
           e_chave          TYPE char32,
           cx_exception     TYPE REF TO zescx_webservice,
           lc_msg           TYPE string,
           lc_xml           TYPE string,
           lc_msg_adm       TYPE string,
           i_name_file      TYPE string,
-          it_consultas     TYPE TABLE OF zde_consulta_rntrc,
-          wa_consultas     TYPE zde_consulta_rntrc,
+          it_consultas     TYPE TABLE OF ZESDE_consulta_rntrc,
+          wa_consultas     TYPE ZESDE_consulta_rntrc,
           wa_j_1bbranch    TYPE j_1bbranch,
           wa_lfa1          TYPE lfa1,
           it_lfa1          TYPE TABLE OF lfa1,

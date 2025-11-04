@@ -2,7 +2,7 @@ FUNCTION z_detalhamento_cte.
 *"----------------------------------------------------------------------
 *"*"Interface local:
 *"  IMPORTING
-*"     REFERENCE(I_CHAVE_NFE) TYPE  ZDE_CHAVE_DOC_E
+*"     REFERENCE(I_CHAVE_NFE) TYPE  ZESDE_CHAVE_DOC_E
 *"  EXPORTING
 *"     REFERENCE(E_XML_CTE) TYPE  ZCTE_XML_SEFAZ_AUTH
 *"----------------------------------------------------------------------
@@ -10,7 +10,7 @@ FUNCTION z_detalhamento_cte.
   DATA: l_chave_nfe      TYPE string,
         l_xstring_out    TYPE xstring,
         l_xml_doc        TYPE string,
-        lt_element_array TYPE zde_element_array_t.
+        lt_element_array TYPE ZESDE_element_array_t.
 
 
   FREE: l_xml_doc,

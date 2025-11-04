@@ -40,7 +40,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
 
   METHOD get_arq_doc_fiscal.
 
-    DATA: chamada TYPE zde_get_arq_doc_fiscal.
+    DATA: chamada TYPE ZESDE_get_arq_doc_fiscal.
 
     CLEAR: e_name, e_tipo.
 
@@ -95,7 +95,7 @@ CLASS ZESCL_DOC_ELETRONICO IMPLEMENTATION.
       ME->ZESIF_DOC_ELETRONICO~AT_QTD_SEGUNDOS = I_SEGUNDOS.
     ENDIF.
 
-    DATA: LC_CICLOS	TYPE ZDE_QTD_CICLOS.
+    DATA: LC_CICLOS	TYPE ZESDE_QTD_CICLOS.
 
     R_INSTANCIA = ME.
 

@@ -58,12 +58,12 @@ ENDFORM.                    " HANDLE_DOUBLE_CLICK
 *       text
 *----------------------------------------------------------------------*
 FORM escolher_liberacao  TABLES   pit_liberado STRUCTURE dd07v
-                         CHANGING pe_tp_aprovacao TYPE zde_tip_aprovacao
+                         CHANGING pe_tp_aprovacao TYPE ZESDE_tip_aprovacao
                                   pe_domname      TYPE char30
                                   pe_ddtext	      TYPE val_text.
 
   DATA: lv_domname    TYPE char30,
-        lv_domvalue_l TYPE zde_tip_aprovacao,
+        lv_domvalue_l TYPE ZESDE_tip_aprovacao,
         lv_ddtext	    TYPE val_text.
 
   CLEAR: wa_opcoes, it_opcoes[].

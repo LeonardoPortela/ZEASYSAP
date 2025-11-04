@@ -11,7 +11,7 @@ FUNCTION Z_GRC_UPDATE_INBOUND_EVENTOS.
 *"     VALUE(I_MSG_ERRO) TYPE  CHAR255 OPTIONAL
 *"----------------------------------------------------------------------
 
-  DATA: lt_element_array TYPE zde_element_array_t,
+  DATA: lt_element_array TYPE ZESDE_element_array_t,
         lv_nfe           TYPE j_1bnfdoc-nfenum,
         lv_serie         TYPE j_1bnfdoc-series,
         v_status         TYPE zib_nfe_forn-st_nota,

@@ -3,14 +3,14 @@ FUNCTION z_grc_monta_link.
 *"*"Interface local:
 *"  IMPORTING
 *"     REFERENCE(I_DOCNUM) TYPE  J_1BDOCNUM OPTIONAL
-*"     REFERENCE(I_CHAVE) TYPE  ZDE_CHAVE_DOC_E OPTIONAL
+*"     REFERENCE(I_CHAVE) TYPE  ZESDE_CHAVE_DOC_E OPTIONAL
 *"     REFERENCE(I_ID_CCE) TYPE  NUM OPTIONAL
 *"  EXPORTING
 *"     REFERENCE(E_LINK_PDF) TYPE  STRING
 *"     REFERENCE(E_LINK_XML) TYPE  STRING
 *"----------------------------------------------------------------------
 
-  DATA: lc_tp_ambiente TYPE zde_tp_ambiente,
+  DATA: lc_tp_ambiente TYPE ZESDE_tp_ambiente,
         it_urllist     TYPE tihttpurls2.
 
   CLEAR: e_link_pdf,

@@ -1288,8 +1288,8 @@ endform.
 *----------------------------------------------------------------------*
 form zf_atribuir_cte_dist_d55 .
 
-  data: lt_zde_inf_cte_norm type zde_inf_cte_norm_inf_nfe_t,
-        ls_zde_inf_cte_norm type zde_inf_cte_norm_inf_nfe.
+  data: lt_zde_inf_cte_norm type ZESDE_inf_cte_norm_inf_nfe_t,
+        ls_zde_inf_cte_norm type ZESDE_inf_cte_norm_inf_nfe.
 
 *  Atualiza Tabela ZIB_CTE_DIST_D55
   lt_zde_inf_cte_norm[] =  gs_xml_sefaz_cte-cteproc-cte-infcte-infctenorm-infdoc-infnfe[].
@@ -1347,8 +1347,8 @@ endform.
 form zf_atribuir_cte_dist_n01 .
 
 
-  data: lt_zde_inf_cte_norm_inf type zde_inf_cte_norm_inf_nff_t,
-        ls_zde_inf_cte_norm_inf type zde_inf_cte_norm_inf_nff.
+  data: lt_zde_inf_cte_norm_inf type ZESDE_inf_cte_norm_inf_nff_t,
+        ls_zde_inf_cte_norm_inf type ZESDE_inf_cte_norm_inf_nff.
 
 *  Atualiza Tabela ZIB_CTE_DIST_N01
   lt_zde_inf_cte_norm_inf[] = gs_xml_sefaz_cte-cteproc-cte-infcte-infctenorm-infdoc-infnf[].
@@ -1381,8 +1381,8 @@ endform.
 *----------------------------------------------------------------------*
 form zf_atribuir_cte_dist_n55.
 
-  data: lt_zde_inf_cte_norm_inf type zde_inf_cte_norm_inf_nfe_t,
-        ls_zde_inf_cte_norm_inf type zde_inf_cte_norm_inf_nfe.
+  data: lt_zde_inf_cte_norm_inf type ZESDE_inf_cte_norm_inf_nfe_t,
+        ls_zde_inf_cte_norm_inf type ZESDE_inf_cte_norm_inf_nfe.
 
 *  Atualiza Tabela ZIB_CTE_DIST_N55
   lt_zde_inf_cte_norm_inf[] = gs_xml_sefaz_cte-cteproc-cte-infcte-infctenorm-infdoc-infnfe[].
@@ -1452,8 +1452,8 @@ endform.
 *----------------------------------------------------------------------*
 form zf_atribuir_cte_dist_vei .
 
-  data: lt_zde_inf_modal_rodo type zde_inf_modal_rodo_t,
-        ls_zde_inf_modal_rodo type zde_inf_modal_rodo_m.
+  data: lt_zde_inf_modal_rodo type ZESDE_inf_modal_rodo_t,
+        ls_zde_inf_modal_rodo type ZESDE_inf_modal_rodo_m.
 
   lt_zde_inf_modal_rodo[] = gs_xml_sefaz_cte-cteproc-cte-infcte-infctenorm-infmodal-rodo-veic[].
 
@@ -1576,8 +1576,8 @@ endform.
 
 form zf_atribuir_cte_dist_cpl.
 
-  data: lt_zde_inf_compl type zde_inf_cte_compl_obs_cont_t,
-        ls_zde_inf_compl type zde_inf_cte_compl_obs_cont.
+  data: lt_zde_inf_compl type ZESDE_inf_cte_compl_obs_cont_t,
+        ls_zde_inf_compl type ZESDE_inf_cte_compl_obs_cont.
 
   data: v_contador type zib_cte_dist_cpl-cd_contador.
 
@@ -1656,8 +1656,8 @@ endform.
 
 form zf_atribuir_cte_dist_d01 .
 
-  data: lt_zde_inf_cte_norm type zde_inf_cte_norm_inf_nff_t,
-        ls_zde_inf_cte_norm type zde_inf_cte_norm_inf_nff.
+  data: lt_zde_inf_cte_norm type ZESDE_inf_cte_norm_inf_nff_t,
+        ls_zde_inf_cte_norm type ZESDE_inf_cte_norm_inf_nff.
 
 *  Atualiza Tabela ZIB_CTE_DIST_D01
   lt_zde_inf_cte_norm[] =  gs_xml_sefaz_cte-cteproc-cte-infcte-infctenorm-infdoc-infnf[].

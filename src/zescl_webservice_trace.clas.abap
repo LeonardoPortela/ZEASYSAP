@@ -26,7 +26,7 @@ CLASS zescl_webservice_trace DEFINITION
     IMPORTING
       !e_client TYPE REF TO cl_http_client
       !id_referencia TYPE char11
-      !id_interface TYPE zde_id_interface OPTIONAL .
+      !id_interface TYPE ZESDE_id_interface OPTIONAL .
   PROTECTED SECTION.
 *"* protected components of class ZCL_WEBSERVICE_TRACE
 *"* do not include other source files here!!!
@@ -234,7 +234,7 @@ CLASS zcl_webservice_trace IMPLEMENTATION.
 
   METHOD envia_integracao.
 
-    DATA: l_id     TYPE zde_id_integracao.
+    DATA: l_id     TYPE ZESDE_id_integracao.
     DATA: w_integracao     TYPE zintegracao,
           w_integracao_log TYPE zintegracao_log.
 
