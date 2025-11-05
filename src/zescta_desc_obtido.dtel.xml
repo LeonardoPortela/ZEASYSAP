@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESCTA_DESC_OBTIDO</ROLLNAME>
+    <ROLLNAME>ZESCTA_DESC_OBTIDO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>SAKNR</DOMNAME>
     <HEADLEN>20</HEADLEN>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESCOD_GPO</ROLLNAME>
+    <ROLLNAME>ZESCOD_GPO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>NUMC5</DOMNAME>
     <HEADLEN>23</HEADLEN>

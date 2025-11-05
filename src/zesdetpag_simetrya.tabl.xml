@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESDETPAG_SIMETRYA</TABNAME>
+    <TABNAME>ZESDETPAG_SIMETRYA</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Grupo de Formas de Pagamento</DDTEXT>
@@ -28,7 +28,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>CARD</FIELDNAME>
-     <ROLLNAME>ZESESDE_NFE_CARD</ROLLNAME>
+     <ROLLNAME>ZESDE_NFE_CARD</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>STRU</DATATYPE>
      <MASK>  STRUS</MASK>

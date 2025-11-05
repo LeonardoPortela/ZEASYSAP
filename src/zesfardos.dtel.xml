@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESFARDOS</ROLLNAME>
+    <ROLLNAME>ZESFARDOS</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESFARDOS</DOMNAME>
+    <DOMNAME>ZESFARDOS</DOMNAME>
     <DDTEXT>Tamanho dos Fardos</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

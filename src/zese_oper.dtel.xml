@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESE_OPER</ROLLNAME>
+    <ROLLNAME>ZESE_OPER</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESD_OPER</DOMNAME>
+    <DOMNAME>ZESD_OPER</DOMNAME>
     <DDTEXT>Operação</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

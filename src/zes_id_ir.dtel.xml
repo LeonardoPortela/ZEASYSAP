@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESES_ID_IR</ROLLNAME>
+    <ROLLNAME>ZES_ID_IR</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>NUMC4</DOMNAME>
     <DDTEXT>Id Alíquota IR.</DDTEXT>

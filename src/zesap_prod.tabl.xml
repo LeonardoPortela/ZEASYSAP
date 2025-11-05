@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESAP_PROD</TABNAME>
+    <TABNAME>ZESAP_PROD</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Detalhamento de Produtos e Serviços</DDTEXT>
@@ -237,7 +237,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>DETEXPORT</FIELDNAME>
-     <ROLLNAME>ZESESAP_PROD_DET_EXPORT_T</ROLLNAME>
+     <ROLLNAME>ZESAP_PROD_DET_EXPORT_T</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>TTYP</DATATYPE>
      <MASK>  TTYPL</MASK>

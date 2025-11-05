@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_TP_REQ_TRIBUTUM</ROLLNAME>
+    <ROLLNAME>ZESDE_TP_REQ_TRIBUTUM</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDM_TP_REQ_TRIBUTUM</DOMNAME>
+    <DOMNAME>ZESDM_TP_REQ_TRIBUTUM</DOMNAME>
     <DDTEXT>Tipo Requisição Tributum</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

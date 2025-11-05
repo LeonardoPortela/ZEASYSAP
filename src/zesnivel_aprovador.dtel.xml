@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESNIVEL_APROVADOR</ROLLNAME>
+    <ROLLNAME>ZESNIVEL_APROVADOR</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>DEC02</DOMNAME>
     <HEADLEN>55</HEADLEN>

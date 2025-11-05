@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_ST_ENT_PROD</ROLLNAME>
+    <ROLLNAME>ZESDE_ST_ENT_PROD</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDM_ST_ENT_PROD</DOMNAME>
+    <DOMNAME>ZESDM_ST_ENT_PROD</DOMNAME>
     <DDTEXT>Status Atualização Baixa Consumo</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

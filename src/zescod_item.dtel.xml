@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESCOD_ITEM</ROLLNAME>
+    <ROLLNAME>ZESCOD_ITEM</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>NUMC5</DOMNAME>
     <HEADLEN>19</HEADLEN>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESESEND_TERRENO</DOMNAME>
+    <DOMNAME>ZESEND_TERRENO</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>CHAR</DATATYPE>
     <LENG>000035</LENG>

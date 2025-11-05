@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESDE_REFNF</TABNAME>
+    <TABNAME>ZESDE_REFNF</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Chave de acesso da NF-e referenciada - Nota Papel</DDTEXT>

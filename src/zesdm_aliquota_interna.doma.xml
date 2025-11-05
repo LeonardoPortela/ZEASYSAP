@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESESDM_ALIQUOTA_INTERNA</DOMNAME>
+    <DOMNAME>ZESDM_ALIQUOTA_INTERNA</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>DEC</DATATYPE>
     <LENG>000012</LENG>

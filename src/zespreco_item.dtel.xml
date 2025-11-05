@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESPRECO_ITEM</ROLLNAME>
+    <ROLLNAME>ZESPRECO_ITEM</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>WERT11</DOMNAME>
     <HEADLEN>16</HEADLEN>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESIB_CTE_GMI_ALV</TABNAME>
+    <TABNAME>ZESIB_CTE_GMI_ALV</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <LANGDEP>X</LANGDEP>
@@ -14,7 +14,7 @@
     <DD03P>
      <FIELDNAME>.INCLUDE</FIELDNAME>
      <ADMINFIELD>0</ADMINFIELD>
-     <PRECFIELD>ZESESIB_CTE_GMI</PRECFIELD>
+     <PRECFIELD>ZESIB_CTE_GMI</PRECFIELD>
      <MASK>      S</MASK>
      <DDTEXT>Informações de Mercadoria/Frete CT-e Grupos Específicos</DDTEXT>
      <COMPTYPE>S</COMPTYPE>

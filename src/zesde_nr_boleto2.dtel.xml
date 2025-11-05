@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_NR_BOLETO2</ROLLNAME>
+    <ROLLNAME>ZESDE_NR_BOLETO2</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDM_NR_BOLETO2</DOMNAME>
+    <DOMNAME>ZESDM_NR_BOLETO2</DOMNAME>
     <DDTEXT>Código de Boleto Bancário</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

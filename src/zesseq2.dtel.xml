@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESSEQ2</ROLLNAME>
+    <ROLLNAME>ZESSEQ2</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESSEQ2</DOMNAME>
+    <DOMNAME>ZESSEQ2</DOMNAME>
     <DDTEXT>Campo livre CNAB240</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

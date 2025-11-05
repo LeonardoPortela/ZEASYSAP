@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESCONVERSOR</ROLLNAME>
+    <ROLLNAME>ZESCONVERSOR</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>ANZ5_4</DOMNAME>
     <LOGFLAG>X</LOGFLAG>

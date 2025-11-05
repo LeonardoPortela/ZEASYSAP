@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESST_FISCAL_DATA</ROLLNAME>
+    <ROLLNAME>ZESST_FISCAL_DATA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <HEADLEN>55</HEADLEN>
     <SCRLEN1>10</SCRLEN1>

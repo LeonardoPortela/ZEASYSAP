@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESSDE_RET_NF_TER</ROLLNAME>
+    <ROLLNAME>ZESSDE_RET_NF_TER</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>BOE_FLAG</DOMNAME>
     <HEADLEN>51</HEADLEN>

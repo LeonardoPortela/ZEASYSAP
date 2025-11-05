@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_FRETE_POR</ROLLNAME>
+    <ROLLNAME>ZESDE_FRETE_POR</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDM_FRETE_POR</DOMNAME>
+    <DOMNAME>ZESDM_FRETE_POR</DOMNAME>
     <DDTEXT>Frete por</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

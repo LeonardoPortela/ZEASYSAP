@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_PESO_LIQRET_EST</ROLLNAME>
+    <ROLLNAME>ZESDE_PESO_LIQRET_EST</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>MENG13</DOMNAME>
     <HEADLEN>55</HEADLEN>

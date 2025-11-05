@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESEACAO</ROLLNAME>
+    <ROLLNAME>ZESEACAO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDACAO</DOMNAME>
+    <DOMNAME>ZESDACAO</DOMNAME>
     <DDTEXT>Ação da Execução da Embalagem</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

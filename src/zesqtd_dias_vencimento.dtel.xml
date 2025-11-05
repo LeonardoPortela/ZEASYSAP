@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESQTD_DIAS_VENCIMENTO</ROLLNAME>
+    <ROLLNAME>ZESQTD_DIAS_VENCIMENTO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>NUMC3</DOMNAME>
     <HEADLEN>55</HEADLEN>

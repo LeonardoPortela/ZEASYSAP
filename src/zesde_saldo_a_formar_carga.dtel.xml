@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_SALDO_A_FORMAR_CARGA</ROLLNAME>
+    <ROLLNAME>ZESDE_SALDO_A_FORMAR_CARGA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>MENGE</DOMNAME>
     <HEADLEN>55</HEADLEN>

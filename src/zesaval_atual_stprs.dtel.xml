@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESAVAL_ATUAL_STPRS</ROLLNAME>
+    <ROLLNAME>ZESAVAL_ATUAL_STPRS</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>WERT11V</DOMNAME>
     <HEADLEN>23</HEADLEN>

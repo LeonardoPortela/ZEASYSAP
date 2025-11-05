@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESDE_INFPROTNFE_XML</TABNAME>
+    <TABNAME>ZESDE_INFPROTNFE_XML</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Estrutura XML NF-e - Info Protocolo</DDTEXT>

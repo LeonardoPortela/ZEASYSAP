@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESINTG_IPINT</TABNAME>
+    <TABNAME>ZESINTG_IPINT</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Grupo CST 01, 02, 03, 04, 51, 52, 53, 54 e 55</DDTEXT>

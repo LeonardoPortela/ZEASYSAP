@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESESNR_CTAFRETE</DOMNAME>
+    <DOMNAME>ZESNR_CTAFRETE</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>NUMC</DATATYPE>
     <LENG>000010</LENG>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_HORAS_INATIVO</ROLLNAME>
+    <ROLLNAME>ZESDE_HORAS_INATIVO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>DEC11_4</DOMNAME>
     <HEADLEN>55</HEADLEN>

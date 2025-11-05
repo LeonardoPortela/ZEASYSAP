@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_PROC_AJUSTE</ROLLNAME>
+    <ROLLNAME>ZESDE_PROC_AJUSTE</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>XFIELD</DOMNAME>
     <HEADLEN>55</HEADLEN>

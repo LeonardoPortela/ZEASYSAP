@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESTX_ITEM_OV_ITM_NFE</ROLLNAME>
+    <ROLLNAME>ZESTX_ITEM_OV_ITM_NFE</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>XFELD</DOMNAME>
     <HEADLEN>21</HEADLEN>

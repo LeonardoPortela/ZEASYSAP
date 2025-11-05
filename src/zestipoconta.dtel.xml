@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESTIPOCONTA</ROLLNAME>
+    <ROLLNAME>ZESTIPOCONTA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESTIPOCONTA</DOMNAME>
+    <DOMNAME>ZESTIPOCONTA</DOMNAME>
     <DDTEXT>Tipo de Conta</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

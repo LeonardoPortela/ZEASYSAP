@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_INTERFACE_001</ROLLNAME>
+    <ROLLNAME>ZESDE_INTERFACE_001</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDM_INTERFACE_001</DOMNAME>
+    <DOMNAME>ZESDM_INTERFACE_001</DOMNAME>
     <DDTEXT>Identificador Interface</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

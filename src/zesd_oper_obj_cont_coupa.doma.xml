@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESESD_OPER_OBJ_CONT_COUPA</DOMNAME>
+    <DOMNAME>ZESD_OPER_OBJ_CONT_COUPA</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>CHAR</DATATYPE>
     <LENG>000002</LENG>

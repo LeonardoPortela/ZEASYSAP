@@ -3,8 +3,8 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESYDT_COD_DOC</ROLLNAME>
-    <DOMNAME>ZESESYDM_COD_DOC</DOMNAME>
+    <ROLLNAME>ZESYDT_COD_DOC</ROLLNAME>
+    <DOMNAME>ZESYDM_COD_DOC</DOMNAME>
     <HEADLEN>25</HEADLEN>
     <SCRLEN1>05</SCRLEN1>
     <SCRLEN2>10</SCRLEN2>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESDE_CTE_DIST_NIT_ALV</TABNAME>
+    <TABNAME>ZESDE_CTE_DIST_NIT_ALV</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <LANGDEP>X</LANGDEP>
@@ -14,7 +14,7 @@
     <DD03P>
      <FIELDNAME>.INCLUDE</FIELDNAME>
      <ADMINFIELD>0</ADMINFIELD>
-     <PRECFIELD>ZESESIB_CTE_NIT</PRECFIELD>
+     <PRECFIELD>ZESIB_CTE_NIT</PRECFIELD>
      <MASK>      S</MASK>
      <DDTEXT>Tabela de InBound de Itens de Documento Fiscal</DDTEXT>
      <COMPTYPE>S</COMPTYPE>

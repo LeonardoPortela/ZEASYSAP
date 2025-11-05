@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESINTG_EMIT</TABNAME>
+    <TABNAME>ZESINTG_EMIT</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Identificação do emitente da NF-e</DDTEXT>
@@ -77,7 +77,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>ENDEREMIT</FIELDNAME>
-     <ROLLNAME>ZESESINTG_EMIT_END</ROLLNAME>
+     <ROLLNAME>ZESINTG_EMIT_END</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>STRU</DATATYPE>
      <MASK>  STRUS</MASK>

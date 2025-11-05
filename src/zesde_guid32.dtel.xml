@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_GUID32</ROLLNAME>
+    <ROLLNAME>ZESDE_GUID32</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>MDG_BS_ACS_GUID_CHAR32</DOMNAME>
     <HEADLEN>32</HEADLEN>

@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESFIWED010</ROLLNAME>
+    <ROLLNAME>ZESFIWED010</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESFIWD011</DOMNAME>
+    <DOMNAME>ZESFIWD011</DOMNAME>
     <DDTEXT>Tipo de ação: Aprovação / Reprovação</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

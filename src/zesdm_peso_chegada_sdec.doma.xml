@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESESDM_PESO_CHEGADA_SDEC</DOMNAME>
+    <DOMNAME>ZESDM_PESO_CHEGADA_SDEC</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>QUAN</DATATYPE>
     <LENG>000010</LENG>

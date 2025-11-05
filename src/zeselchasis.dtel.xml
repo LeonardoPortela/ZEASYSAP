@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESELCHASIS</ROLLNAME>
+    <ROLLNAME>ZESELCHASIS</ROLLNAME>
     <DOMNAME>CHAR7</DOMNAME>
     <HEADLEN>07</HEADLEN>
     <SCRLEN1>10</SCRLEN1>

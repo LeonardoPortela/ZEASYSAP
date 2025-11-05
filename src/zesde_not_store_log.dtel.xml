@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_NOT_STORE_LOG</ROLLNAME>
+    <ROLLNAME>ZESDE_NOT_STORE_LOG</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>CHAR01</DOMNAME>
     <HEADLEN>55</HEADLEN>

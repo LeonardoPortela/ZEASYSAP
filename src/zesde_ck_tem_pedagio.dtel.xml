@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_CK_TEM_PEDAGIO</ROLLNAME>
+    <ROLLNAME>ZESDE_CK_TEM_PEDAGIO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>XFIELD</DOMNAME>
     <HEADLEN>55</HEADLEN>

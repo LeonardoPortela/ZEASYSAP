@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESESDM_TP_COMBROP</DOMNAME>
+    <DOMNAME>ZESDM_TP_COMBROP</DOMNAME>
     <DATATYPE>CHAR</DATATYPE>
     <LENG>000002</LENG>
     <OUTPUTLEN>000002</OUTPUTLEN>

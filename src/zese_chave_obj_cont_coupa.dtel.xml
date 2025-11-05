@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESE_CHAVE_OBJ_CONT_COUPA</ROLLNAME>
+    <ROLLNAME>ZESE_CHAVE_OBJ_CONT_COUPA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESD_CHAVE_OBJ_CONT_COUPA</DOMNAME>
+    <DOMNAME>ZESD_CHAVE_OBJ_CONT_COUPA</DOMNAME>
     <DDTEXT>Chave de Operação Objeto Contábil</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

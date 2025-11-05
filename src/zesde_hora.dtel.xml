@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_HORA</ROLLNAME>
+    <ROLLNAME>ZESDE_HORA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>UZEIT</DOMNAME>
     <HEADLEN>08</HEADLEN>

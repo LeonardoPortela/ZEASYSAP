@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_QUEBRA</ROLLNAME>
+    <ROLLNAME>ZESDE_QUEBRA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESMENG15</DOMNAME>
+    <DOMNAME>ZESMENG15</DOMNAME>
     <HEADLEN>20</HEADLEN>
     <SCRLEN1>06</SCRLEN1>
     <SCRLEN2>11</SCRLEN2>

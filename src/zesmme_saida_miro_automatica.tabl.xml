@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESMME_SAIDA_MIRO_AUTOMATICA</TABNAME>
+    <TABNAME>ZESMME_SAIDA_MIRO_AUTOMATICA</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Retorno do programa ZESMMR207</DDTEXT>

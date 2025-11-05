@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_CONTROLE_ADM</ROLLNAME>
+    <ROLLNAME>ZESDE_CONTROLE_ADM</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDM_CONTROLE_ADM</DOMNAME>
+    <DOMNAME>ZESDM_CONTROLE_ADM</DOMNAME>
     <DDTEXT>Controle Administrativo</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

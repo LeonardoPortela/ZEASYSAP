@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_CK_OBRIGA_BLOQUEIO</ROLLNAME>
+    <ROLLNAME>ZESDE_CK_OBRIGA_BLOQUEIO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>XFELD</DOMNAME>
     <HEADLEN>55</HEADLEN>

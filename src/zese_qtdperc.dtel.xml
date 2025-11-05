@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESE_QTDPERC</ROLLNAME>
+    <ROLLNAME>ZESE_QTDPERC</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <SCRLEN1>10</SCRLEN1>
     <DDTEXT>Percentual do defeito</DDTEXT>

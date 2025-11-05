@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESAGENTE_FRETE</ROLLNAME>
+    <ROLLNAME>ZESAGENTE_FRETE</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>LIFNR</DOMNAME>
     <HEADLEN>12</HEADLEN>

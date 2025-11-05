@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_NAO_INTEGRA</ROLLNAME>
+    <ROLLNAME>ZESDE_NAO_INTEGRA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>ABAP_BOOLEAN</DOMNAME>
     <HEADLEN>55</HEADLEN>

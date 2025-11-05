@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDOC_CONT_REC</ROLLNAME>
+    <ROLLNAME>ZESDOC_CONT_REC</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>BELNR</DOMNAME>
     <HEADLEN>16</HEADLEN>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESDE_CTE_DIST_N55</TABNAME>
+    <TABNAME>ZESDE_CTE_DIST_N55</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Tabela de InBound de CT-e Distribuida de Terceiro - NF55</DDTEXT>

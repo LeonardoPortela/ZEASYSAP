@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_HR_AUTORIZA</ROLLNAME>
+    <ROLLNAME>ZESDE_HR_AUTORIZA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>TIME</DOMNAME>
     <HEADLEN>19</HEADLEN>

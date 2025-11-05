@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESFIS_DOCST</ROLLNAME>
+    <ROLLNAME>ZESFIS_DOCST</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>CHAR1</DOMNAME>
     <DDTEXT>Consultar status documento NFS-e</DDTEXT>

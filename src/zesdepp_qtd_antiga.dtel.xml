@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDEPP_QTD_ANTIGA</ROLLNAME>
+    <ROLLNAME>ZESDEPP_QTD_ANTIGA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>MENG13</DOMNAME>
     <HEADLEN>55</HEADLEN>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESPROD_EXPORTIND</TABNAME>
+    <TABNAME>ZESPROD_EXPORTIND</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Exportação Indireta Item NF-e</DDTEXT>

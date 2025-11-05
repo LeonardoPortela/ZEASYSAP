@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_SENHA_HASH_MD5</ROLLNAME>
+    <ROLLNAME>ZESDE_SENHA_HASH_MD5</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>STRING</DOMNAME>
     <HEADLEN>14</HEADLEN>

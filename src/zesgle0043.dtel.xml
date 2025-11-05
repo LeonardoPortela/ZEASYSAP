@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESGLE0043</ROLLNAME>
+    <ROLLNAME>ZESGLE0043</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESGLD0043</DOMNAME>
+    <DOMNAME>ZESGLD0043</DOMNAME>
     <DDTEXT>Parc Key</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

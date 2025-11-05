@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESEXCECAO_LOTE_VENCIDOS</ROLLNAME>
+    <ROLLNAME>ZESEXCECAO_LOTE_VENCIDOS</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>CHAR1</DOMNAME>
     <HEADLEN>55</HEADLEN>

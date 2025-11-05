@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESSD_DATUM</ROLLNAME>
+    <ROLLNAME>ZESSD_DATUM</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>DATUM</DOMNAME>
     <HEADLEN>19</HEADLEN>

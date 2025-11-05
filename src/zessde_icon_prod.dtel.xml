@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESSDE_ICON_PROD</ROLLNAME>
+    <ROLLNAME>ZESSDE_ICON_PROD</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>ICON</DOMNAME>
     <HEADLEN>55</HEADLEN>

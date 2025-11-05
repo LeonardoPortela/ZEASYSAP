@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESED_CHAVE_NFE</ROLLNAME>
+    <ROLLNAME>ZESED_CHAVE_NFE</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>CHAR44</DOMNAME>
     <MEMORYID>ZESNFE</MEMORYID>

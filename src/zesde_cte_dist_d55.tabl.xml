@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESDE_CTE_DIST_D55</TABNAME>
+    <TABNAME>ZESDE_CTE_DIST_D55</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <LANGDEP>X</LANGDEP>
@@ -14,7 +14,7 @@
     <DD03P>
      <FIELDNAME>.INCLUDE</FIELDNAME>
      <ADMINFIELD>0</ADMINFIELD>
-     <PRECFIELD>ZESESIB_CTE_D55</PRECFIELD>
+     <PRECFIELD>ZESIB_CTE_D55</PRECFIELD>
      <MASK>      S</MASK>
      <DDTEXT>Tabela de InBound de CT-e Distribuida - Inf. Unid. Transp.</DDTEXT>
      <COMPTYPE>S</COMPTYPE>

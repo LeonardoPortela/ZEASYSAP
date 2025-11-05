@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESCOD_MOTORISTA</ROLLNAME>
+    <ROLLNAME>ZESCOD_MOTORISTA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>LIFNR</DOMNAME>
     <HEADLEN>30</HEADLEN>

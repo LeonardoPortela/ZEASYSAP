@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESESXNFE_IF_CTE_VALUE</DOMNAME>
+    <DOMNAME>ZESXNFE_IF_CTE_VALUE</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>DEC</DATATYPE>
     <LENG>000015</LENG>

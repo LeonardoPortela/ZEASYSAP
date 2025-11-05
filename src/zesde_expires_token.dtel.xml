@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_EXPIRES_TOKEN</ROLLNAME>
+    <ROLLNAME>ZESDE_EXPIRES_TOKEN</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>CHAR100</DOMNAME>
     <HEADLEN>55</HEADLEN>

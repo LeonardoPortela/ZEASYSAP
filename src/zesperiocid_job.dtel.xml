@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESPERIOCID_JOB</ROLLNAME>
+    <ROLLNAME>ZESPERIOCID_JOB</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESPERIOCID_JOB</DOMNAME>
+    <DOMNAME>ZESPERIOCID_JOB</DOMNAME>
     <HEADLEN>11</HEADLEN>
     <SCRLEN3>40</SCRLEN3>
     <DDTEXT>Periocidade do JOB</DDTEXT>

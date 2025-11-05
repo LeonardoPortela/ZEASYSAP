@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESVALOR_INDEX</ROLLNAME>
+    <ROLLNAME>ZESVALOR_INDEX</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESVALOR_INDEX</DOMNAME>
+    <DOMNAME>ZESVALOR_INDEX</DOMNAME>
     <DDTEXT>Valor indice XRT</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

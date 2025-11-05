@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESESIB_NFE</TABNAME>
+    <TABNAME>ZESIB_NFE</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>TRANSP</TABCLASS>
     <CLIDEP>X</CLIDEP>
@@ -13,7 +13,7 @@
     <EXCLASS>1</EXCLASS>
    </DD02V>
    <DD09L>
-    <TABNAME>ZESESIB_NFE</TABNAME>
+    <TABNAME>ZESIB_NFE</TABNAME>
     <AS4LOCAL>A</AS4LOCAL>
     <TABKAT>5</TABKAT>
     <TABART>APPL0</TABART>

@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESVLR_UNIT_FRETE</ROLLNAME>
+    <ROLLNAME>ZESVLR_UNIT_FRETE</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESVLR_UNIT_FRETE</DOMNAME>
+    <DOMNAME>ZESVLR_UNIT_FRETE</DOMNAME>
     <DDTEXT>Valor Unitario do Frete</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

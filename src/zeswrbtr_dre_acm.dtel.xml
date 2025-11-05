@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESWRBTR_DRE_ACM</ROLLNAME>
+    <ROLLNAME>ZESWRBTR_DRE_ACM</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>WERTV12</DOMNAME>
     <LOGFLAG>X</LOGFLAG>

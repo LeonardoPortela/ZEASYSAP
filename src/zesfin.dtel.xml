@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESFIN</ROLLNAME>
+    <ROLLNAME>ZESFIN</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESFINALIDADE</DOMNAME>
+    <DOMNAME>ZESFINALIDADE</DOMNAME>
     <DDTEXT>Finalidade</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

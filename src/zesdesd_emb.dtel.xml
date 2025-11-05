@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDESD_EMB</ROLLNAME>
+    <ROLLNAME>ZESDESD_EMB</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDOSD_EMB</DOMNAME>
+    <DOMNAME>ZESDOSD_EMB</DOMNAME>
     <HEADLEN>08</HEADLEN>
     <SCRLEN1>08</SCRLEN1>
     <SCRLEN2>08</SCRLEN2>

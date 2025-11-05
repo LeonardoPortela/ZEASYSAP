@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESRETORNO</ROLLNAME>
+    <ROLLNAME>ZESRETORNO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>/PLMU/VWR_RAWSTRING</DOMNAME>
     <HEADLEN>55</HEADLEN>

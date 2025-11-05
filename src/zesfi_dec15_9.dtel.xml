@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESFI_DEC15_9</ROLLNAME>
+    <ROLLNAME>ZESFI_DEC15_9</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESES_DEC15_9</DOMNAME>
+    <DOMNAME>ZES_DEC15_9</DOMNAME>
     <DDTEXT>Fator de calculo CDI</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

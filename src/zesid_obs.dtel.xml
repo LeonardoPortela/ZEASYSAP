@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESID_OBS</ROLLNAME>
+    <ROLLNAME>ZESID_OBS</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESID_OBS</DOMNAME>
+    <DOMNAME>ZESID_OBS</DOMNAME>
     <MEMORYID>ZESIDOBS</MEMORYID>
     <LOGFLAG>X</LOGFLAG>
     <HEADLEN>55</HEADLEN>

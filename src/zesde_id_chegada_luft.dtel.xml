@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_ID_CHEGADA_LUFT</ROLLNAME>
+    <ROLLNAME>ZESDE_ID_CHEGADA_LUFT</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>TZNTSTMPL</DOMNAME>
     <HEADLEN>27</HEADLEN>

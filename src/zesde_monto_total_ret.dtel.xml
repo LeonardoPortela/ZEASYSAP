@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_MONTO_TOTAL_RET</ROLLNAME>
+    <ROLLNAME>ZESDE_MONTO_TOTAL_RET</ROLLNAME>
     <DOMNAME>WERT7</DOMNAME>
     <HEADLEN>20</HEADLEN>
     <SCRLEN1>10</SCRLEN1>

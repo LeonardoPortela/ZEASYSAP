@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_PRECO_FRETE</ROLLNAME>
+    <ROLLNAME>ZESDE_PRECO_FRETE</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>AFLE13D2O16N_TO_23D2O30N</DOMNAME>
     <HEADLEN>30</HEADLEN>

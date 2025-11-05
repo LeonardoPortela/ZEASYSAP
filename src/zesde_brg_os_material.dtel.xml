@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_BRG_OS_MATERIAL</ROLLNAME>
+    <ROLLNAME>ZESDE_BRG_OS_MATERIAL</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>ABAP_BOOLEAN</DOMNAME>
     <HEADLEN>55</HEADLEN>

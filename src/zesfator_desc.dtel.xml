@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESFATOR_DESC</ROLLNAME>
+    <ROLLNAME>ZESFATOR_DESC</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESFATOR_DESC</DOMNAME>
+    <DOMNAME>ZESFATOR_DESC</DOMNAME>
     <DDTEXT>Fator desconto MTM</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

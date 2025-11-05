@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESGJAHR_F</ROLLNAME>
+    <ROLLNAME>ZESGJAHR_F</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>GJAHR</DOMNAME>
     <HEADLEN>20</HEADLEN>

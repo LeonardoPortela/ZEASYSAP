@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_CD_VALIDACAO</ROLLNAME>
+    <ROLLNAME>ZESDE_CD_VALIDACAO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>QFANZAHL4</DOMNAME>
     <HEADLEN>55</HEADLEN>

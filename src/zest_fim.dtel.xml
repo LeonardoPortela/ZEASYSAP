@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESEST_FIM</ROLLNAME>
+    <ROLLNAME>ZEST_FIM</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>UZEIT</DOMNAME>
     <HEADLEN>55</HEADLEN>

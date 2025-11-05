@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZESESFATOR_DESC</DOMNAME>
+    <DOMNAME>ZESFATOR_DESC</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>DEC</DATATYPE>
     <LENG>000017</LENG>

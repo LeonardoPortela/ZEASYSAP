@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_TP_DUE</ROLLNAME>
+    <ROLLNAME>ZESDE_TP_DUE</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDM_TP_DUE</DOMNAME>
+    <DOMNAME>ZESDM_TP_DUE</DOMNAME>
     <DDTEXT>Tipo DU-e</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

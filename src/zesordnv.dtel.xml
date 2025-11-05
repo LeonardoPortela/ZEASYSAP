@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESORDNV</ROLLNAME>
+    <ROLLNAME>ZESORDNV</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESORDEM</DOMNAME>
+    <DOMNAME>ZESORDEM</DOMNAME>
     <DDTEXT>Ordem de nivel</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

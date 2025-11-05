@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESSEQ4</ROLLNAME>
+    <ROLLNAME>ZESSEQ4</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESSEQ4</DOMNAME>
+    <DOMNAME>ZESSEQ4</DOMNAME>
     <DDTEXT>CNAB240-Sem Uso</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

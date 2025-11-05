@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESRNTRC_EMISSOR</ROLLNAME>
+    <ROLLNAME>ZESRNTRC_EMISSOR</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DOMNAME>CHAR08</DOMNAME>
     <HEADLEN>10</HEADLEN>

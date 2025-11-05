@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESE_LUB_FILT</ROLLNAME>
+    <ROLLNAME>ZESE_LUB_FILT</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESE_LUB_FILT</DOMNAME>
+    <DOMNAME>ZESE_LUB_FILT</DOMNAME>
     <SCRLEN1>10</SCRLEN1>
     <SCRLEN2>20</SCRLEN2>
     <DDTEXT>Manutenção Filtro ou Compartimento</DDTEXT>

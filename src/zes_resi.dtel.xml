@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESES_RESI</ROLLNAME>
+    <ROLLNAME>ZES_RESI</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESES_RESI</DOMNAME>
+    <DOMNAME>ZES_RESI</DOMNAME>
     <DDTEXT>Residuo de entrada de romaneioX saida</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

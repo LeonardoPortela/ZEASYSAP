@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESESDE_TP_ENTREGA</ROLLNAME>
+    <ROLLNAME>ZESDE_TP_ENTREGA</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESESDM_TP_ENTREGA</DOMNAME>
+    <DOMNAME>ZESDM_TP_ENTREGA</DOMNAME>
     <DDTEXT>Tipo de Entrega Carga - CCT</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>
