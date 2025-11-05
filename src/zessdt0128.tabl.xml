@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESSDT0128</TABNAME>
+    <TABNAME>ZESESSDT0128</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>TRANSP</TABCLASS>
     <CLIDEP>X</CLIDEP>
@@ -12,7 +12,7 @@
     <CONTFLAG>A</CONTFLAG>
    </DD02V>
    <DD09L>
-    <TABNAME>ZESSDT0128</TABNAME>
+    <TABNAME>ZESESSDT0128</TABNAME>
     <AS4LOCAL>A</AS4LOCAL>
     <TABKAT>0</TABKAT>
     <TABART>APPL0</TABART>
@@ -58,7 +58,7 @@
    </DD03P_TABLE>
    <TABL_EXTRAS>
     <TDDAT>
-     <TABNAME>ZESSDT0128</TABNAME>
+     <TABNAME>ZESESSDT0128</TABNAME>
      <CCLASS>&amp;NC&amp;</CCLASS>
     </TDDAT>
    </TABL_EXTRAS>

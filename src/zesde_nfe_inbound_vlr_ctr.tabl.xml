@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESDE_NFE_INBOUND_VLR_CTR</TABNAME>
+    <TABNAME>ZESESDE_NFE_INBOUND_VLR_CTR</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Estrutura para Valores do Contrato</DDTEXT>
@@ -12,7 +12,7 @@
    <DD03P_TABLE>
     <DD03P>
      <FIELDNAME>CTR_WAERS</FIELDNAME>
-     <ROLLNAME>ZESDE_WAERS_PED</ROLLNAME>
+     <ROLLNAME>ZESESDE_WAERS_PED</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
@@ -38,7 +38,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>CTR_VALOR_TOTAL</FIELDNAME>
-     <ROLLNAME>ZESDE_VLR_TOTAL_CTR</ROLLNAME>
+     <ROLLNAME>ZESESDE_VLR_TOTAL_CTR</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
@@ -50,7 +50,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>CTR_VALOR_TOTAL_LIQUIDO</FIELDNAME>
-     <ROLLNAME>ZESDE_VLR_TOTAL_CTR</ROLLNAME>
+     <ROLLNAME>ZESESDE_VLR_TOTAL_CTR</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <COMPTYPE>E</COMPTYPE>
     </DD03P>

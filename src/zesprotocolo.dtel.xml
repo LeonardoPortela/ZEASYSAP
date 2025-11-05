@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESPROTOCOLO</ROLLNAME>
+    <ROLLNAME>ZESESPROTOCOLO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESPROTOCOLO</DOMNAME>
+    <DOMNAME>ZESESPROTOCOLO</DOMNAME>
     <DDTEXT>Cd. Protocolo</DDTEXT>
     <DTELMASTER>P</DTELMASTER>
     <REFKIND>D</REFKIND>

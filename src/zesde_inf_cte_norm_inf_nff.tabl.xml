@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESDE_INF_CTE_NORM_INF_NFF</TABNAME>
+    <TABNAME>ZESESDE_INF_CTE_NORM_INF_NFF</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Inf NF-f</DDTEXT>
@@ -99,7 +99,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>INFUNIDTRANSP</FIELDNAME>
-     <ROLLNAME>ZESDE_INF_UNID_TRASNP</ROLLNAME>
+     <ROLLNAME>ZESESDE_INF_UNID_TRASNP</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>STRU</DATATYPE>
      <MASK>  STRUS</MASK>

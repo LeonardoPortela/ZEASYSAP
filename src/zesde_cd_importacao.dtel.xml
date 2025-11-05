@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZESDE_CD_IMPORTACAO</ROLLNAME>
+    <ROLLNAME>ZESESDE_CD_IMPORTACAO</ROLLNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <DOMNAME>ZESDM_SEQ_LANC</DOMNAME>
+    <DOMNAME>ZESESDM_SEQ_LANC</DOMNAME>
     <HEADLEN>41</HEADLEN>
     <SCRLEN1>06</SCRLEN1>
     <SCRLEN2>15</SCRLEN2>

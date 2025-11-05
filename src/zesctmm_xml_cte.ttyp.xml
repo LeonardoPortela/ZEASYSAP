@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_TTYP" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD40V>
-    <TYPENAME>ZESCTMM_XML_CTE</TYPENAME>
+    <TYPENAME>ZESESCTMM_XML_CTE</TYPENAME>
     <DDLANGUAGE>P</DDLANGUAGE>
-    <ROWTYPE>ZESDE_XML_CTE</ROWTYPE>
+    <ROWTYPE>ZESESDE_XML_CTE</ROWTYPE>
     <ROWKIND>S</ROWKIND>
     <DATATYPE>STRU</DATATYPE>
     <ACCESSMODE>T</ACCESSMODE>

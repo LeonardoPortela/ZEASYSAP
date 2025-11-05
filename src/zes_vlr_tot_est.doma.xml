@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZES_VLR_TOT_EST</DOMNAME>
+    <DOMNAME>ZESES_VLR_TOT_EST</DOMNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <DATATYPE>CURR</DATATYPE>
     <LENG>000011</LENG>

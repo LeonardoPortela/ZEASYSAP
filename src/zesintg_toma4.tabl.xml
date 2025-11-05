@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESINTG_TOMA4</TABNAME>
+    <TABNAME>ZESESINTG_TOMA4</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Tomador do Serviço versão 4.00</DDTEXT>
@@ -20,7 +20,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>UNIDAUTTOMA</FIELDNAME>
-     <ROLLNAME>ZESDE_INF_CTE_TOMA</ROLLNAME>
+     <ROLLNAME>ZESESDE_INF_CTE_TOMA</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>STRU</DATATYPE>
      <MASK>  STRUS</MASK>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESDE_INF_MODAL_FERROV</TABNAME>
+    <TABNAME>ZESESDE_INF_MODAL_FERROV</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Inf. Modal Ferroviario</DDTEXT>

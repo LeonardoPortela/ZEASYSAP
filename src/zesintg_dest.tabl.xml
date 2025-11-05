@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESINTG_DEST</TABNAME>
+    <TABNAME>ZESESINTG_DEST</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Identificação do Destinatário da NF-e</DDTEXT>
@@ -39,7 +39,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>ENDERDEST</FIELDNAME>
-     <ROLLNAME>ZESENDERDEST</ROLLNAME>
+     <ROLLNAME>ZESESENDERDEST</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>STRU</DATATYPE>
      <MASK>  STRUS</MASK>

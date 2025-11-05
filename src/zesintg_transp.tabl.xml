@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESINTG_TRANSP</TABNAME>
+    <TABNAME>ZESESINTG_TRANSP</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Grupo Informações do Transporte</DDTEXT>
@@ -20,7 +20,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>TRANSPORTA</FIELDNAME>
-     <ROLLNAME>ZESINTG_TRANSPORTA</ROLLNAME>
+     <ROLLNAME>ZESESINTG_TRANSPORTA</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>STRU</DATATYPE>
      <MASK>  STRUS</MASK>
@@ -28,7 +28,7 @@
     </DD03P>
     <DD03P>
      <FIELDNAME>VOL</FIELDNAME>
-     <ROLLNAME>ZESINTG_TRANSP_VOL_T</ROLLNAME>
+     <ROLLNAME>ZESESINTG_TRANSP_VOL_T</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <DATATYPE>TTYP</DATATYPE>
      <MASK>  TTYPL</MASK>
