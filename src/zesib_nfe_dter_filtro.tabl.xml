@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESIB_NFE_DIST_TER_FILTRO</TABNAME>
+    <TABNAME>ZESIB_NFE_DTER_FILTRO</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Tabela de Dados de Importação de NF-e de Terceiro - Filtro</DDTEXT>
