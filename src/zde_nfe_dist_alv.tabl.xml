@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESDE_NFE_DIST_ALV</TABNAME>
+    <TABNAME>ZDE_NFE_DIST_ALV</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <LANGDEP>X</LANGDEP>
@@ -77,7 +77,7 @@
     <DD03P>
      <FIELDNAME>.INCLUDE</FIELDNAME>
      <ADMINFIELD>0</ADMINFIELD>
-     <PRECFIELD>ZESIB_NFE_DTER</PRECFIELD>
+     <PRECFIELD>ZIB_NFE_DIST_TER</PRECFIELD>
      <MASK>      S</MASK>
      <DDTEXT>Tabela de Dados de Importação de NF-e de Terceiro</DDTEXT>
      <COMPTYPE>S</COMPTYPE>

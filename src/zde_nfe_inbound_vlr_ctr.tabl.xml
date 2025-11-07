@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD02V>
-    <TABNAME>ZESDE_NFE_INBOUND_VLR_CTR</TABNAME>
+    <TABNAME>ZDE_NFE_INBOUND_VLR_CTR</TABNAME>
     <DDLANGUAGE>P</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Estrutura para Valores do Contrato</DDTEXT>
